@@ -1,0 +1,32 @@
+<!-- A ball rolling on a flat plane. Units: meters, kilograms, seconds. -->
+<mujoco model="ball_on_plane">
+  <option timestep="0.002" gravity="0 0 -9.81"/>
+
+  <visual>
+    <headlight ambient="0.4 0.4 0.4" diffuse="0.6 0.6 0.6"/>
+  </visual>
+
+  <asset>
+    <texture name="grid" type="2d" builtin="checker" rgb1="0.2 0.3 0.4" rgb2="0.3 0.4 0.5"
+             width="512" height="512"/>
+    <material name="grid" texture="grid" texrepeat="8 8" reflectance="0.1"/>
+  </asset>
+
+  <worldbody>
+    <light pos="0 0 5" dir="0 0 -1"/>
+    <geom name="floor" type="plane" size="5 5 0.1" material="grid"/>
+
+    <body name="ball" pos="0 0 0.1">
+      <freejoint name="ball_joint"/>
+      <!-- friction: sliding, torsional, rolling. Rolling friction slowly stops the ball. -->
+      <geom name="ball_geom" type="sphere" size="0.1" mass="0.5" rgba="0.9 0.2 0.2 1"
+            friction="1 0.005 0.002" condim="6"/>
+    </body>
+  </worldbody>
+
+  <keyframe>
+    <!-- qpos: x y z qw qx qy qz | qvel: vx vy vz wx wy wz -->
+    <!-- Ball starts at the origin, pushed along +x at 2 m/s and +y at 0.5 m/s. -->
+    <key name="push" qpos="0 0 0.1 1 0 0 0" qvel="2 0.5 0 0 0 0"/>
+  </keyframe>
+</mujoco>
