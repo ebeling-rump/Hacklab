@@ -221,3 +221,6 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# MuJoCo Menagerie (downloaded by franka_mujoco.py)
+mujoco_menagerie/
