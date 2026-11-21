@@ -1,0 +1,60 @@
+<!-- Predictive navigation arena. Units: meters, kilograms, seconds.
+     A holonomic disc robot drives toward a goal while two obstacles move around it.
+     All contacts are disabled: collisions are measured geometrically (center distance
+     vs. summed radii), so a collision is counted instead of bouncing the robot away. -->
+<mujoco model="predictive_nav">
+  <option timestep="0.002"/>
+
+  <visual>
+    <headlight ambient="0.3 0.3 0.3" diffuse="0.3 0.3 0.3" specular="0 0 0"/>
+    <global offwidth="720" offheight="720"/>
+  </visual>
+
+  <asset>
+    <texture name="grid" type="2d" builtin="checker" rgb1="0.62 0.64 0.66" rgb2="0.54 0.56 0.59"
+             width="512" height="512"/>
+    <material name="grid" texture="grid" texrepeat="5 5"/>
+  </asset>
+
+  <default>
+    <geom contype="0" conaffinity="0"/>
+  </default>
+
+  <worldbody>
+    <light pos="0 0 10" dir="0 0 -1" directional="true" diffuse="0.35 0.35 0.35" specular="0 0 0"/>
+    <camera name="top" pos="0 0 13" xyaxes="1 0 0 0 1 0" fovy="45"/>
+    <camera name="overview" pos="0 -9 9" xyaxes="1 0 0 0 0.707 0.707" fovy="50"/>
+
+    <!-- 10 m x 10 m arena with low walls (visual only) -->
+    <geom name="floor" type="plane" size="5 5 0.1" material="grid"/>
+    <geom type="box" pos="0 5.05 0.1" size="5.1 0.05 0.1" rgba="0.35 0.35 0.35 1"/>
+    <geom type="box" pos="0 -5.05 0.1" size="5.1 0.05 0.1" rgba="0.35 0.35 0.35 1"/>
+    <geom type="box" pos="5.05 0 0.1" size="0.05 5.1 0.1" rgba="0.35 0.35 0.35 1"/>
+    <geom type="box" pos="-5.05 0 0.1" size="0.05 5.1 0.1" rgba="0.35 0.35 0.35 1"/>
+
+    <!-- Goal marker; its x/y are set per episode -->
+    <site name="goal" pos="4 0 0.005" type="cylinder" size="0.2 0.005" rgba="0.05 0.64 0.05 0.9"/>
+
+    <!-- Robot: disc of radius 0.25 m on two slide joints (holonomic). qpos[0:2] = world x, y. -->
+    <body name="robot" pos="0 0 0.15">
+      <joint name="robot_x" type="slide" axis="1 0 0"/>
+      <joint name="robot_y" type="slide" axis="0 1 0"/>
+      <geom name="robot" type="cylinder" size="0.25 0.15" mass="10" rgba="0.16 0.47 0.84 1"/>
+      <geom type="box" pos="0 0 0.16" size="0.05 0.05 0.01" rgba="1 1 1 1"/>
+    </body>
+
+    <!-- Obstacles: kinematic (mocap) bodies, radius 0.3 m, moved by obstacles.py each step -->
+    <body name="obs_0" mocap="true" pos="0 3 0.2">
+      <geom name="obs_0" type="cylinder" size="0.3 0.2" rgba="0.92 0.41 0.2 1"/>
+    </body>
+    <body name="obs_1" mocap="true" pos="0 -3 0.2">
+      <geom name="obs_1" type="cylinder" size="0.3 0.2" rgba="0.38 0.31 0.84 1"/>
+    </body>
+  </worldbody>
+
+  <actuator>
+    <!-- Velocity servos: ctrl = commanded velocity (m/s); time constant m/kv = 0.05 s -->
+    <velocity name="vx" joint="robot_x" kv="200" ctrlrange="-1 1" ctrllimited="true"/>
+    <velocity name="vy" joint="robot_y" kv="200" ctrlrange="-1 1" ctrllimited="true"/>
+  </actuator>
+</mujoco>
