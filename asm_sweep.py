@@ -118,7 +118,9 @@ def markdown(summary, rows):
         lines.append(f"| {s['env']} | {s['predictor']} | {s['runs']} | {s['query_occ_frac']:.3f} | "
                      + " | ".join(cells) + " |")
     lines += ["", "Paired Brier comparison on identical runs (wins / runs, mean Δ Brier):", ""]
-    for a, b in (("tabpfn", "gp"), ("tabpfn", "nearest_observed"), ("gp", "nearest_observed")):
+    names = sorted({r["predictor"] for r in rows})
+    pairs = [(t, b) for t in names if t.startswith("tabpfn") for b in ("gp", "nearest_observed")]
+    for a, b in pairs + [("gp", "nearest_observed")]:
         w, n, d = paired_wins(rows, a, b)
         if n:
             lines.append(f"- {a} vs {b}: {a} lower Brier in {w}/{n} runs, mean Δ {d:+.4f}")

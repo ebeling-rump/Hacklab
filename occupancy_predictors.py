@@ -113,3 +113,81 @@ class TabPFN(OccupancyPredictor):
             proba = self.clf.predict_proba(np.asarray(X_query, float))
             p = proba[:, list(self.clf.classes_).index(1)]
         return p, _bernoulli_std(p)
+
+
+# ---------- variants for the TabPFN follow-up test ----------
+
+class SpatialFeatures:
+    """Context features from the observed (training) cells only: x, y, distance to the
+    nearest observed occupied / free cell and counts of each within `radius`. For training
+    rows the cell itself is excluded (leave-one-out), so a training cell never sees its own
+    label; the query cells are unobserved, so nothing to exclude there."""
+
+    def __init__(self, radius: float = 0.35):
+        self.radius = radius
+
+    def fit(self, X_obs, y_obs):
+        from scipy.spatial import cKDTree
+        from sklearn.preprocessing import StandardScaler
+        X_obs, y_obs = np.asarray(X_obs, float), np.asarray(y_obs, int)
+        self.trees = {c: cKDTree(X_obs[y_obs == c]) if (y_obs == c).any() else None for c in (0, 1)}
+        F = self._features(X_obs, y_obs)
+        self.scaler = StandardScaler().fit(F)
+        return self.scaler.transform(F)
+
+    def transform(self, X_query):
+        return self.scaler.transform(self._features(np.asarray(X_query, float), None))
+
+    def _features(self, X, y):
+        cols = [X[:, 0], X[:, 1]]
+        for c in (1, 0):
+            tree = self.trees[c]
+            if tree is None:
+                cols += [np.full(len(X), 10.0), np.zeros(len(X))]
+                continue
+            k = min(2, tree.n)
+            d, _ = tree.query(X, k=k)
+            d = d.reshape(len(X), k)
+            n = np.array([len(i) for i in tree.query_ball_point(X, self.radius)], float)
+            if y is not None:                       # leave-one-out for own-class training rows
+                own = y == c
+                d0 = np.where(own & (d[:, 0] == 0) & (k > 1), d[:, -1], d[:, 0])
+                n = n - own
+            else:
+                d0 = d[:, 0]
+            cols += [d0, n]
+        return np.column_stack(cols)
+
+
+class WithFeatures(OccupancyPredictor):
+    """Wrap a predictor so it sees SpatialFeatures instead of raw (x, y)."""
+
+    def __init__(self, base: OccupancyPredictor, name: str):
+        self.base, self.name, self.feat = base, name, SpatialFeatures()
+
+    def fit(self, X_obs, y_obs):
+        self.base.fit(self.feat.fit(X_obs, y_obs), y_obs)
+        return self
+
+    def predict(self, X_query):
+        return self.base.predict(self.feat.transform(X_query))
+
+
+class Rebalanced(OccupancyPredictor):
+    """Fit the base predictor on all occupied cells plus `ratio` x as many free cells
+    (random, seeded). Raw probabilities, no prior correction."""
+
+    def __init__(self, base: OccupancyPredictor, name: str, ratio: float = 3.0, seed: int = 0):
+        self.base, self.name, self.ratio, self.seed = base, name, ratio, seed
+
+    def fit(self, X_obs, y_obs):
+        X_obs, y_obs = np.asarray(X_obs, float), np.asarray(y_obs, int)
+        occ, free = np.flatnonzero(y_obs == 1), np.flatnonzero(y_obs == 0)
+        n_free = min(len(free), int(self.ratio * max(len(occ), 1)))
+        free = np.random.default_rng(self.seed).choice(free, n_free, replace=False)
+        idx = np.sort(np.concatenate([occ, free]))
+        self.base.fit(X_obs[idx], y_obs[idx])
+        return self
+
+    def predict(self, X_query):
+        return self.base.predict(X_query)

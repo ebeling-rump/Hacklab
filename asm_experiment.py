@@ -23,10 +23,19 @@ import numpy as np
 
 from a1_dataset import ARENA, ENVIRONMENTS, STEP_TIME, build_model, reset_robot
 from a1_lidar import MAX_RANGE, MAX_TURN, N_RAYS, SMOOTHING, gait
-from occupancy_predictors import ConstantPrior, GaussianProcess, NearestObserved, TabPFN
+from occupancy_predictors import (ConstantPrior, GaussianProcess, NearestObserved, Rebalanced,
+                                  TabPFN, WithFeatures)
 
-PREDICTORS = {"constant_prior": ConstantPrior, "nearest_observed": NearestObserved,
-              "gp": GaussianProcess, "tabpfn": TabPFN}
+PREDICTORS = {
+    "constant_prior": ConstantPrior, "nearest_observed": NearestObserved,
+    "gp": GaussianProcess, "tabpfn": TabPFN,
+    # follow-up variants: rebalanced training (1 occupied : 3 free) and context features
+    "tabpfn_bal": lambda: Rebalanced(TabPFN(), "tabpfn_bal"),
+    "tabpfn_feat": lambda: WithFeatures(TabPFN(), "tabpfn_feat"),
+    "tabpfn_feat_bal": lambda: Rebalanced(WithFeatures(TabPFN(), "f"), "tabpfn_feat_bal"),
+    "gp_bal": lambda: Rebalanced(GaussianProcess(), "gp_bal"),
+    "gp_feat": lambda: WithFeatures(GaussianProcess(length_scale=np.ones(6)), "gp_feat"),
+}
 
 UNKNOWN, FREE, OCC = -1, 0, 1
 RES = 0.1                 # cell size (m)
