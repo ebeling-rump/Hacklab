@@ -36,13 +36,20 @@ def open_arena(seed):
     return Scenario("open", (HERE / "scene.xml").read_text(), start, goal, [goal], make_obstacles(rng))
 
 
-def warehouse_intersections(seed):
+def warehouse_intersections(seed, name="warehouse", **fleet):
+    """`fleet` kwargs (cruise, turn_parity) select the AGV motion pattern, see warehouse.make_agvs."""
     rng = np.random.default_rng(seed)
     start, goal, waypoints = warehouse.make_route(rng)
-    agvs = warehouse.make_agvs(rng, start)
-    return Scenario("warehouse", warehouse.scene_xml(len(agvs)), start, goal, waypoints, agvs,
+    agvs = warehouse.make_agvs(rng, start, **fleet)
+    return Scenario(name, warehouse.scene_xml(len(agvs)), start, goal, waypoints, agvs,
                     free_space=lambda p: warehouse.in_aisles(p, margin=R_ROBOT),
                     max_time=40.0, shelves=warehouse.shelf_boxes())
 
 
-SCENARIOS = {"open": open_arena, "warehouse": warehouse_intersections}
+SCENARIOS = {
+    "open": open_arena,
+    "warehouse": warehouse_intersections,
+    # Unseen motion patterns (for testing generalization only, never for training):
+    "warehouse_flipped": lambda s: warehouse_intersections(s, "warehouse_flipped", turn_parity=0),
+    "warehouse_fast": lambda s: warehouse_intersections(s, "warehouse_fast", cruise=(1.2, 1.5)),
+}

@@ -98,6 +98,42 @@ Prediction-sensitive seeds (oracle fixes a near miss or saves >= 1 s): 10 of 50,
 AGVs turning at intersections (4) and at pick stations (3). Paired over all seeds the oracle
 saves 0.63 s on average (median 0.0 s; >= 1 s faster in 7 seeds, >= 1 s slower in 3).
 
+## Phase 2: motion prediction (`motion_data.py`, `predict_motion.py`, `plot_motion.py`)
+
+```bash
+python motion_data.py             # trajectories -> data/motion/{train,test,flipped,fast}.npz (~3 min)
+python predict_motion.py --models cv gp           # local models
+python predict_motion.py --models tabpfn          # needs TABPFN_TOKEN; sends simulated rows to Prior Labs
+python predict_motion.py --report-only            # tables from cached predictions
+python plot_motion.py                             # data/motion/prediction_errors.png
+```
+
+- **Data:** 30 s warehouse episodes with the constant-velocity robot driving, logged at 10 Hz.
+  Disjoint seed ranges: train 1000-1039 (45,920 rows), test 2000-2019, unseen *flipped routing*
+  3000-3019, unseen *fast fleet* (1.2-1.5 m/s) 4000-4019; 1000 rows sampled per evaluation set.
+- **Features (observable only):** position, velocity, acceleration over the last 0.3 s, robot
+  position relative to the AGV and its distance. **Targets:** deviation from constant velocity
+  at +0.5 s and +1.0 s (x, y); prediction = constant velocity + predicted deviation.
+- **Models:** constant velocity; Gaussian Process (ARD RBF + noise, scikit-learn); TabPFN
+  (cloud, one regressor per target). Learned models see only N = 100 / 300 / 1000 training rows.
+
+Mean position error at +1.0 s (m):
+
+| Model | N | Test (same pattern) | Flipped routing (unseen) | Fast fleet (unseen) |
+|---|---|---|---|---|
+| Constant velocity | - | 0.172 | 0.149 | 0.294 |
+| Gaussian Process | 100 / 300 / 1000 | 0.124 / 0.092 / 0.073 | 0.173 / 0.139 / 0.111 | 0.214 / 0.190 / 0.170 |
+| **TabPFN** | 100 / 300 / 1000 | **0.107 / 0.072 / 0.051** | **0.163 / 0.096 / 0.065** | **0.182 / 0.145 / 0.115** |
+
+By upcoming behaviour (test, N = 1000, CV / GP / TabPFN): turning 0.243 / 0.065 / 0.035,
+slowing for a station 0.159 / 0.056 / 0.038, standing at a station 0.138 / 0.130 / 0.127,
+yielding 0.131 / 0.201 / 0.171, cruising 0.077 / 0.048 / 0.032.
+On flipped routing, cruising AGVs get worse with learning (CV 0.054, GP 0.135, TabPFN 0.064):
+the models expect turns where the training fleet turned.
+
+**Latency:** TabPFN via the cloud takes ~2 s per fit and ~1.5-2.5 s per predict call (per target,
+3000 rows batched); GP predicts 3000 rows in 0.4 s locally but needs 5 min to fit on 1000 rows.
+
 ## Phase 1 results, open arena (seeds 0-49)
 
 | Controller | Safety filter | Collision rate | Near-miss rate | Reached goal | Mean time to goal | Mean smallest gap |

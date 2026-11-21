@@ -78,16 +78,17 @@ def exits(node):
     return [d for d in (H_DIR[j], V_DIR[i]) if 0 <= _step_node(node, d)[0] < 3 and 0 <= _step_node(node, d)[1] < 3]
 
 
-def route_choice(node, heading):
+def route_choice(node, heading, turn_parity=1):
     """Routing table: the direction an AGV takes when it reaches intersection `node`.
 
-    Location-based rule: where i + j is odd the AGV turns if it can, elsewhere it goes
-    straight if it can. So the decision is a function of (position, heading) only.
+    Location-based rule: where (i + j) % 2 == turn_parity the AGV turns if it can,
+    elsewhere it goes straight if it can. So the decision is a function of (position,
+    heading) only. turn_parity=1 is the standard fleet; 0 is the "unseen" flipped routing.
     """
     options = exits(node)
     if len(options) == 1:
         return options[0]
-    prefer_turn = (node[0] + node[1]) % 2 == 1
+    prefer_turn = (node[0] + node[1]) % 2 == turn_parity
     straight = heading in options
     if straight and not prefer_turn:
         return heading
@@ -99,8 +100,9 @@ class AGV(Obstacle):
     """Automated guided vehicle following the aisle network with the rules above."""
     pattern = "warehouse_agv"
 
-    def __init__(self, node, heading, progress, cruise):
+    def __init__(self, node, heading, progress, cruise, turn_parity=1):
         """Start on the segment leaving intersection `node` in direction `heading`, `progress` m along."""
+        self.turn_parity = turn_parity
         self.heading = heading
         self.next_node = _step_node(node, heading)
         self.cruise = cruise
@@ -173,7 +175,7 @@ class AGV(Obstacle):
 
         node_pos = self._node_pos(self.next_node)
         dist_node = np.linalg.norm(node_pos - self.pos)
-        turning = route_choice(self.next_node, self.heading) != self.heading
+        turning = route_choice(self.next_node, self.heading, self.turn_parity) != self.heading
 
         # target speed from the rules; `mode` is a hidden label kept for analysis only
         target, self.mode = self.cruise, "cruise"
@@ -197,7 +199,7 @@ class AGV(Obstacle):
             self.pause_left = STATION_PAUSE
             self.speed = 0.0
         elif move >= dist_node:                          # pass through the intersection
-            new_heading = route_choice(self.next_node, self.heading)
+            new_heading = route_choice(self.next_node, self.heading, self.turn_parity)
             node = self.next_node
             self.pos = node_pos + DIRS[new_heading] * (move - dist_node)
             self.heading = new_heading
@@ -208,13 +210,18 @@ class AGV(Obstacle):
         self.vel = DIRS[self.heading] * self.speed
 
 
-def make_agvs(rng, robot_start, n=4):
-    """Spawn `n` AGVs on random grid segments, away from the robot start and from each other."""
+def make_agvs(rng, robot_start, n=4, cruise=(0.7, 1.1), turn_parity=1):
+    """Spawn `n` AGVs on random grid segments, away from the robot start and from each other.
+
+    `cruise` (speed range) and `turn_parity` (routing table) define the fleet's motion pattern;
+    the defaults are the standard fleet, other values create unseen patterns for testing.
+    """
     agvs = []
     while len(agvs) < n:
         node = (int(rng.integers(3)), int(rng.integers(3)))
         heading = str(rng.choice(exits(node)))
-        agv = AGV(node, heading, progress=rng.uniform(0.3, 2.7), cruise=rng.uniform(0.7, 1.1))
+        agv = AGV(node, heading, progress=rng.uniform(0.3, 2.7), cruise=rng.uniform(*cruise),
+                  turn_parity=turn_parity)
         if np.linalg.norm(agv.pos - robot_start) < 2.5:
             continue
         if any(np.linalg.norm(agv.pos - a.pos) < 1.5 for a in agvs):
