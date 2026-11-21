@@ -1,0 +1,46 @@
+{
+ "classical": {
+  "n": 20,
+  "opened": 1.0,
+  "time": 8.001749999999493,
+  "strokes": 11.35,
+  "exploratory": 2.55,
+  "slip_strokes": 1.2,
+  "damage": 0.05,
+  "damaged_bottles": 0.05,
+  "force_ratio": 1.519856025375124
+ },
+ "tabpfn": {
+  "n": 20,
+  "opened": 1.0,
+  "time": 3.1614750000001357,
+  "strokes": 5.8,
+  "exploratory": 0.7,
+  "slip_strokes": 0.8,
+  "damage": 0.05,
+  "damaged_bottles": 0.05,
+  "force_ratio": 1.4531895732953766
+ },
+ "tabpfn_prior_only": {
+  "n": 20,
+  "opened": 0.95,
+  "time": 3.1213157894738095,
+  "strokes": 5.7368421052631575,
+  "exploratory": 2.55,
+  "slip_strokes": 2.55,
+  "damage": 0.05,
+  "damaged_bottles": 0.05,
+  "force_ratio": 1.5417388513878616
+ },
+ "oracle": {
+  "n": 20,
+  "opened": 1.0,
+  "time": 3.6264250000002898,
+  "strokes": 5.75,
+  "exploratory": 0.0,
+  "slip_strokes": 0.0,
+  "damage": 0.0,
+  "damaged_bottles": 0.0,
+  "force_ratio": 1.6626951162693744
+ }
+}

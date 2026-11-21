@@ -1,0 +1,5 @@
+mujoco>=3.1
+numpy
+matplotlib
+tabpfn-client     # TabPFN via the cloud API, needs TABPFN_TOKEN
+truststore        # use the OS certificate store (needed behind TLS-scanning antivirus/proxies)

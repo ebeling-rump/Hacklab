@@ -1,0 +1,84 @@
+<!--
+Bottle-cap opening scene (simplified physics, see README "Simplifications").
+
+  bottle      held in a fixture; hinge `bottle_twist` with a torsion spring (per-bottle stiffness,
+              set at runtime) so soft bottles wind up under torque.
+  cap         hinge `cap_turn` relative to the bottle neck + slide `cap_lift` coupled by a thread
+              equality (3 mm per turn). The seal / thread friction is the hinge's dry friction
+              (`frictionloss`), set at runtime: breakaway torque until the cap first moves, then the
+              lower running torque.
+  gripper     floating above the cap (the arm is abstracted away): passive vertical slide, a
+              torque-controlled wrist hinge and two force-controlled parallel fingers.
+Only finger pads and the cap collide. Cap friction is set per bottle at runtime (MuJoCo uses
+the larger friction of the two geoms; the pads are low-friction so the cap's value wins).
+-->
+<mujoco model="bottle_cap">
+  <compiler angle="radian"/>
+  <option timestep="0.0005" gravity="0 0 0" integrator="implicitfast" cone="elliptic" impratio="100"/>
+
+  <default>
+    <geom contype="0" conaffinity="0"/>
+  </default>
+
+  <visual>
+    <global offwidth="1280" offheight="960"/>
+  </visual>
+
+  <asset>
+    <texture name="grid" type="2d" builtin="checker" rgb1=".85 .85 .85" rgb2=".75 .75 .75" width="256" height="256"/>
+    <material name="grid" texture="grid" texrepeat="8 8"/>
+  </asset>
+
+  <worldbody>
+    <light pos="0.3 -0.3 0.8" dir="-0.3 0.3 -0.8"/>
+    <geom type="plane" size="0.4 0.4 0.01" material="grid"/>
+    <!-- fixture -->
+    <geom type="box" pos="0 0 0.02" size="0.06 0.06 0.02" rgba=".3 .3 .3 1"/>
+
+    <body name="bottle" pos="0 0 0.04">
+      <joint name="bottle_twist" type="hinge" axis="0 0 1" damping="0.05" armature="0.002"/>
+      <geom name="bottle_body" type="cylinder" size="0.04 0.08" pos="0 0 0.08" rgba=".55 .8 .95 .55" mass="0.05"/>
+      <geom name="bottle_shoulder" type="cylinder" size="0.025 0.015" pos="0 0 0.175" rgba=".55 .8 .95 .55" mass="0.01"/>
+      <geom name="neck" type="cylinder" size="0.0135 0.012" pos="0 0 0.2" rgba=".55 .8 .95 .7" mass="0.005"/>
+      <!-- label stripe so twist is visible -->
+      <geom type="box" size="0.002 0.0405 0.03" pos="0 0 0.08" rgba=".9 .2 .2 1" mass="0.001"/>
+
+      <body name="cap" pos="0 0 0.215">
+        <joint name="cap_turn" type="hinge" axis="0 0 1" armature="2e-5" damping="0.002" solimpfriction="0.9999 0.9999 0.001 0.5 2"/>
+        <joint name="cap_lift" type="slide" axis="0 0 1" armature="0.01"/>
+        <geom name="cap" type="cylinder" size="0.016 0.009" rgba=".95 .95 .95 1" mass="0.004"
+              contype="1" conaffinity="2" condim="3" friction="0.8 0.005 0.0001"/>
+        <geom type="box" size="0.0165 0.0015 0.0092" rgba=".1 .4 .9 1" mass="0.0001"/>
+      </body>
+    </body>
+
+    <body name="gripper" pos="0 0 0.285">
+      <joint name="grip_z" type="slide" axis="0 0 1" damping="0.2" armature="0.005"/>
+      <joint name="wrist" type="hinge" axis="0 0 1" damping="0.1" armature="0.001"/>
+      <geom type="box" size="0.035 0.012 0.006" pos="0 0 0.02" rgba=".25 .25 .3 1" mass="0.05"/>
+      <body name="finger_l" pos="-0.0235 0 0">
+        <joint name="finger_l" type="slide" axis="1 0 0" range="-0.01 0.012" damping="300" armature="0.02"/>
+        <geom type="box" size="0.002 0.006 0.012" pos="0 0 0.008" rgba=".25 .25 .3 1" mass="0.01"/>
+        <geom name="pad_l" type="box" size="0.0035 0.007 0.007" pos="0.002 0 -0.03" rgba=".2 .2 .2 1" mass="0.005"
+              contype="2" conaffinity="1" condim="3" friction="0.1 0.005 0.0001" solref="-200000 -200" solimp="0.99 0.999 0.001 0.5 2"/>
+      </body>
+      <body name="finger_r" pos="0.0235 0 0">
+        <joint name="finger_r" type="slide" axis="-1 0 0" range="-0.01 0.012" damping="300" armature="0.02"/>
+        <geom type="box" size="0.002 0.006 0.012" pos="0 0 0.008" rgba=".25 .25 .3 1" mass="0.01"/>
+        <geom name="pad_r" type="box" size="0.0035 0.007 0.007" pos="-0.002 0 -0.03" rgba=".2 .2 .2 1" mass="0.005"
+              contype="2" conaffinity="1" condim="3" friction="0.1 0.005 0.0001" solref="-200000 -200" solimp="0.99 0.999 0.001 0.5 2"/>
+      </body>
+    </body>
+  </worldbody>
+
+  <equality>
+    <!-- thread: lift = pitch / (2 pi) * turn, pitch 3 mm -->
+    <joint joint1="cap_lift" joint2="cap_turn" polycoef="0 0.000477 0 0 0" solref="0.004 1"/>
+  </equality>
+
+  <actuator>
+    <motor name="grip_l" joint="finger_l" ctrlrange="-150 150"/>
+    <motor name="grip_r" joint="finger_r" ctrlrange="-150 150"/>
+    <motor name="wrist" joint="wrist" ctrlrange="-3 3"/>
+  </actuator>
+</mujoco>
