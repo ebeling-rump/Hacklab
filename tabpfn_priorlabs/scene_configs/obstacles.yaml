@@ -1,0 +1,13 @@
+# Two fixed obstacles on the table (half extents in metres). Their poses are part of the known map
+# (TaskInfo.obstacles); the CollisionChecker already contains them.
+name: obstacles
+seed: 3
+cubes:
+  - {color: red,    xy: [0.58, -0.12], yaw: 0.20}
+  - {color: blue,   xy: [0.60,  0.17], yaw: -0.50}
+  - {color: green,  xy: [0.30,  0.16], yaw: 0.80}
+  - {color: yellow, xy: [0.56, -0.20], yaw: 1.10}
+bin: {xy: [0.40, 0.42], yaw: 0.0, known: false}   # known: false -> the agent must localise the bin
+obstacles:
+  - {xy: [0.46,  0.04], half: [0.03, 0.04, 0.07], yaw: 0.4}
+  - {xy: [0.36, -0.14], half: [0.04, 0.025, 0.06], yaw: 1.0}

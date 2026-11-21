@@ -1,0 +1,10 @@
+# Only red and blue must be moved. Green/yellow are distractors: they must stay where they are.
+name: distractors
+seed: 5
+pick_colors: [red, blue]
+cubes:
+  - {color: red,    xy: [0.38, -0.10], yaw: 0.2}
+  - {color: green,  xy: [0.48, -0.02], yaw: 0.4}
+  - {color: blue,   xy: [0.56,  0.12], yaw: -0.3}
+  - {color: yellow, xy: [0.36,  0.12], yaw: 0.9}
+bin: {xy: [0.40, 0.42], yaw: 0.0, known: false}   # known: false -> the agent must localise the bin

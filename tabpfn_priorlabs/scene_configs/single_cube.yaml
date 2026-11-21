@@ -1,0 +1,7 @@
+# Smallest scene: one cube, bin on the left with a KNOWN pose (no bin localisation needed).
+# Other scenes hide the bin (`known: false`): see three_cubes.yaml.
+name: single_cube
+seed: 0
+cubes:
+  - {color: red, xy: [0.45, -0.05], yaw: 0.35}
+bin: {xy: [0.40, 0.42], yaw: 0.0}

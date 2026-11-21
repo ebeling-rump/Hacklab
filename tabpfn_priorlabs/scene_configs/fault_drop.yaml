@@ -1,0 +1,10 @@
+# The first time cube 0 is lifted > 8 cm the gripper is forced open for 0.4 s (slipped grasp).
+name: fault_drop
+seed: 7
+cubes:
+  - {color: green,  xy: [0.44, -0.10], yaw: -0.2}
+  - {color: purple, xy: [0.55,  0.06], yaw: 0.7}
+  - {color: yellow, xy: [0.34,  0.10], yaw: 0.2}
+bin: {xy: [0.40, 0.42], yaw: 0.0, known: false}   # known: false -> the agent must localise the bin
+faults:
+  - {type: drop_on_lift, cube: 0, duration: 0.4}

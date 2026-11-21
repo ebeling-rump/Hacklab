@@ -1,0 +1,10 @@
+# After the first camera frame the first cube is pushed by (5, 3) cm: stale estimates are wrong.
+name: fault_nudge
+seed: 6
+cubes:
+  - {color: orange, xy: [0.46, -0.08], yaw: 0.3}
+  - {color: blue,   xy: [0.36,  0.08], yaw: -0.4}
+  - {color: red,    xy: [0.56,  0.10], yaw: 0.9}
+bin: {xy: [0.40, 0.42], yaw: 0.0, known: false}   # known: false -> the agent must localise the bin
+faults:
+  - {type: nudge_after_obs, cube: 0, obs_index: 1, delta: [0.05, 0.03]}

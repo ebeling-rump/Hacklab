@@ -1,0 +1,7 @@
+name: three_cubes
+seed: 1
+cubes:
+  - {color: red,   xy: [0.40, -0.12], yaw: 0.30}
+  - {color: green, xy: [0.52,  0.02], yaw: -0.60}
+  - {color: blue,  xy: [0.36,  0.10], yaw: 1.00}
+bin: {xy: [0.40, 0.42], yaw: 0.0, known: false}   # known: false -> the agent must localise the bin

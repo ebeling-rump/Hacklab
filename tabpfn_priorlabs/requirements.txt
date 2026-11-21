@@ -1,0 +1,4 @@
+mujoco==3.15.0
+numpy==2.4.6
+scipy==1.17.1
+PyYAML==6.0.3
