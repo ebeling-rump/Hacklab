@@ -1,0 +1,2 @@
+seed,agent,success,steps,sim_s,final_phase,final_phase_true,phases,drops,ik_failures,collisions,lat_mean_ms,lat_p95_ms,per_cube
+10000,student,True,168,8.4,DONE,DONE,"[0, 1, 2, 3, 4, 5, 6, 7, 8]",0,0,0,98.61691071516059,148.61472000484355,"[{'color': 'orange', 'in_bin': True, 'at_rest': True, 'slot_ok': True, 'bin_xy': (-0.0018174360346394991, -0.004642857482109385)}]"
