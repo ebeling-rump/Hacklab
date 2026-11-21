@@ -235,6 +235,29 @@ python plot_results.py 10000 20002              # figures -> results/
 python view.py --controller classical --seed 10000            # MuJoCo viewer replay
 ```
 
+### Watch the episodes in MuJoCo
+
+```bash
+python explorer.py                       # starts on slippery bottle 20002, TabPFN closed loop
+```
+
+Everything is chosen with the keyboard inside the viewer window. The overlay shows the bottle's
+hidden properties, the current stroke (grip, torque, progress, slip, damage) and the result.
+
+| key | action |
+|---|---|
+| Up / Down | next / previous bottle |
+| Insert | switch between in-distribution (40) and slippery caps (20) |
+| Home / End | previous / next controller |
+| Enter | pause / resume |
+| Page Up / Page Down | faster / slower (0.1× to 2×) |
+| Delete | restart the episode |
+
+Episodes are re-simulated from the actions cached by `evaluate.py`, so they match the
+evaluation exactly and need no TabPFN calls. Switching takes about 0.7 s, or a few seconds for
+a 40-stroke episode. `python view.py --controller tabpfn --seed 20002 --cached` replays a
+single episode without the overlay.
+
 Results are cached per (controller, bottle) in `data/results/`, so interrupted TabPFN runs
 resume. Use `--fresh` to recompute, and `--seeds 10016 10017 ...` to (re)run selected bottles only.
 After a long run, check the log: the exit code alone does not prove every bottle finished.
