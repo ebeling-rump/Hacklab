@@ -239,7 +239,11 @@ python view.py --controller classical --seed 10000            # MuJoCo viewer re
 
 ```bash
 python explorer.py                       # starts on slippery bottle 20002, TabPFN closed loop
+python explorer.py --tour                # guided tour: the 8 most instructive episodes, with captions
 ```
+
+In tour mode Up / Down step through the cases and each case advances automatically after its
+result is shown. Changing bottle or controller by hand leaves the tour.
 
 Everything is chosen with the keyboard inside the viewer window. The overlay shows the bottle's
 hidden properties, the current stroke (grip, torque, progress, slip, damage) and the result.

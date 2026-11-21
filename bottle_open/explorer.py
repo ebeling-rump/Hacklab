@@ -57,16 +57,48 @@ def simulate(controller, seed):
             "bottle": sample_bottle(seed)}
 
 
+# Guided tour (--tour): the most instructive episodes, mostly as pairs on the same bottle.
+TOUR = [
+    (20016, "classical", "Biggest gap (1/2): classical escalates torque step by step, 14 strokes"),
+    (20016, "tabpfn", "Biggest gap (2/2): TabPFN on the same bottle, 5 strokes"),
+    (20002, "tabpfn_prior_only", "Prior only gets stuck: cap more slippery than any training bottle, slips 37x"),
+    (20002, "tabpfn", "Closed loop on the same bottle opens in 5 (but the blind 1st grasp crushes it)"),
+    (10019, "tabpfn", "Excessive force: blind first grasp (33 N) above this soft cap's 30 N crush limit"),
+    (10025, "classical", "Excessive force, classical: grip escalation overshoots the crush limit on stroke 3"),
+    (10037, "classical", "Soft bottle (2.1 Nm/rad): watch the red label wind up before the seal breaks"),
+    (20017, "tabpfn", "TabPFN probes: slips at 33 N, works at 83 N, tries 25 N and slips, settles at 75 N"),
+]
+
+
 class Explorer:
-    def __init__(self, seed, controller):
-        self.set_name = next(n for n, s in SETS.items() if seed in s)
-        self.idx = SETS[self.set_name].index(seed)
-        self.ctrl = CONTROLLERS.index(controller)
+    def __init__(self, seed, controller, tour=False):
+        self.tour_i = 0 if tour else None
+        if tour:
+            seed, controller, _ = TOUR[0]
         self.speed = SPEEDS.index(0.33)
         self.paused = False
         self.pending = None            # command from the key thread
         self.lock = threading.Lock()
+        self.select(seed, controller)
+
+    def select(self, seed, controller):
+        self.set_name = next(n for n, s in SETS.items() if seed in s)
+        self.idx = SETS[self.set_name].index(seed)
+        self.ctrl = CONTROLLERS.index(controller)
         self.load()
+
+    def caption(self):
+        if self.tour_i is None:
+            return None
+        seed, ctrl, text = TOUR[self.tour_i]
+        if (seed, ctrl) != (self.seed, CONTROLLERS[self.ctrl]):
+            return None                # user wandered off the tour
+        return f"Tour {self.tour_i + 1}/{len(TOUR)}: {text}"
+
+    def tour_step(self, delta):
+        self.tour_i = (self.tour_i + delta) % len(TOUR)
+        seed, ctrl, _ = TOUR[self.tour_i]
+        self.select(seed, ctrl)
 
     @property
     def seed(self):
@@ -87,6 +119,9 @@ class Explorer:
         if code is None:
             return
         names = list(SETS)
+        if self.tour_i is not None and code in (K_UP, K_DOWN):
+            self.tour_step(1 if code == K_UP else -1)
+            return
         if code == K_UP:
             self.idx = (self.idx + 1) % len(SETS[self.set_name])
         elif code == K_DOWN:
@@ -144,6 +179,11 @@ class Explorer:
                 "Enter  pause\nPgUp/PgDn  speed\nDelete  restart")
         F = mujoco.mjtFontScale.mjFONTSCALE_150
         G = mujoco.mjtGridPos
+        cap_text = self.caption()
+        if cap_text:
+            head = cap_text + "\n\n" + head
+        if self.tour_i is not None:
+            keys = keys.replace("Up/Down  bottle", "Up/Down  next / prev tour case")
         return [(F, G.mjGRID_TOPLEFT, head, None),
                 (F, G.mjGRID_BOTTOMLEFT, live, None),
                 (F, G.mjGRID_TOPRIGHT, state, None),
@@ -166,7 +206,10 @@ class Explorer:
                 elif self.hold > 0:
                     self.hold -= dt
                     if self.hold <= 0 and self.frame >= last_frame:   # result shown: loop
-                        self.frame, self.hold = 0, 1.0
+                        if self.caption():                        # tour: next case
+                            self.tour_step(1)
+                        else:
+                            self.frame, self.hold = 0, 1.0
                 else:
                     acc += dt * SPEEDS[self.speed]
                     steps, acc = int(acc / FRAME_DT), acc % FRAME_DT
@@ -185,8 +228,9 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--seed", type=int, default=20002)
     ap.add_argument("--controller", default="tabpfn", choices=CONTROLLERS)
+    ap.add_argument("--tour", action="store_true", help="guided tour of the most instructive episodes")
     a = ap.parse_args()
-    Explorer(a.seed, a.controller).run()
+    Explorer(a.seed, a.controller, tour=a.tour).run()
 
 
 if __name__ == "__main__":
