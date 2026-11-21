@@ -14,6 +14,8 @@ unknown cells.
 """
 
 import argparse
+import json
+import time
 from pathlib import Path
 
 import mujoco
@@ -21,7 +23,10 @@ import numpy as np
 
 from a1_dataset import ARENA, ENVIRONMENTS, STEP_TIME, build_model, reset_robot
 from a1_lidar import MAX_RANGE, MAX_TURN, N_RAYS, SMOOTHING, gait
-from occupancy_predictors import ConstantPrior, NearestObserved
+from occupancy_predictors import ConstantPrior, GaussianProcess, NearestObserved, TabPFN
+
+PREDICTORS = {"constant_prior": ConstantPrior, "nearest_observed": NearestObserved,
+              "gp": GaussianProcess, "tabpfn": TabPFN}
 
 UNKNOWN, FREE, OCC = -1, 0, 1
 RES = 0.1                 # cell size (m)
@@ -102,14 +107,32 @@ def evaluate_map(grid: Grid, gt):
                 coverage=float(obs.mean()), **m)
 
 
-def evaluate_predictor(predictor, grid: Grid, gt):
+def training_set(grid: Grid, max_train: int, rng):
+    """Observed cells used to fit every predictor (identical for all). If there are
+    more than max_train, keep all occupied cells and a random subset of free ones."""
     obs = (grid.cells != UNKNOWN).ravel()
+    idx = np.flatnonzero(obs)
+    y = grid.cells.ravel()[idx]
+    if max_train and len(idx) > max_train:
+        occ, free = idx[y == OCC], idx[y == FREE]
+        free = rng.choice(free, max(max_train - len(occ), 0), replace=False)
+        idx = np.sort(np.concatenate([occ, free]))
+    return idx, obs
+
+
+def evaluate_predictor(predictor, grid: Grid, gt, train_idx, obs):
+    """Fit on the shared training cells, score only on genuinely unobserved cells."""
     X, y_obs, y_gt = grid.coords(), grid.cells.ravel(), gt.ravel()
-    predictor.fit(X[obs], y_obs[obs])
+    t0 = time.perf_counter()
+    predictor.fit(X[train_idx], y_obs[train_idx])
+    t1 = time.perf_counter()
     p, u = predictor.predict(X[~obs])
+    t2 = time.perf_counter()
     m = binary_metrics((p >= 0.5).astype(int), y_gt[~obs])
     m["brier"] = float(np.mean((p - y_gt[~obs]) ** 2))
     m["mean_uncertainty"] = float(np.mean(u))
+    m.update(fit_s=t1 - t0, predict_s=t2 - t1, runtime_s=t2 - t0,
+             n_train=int(len(train_idx)), n_query=int((~obs).sum()))
     full = grid.cells.ravel().astype(float).copy()
     full[~obs] = p
     return m, full.reshape(grid.n, grid.n)
@@ -135,16 +158,17 @@ def collect(model, data, grid, rng, boxes, poses, walk, steps):
     return steps + 1
 
 
-def save_png(path, grid, gt, pred_map, title):
+def save_png(path, grid, gt, maps):
     import matplotlib
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
     ext = [-grid.extent, grid.extent, -grid.extent, grid.extent]
-    fig, ax = plt.subplots(1, 3, figsize=(13, 4.5))
-    for a, img, t, kw in (
-            (ax[0], gt, "ground truth", dict(cmap="gray_r", vmin=0, vmax=1)),
-            (ax[1], grid.cells, "observed (-1 unknown)", dict(cmap="viridis", vmin=-1, vmax=1)),
-            (ax[2], pred_map, title, dict(cmap="gray_r", vmin=0, vmax=1))):
+    panels = [(gt, "ground truth", dict(cmap="gray_r", vmin=0, vmax=1)),
+              (grid.cells, "observed (-1 unknown)", dict(cmap="viridis", vmin=-1, vmax=1))]
+    panels += [(img, f"{name}: P(occupied)", dict(cmap="gray_r", vmin=0, vmax=1))
+               for name, img in maps.items()]
+    fig, ax = plt.subplots(1, len(panels), figsize=(4.3 * len(panels), 4.5))
+    for a, (img, t, kw) in zip(ax, panels):
         im = a.imshow(img.T, origin="lower", extent=ext, **kw)
         a.set_title(t)
         fig.colorbar(im, ax=a, fraction=0.046)
@@ -162,6 +186,11 @@ def main():
     ap.add_argument("--steps", type=int, default=20)
     ap.add_argument("--seed", type=int, default=0)
     ap.add_argument("--png", default="asm_results/occupancy.png", help="'' to skip")
+    ap.add_argument("--out", default="asm_results/comparison.json", help="'' to skip")
+    ap.add_argument("--predictors", nargs="+", default=["nearest_observed", "gp", "tabpfn"],
+                    choices=list(PREDICTORS))
+    ap.add_argument("--max-train", type=int, default=2000,
+                    help="cap on shared training cells (all occupied + random free); 0 = all")
     args = ap.parse_args()
 
     boxes = ENVIRONMENTS[args.env]
@@ -181,15 +210,28 @@ def main():
           f"precision {m['precision']:.3f}, recall {m['recall']:.3f} "
           f"(tp {m['tp']}, fp {m['fp']}, fn {m['fn']})")
 
-    pred_map = None
-    for predictor in (ConstantPrior(), NearestObserved()):
-        pm, full = evaluate_predictor(predictor, grid, gt)
-        print(f"{predictor.name:16s} on unknown cells: accuracy {pm['accuracy']:.3f}, "
+    train_idx, obs = training_set(grid, args.max_train, rng)
+    n_occ = int((grid.cells.ravel()[train_idx] == OCC).sum())
+    print(f"training cells (shared by all predictors): {len(train_idx)} "
+          f"({n_occ} occupied); query = {int((~obs).sum())} unobserved cells")
+
+    results, maps = {}, {}
+    for name in args.predictors:
+        pm, full = evaluate_predictor(PREDICTORS[name](), grid, gt, train_idx, obs)
+        results[name], maps[name] = pm, full
+        print(f"{name:16s} unobserved cells: brier {pm['brier']:.3f}, "
               f"precision {pm['precision']:.3f}, recall {pm['recall']:.3f}, "
-              f"brier {pm['brier']:.3f}, mean uncertainty {pm['mean_uncertainty']:.3f}")
-        pred_map = full
+              f"accuracy {pm['accuracy']:.3f}, runtime {pm['runtime_s']:.2f} s "
+              f"(fit {pm['fit_s']:.2f}, predict {pm['predict_s']:.2f})")
+
+    if args.out:
+        Path(args.out).parent.mkdir(parents=True, exist_ok=True)
+        Path(args.out).write_text(json.dumps(dict(
+            env=args.env, poses=args.poses, walk=args.walk, seed=args.seed,
+            map=m, n_train=len(train_idx), predictors=results), indent=2, default=float))
+        print(f"saved {args.out}")
     if args.png:
-        save_png(args.png, grid, gt, pred_map, f"{predictor.name} filled map")
+        save_png(args.png, grid, gt, maps)
 
 
 if __name__ == "__main__":
