@@ -48,17 +48,19 @@ class ObstacleTracker:
 
 # ---- Predictors: (tracker, times[K]) -> predicted positions (n_obstacles, K, 2) or None ----
 
-def predict_none(tracker, times):
+# Predictors may also receive robot_pos= and t= (sim time) as keyword arguments.
+
+def predict_none(tracker, times, **_):
     """Ignore obstacles entirely (goal-seeking only). Used to show the task is not trivial."""
     return None
 
 
-def predict_static(tracker, times):
+def predict_static(tracker, times, **_):
     """Obstacles stay where they are now (purely reactive avoidance)."""
     return np.repeat(tracker.position[:, None, :], len(times), axis=1)
 
 
-def predict_constant_velocity(tracker, times):
+def predict_constant_velocity(tracker, times, **_):
     """Extrapolate the last observed velocity."""
     return tracker.position[:, None, :] + tracker.velocity[:, None, :] * times[None, :, None]
 

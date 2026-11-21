@@ -1,3 +1,6 @@
 mujoco>=3.1
 numpy
 matplotlib
+scikit-learn      # Gaussian Process baseline (Phase 2/3)
+tabpfn-client     # TabPFN via the cloud API (Phase 2/3), needs TABPFN_TOKEN
+truststore        # use the OS certificate store (needed behind TLS-scanning antivirus/proxies)

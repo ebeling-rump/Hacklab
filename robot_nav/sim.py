@@ -45,8 +45,12 @@ class Episode:
     """Steps physics, obstacles and controller together; records a 10 Hz log and metrics."""
 
     def __init__(self, seed, predictor="constant_velocity", safety=True, scenario="warehouse",
-                 model=None, data=None):
-        """Pass `model`/`data` to reuse them (e.g. a live viewer of the same scenario)."""
+                 model=None, data=None, predictor_obj=None):
+        """Pass `model`/`data` to reuse them (e.g. a live viewer of the same scenario).
+
+        `predictor_obj`: a callable (tracker, times, robot_pos=, t=) -> (n, K, 2), e.g. a
+        learned.AsyncPredictor; `predictor` is then only used as its name.
+        """
         self.sc = SCENARIOS[scenario](seed)
         self.model = model if model is not None else mujoco.MjModel.from_xml_string(self.sc.xml)
         self.data = data if data is not None else mujoco.MjData(self.model)
@@ -66,7 +70,10 @@ class Episode:
         self.control_every = round(CONTROL_DT / self.dt)
         self.tracker = ObstacleTracker(len(self.obstacles), CONTROL_DT)
         self.planner = Planner(PlannerConfig())
-        self.predict = self._predict_oracle if predictor == "oracle" else PREDICTORS[predictor]
+        if predictor_obj is not None:
+            self.predict = predictor_obj
+        else:
+            self.predict = self._predict_oracle if predictor == "oracle" else PREDICTORS[predictor]
         self.cmd = np.zeros(2)
         self.predictions = None
         self.n_steps = 0
@@ -105,7 +112,7 @@ class Episode:
         for o in obstacles:
             o.step(dt, robot_pos=robot_pos, agvs=obstacles)
 
-    def _predict_oracle(self, tracker, times, sub_dt=0.02):
+    def _predict_oracle(self, tracker, times, sub_dt=0.02, **_):
         """Evaluation-only upper bound: roll a copy of the true obstacles forward."""
         clones = copy.deepcopy(self.obstacles)
         robot = self.robot_pos
@@ -126,7 +133,7 @@ class Episode:
         self.tracker.update(obs)
 
         t0 = time.perf_counter()
-        self.predictions = self.predict(self.tracker, self.planner.times)
+        self.predictions = self.predict(self.tracker, self.planner.times, robot_pos=robot, t=self.data.time)
         t1 = time.perf_counter()
         cmd = self.planner.plan(robot, self.target, self.predictions, self.sc.free_space,
                                 final=self.wp == len(self.waypoints) - 1)

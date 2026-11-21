@@ -134,6 +134,48 @@ the models expect turns where the training fleet turned.
 **Latency:** TabPFN via the cloud takes ~2 s per fit and ~1.5-2.5 s per predict call (per target,
 3000 rows batched); GP predicts 3000 rows in 0.4 s locally but needs 5 min to fit on 1000 rows.
 
+## Phase 3: navigation with learned prediction (`learned.py`, `nav_eval.py`)
+
+```bash
+python nav_eval.py --seeds 0 50 --predictors constant_velocity gp oracle
+python nav_eval.py --seeds 0 20 --predictors tabpfn_live tabpfn_ideal    # cloud, needs TABPFN_TOKEN
+python nav_eval.py --report [--only constant_velocity gp ...]
+```
+
+- Learned models (N = 1000 Phase 2 rows) predict the deviation from constant velocity at +0.5 / +1.0 s
+  for AGVs within 4 m; the planner's 0.1-1.0 s path is interpolated from it. TabPFN uses **one**
+  combined model (horizon and axis as extra features, 0.055 m vs 0.051 m for four models) so that
+  one cloud call covers all AGVs.
+- **Latency is modelled in simulation time** (`AsyncPredictor`): a prediction is usable only
+  `latency` seconds after its observation; before that the previous prediction (shifted by its age)
+  or constant velocity is used. `tabpfn_ideal` lets the world wait for each call (5 Hz) to show the
+  predictions' value without latency. Model errors (network, quota) fall back to constant velocity.
+- The local safety filter is identical for every predictor and never waits for a model.
+- `data/nav_eval.csv` is appended per episode and resumable.
+
+Results (paired seeds; collisions 0% and goal reached 100% for every predictor):
+
+| Predictor | Seeds | Time to goal | Near misses | Stops / ep. | Pred. error @1 s | Latency mean / p95 | Inference s / ep. |
+|---|---|---|---|---|---|---|---|
+| constant velocity | 50 | 15.16 s | 62% | 0.42 | 0.163 m | - | 0.00 |
+| GP (local) | 50 | 14.33 s | 60% | 0.18 | 0.092 m | 1 / 2 ms | 0.18 |
+| oracle | 50 | 14.53 s | 56% | 0.26 | 0.006 m | - | - |
+| TabPFN live (cloud) | 20 | 13.95 s (CV: 14.05) | 55% (CV: 55%) | 0.40 | 0.162 m | 1780 / 3658 ms | 13.4 |
+| TabPFN ideal | 7 | 12.41 s (CV: 14.36) | 14% (CV: 29%) | 0.14 | 0.067 m | 1443 / 2019 ms | 71.4 |
+
+On the same 7 seeds the GP needs 12.11 s and the oracle 12.36 s: ideal TabPFN is on par with
+them, with a lower online prediction error than the GP (0.067 m vs 0.090 m).
+
+Live TabPFN used constant velocity in 82% of control steps: its predictions arrive after ~1.8 s,
+later than the 1 s horizon they cover, so it performs like constant velocity.
+The ideal run was limited to 7 seeds on purpose: each cloud call re-sends the 4000-row training
+context (~10k API credits per call, ~50 calls per episode).
+
+**Takeaway:** TabPFN is the most accurate predictor from few observations, and accurate
+prediction makes navigation faster (fewer stops), not safer (the local safety layer already
+prevents collisions). Through the cloud API it is too slow for a 10 Hz loop; it would need
+local inference or distillation into a fast local model.
+
 ## Phase 1 results, open arena (seeds 0-49)
 
 | Controller | Safety filter | Collision rate | Near-miss rate | Reached goal | Mean time to goal | Mean smallest gap |
