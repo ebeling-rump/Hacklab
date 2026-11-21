@@ -11,6 +11,7 @@ controller in sim.py.
                       this bottle's own strokes; a separate optimizer picks the best safe one
   Oracle              knows the hidden bottle parameters: evaluation-only upper bound
 """
+import re
 import time
 
 import numpy as np
@@ -142,8 +143,20 @@ class TabPFNController:
             hX, hY = history_rows(history)
             X, Y = np.vstack([X, hX]), np.vstack([Y, hY])
         Xq = rows(s, self.cF, self.cT)
-        t0 = time.perf_counter()
-        pred = self.predictor.fit_predict(X, Y, Xq)
+        for attempt in range(4):
+            t0 = time.perf_counter()
+            try:
+                pred = self.predictor.fit_predict(X, Y, Xq)
+                break
+            except RuntimeError as e:
+                # cloud rate limit (HTTP 429, 1000 fits/hour): wait it out, then retry.
+                # The wait is not counted as model latency.
+                if "429" not in str(e) or attempt == 3:
+                    raise
+                wait = re.search(r"Retry in (\d+)s", str(e))
+                wait = min(int(wait.group(1)) + 5, 900) if wait else 300
+                print(f"  TabPFN rate limit, waiting {wait} s", flush=True)
+                time.sleep(wait)
         latency = time.perf_counter() - t0
         prog, slip, dmg = pred[:, 0], np.clip(pred[:, 1], 0, None), np.clip(pred[:, 2], 0, 1)
         score = prog - self.W_SLIP * slip - self.W_FORCE * self.cF - self.W_TAU * self.cT - self.W_DAMAGE * dmg

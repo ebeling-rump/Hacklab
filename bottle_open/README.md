@@ -17,7 +17,7 @@ Time is simulated time; cloud latency is excluded and listed separately.
 | controller | opened | strokes | time [s] | exploratory strokes | slip strokes | bottles damaged | peak / needed grip |
 |---|---|---|---|---|---|---|---|
 | classical adaptive | 100 % | 9.1 | 6.2 | 2.9 | 0.0 | 5 % (2) | 2.10 |
-| TabPFN prior only | 100 % | 5.2 | 2.8 | 0.2 | 0.2 | 5 % (2) | 1.79 |
+| TabPFN prior only | 100 % | 5.3 | 2.9 | 0.3 | 0.3 | 5 % (2) | 1.78 |
 | **TabPFN closed loop** | 100 % | **5.3** | **2.9** | **0.3** | 0.3 | 5 % (2) | **1.73** |
 | oracle (knows the bottle) | 100 % | 5.3 | 3.4 | 0.0 | 0.0 | 0 % | 1.82 |
 
@@ -51,7 +51,8 @@ the hidden crush limit. Peak / needed grip is a median.
    which is why it beats the oracle's *time*. The oracle is a knowledge-based heuristic, not a
    time-optimal policy, so it is an upper bound on knowledge, not on speed.
 3. **The bottle's own strokes help mainly when the prior is wrong, and the evidence is thin.**
-   In-distribution, the closed-loop and prior-only variants are statistically identical: the
+   In-distribution, the closed-loop and prior-only variants behave the same (same first
+   stroke, same two damaged bottles, near-identical means): the
    running-estimate features (stiffness, friction bounds, seal state) already carry what the
    robot learns about the bottle. Out-of-distribution, the prior-only variant failed on one
    bottle, 20002 (μ = 0.36):
@@ -84,10 +85,9 @@ the hidden crush limit. Peak / needed grip is a median.
   - progress: 15° mean absolute error (18° out-of-distribution)
   - slip: 1.8°
   - damage probability: 0.01
-- **Not fully deterministic:** with identical inputs (`random_state=0`), the cloud returned two
-  different first-stroke choices across the 40 prior-only episodes (41 N / 1.33 Nm on 24,
-  33 N / 2.0 Nm on 16). Small differences in predicted score flip the argmax. Rerunning the
-  evaluation will shift the TabPFN numbers slightly.
+- **Rate limit:** the cloud API allows 1000 fit calls per hour, and every decision is one fit.
+  A full evaluation (both sets, both TabPFN variants) needs about 700. The controller now waits
+  out HTTP 429 errors and retries; the wait is not counted as latency.
 
 ### Limitations and next steps
 
@@ -236,4 +236,5 @@ python view.py --controller classical --seed 10000            # MuJoCo viewer re
 ```
 
 Results are cached per (controller, bottle) in `data/results/`, so interrupted TabPFN runs
-resume. Use `--fresh` to recompute.
+resume. Use `--fresh` to recompute, and `--seeds 10016 10017 ...` to (re)run selected bottles only.
+After a long run, check the log: the exit code alone does not prove every bottle finished.

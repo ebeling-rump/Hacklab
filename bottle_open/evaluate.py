@@ -102,15 +102,21 @@ if __name__ == "__main__":
     ap.add_argument("--controllers", nargs="+", default=["classical", "oracle"], choices=CONTROLLERS)
     ap.add_argument("--set", default="test", choices=["test", "ood"], help="in-distribution or out-of-distribution bottles")
     ap.add_argument("--bottles", type=int, default=None)
+    ap.add_argument("--seeds", type=int, nargs="+", help="run only these seeds (must belong to --set)")
     ap.add_argument("--summary", action="store_true")
     ap.add_argument("--fresh", action="store_true", help="ignore and overwrite cached results")
     ap.add_argument("-v", action="store_true")
     a = ap.parse_args()
     seeds = list(TEST_SEEDS if a.set == "test" else OOD_SEEDS)[:a.bottles]
     FRESH = a.fresh
+    if a.seeds:
+        run_seeds = [s for s in a.seeds if s in seeds]
+        assert len(run_seeds) == len(a.seeds), "--seeds must belong to the chosen --set"
+    else:
+        run_seeds = seeds
     if not a.summary:
         for n in a.controllers:
-            for s in seeds:
+            for s in run_seeds:
                 r = run(n, s)
                 lat = np.mean([d["latency"] for d in r.get("decisions", [])]) if r.get("decisions") else 0
                 print(f"{n:<18} bottle {s}: opened={r['opened']!s:<5} strokes={r['strokes']:>2} "
