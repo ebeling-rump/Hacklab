@@ -78,9 +78,10 @@ class PlannerConfig:
     horizon: float = 1.0        # s, how far ahead candidates are rolled out
     dt: float = 0.1             # s, rollout resolution (matches the control rate)
     n_headings: int = 24
-    speed_fracs: tuple = (0.35, 0.7, 1.0)
+    speed_fracs: tuple = (0.15, 0.35, 0.7, 1.0)
     margin: float = 0.4         # desired clearance beyond touching (m)
     w_clear: float = 20.0       # weight of the clearance penalty
+    w_room: float = 0.3         # weight of the extra-clearance bonus
 
 
 class Planner:
@@ -95,26 +96,36 @@ class Planner:
             [np.zeros((1, 2))] + [f * cfg.v_max * dirs for f in cfg.speed_fracs]
         )
 
-    def plan(self, pos, goal, predictions):
-        """Return the commanded velocity (2,) given predicted obstacle positions (n, K, 2)."""
+    def plan(self, pos, goal, predictions, free_space=None, final=True):
+        """Return the commanded velocity (2,) given predicted obstacle positions (n, K, 2).
+
+        `goal` is the current target (a waypoint or the final goal; only the final goal is
+        approached slowly). `free_space(points) -> bool` marks where the robot may be.
+        """
         cfg = self.cfg
         to_goal = goal - pos
         dist = np.linalg.norm(to_goal)
-        # Always include "straight to the goal" at a speed that stops on it.
-        direct = to_goal / max(dist, 1e-9) * min(cfg.v_max, dist / cfg.horizon)
+        # Always include "straight to the target" (stopping on it if it is the final goal).
+        speed = min(cfg.v_max, dist / cfg.horizon) if final else cfg.v_max
+        direct = to_goal / max(dist, 1e-9) * speed
         V = np.vstack([self.candidates, direct])
 
         traj = pos + V[:, None, :] * self.times[None, :, None]          # (M, K, 2)
         cost = np.linalg.norm(traj[:, -1] - goal, axis=1)               # distance left after horizon
 
-        # Stay inside the arena.
+        # Stay inside the arena and (if given) the free space, e.g. warehouse aisles.
         out = np.abs(traj).max(axis=(1, 2)) > ARENA - R_ROBOT
         cost[out] += 100.0
+        if free_space is not None:
+            cost += 100.0 * (~free_space(traj)).mean(axis=1)
 
         if predictions is not None:
             d = np.linalg.norm(traj[:, None] - predictions[None], axis=-1)   # (M, n_obs, K)
             clearance = d.min(axis=(1, 2)) - R_SUM
             cost += cfg.w_clear * np.clip(cfg.margin - clearance, 0, None) ** 2
+            # Small bonus for extra room (up to 1 m): when progress is blocked the robot
+            # steps aside instead of standing in an AGV's path.
+            cost -= cfg.w_room * np.minimum(clearance, 1.0)
             hit = clearance < 0                                         # predicted collision
             cost[hit] += 1000.0 - 1000.0 * clearance[hit]
         return V[np.argmin(cost)]

@@ -5,9 +5,10 @@ Small dots show what the controller is thinking:
   - blue dots: where the robot would go along the chosen command
 
 Usage:
-    python view.py                                    # seed 0, constant-velocity predictor
-    python view.py --seed 7 --predictor static
-    python view.py --predictor none --no-safety       # watch it crash
+    python view.py                                    # warehouse, seed 0, constant velocity
+    python view.py --seed 7 --predictor oracle
+    python view.py --scenario open --predictor none --no-safety   # Phase 1 arena, watch it crash
+Close the viewer before batch runs: it keeps the CPU busy and skews latency numbers.
 When an episode ends, the next seed starts. Close the window to quit.
 """
 import argparse
@@ -17,10 +18,11 @@ import mujoco
 import mujoco.viewer
 import numpy as np
 
-from controller import PREDICTORS
-from sim import Episode
+from scenarios import SCENARIOS
+from sim import ALL_PREDICTORS, Episode
 
-OBS_RGBA = [np.array([0.92, 0.41, 0.2, 0.7]), np.array([0.38, 0.31, 0.84, 0.7])]
+OBS_RGBA = [np.array(c + [0.7]) for c in ([0.92, 0.41, 0.2], [0.38, 0.31, 0.84], [0.11, 0.69, 0.48],
+                                          [0.91, 0.48, 0.64], [0.89, 0.29, 0.28])]
 ROBOT_RGBA = np.array([0.16, 0.47, 0.84, 0.7])
 
 
@@ -45,14 +47,15 @@ def draw_markers(viewer, ep):
 
 def main():
     parser = argparse.ArgumentParser()
+    parser.add_argument("--scenario", default="warehouse", choices=list(SCENARIOS))
     parser.add_argument("--seed", type=int, default=0)
-    parser.add_argument("--predictor", default="constant_velocity", choices=list(PREDICTORS))
+    parser.add_argument("--predictor", default="constant_velocity", choices=ALL_PREDICTORS)
     parser.add_argument("--no-safety", action="store_true")
     parser.add_argument("--speed", type=float, default=1.0, help="playback speed factor")
     args = parser.parse_args()
 
     seed = args.seed
-    ep = Episode(seed, args.predictor, safety=not args.no_safety)
+    ep = Episode(seed, args.predictor, safety=not args.no_safety, scenario=args.scenario)
     with mujoco.viewer.launch_passive(ep.model, ep.data) as viewer:
         viewer.cam.lookat[:] = [0, 0, 0]
         viewer.cam.distance, viewer.cam.elevation, viewer.cam.azimuth = 13, -60, 90
@@ -68,7 +71,8 @@ def main():
                       f"collisions={m['collision_events']} min gap={m['min_clearance']:.3f} m")
                 time.sleep(1.5)
                 seed += 1
-                ep = Episode(seed, args.predictor, safety=not args.no_safety, model=ep.model, data=ep.data)
+                ep = Episode(seed, args.predictor, safety=not args.no_safety, scenario=args.scenario,
+                             model=ep.model, data=ep.data)
                 continue
             lag = (ep.data.time - sim0) / args.speed - (time.perf_counter() - wall0)
             if lag > 0:

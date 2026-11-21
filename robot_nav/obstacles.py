@@ -13,6 +13,7 @@ R_OBS = 0.3      # obstacle radius (m)
 
 class Obstacle:
     pattern = "base"
+    mode = "-"          # hidden behaviour label (analysis only), set by subclasses that have modes
 
     def __init__(self, pos, vel, radius=R_OBS, arena=ARENA):
         self.pos = np.asarray(pos, dtype=float).copy()
@@ -30,7 +31,8 @@ class Obstacle:
                 self.pos[i] = -2 * self.limit - self.pos[i]
                 self.vel[i] = abs(self.vel[i])
 
-    def step(self, dt):
+    def step(self, dt, **_):
+        """Advance by dt. Extra keyword arguments (robot_pos, agvs) are for reactive obstacles."""
         raise NotImplementedError
 
 
@@ -38,7 +40,7 @@ class ConstantVelocity(Obstacle):
     """Straight line at constant velocity; only the walls change its direction."""
     pattern = "constant_velocity"
 
-    def step(self, dt):
+    def step(self, dt, **_):
         self.pos += self.vel * dt
         self._reflect()
 
@@ -58,7 +60,7 @@ class RandomTurns(Obstacle):
         heading = self.rng.uniform(0, 2 * np.pi)
         return self.speed * np.array([np.cos(heading), np.sin(heading)])
 
-    def step(self, dt):
+    def step(self, dt, **_):
         self.time_to_turn -= dt
         if self.time_to_turn <= 0:
             self.vel = self._random_velocity()
