@@ -4,7 +4,8 @@
   ice_patrol_tabpfn.mp4        layout 2, 6-leg patrol, top-down, 2x speed: TabPFN's slip map
                                drawn on the ground (orange = slippery), route bending around ice
 
-    python a1_ice_videos.py
+    python a1_ice_videos.py            # both
+    python a1_ice_videos.py patrol     # patrol video only
 """
 
 import time
@@ -70,9 +71,11 @@ def record_walk(name, title, model, sensors, goals, choose, info, max_time, cam_
 
 
 def main():
+    import sys
     OUT.mkdir(exist_ok=True)
     tab, det, gap, ref = P.models()
     fi = feature_names().index("cmd_forward")
+    only_patrol = "patrol" in sys.argv[1:]
 
     def track(cam):
         cam.type = mujoco.mjtCamera.mjCAMERA_TRACKING
@@ -101,11 +104,12 @@ def main():
 
     info = lambda d, leg: f"speed command {speed['v']:.2f}"
     fps = None
-    for name, title, choose in (("ice_gov_full", "Fixed full speed", fixed(1.0)),
-                                ("ice_gov_crawl", "Fixed crawl (0.3)", fixed(0.3)),
-                                ("ice_gov_tabpfn", "TabPFN speed governor", gov)):
-        fps = record_walk(name, title, model, sensors, [P.B], choose, info, 60, track)
-    composite("ice_governor_comparison", ["ice_gov_full", "ice_gov_crawl", "ice_gov_tabpfn"], fps)
+    if not only_patrol:
+        for name, title, choose in (("ice_gov_full", "Fixed full speed", fixed(1.0)),
+                                    ("ice_gov_crawl", "Fixed crawl (0.3)", fixed(0.3)),
+                                    ("ice_gov_tabpfn", "TabPFN speed governor", gov)):
+            fps = record_walk(name, title, model, sensors, [P.B], choose, info, 60, track)
+        composite("ice_governor_comparison", ["ice_gov_full", "ice_gov_crawl", "ice_gov_tabpfn"], fps)
 
     # ---- patrol with TabPFN slip map (layout 2), top-down at 2x ------------------------
     seed = 2
@@ -121,9 +125,10 @@ def main():
 
     def draw_map(scn):
         r = smap.risk()
-        for i, j in zip(*np.nonzero(r > 0.3)):
+        for i, j in zip(*np.nonzero(r > 0.55)):          # only clearly slippery cells
             add_geom(scn, mujoco.mjtGeom.mjGEOM_BOX, [P.CELL / 2, P.CELL / 2, 0.002],
-                     [smap.cx[i, j], smap.cy[i, j], 0.012], [0.95, 0.45, 0.1, 0.25 + 0.5 * r[i, j]])
+                     [smap.cx[i, j], smap.cy[i, j], 0.012],
+                     [0.95, 0.45, 0.1, 0.2 + 0.6 * (r[i, j] - 0.55) / 0.45])
         path = choose.state["path"]
         if path is not None:
             for x, y in path[::2]:
