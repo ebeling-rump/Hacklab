@@ -1,0 +1,4205 @@
+{
+ "threshold": 0.086,
+ "rows": [
+  {
+   "episode": 0,
+   "mu": 0.1759018820758558,
+   "strategy": "blind trot",
+   "fell": true,
+   "distance": 1.2876100586522379,
+   "braced_s": 0.0,
+   "duration": 7.4319999999994035,
+   "set": "steep hills"
+  },
+  {
+   "episode": 0,
+   "mu": 0.1759018820758558,
+   "strategy": "always brace",
+   "fell": false,
+   "distance": 0.07817023704256755,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 0,
+   "mu": 0.1759018820758558,
+   "strategy": "tilt rule",
+   "fell": false,
+   "distance": 0.07817023704256755,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 0,
+   "mu": 0.1759018820758558,
+   "strategy": "TabPFN danger mode",
+   "fell": false,
+   "distance": 1.1938786395674021,
+   "braced_s": 2.9,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 0,
+   "mu": 0.1759018820758558,
+   "strategy": "balance reflex",
+   "fell": false,
+   "distance": 0.05681167233268438,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 1,
+   "mu": 0.3609955022013566,
+   "strategy": "blind trot",
+   "fell": false,
+   "distance": 0.7317388756008513,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 1,
+   "mu": 0.3609955022013566,
+   "strategy": "always brace",
+   "fell": false,
+   "distance": 0.10076998890309276,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 1,
+   "mu": 0.3609955022013566,
+   "strategy": "tilt rule",
+   "fell": false,
+   "distance": 0.08657642912361901,
+   "braced_s": 6.3,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 1,
+   "mu": 0.3609955022013566,
+   "strategy": "TabPFN danger mode",
+   "fell": false,
+   "distance": 0.10076998890309276,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 1,
+   "mu": 0.3609955022013566,
+   "strategy": "balance reflex",
+   "fell": false,
+   "distance": 0.017459910770425503,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 2,
+   "mu": 0.10027012886006861,
+   "strategy": "blind trot",
+   "fell": false,
+   "distance": 0.12689457859067277,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 2,
+   "mu": 0.10027012886006861,
+   "strategy": "always brace",
+   "fell": false,
+   "distance": 0.07579143056553646,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 2,
+   "mu": 0.10027012886006861,
+   "strategy": "tilt rule",
+   "fell": false,
+   "distance": 0.07579143056553646,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 2,
+   "mu": 0.10027012886006861,
+   "strategy": "TabPFN danger mode",
+   "fell": false,
+   "distance": 0.07568799223653007,
+   "braced_s": 4.3,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 2,
+   "mu": 0.10027012886006861,
+   "strategy": "balance reflex",
+   "fell": false,
+   "distance": 0.05954504388330936,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 3,
+   "mu": 0.5062868407892855,
+   "strategy": "blind trot",
+   "fell": true,
+   "distance": 0.2700965800107306,
+   "braced_s": 0.0,
+   "duration": 0.6420000000000005,
+   "set": "steep hills"
+  },
+  {
+   "episode": 3,
+   "mu": 0.5062868407892855,
+   "strategy": "always brace",
+   "fell": true,
+   "distance": 0.2700965800107306,
+   "braced_s": 0.0,
+   "duration": 0.6420000000000005,
+   "set": "steep hills"
+  },
+  {
+   "episode": 3,
+   "mu": 0.5062868407892855,
+   "strategy": "tilt rule",
+   "fell": true,
+   "distance": 0.2700965800107306,
+   "braced_s": 0.0,
+   "duration": 0.6420000000000005,
+   "set": "steep hills"
+  },
+  {
+   "episode": 3,
+   "mu": 0.5062868407892855,
+   "strategy": "TabPFN danger mode",
+   "fell": true,
+   "distance": 0.2700965800107306,
+   "braced_s": 0.0,
+   "duration": 0.6420000000000005,
+   "set": "steep hills"
+  },
+  {
+   "episode": 3,
+   "mu": 0.5062868407892855,
+   "strategy": "balance reflex",
+   "fell": false,
+   "distance": 1.1883229392466732,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 4,
+   "mu": 0.2046731266623956,
+   "strategy": "blind trot",
+   "fell": false,
+   "distance": 0.022552627604422528,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 4,
+   "mu": 0.2046731266623956,
+   "strategy": "always brace",
+   "fell": false,
+   "distance": 0.10738209414079052,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 4,
+   "mu": 0.2046731266623956,
+   "strategy": "tilt rule",
+   "fell": false,
+   "distance": 0.022552627604422528,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 4,
+   "mu": 0.2046731266623956,
+   "strategy": "TabPFN danger mode",
+   "fell": false,
+   "distance": 0.09314329462056295,
+   "braced_s": 6.0,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 4,
+   "mu": 0.2046731266623956,
+   "strategy": "balance reflex",
+   "fell": false,
+   "distance": 0.03043622317785059,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 5,
+   "mu": 0.8568334397273433,
+   "strategy": "blind trot",
+   "fell": true,
+   "distance": 0.3837525572045965,
+   "braced_s": 0.0,
+   "duration": 0.5320000000000004,
+   "set": "steep hills"
+  },
+  {
+   "episode": 5,
+   "mu": 0.8568334397273433,
+   "strategy": "always brace",
+   "fell": true,
+   "distance": 0.3837525572045965,
+   "braced_s": 0.0,
+   "duration": 0.5320000000000004,
+   "set": "steep hills"
+  },
+  {
+   "episode": 5,
+   "mu": 0.8568334397273433,
+   "strategy": "tilt rule",
+   "fell": true,
+   "distance": 0.3837525572045965,
+   "braced_s": 0.0,
+   "duration": 0.5320000000000004,
+   "set": "steep hills"
+  },
+  {
+   "episode": 5,
+   "mu": 0.8568334397273433,
+   "strategy": "TabPFN danger mode",
+   "fell": true,
+   "distance": 0.3837525572045965,
+   "braced_s": 0.0,
+   "duration": 0.5320000000000004,
+   "set": "steep hills"
+  },
+  {
+   "episode": 5,
+   "mu": 0.8568334397273433,
+   "strategy": "balance reflex",
+   "fell": false,
+   "distance": 1.7535123818695173,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 6,
+   "mu": 0.10382664518618152,
+   "strategy": "blind trot",
+   "fell": true,
+   "distance": 0.42203821552867865,
+   "braced_s": 0.0,
+   "duration": 0.6120000000000004,
+   "set": "steep hills"
+  },
+  {
+   "episode": 6,
+   "mu": 0.10382664518618152,
+   "strategy": "always brace",
+   "fell": true,
+   "distance": 0.42203821552867865,
+   "braced_s": 0.0,
+   "duration": 0.6120000000000004,
+   "set": "steep hills"
+  },
+  {
+   "episode": 6,
+   "mu": 0.10382664518618152,
+   "strategy": "tilt rule",
+   "fell": true,
+   "distance": 0.42203821552867865,
+   "braced_s": 0.0,
+   "duration": 0.6120000000000004,
+   "set": "steep hills"
+  },
+  {
+   "episode": 6,
+   "mu": 0.10382664518618152,
+   "strategy": "TabPFN danger mode",
+   "fell": true,
+   "distance": 0.42203821552867865,
+   "braced_s": 0.0,
+   "duration": 0.6120000000000004,
+   "set": "steep hills"
+  },
+  {
+   "episode": 6,
+   "mu": 0.10382664518618152,
+   "strategy": "balance reflex",
+   "fell": false,
+   "distance": 0.9172669547334503,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 7,
+   "mu": 0.19803120953033673,
+   "strategy": "blind trot",
+   "fell": true,
+   "distance": 1.7081427786363341,
+   "braced_s": 0.0,
+   "duration": 1.9920000000000015,
+   "set": "steep hills"
+  },
+  {
+   "episode": 7,
+   "mu": 0.19803120953033673,
+   "strategy": "always brace",
+   "fell": false,
+   "distance": 2.147630175270897,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 7,
+   "mu": 0.19803120953033673,
+   "strategy": "tilt rule",
+   "fell": false,
+   "distance": 2.147630175270897,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 7,
+   "mu": 0.19803120953033673,
+   "strategy": "TabPFN danger mode",
+   "fell": false,
+   "distance": 2.0057179543501054,
+   "braced_s": 3.8000000000000003,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 7,
+   "mu": 0.19803120953033673,
+   "strategy": "balance reflex",
+   "fell": false,
+   "distance": 1.9042440367623603,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 8,
+   "mu": 0.11397899788672203,
+   "strategy": "blind trot",
+   "fell": false,
+   "distance": 0.7309273455622121,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 8,
+   "mu": 0.11397899788672203,
+   "strategy": "always brace",
+   "fell": false,
+   "distance": 0.05316434626852273,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 8,
+   "mu": 0.11397899788672203,
+   "strategy": "tilt rule",
+   "fell": false,
+   "distance": 0.054776634572296715,
+   "braced_s": 5.9,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 8,
+   "mu": 0.11397899788672203,
+   "strategy": "TabPFN danger mode",
+   "fell": false,
+   "distance": 0.05626872771995589,
+   "braced_s": 4.3,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 8,
+   "mu": 0.11397899788672203,
+   "strategy": "balance reflex",
+   "fell": false,
+   "distance": 0.031059391244141792,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 9,
+   "mu": 0.5581376799459054,
+   "strategy": "blind trot",
+   "fell": true,
+   "distance": 0.9357509616076032,
+   "braced_s": 0.0,
+   "duration": 5.6619999999995985,
+   "set": "steep hills"
+  },
+  {
+   "episode": 9,
+   "mu": 0.5581376799459054,
+   "strategy": "always brace",
+   "fell": false,
+   "distance": 0.03331262813725959,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 9,
+   "mu": 0.5581376799459054,
+   "strategy": "tilt rule",
+   "fell": false,
+   "distance": 0.03331262813725959,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 9,
+   "mu": 0.5581376799459054,
+   "strategy": "TabPFN danger mode",
+   "fell": true,
+   "distance": 0.5764059357177628,
+   "braced_s": 0.382,
+   "duration": 5.28199999999964,
+   "set": "steep hills"
+  },
+  {
+   "episode": 9,
+   "mu": 0.5581376799459054,
+   "strategy": "balance reflex",
+   "fell": false,
+   "distance": 0.12064062680606705,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 10,
+   "mu": 0.8141966782205428,
+   "strategy": "blind trot",
+   "fell": false,
+   "distance": 0.9884231549010266,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 10,
+   "mu": 0.8141966782205428,
+   "strategy": "always brace",
+   "fell": false,
+   "distance": 0.16105826249270583,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 10,
+   "mu": 0.8141966782205428,
+   "strategy": "tilt rule",
+   "fell": false,
+   "distance": 0.16105826249270583,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 10,
+   "mu": 0.8141966782205428,
+   "strategy": "TabPFN danger mode",
+   "fell": false,
+   "distance": 0.8276320541626897,
+   "braced_s": 3.6,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 10,
+   "mu": 0.8141966782205428,
+   "strategy": "balance reflex",
+   "fell": false,
+   "distance": 0.9753596218123283,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 11,
+   "mu": 0.7727751013664106,
+   "strategy": "blind trot",
+   "fell": false,
+   "distance": 2.0650692729456934,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 11,
+   "mu": 0.7727751013664106,
+   "strategy": "always brace",
+   "fell": false,
+   "distance": 1.72375208012583,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 11,
+   "mu": 0.7727751013664106,
+   "strategy": "tilt rule",
+   "fell": false,
+   "distance": 2.031159412616515,
+   "braced_s": 5.7,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 11,
+   "mu": 0.7727751013664106,
+   "strategy": "TabPFN danger mode",
+   "fell": false,
+   "distance": 2.057950281684671,
+   "braced_s": 3.1,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 11,
+   "mu": 0.7727751013664106,
+   "strategy": "balance reflex",
+   "fell": false,
+   "distance": 2.3053714117552286,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 12,
+   "mu": 0.10457847473749289,
+   "strategy": "blind trot",
+   "fell": true,
+   "distance": 2.142495602984478,
+   "braced_s": 0.0,
+   "duration": 2.6719999999999273,
+   "set": "steep hills"
+  },
+  {
+   "episode": 12,
+   "mu": 0.10457847473749289,
+   "strategy": "always brace",
+   "fell": false,
+   "distance": 2.5719217462482895,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 12,
+   "mu": 0.10457847473749289,
+   "strategy": "tilt rule",
+   "fell": false,
+   "distance": 2.5719217462482895,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 12,
+   "mu": 0.10457847473749289,
+   "strategy": "TabPFN danger mode",
+   "fell": false,
+   "distance": 2.67301978807327,
+   "braced_s": 5.4,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 12,
+   "mu": 0.10457847473749289,
+   "strategy": "balance reflex",
+   "fell": false,
+   "distance": 2.8965763606526562,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 13,
+   "mu": 0.2937039058552874,
+   "strategy": "blind trot",
+   "fell": false,
+   "distance": 2.959669805749739,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 13,
+   "mu": 0.2937039058552874,
+   "strategy": "always brace",
+   "fell": false,
+   "distance": 2.142190958884844,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 13,
+   "mu": 0.2937039058552874,
+   "strategy": "tilt rule",
+   "fell": false,
+   "distance": 2.142190958884844,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 13,
+   "mu": 0.2937039058552874,
+   "strategy": "TabPFN danger mode",
+   "fell": false,
+   "distance": 3.012174857537106,
+   "braced_s": 0.4,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 13,
+   "mu": 0.2937039058552874,
+   "strategy": "balance reflex",
+   "fell": false,
+   "distance": 2.029108487741355,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 14,
+   "mu": 0.9136632991683807,
+   "strategy": "blind trot",
+   "fell": true,
+   "distance": 1.0239569771808623,
+   "braced_s": 0.0,
+   "duration": 3.0219999999998888,
+   "set": "steep hills"
+  },
+  {
+   "episode": 14,
+   "mu": 0.9136632991683807,
+   "strategy": "always brace",
+   "fell": false,
+   "distance": 1.8852863283403,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 14,
+   "mu": 0.9136632991683807,
+   "strategy": "tilt rule",
+   "fell": false,
+   "distance": 1.8852863283403,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 14,
+   "mu": 0.9136632991683807,
+   "strategy": "TabPFN danger mode",
+   "fell": true,
+   "distance": 0.9666510529799711,
+   "braced_s": 0.362,
+   "duration": 2.9619999999998954,
+   "set": "steep hills"
+  },
+  {
+   "episode": 14,
+   "mu": 0.9136632991683807,
+   "strategy": "balance reflex",
+   "fell": false,
+   "distance": 3.444190138560688,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 15,
+   "mu": 0.11572567836497968,
+   "strategy": "blind trot",
+   "fell": true,
+   "distance": 0.6269526415549174,
+   "braced_s": 0.0,
+   "duration": 1.0320000000000007,
+   "set": "steep hills"
+  },
+  {
+   "episode": 15,
+   "mu": 0.11572567836497968,
+   "strategy": "always brace",
+   "fell": true,
+   "distance": 0.6264401174723087,
+   "braced_s": 0.032,
+   "duration": 1.0320000000000007,
+   "set": "steep hills"
+  },
+  {
+   "episode": 15,
+   "mu": 0.11572567836497968,
+   "strategy": "tilt rule",
+   "fell": true,
+   "distance": 0.6264401174723087,
+   "braced_s": 0.032,
+   "duration": 1.0320000000000007,
+   "set": "steep hills"
+  },
+  {
+   "episode": 15,
+   "mu": 0.11572567836497968,
+   "strategy": "TabPFN danger mode",
+   "fell": true,
+   "distance": 0.6264401174723087,
+   "braced_s": 0.032,
+   "duration": 1.0320000000000007,
+   "set": "steep hills"
+  },
+  {
+   "episode": 15,
+   "mu": 0.11572567836497968,
+   "strategy": "balance reflex",
+   "fell": false,
+   "distance": 3.225443587267395,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 16,
+   "mu": 0.8555869211051842,
+   "strategy": "blind trot",
+   "fell": false,
+   "distance": 2.923534556803959,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 16,
+   "mu": 0.8555869211051842,
+   "strategy": "always brace",
+   "fell": false,
+   "distance": 2.0951935317717005,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 16,
+   "mu": 0.8555869211051842,
+   "strategy": "tilt rule",
+   "fell": false,
+   "distance": 2.3531764914197755,
+   "braced_s": 5.1000000000000005,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 16,
+   "mu": 0.8555869211051842,
+   "strategy": "TabPFN danger mode",
+   "fell": false,
+   "distance": 2.591888154909934,
+   "braced_s": 4.4,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 16,
+   "mu": 0.8555869211051842,
+   "strategy": "balance reflex",
+   "fell": false,
+   "distance": 2.904699544924282,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 17,
+   "mu": 0.46602970062404886,
+   "strategy": "blind trot",
+   "fell": true,
+   "distance": 0.48205294404931387,
+   "braced_s": 0.0,
+   "duration": 0.8920000000000007,
+   "set": "steep hills"
+  },
+  {
+   "episode": 17,
+   "mu": 0.46602970062404886,
+   "strategy": "always brace",
+   "fell": true,
+   "distance": 0.48205294404931387,
+   "braced_s": 0.0,
+   "duration": 0.8920000000000007,
+   "set": "steep hills"
+  },
+  {
+   "episode": 17,
+   "mu": 0.46602970062404886,
+   "strategy": "tilt rule",
+   "fell": true,
+   "distance": 0.48205294404931387,
+   "braced_s": 0.0,
+   "duration": 0.8920000000000007,
+   "set": "steep hills"
+  },
+  {
+   "episode": 17,
+   "mu": 0.46602970062404886,
+   "strategy": "TabPFN danger mode",
+   "fell": true,
+   "distance": 0.48205294404931387,
+   "braced_s": 0.0,
+   "duration": 0.8920000000000007,
+   "set": "steep hills"
+  },
+  {
+   "episode": 17,
+   "mu": 0.46602970062404886,
+   "strategy": "balance reflex",
+   "fell": false,
+   "distance": 2.3381113452003426,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 18,
+   "mu": 0.10820380976763293,
+   "strategy": "blind trot",
+   "fell": false,
+   "distance": 2.7004942265290173,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 18,
+   "mu": 0.10820380976763293,
+   "strategy": "always brace",
+   "fell": true,
+   "distance": 0.5742204841776474,
+   "braced_s": 0.622,
+   "duration": 1.6220000000000012,
+   "set": "steep hills"
+  },
+  {
+   "episode": 18,
+   "mu": 0.10820380976763293,
+   "strategy": "tilt rule",
+   "fell": true,
+   "distance": 0.5742204841776474,
+   "braced_s": 0.622,
+   "duration": 1.6220000000000012,
+   "set": "steep hills"
+  },
+  {
+   "episode": 18,
+   "mu": 0.10820380976763293,
+   "strategy": "TabPFN danger mode",
+   "fell": false,
+   "distance": 2.088168608393962,
+   "braced_s": 6.5,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 18,
+   "mu": 0.10820380976763293,
+   "strategy": "balance reflex",
+   "fell": false,
+   "distance": 2.5787829728476686,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 19,
+   "mu": 0.13404929766940218,
+   "strategy": "blind trot",
+   "fell": true,
+   "distance": 1.4234771721892028,
+   "braced_s": 0.0,
+   "duration": 4.7719999999996965,
+   "set": "steep hills"
+  },
+  {
+   "episode": 19,
+   "mu": 0.13404929766940218,
+   "strategy": "always brace",
+   "fell": false,
+   "distance": 1.6182384179696754,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 19,
+   "mu": 0.13404929766940218,
+   "strategy": "tilt rule",
+   "fell": false,
+   "distance": 1.8896270157378785,
+   "braced_s": 6.1000000000000005,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 19,
+   "mu": 0.13404929766940218,
+   "strategy": "TabPFN danger mode",
+   "fell": false,
+   "distance": 1.8923371938479598,
+   "braced_s": 5.7,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 19,
+   "mu": 0.13404929766940218,
+   "strategy": "balance reflex",
+   "fell": false,
+   "distance": 1.4801302599761543,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 20,
+   "mu": 0.47488367674291415,
+   "strategy": "blind trot",
+   "fell": true,
+   "distance": 0.3281784108389446,
+   "braced_s": 0.0,
+   "duration": 2.2419999999999747,
+   "set": "steep hills"
+  },
+  {
+   "episode": 20,
+   "mu": 0.47488367674291415,
+   "strategy": "always brace",
+   "fell": false,
+   "distance": 1.212813903071056,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 20,
+   "mu": 0.47488367674291415,
+   "strategy": "tilt rule",
+   "fell": true,
+   "distance": 0.2981020210920705,
+   "braced_s": 0.122,
+   "duration": 2.221999999999977,
+   "set": "steep hills"
+  },
+  {
+   "episode": 20,
+   "mu": 0.47488367674291415,
+   "strategy": "TabPFN danger mode",
+   "fell": true,
+   "distance": 0.2981020210920705,
+   "braced_s": 0.122,
+   "duration": 2.221999999999977,
+   "set": "steep hills"
+  },
+  {
+   "episode": 20,
+   "mu": 0.47488367674291415,
+   "strategy": "balance reflex",
+   "fell": false,
+   "distance": 0.01842609816647293,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 21,
+   "mu": 0.13982508118950918,
+   "strategy": "blind trot",
+   "fell": false,
+   "distance": 2.5486482843422213,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 21,
+   "mu": 0.13982508118950918,
+   "strategy": "always brace",
+   "fell": false,
+   "distance": 1.5122034091269188,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 21,
+   "mu": 0.13982508118950918,
+   "strategy": "tilt rule",
+   "fell": false,
+   "distance": 1.5122034091269188,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 21,
+   "mu": 0.13982508118950918,
+   "strategy": "TabPFN danger mode",
+   "fell": false,
+   "distance": 1.6613259389237736,
+   "braced_s": 6.8,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 21,
+   "mu": 0.13982508118950918,
+   "strategy": "balance reflex",
+   "fell": false,
+   "distance": 1.5955415375909692,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 22,
+   "mu": 0.1669219269360578,
+   "strategy": "blind trot",
+   "fell": false,
+   "distance": 0.0777565283117714,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 22,
+   "mu": 0.1669219269360578,
+   "strategy": "always brace",
+   "fell": false,
+   "distance": 0.08672834506519024,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 22,
+   "mu": 0.1669219269360578,
+   "strategy": "tilt rule",
+   "fell": false,
+   "distance": 0.08672834506519024,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 22,
+   "mu": 0.1669219269360578,
+   "strategy": "TabPFN danger mode",
+   "fell": false,
+   "distance": 0.08695756265554044,
+   "braced_s": 6.9,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 22,
+   "mu": 0.1669219269360578,
+   "strategy": "balance reflex",
+   "fell": false,
+   "distance": 0.052965238490603465,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 23,
+   "mu": 0.4971384280595478,
+   "strategy": "blind trot",
+   "fell": false,
+   "distance": 0.015269429603374449,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 23,
+   "mu": 0.4971384280595478,
+   "strategy": "always brace",
+   "fell": true,
+   "distance": 0.4696433862424845,
+   "braced_s": 1.252,
+   "duration": 2.2519999999999736,
+   "set": "steep hills"
+  },
+  {
+   "episode": 23,
+   "mu": 0.4971384280595478,
+   "strategy": "tilt rule",
+   "fell": true,
+   "distance": 0.4696433862424845,
+   "braced_s": 1.252,
+   "duration": 2.2519999999999736,
+   "set": "steep hills"
+  },
+  {
+   "episode": 23,
+   "mu": 0.4971384280595478,
+   "strategy": "TabPFN danger mode",
+   "fell": true,
+   "distance": 0.4696433862424845,
+   "braced_s": 1.252,
+   "duration": 2.2519999999999736,
+   "set": "steep hills"
+  },
+  {
+   "episode": 23,
+   "mu": 0.4971384280595478,
+   "strategy": "balance reflex",
+   "fell": false,
+   "distance": 0.008294180072537849,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 24,
+   "mu": 0.39168682367755253,
+   "strategy": "blind trot",
+   "fell": true,
+   "distance": 1.9391559367024744,
+   "braced_s": 0.0,
+   "duration": 5.681999999999596,
+   "set": "steep hills"
+  },
+  {
+   "episode": 24,
+   "mu": 0.39168682367755253,
+   "strategy": "always brace",
+   "fell": false,
+   "distance": 2.1441983106593776,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 24,
+   "mu": 0.39168682367755253,
+   "strategy": "tilt rule",
+   "fell": false,
+   "distance": 2.1441983106593776,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 24,
+   "mu": 0.39168682367755253,
+   "strategy": "TabPFN danger mode",
+   "fell": false,
+   "distance": 2.519657633014826,
+   "braced_s": 3.0,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 24,
+   "mu": 0.39168682367755253,
+   "strategy": "balance reflex",
+   "fell": false,
+   "distance": 2.3385435263683796,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 25,
+   "mu": 0.16852356037023372,
+   "strategy": "blind trot",
+   "fell": false,
+   "distance": 0.34030764583923306,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 25,
+   "mu": 0.16852356037023372,
+   "strategy": "always brace",
+   "fell": false,
+   "distance": 0.07743320175979863,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 25,
+   "mu": 0.16852356037023372,
+   "strategy": "tilt rule",
+   "fell": false,
+   "distance": 0.07743320175979863,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 25,
+   "mu": 0.16852356037023372,
+   "strategy": "TabPFN danger mode",
+   "fell": false,
+   "distance": 0.0811012439628991,
+   "braced_s": 6.4,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 25,
+   "mu": 0.16852356037023372,
+   "strategy": "balance reflex",
+   "fell": false,
+   "distance": 0.07251651609136041,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 26,
+   "mu": 0.188544034559361,
+   "strategy": "blind trot",
+   "fell": false,
+   "distance": 0.017391216035132204,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 26,
+   "mu": 0.188544034559361,
+   "strategy": "always brace",
+   "fell": false,
+   "distance": 0.07865387734222795,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 26,
+   "mu": 0.188544034559361,
+   "strategy": "tilt rule",
+   "fell": false,
+   "distance": 0.07596332835128472,
+   "braced_s": 6.9,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 26,
+   "mu": 0.188544034559361,
+   "strategy": "TabPFN danger mode",
+   "fell": false,
+   "distance": 0.0680592560485624,
+   "braced_s": 5.3,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 26,
+   "mu": 0.188544034559361,
+   "strategy": "balance reflex",
+   "fell": false,
+   "distance": 0.01928240689181581,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 27,
+   "mu": 0.11966447714345398,
+   "strategy": "blind trot",
+   "fell": true,
+   "distance": 1.0953432051357974,
+   "braced_s": 0.0,
+   "duration": 1.7920000000000014,
+   "set": "steep hills"
+  },
+  {
+   "episode": 27,
+   "mu": 0.11966447714345398,
+   "strategy": "always brace",
+   "fell": false,
+   "distance": 2.1764293924244287,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 27,
+   "mu": 0.11966447714345398,
+   "strategy": "tilt rule",
+   "fell": false,
+   "distance": 2.1764293924244287,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 27,
+   "mu": 0.11966447714345398,
+   "strategy": "TabPFN danger mode",
+   "fell": false,
+   "distance": 2.1764293924244287,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 27,
+   "mu": 0.11966447714345398,
+   "strategy": "balance reflex",
+   "fell": false,
+   "distance": 2.6057853638676796,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 28,
+   "mu": 0.3150818563904343,
+   "strategy": "blind trot",
+   "fell": false,
+   "distance": 0.05078877879488452,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 28,
+   "mu": 0.3150818563904343,
+   "strategy": "always brace",
+   "fell": false,
+   "distance": 0.05948208508491283,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 28,
+   "mu": 0.3150818563904343,
+   "strategy": "tilt rule",
+   "fell": false,
+   "distance": 0.05948208508491283,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 28,
+   "mu": 0.3150818563904343,
+   "strategy": "TabPFN danger mode",
+   "fell": false,
+   "distance": 0.05948208508491283,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 28,
+   "mu": 0.3150818563904343,
+   "strategy": "balance reflex",
+   "fell": false,
+   "distance": 0.04094168162023237,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 29,
+   "mu": 0.43458574449387394,
+   "strategy": "blind trot",
+   "fell": false,
+   "distance": 2.7523058648905834,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 29,
+   "mu": 0.43458574449387394,
+   "strategy": "always brace",
+   "fell": false,
+   "distance": 2.282265359499145,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 29,
+   "mu": 0.43458574449387394,
+   "strategy": "tilt rule",
+   "fell": false,
+   "distance": 2.337147604841198,
+   "braced_s": 5.8,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 29,
+   "mu": 0.43458574449387394,
+   "strategy": "TabPFN danger mode",
+   "fell": false,
+   "distance": 2.527228943784492,
+   "braced_s": 3.7,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 29,
+   "mu": 0.43458574449387394,
+   "strategy": "balance reflex",
+   "fell": false,
+   "distance": 2.854494470838723,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "steep hills"
+  },
+  {
+   "episode": 0,
+   "mu": 0.17457904673555494,
+   "strategy": "blind trot",
+   "fell": false,
+   "distance": 1.220349298542379,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 0,
+   "mu": 0.17457904673555494,
+   "strategy": "always brace",
+   "fell": false,
+   "distance": 0.7926799218484729,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 0,
+   "mu": 0.17457904673555494,
+   "strategy": "tilt rule",
+   "fell": false,
+   "distance": 0.7926799218484729,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 0,
+   "mu": 0.17457904673555494,
+   "strategy": "TabPFN danger mode",
+   "fell": false,
+   "distance": 0.766627246879841,
+   "braced_s": 3.2,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 0,
+   "mu": 0.17457904673555494,
+   "strategy": "balance reflex",
+   "fell": false,
+   "distance": 1.5628440411908198,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 1,
+   "mu": 0.4233395629967313,
+   "strategy": "blind trot",
+   "fell": false,
+   "distance": 1.2936268921472331,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 1,
+   "mu": 0.4233395629967313,
+   "strategy": "always brace",
+   "fell": false,
+   "distance": 0.4757733258918366,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 1,
+   "mu": 0.4233395629967313,
+   "strategy": "tilt rule",
+   "fell": false,
+   "distance": 0.4757733258918366,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 1,
+   "mu": 0.4233395629967313,
+   "strategy": "TabPFN danger mode",
+   "fell": false,
+   "distance": 0.7064883430805847,
+   "braced_s": 5.8,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 1,
+   "mu": 0.4233395629967313,
+   "strategy": "balance reflex",
+   "fell": false,
+   "distance": 2.024442811614814,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 2,
+   "mu": 0.8425390210280322,
+   "strategy": "blind trot",
+   "fell": true,
+   "distance": 1.0983758380782314,
+   "braced_s": 0.0,
+   "duration": 3.2519999999998634,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 2,
+   "mu": 0.8425390210280322,
+   "strategy": "always brace",
+   "fell": false,
+   "distance": 0.9869565042150353,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 2,
+   "mu": 0.8425390210280322,
+   "strategy": "tilt rule",
+   "fell": false,
+   "distance": 0.9869565042150353,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 2,
+   "mu": 0.8425390210280322,
+   "strategy": "TabPFN danger mode",
+   "fell": false,
+   "distance": 1.3999221573296574,
+   "braced_s": 5.7,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 2,
+   "mu": 0.8425390210280322,
+   "strategy": "balance reflex",
+   "fell": false,
+   "distance": 0.912480129271807,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 3,
+   "mu": 0.6978416565161342,
+   "strategy": "blind trot",
+   "fell": false,
+   "distance": 2.0356305546757802,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 3,
+   "mu": 0.6978416565161342,
+   "strategy": "always brace",
+   "fell": false,
+   "distance": 1.5038065876260194,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 3,
+   "mu": 0.6978416565161342,
+   "strategy": "tilt rule",
+   "fell": false,
+   "distance": 1.5038065876260194,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 3,
+   "mu": 0.6978416565161342,
+   "strategy": "TabPFN danger mode",
+   "fell": false,
+   "distance": 1.7492058792600866,
+   "braced_s": 3.9,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 3,
+   "mu": 0.6978416565161342,
+   "strategy": "balance reflex",
+   "fell": false,
+   "distance": 1.8685576548292444,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 4,
+   "mu": 0.5034344415122717,
+   "strategy": "blind trot",
+   "fell": true,
+   "distance": 0.3885510965502548,
+   "braced_s": 0.0,
+   "duration": 0.6720000000000005,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 4,
+   "mu": 0.5034344415122717,
+   "strategy": "always brace",
+   "fell": true,
+   "distance": 0.3885510965502548,
+   "braced_s": 0.0,
+   "duration": 0.6720000000000005,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 4,
+   "mu": 0.5034344415122717,
+   "strategy": "tilt rule",
+   "fell": true,
+   "distance": 0.3885510965502548,
+   "braced_s": 0.0,
+   "duration": 0.6720000000000005,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 4,
+   "mu": 0.5034344415122717,
+   "strategy": "TabPFN danger mode",
+   "fell": true,
+   "distance": 0.3885510965502548,
+   "braced_s": 0.0,
+   "duration": 0.6720000000000005,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 4,
+   "mu": 0.5034344415122717,
+   "strategy": "balance reflex",
+   "fell": false,
+   "distance": 2.2375435397691708,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 5,
+   "mu": 0.14820410028148134,
+   "strategy": "blind trot",
+   "fell": false,
+   "distance": 2.6951411235837894,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 5,
+   "mu": 0.14820410028148134,
+   "strategy": "always brace",
+   "fell": false,
+   "distance": 1.6276164757728326,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 5,
+   "mu": 0.14820410028148134,
+   "strategy": "tilt rule",
+   "fell": false,
+   "distance": 1.6276164757728326,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 5,
+   "mu": 0.14820410028148134,
+   "strategy": "TabPFN danger mode",
+   "fell": false,
+   "distance": 1.4840500346857308,
+   "braced_s": 5.1000000000000005,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 5,
+   "mu": 0.14820410028148134,
+   "strategy": "balance reflex",
+   "fell": false,
+   "distance": 2.1234318361342432,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 6,
+   "mu": 0.23382126620099192,
+   "strategy": "blind trot",
+   "fell": true,
+   "distance": 0.46446504575550285,
+   "braced_s": 0.0,
+   "duration": 0.7520000000000006,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 6,
+   "mu": 0.23382126620099192,
+   "strategy": "always brace",
+   "fell": true,
+   "distance": 0.46446504575550285,
+   "braced_s": 0.0,
+   "duration": 0.7520000000000006,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 6,
+   "mu": 0.23382126620099192,
+   "strategy": "tilt rule",
+   "fell": true,
+   "distance": 0.46446504575550285,
+   "braced_s": 0.0,
+   "duration": 0.7520000000000006,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 6,
+   "mu": 0.23382126620099192,
+   "strategy": "TabPFN danger mode",
+   "fell": true,
+   "distance": 0.46446504575550285,
+   "braced_s": 0.0,
+   "duration": 0.7520000000000006,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 6,
+   "mu": 0.23382126620099192,
+   "strategy": "balance reflex",
+   "fell": false,
+   "distance": 2.3240440110411313,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 7,
+   "mu": 0.6141417530093086,
+   "strategy": "blind trot",
+   "fell": false,
+   "distance": 1.8013835993236218,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 7,
+   "mu": 0.6141417530093086,
+   "strategy": "always brace",
+   "fell": false,
+   "distance": 0.7095471645084791,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 7,
+   "mu": 0.6141417530093086,
+   "strategy": "tilt rule",
+   "fell": false,
+   "distance": 0.7095471645084791,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 7,
+   "mu": 0.6141417530093086,
+   "strategy": "TabPFN danger mode",
+   "fell": false,
+   "distance": 1.0210280093315212,
+   "braced_s": 3.6,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 7,
+   "mu": 0.6141417530093086,
+   "strategy": "balance reflex",
+   "fell": false,
+   "distance": 2.254093488525145,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 8,
+   "mu": 0.19848242844858877,
+   "strategy": "blind trot",
+   "fell": true,
+   "distance": 0.4719002791394814,
+   "braced_s": 0.0,
+   "duration": 0.6620000000000005,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 8,
+   "mu": 0.19848242844858877,
+   "strategy": "always brace",
+   "fell": true,
+   "distance": 0.4719002791394814,
+   "braced_s": 0.0,
+   "duration": 0.6620000000000005,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 8,
+   "mu": 0.19848242844858877,
+   "strategy": "tilt rule",
+   "fell": true,
+   "distance": 0.4719002791394814,
+   "braced_s": 0.0,
+   "duration": 0.6620000000000005,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 8,
+   "mu": 0.19848242844858877,
+   "strategy": "TabPFN danger mode",
+   "fell": true,
+   "distance": 0.4719002791394814,
+   "braced_s": 0.0,
+   "duration": 0.6620000000000005,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 8,
+   "mu": 0.19848242844858877,
+   "strategy": "balance reflex",
+   "fell": false,
+   "distance": 2.7266763190206436,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 9,
+   "mu": 0.27839893096039625,
+   "strategy": "blind trot",
+   "fell": false,
+   "distance": 2.853537832899555,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 9,
+   "mu": 0.27839893096039625,
+   "strategy": "always brace",
+   "fell": false,
+   "distance": 2.3350919203271925,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 9,
+   "mu": 0.27839893096039625,
+   "strategy": "tilt rule",
+   "fell": false,
+   "distance": 2.106622064762103,
+   "braced_s": 5.5,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 9,
+   "mu": 0.27839893096039625,
+   "strategy": "TabPFN danger mode",
+   "fell": false,
+   "distance": 2.853537832899555,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 9,
+   "mu": 0.27839893096039625,
+   "strategy": "balance reflex",
+   "fell": false,
+   "distance": 2.7333072726511793,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 10,
+   "mu": 0.2088012438293273,
+   "strategy": "blind trot",
+   "fell": false,
+   "distance": 0.005161578505626588,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 10,
+   "mu": 0.2088012438293273,
+   "strategy": "always brace",
+   "fell": false,
+   "distance": 0.016172514448915737,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 10,
+   "mu": 0.2088012438293273,
+   "strategy": "tilt rule",
+   "fell": false,
+   "distance": 0.016172514448915737,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 10,
+   "mu": 0.2088012438293273,
+   "strategy": "TabPFN danger mode",
+   "fell": false,
+   "distance": 0.012646503897158542,
+   "braced_s": 3.1,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 10,
+   "mu": 0.2088012438293273,
+   "strategy": "balance reflex",
+   "fell": false,
+   "distance": 0.013265289564135304,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 11,
+   "mu": 0.2042244568830859,
+   "strategy": "blind trot",
+   "fell": false,
+   "distance": 0.03593854852203502,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 11,
+   "mu": 0.2042244568830859,
+   "strategy": "always brace",
+   "fell": false,
+   "distance": 0.049944114109896416,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 11,
+   "mu": 0.2042244568830859,
+   "strategy": "tilt rule",
+   "fell": false,
+   "distance": 0.049944114109896416,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 11,
+   "mu": 0.2042244568830859,
+   "strategy": "TabPFN danger mode",
+   "fell": false,
+   "distance": 0.035404195041957826,
+   "braced_s": 3.5,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 11,
+   "mu": 0.2042244568830859,
+   "strategy": "balance reflex",
+   "fell": false,
+   "distance": 0.031862543791316825,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 12,
+   "mu": 0.5129368732981874,
+   "strategy": "blind trot",
+   "fell": false,
+   "distance": 1.8714525378915272,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 12,
+   "mu": 0.5129368732981874,
+   "strategy": "always brace",
+   "fell": false,
+   "distance": 1.125814479621044,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 12,
+   "mu": 0.5129368732981874,
+   "strategy": "tilt rule",
+   "fell": false,
+   "distance": 1.5821788159497538,
+   "braced_s": 4.2,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 12,
+   "mu": 0.5129368732981874,
+   "strategy": "TabPFN danger mode",
+   "fell": false,
+   "distance": 1.8714525378915272,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 12,
+   "mu": 0.5129368732981874,
+   "strategy": "balance reflex",
+   "fell": false,
+   "distance": 1.834562467901472,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 13,
+   "mu": 0.5360454206335699,
+   "strategy": "blind trot",
+   "fell": false,
+   "distance": 0.8293244474423398,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 13,
+   "mu": 0.5360454206335699,
+   "strategy": "always brace",
+   "fell": false,
+   "distance": 0.8625385855176176,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 13,
+   "mu": 0.5360454206335699,
+   "strategy": "tilt rule",
+   "fell": false,
+   "distance": 0.815124522193546,
+   "braced_s": 2.3000000000000003,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 13,
+   "mu": 0.5360454206335699,
+   "strategy": "TabPFN danger mode",
+   "fell": false,
+   "distance": 0.8293244474423398,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 13,
+   "mu": 0.5360454206335699,
+   "strategy": "balance reflex",
+   "fell": false,
+   "distance": 0.45699324631545635,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 14,
+   "mu": 0.8016267002808392,
+   "strategy": "blind trot",
+   "fell": true,
+   "distance": 0.7709643798184483,
+   "braced_s": 0.0,
+   "duration": 1.7120000000000013,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 14,
+   "mu": 0.8016267002808392,
+   "strategy": "always brace",
+   "fell": false,
+   "distance": 1.7384431756990013,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 14,
+   "mu": 0.8016267002808392,
+   "strategy": "tilt rule",
+   "fell": false,
+   "distance": 1.7384431756990013,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 14,
+   "mu": 0.8016267002808392,
+   "strategy": "TabPFN danger mode",
+   "fell": false,
+   "distance": 2.0342833440376307,
+   "braced_s": 3.9,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 14,
+   "mu": 0.8016267002808392,
+   "strategy": "balance reflex",
+   "fell": false,
+   "distance": 1.8313230736122739,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 15,
+   "mu": 0.6892959452154677,
+   "strategy": "blind trot",
+   "fell": true,
+   "distance": 1.77156033218356,
+   "braced_s": 0.0,
+   "duration": 6.361999999999521,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 15,
+   "mu": 0.6892959452154677,
+   "strategy": "always brace",
+   "fell": false,
+   "distance": 1.592624953275522,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 15,
+   "mu": 0.6892959452154677,
+   "strategy": "tilt rule",
+   "fell": false,
+   "distance": 1.592624953275522,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 15,
+   "mu": 0.6892959452154677,
+   "strategy": "TabPFN danger mode",
+   "fell": true,
+   "distance": 1.292853212374304,
+   "braced_s": 3.362,
+   "duration": 4.961999999999676,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 15,
+   "mu": 0.6892959452154677,
+   "strategy": "balance reflex",
+   "fell": false,
+   "distance": 1.8021435462682611,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 16,
+   "mu": 0.6000546152695262,
+   "strategy": "blind trot",
+   "fell": true,
+   "distance": 0.3183812510610534,
+   "braced_s": 0.0,
+   "duration": 0.4920000000000004,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 16,
+   "mu": 0.6000546152695262,
+   "strategy": "always brace",
+   "fell": true,
+   "distance": 0.3183812510610534,
+   "braced_s": 0.0,
+   "duration": 0.4920000000000004,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 16,
+   "mu": 0.6000546152695262,
+   "strategy": "tilt rule",
+   "fell": true,
+   "distance": 0.3183812510610534,
+   "braced_s": 0.0,
+   "duration": 0.4920000000000004,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 16,
+   "mu": 0.6000546152695262,
+   "strategy": "TabPFN danger mode",
+   "fell": true,
+   "distance": 0.3183812510610534,
+   "braced_s": 0.0,
+   "duration": 0.4920000000000004,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 16,
+   "mu": 0.6000546152695262,
+   "strategy": "balance reflex",
+   "fell": false,
+   "distance": 2.1031896151468215,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 17,
+   "mu": 0.36756166893503506,
+   "strategy": "blind trot",
+   "fell": true,
+   "distance": 0.37070896790271507,
+   "braced_s": 0.0,
+   "duration": 0.9820000000000008,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 17,
+   "mu": 0.36756166893503506,
+   "strategy": "always brace",
+   "fell": true,
+   "distance": 0.37070896790271507,
+   "braced_s": 0.0,
+   "duration": 0.9820000000000008,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 17,
+   "mu": 0.36756166893503506,
+   "strategy": "tilt rule",
+   "fell": true,
+   "distance": 0.37070896790271507,
+   "braced_s": 0.0,
+   "duration": 0.9820000000000008,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 17,
+   "mu": 0.36756166893503506,
+   "strategy": "TabPFN danger mode",
+   "fell": true,
+   "distance": 0.37070896790271507,
+   "braced_s": 0.0,
+   "duration": 0.9820000000000008,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 17,
+   "mu": 0.36756166893503506,
+   "strategy": "balance reflex",
+   "fell": false,
+   "distance": 1.2469585005494908,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 18,
+   "mu": 0.5318774311726726,
+   "strategy": "blind trot",
+   "fell": false,
+   "distance": 0.7914011953792269,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 18,
+   "mu": 0.5318774311726726,
+   "strategy": "always brace",
+   "fell": false,
+   "distance": 0.05408363189316,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 18,
+   "mu": 0.5318774311726726,
+   "strategy": "tilt rule",
+   "fell": false,
+   "distance": 0.5871921272262951,
+   "braced_s": 3.8000000000000003,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 18,
+   "mu": 0.5318774311726726,
+   "strategy": "TabPFN danger mode",
+   "fell": false,
+   "distance": 0.7914011953792269,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 18,
+   "mu": 0.5318774311726726,
+   "strategy": "balance reflex",
+   "fell": false,
+   "distance": 0.43456231880875146,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 19,
+   "mu": 0.7512834106237389,
+   "strategy": "blind trot",
+   "fell": false,
+   "distance": 1.793496026833495,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 19,
+   "mu": 0.7512834106237389,
+   "strategy": "always brace",
+   "fell": false,
+   "distance": 1.2199117598446854,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 19,
+   "mu": 0.7512834106237389,
+   "strategy": "tilt rule",
+   "fell": false,
+   "distance": 1.0896680304453357,
+   "braced_s": 4.8,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 19,
+   "mu": 0.7512834106237389,
+   "strategy": "TabPFN danger mode",
+   "fell": false,
+   "distance": 1.3876797323471894,
+   "braced_s": 3.1,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 19,
+   "mu": 0.7512834106237389,
+   "strategy": "balance reflex",
+   "fell": false,
+   "distance": 1.8504109206107664,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 20,
+   "mu": 0.2270898903600904,
+   "strategy": "blind trot",
+   "fell": true,
+   "distance": 0.3381750669736608,
+   "braced_s": 0.0,
+   "duration": 7.391999999999408,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 20,
+   "mu": 0.2270898903600904,
+   "strategy": "always brace",
+   "fell": false,
+   "distance": 0.038792667883603436,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 20,
+   "mu": 0.2270898903600904,
+   "strategy": "tilt rule",
+   "fell": false,
+   "distance": 0.31017015686075067,
+   "braced_s": 3.1,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 20,
+   "mu": 0.2270898903600904,
+   "strategy": "TabPFN danger mode",
+   "fell": false,
+   "distance": 0.14252847279842804,
+   "braced_s": 4.8,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 20,
+   "mu": 0.2270898903600904,
+   "strategy": "balance reflex",
+   "fell": false,
+   "distance": 0.010642137372612982,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 21,
+   "mu": 0.8362005714469714,
+   "strategy": "blind trot",
+   "fell": false,
+   "distance": 0.03894555113812542,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 21,
+   "mu": 0.8362005714469714,
+   "strategy": "always brace",
+   "fell": false,
+   "distance": 0.06145172873635892,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 21,
+   "mu": 0.8362005714469714,
+   "strategy": "tilt rule",
+   "fell": false,
+   "distance": 0.06145172873635892,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 21,
+   "mu": 0.8362005714469714,
+   "strategy": "TabPFN danger mode",
+   "fell": false,
+   "distance": 0.0610350295949576,
+   "braced_s": 6.4,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 21,
+   "mu": 0.8362005714469714,
+   "strategy": "balance reflex",
+   "fell": false,
+   "distance": 0.02991426389147589,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 22,
+   "mu": 0.6638066498341065,
+   "strategy": "blind trot",
+   "fell": true,
+   "distance": 0.3632248504981159,
+   "braced_s": 0.0,
+   "duration": 6.731999999999481,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 22,
+   "mu": 0.6638066498341065,
+   "strategy": "always brace",
+   "fell": false,
+   "distance": 0.07440958594724799,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 22,
+   "mu": 0.6638066498341065,
+   "strategy": "tilt rule",
+   "fell": false,
+   "distance": 0.3856352010474955,
+   "braced_s": 4.2,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 22,
+   "mu": 0.6638066498341065,
+   "strategy": "TabPFN danger mode",
+   "fell": false,
+   "distance": 0.07255822602848032,
+   "braced_s": 3.8000000000000003,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 22,
+   "mu": 0.6638066498341065,
+   "strategy": "balance reflex",
+   "fell": false,
+   "distance": 0.045770719777772965,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 23,
+   "mu": 0.9632225238063656,
+   "strategy": "blind trot",
+   "fell": false,
+   "distance": 1.8354709540857084,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 23,
+   "mu": 0.9632225238063656,
+   "strategy": "always brace",
+   "fell": false,
+   "distance": 1.2222107405699947,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 23,
+   "mu": 0.9632225238063656,
+   "strategy": "tilt rule",
+   "fell": false,
+   "distance": 1.4832804397820214,
+   "braced_s": 4.7,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 23,
+   "mu": 0.9632225238063656,
+   "strategy": "TabPFN danger mode",
+   "fell": false,
+   "distance": 1.697864290656592,
+   "braced_s": 3.0,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 23,
+   "mu": 0.9632225238063656,
+   "strategy": "balance reflex",
+   "fell": false,
+   "distance": 2.1739504371031257,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 24,
+   "mu": 0.632808617573083,
+   "strategy": "blind trot",
+   "fell": true,
+   "distance": 0.47448728324321005,
+   "braced_s": 0.0,
+   "duration": 0.8720000000000007,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 24,
+   "mu": 0.632808617573083,
+   "strategy": "always brace",
+   "fell": true,
+   "distance": 0.47448728324321005,
+   "braced_s": 0.0,
+   "duration": 0.8720000000000007,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 24,
+   "mu": 0.632808617573083,
+   "strategy": "tilt rule",
+   "fell": true,
+   "distance": 0.47448728324321005,
+   "braced_s": 0.0,
+   "duration": 0.8720000000000007,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 24,
+   "mu": 0.632808617573083,
+   "strategy": "TabPFN danger mode",
+   "fell": true,
+   "distance": 0.47448728324321005,
+   "braced_s": 0.0,
+   "duration": 0.8720000000000007,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 24,
+   "mu": 0.632808617573083,
+   "strategy": "balance reflex",
+   "fell": false,
+   "distance": 1.5109931611624159,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 25,
+   "mu": 0.336907772742607,
+   "strategy": "blind trot",
+   "fell": true,
+   "distance": 0.5344616042699151,
+   "braced_s": 0.0,
+   "duration": 1.0720000000000007,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 25,
+   "mu": 0.336907772742607,
+   "strategy": "always brace",
+   "fell": true,
+   "distance": 0.5215388330107565,
+   "braced_s": 0.062,
+   "duration": 1.0620000000000007,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 25,
+   "mu": 0.336907772742607,
+   "strategy": "tilt rule",
+   "fell": true,
+   "distance": 0.5215388330107565,
+   "braced_s": 0.062,
+   "duration": 1.0620000000000007,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 25,
+   "mu": 0.336907772742607,
+   "strategy": "TabPFN danger mode",
+   "fell": true,
+   "distance": 0.5215388330107565,
+   "braced_s": 0.062,
+   "duration": 1.0620000000000007,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 25,
+   "mu": 0.336907772742607,
+   "strategy": "balance reflex",
+   "fell": false,
+   "distance": 3.2332653126615685,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 26,
+   "mu": 0.19122851898874907,
+   "strategy": "blind trot",
+   "fell": true,
+   "distance": 0.5443811982718054,
+   "braced_s": 0.0,
+   "duration": 1.0120000000000007,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 26,
+   "mu": 0.19122851898874907,
+   "strategy": "always brace",
+   "fell": true,
+   "distance": 0.5443363227032152,
+   "braced_s": 0.012,
+   "duration": 1.0120000000000007,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 26,
+   "mu": 0.19122851898874907,
+   "strategy": "tilt rule",
+   "fell": true,
+   "distance": 0.5443363227032152,
+   "braced_s": 0.012,
+   "duration": 1.0120000000000007,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 26,
+   "mu": 0.19122851898874907,
+   "strategy": "TabPFN danger mode",
+   "fell": true,
+   "distance": 0.5443363227032152,
+   "braced_s": 0.012,
+   "duration": 1.0120000000000007,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 26,
+   "mu": 0.19122851898874907,
+   "strategy": "balance reflex",
+   "fell": false,
+   "distance": 1.8020431277389906,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 27,
+   "mu": 0.17917225188895794,
+   "strategy": "blind trot",
+   "fell": true,
+   "distance": 0.5434587788699665,
+   "braced_s": 0.0,
+   "duration": 0.8620000000000007,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 27,
+   "mu": 0.17917225188895794,
+   "strategy": "always brace",
+   "fell": true,
+   "distance": 0.5434587788699665,
+   "braced_s": 0.0,
+   "duration": 0.8620000000000007,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 27,
+   "mu": 0.17917225188895794,
+   "strategy": "tilt rule",
+   "fell": true,
+   "distance": 0.5434587788699665,
+   "braced_s": 0.0,
+   "duration": 0.8620000000000007,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 27,
+   "mu": 0.17917225188895794,
+   "strategy": "TabPFN danger mode",
+   "fell": true,
+   "distance": 0.5434587788699665,
+   "braced_s": 0.0,
+   "duration": 0.8620000000000007,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 27,
+   "mu": 0.17917225188895794,
+   "strategy": "balance reflex",
+   "fell": false,
+   "distance": 1.8789262187637885,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 28,
+   "mu": 0.5391719814574262,
+   "strategy": "blind trot",
+   "fell": false,
+   "distance": 1.8729532640985307,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 28,
+   "mu": 0.5391719814574262,
+   "strategy": "always brace",
+   "fell": false,
+   "distance": 0.03199471643571168,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 28,
+   "mu": 0.5391719814574262,
+   "strategy": "tilt rule",
+   "fell": false,
+   "distance": 0.03199471643571168,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 28,
+   "mu": 0.5391719814574262,
+   "strategy": "TabPFN danger mode",
+   "fell": false,
+   "distance": 0.032392469917220855,
+   "braced_s": 6.7,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 28,
+   "mu": 0.5391719814574262,
+   "strategy": "balance reflex",
+   "fell": false,
+   "distance": 0.02239741305924239,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 29,
+   "mu": 0.6017804317179122,
+   "strategy": "blind trot",
+   "fell": false,
+   "distance": 1.4256152536540463,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 29,
+   "mu": 0.6017804317179122,
+   "strategy": "always brace",
+   "fell": false,
+   "distance": 1.0257698219818696,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 29,
+   "mu": 0.6017804317179122,
+   "strategy": "tilt rule",
+   "fell": false,
+   "distance": 1.0257698219818696,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 29,
+   "mu": 0.6017804317179122,
+   "strategy": "TabPFN danger mode",
+   "fell": false,
+   "distance": 1.4256152536540463,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "episode": 29,
+   "mu": 0.6017804317179122,
+   "strategy": "balance reflex",
+   "fell": false,
+   "distance": 1.2765540789802392,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341,
+   "set": "moderate hills"
+  },
+  {
+   "set": "steep hills",
+   "episode": 0,
+   "mu": 0.1759018820758558,
+   "strategy": "TabPFN early (2.5 s), hold 5 s",
+   "fell": false,
+   "distance": 0.08083515839285016,
+   "braced_s": 4.7,
+   "duration": 7.999999999999341
+  },
+  {
+   "set": "steep hills",
+   "episode": 0,
+   "mu": 0.1759018820758558,
+   "strategy": "TabPFN early + plant",
+   "fell": false,
+   "distance": 0.08083515839285016,
+   "braced_s": 4.7,
+   "duration": 7.999999999999341
+  },
+  {
+   "set": "steep hills",
+   "episode": 1,
+   "mu": 0.3609955022013566,
+   "strategy": "TabPFN early (2.5 s), hold 5 s",
+   "fell": false,
+   "distance": 0.10076998890309276,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341
+  },
+  {
+   "set": "steep hills",
+   "episode": 1,
+   "mu": 0.3609955022013566,
+   "strategy": "TabPFN early + plant",
+   "fell": false,
+   "distance": 0.08012878212413209,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341
+  },
+  {
+   "set": "steep hills",
+   "episode": 2,
+   "mu": 0.10027012886006861,
+   "strategy": "TabPFN early (2.5 s), hold 5 s",
+   "fell": false,
+   "distance": 0.07579143056553646,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341
+  },
+  {
+   "set": "steep hills",
+   "episode": 2,
+   "mu": 0.10027012886006861,
+   "strategy": "TabPFN early + plant",
+   "fell": false,
+   "distance": 0.07579143056553646,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341
+  },
+  {
+   "set": "steep hills",
+   "episode": 3,
+   "mu": 0.5062868407892855,
+   "strategy": "TabPFN early (2.5 s), hold 5 s",
+   "fell": true,
+   "distance": 0.2700965800107306,
+   "braced_s": 0.0,
+   "duration": 0.6420000000000005
+  },
+  {
+   "set": "steep hills",
+   "episode": 3,
+   "mu": 0.5062868407892855,
+   "strategy": "TabPFN early + plant",
+   "fell": true,
+   "distance": 0.2700965800107306,
+   "braced_s": 0.0,
+   "duration": 0.6420000000000005
+  },
+  {
+   "set": "steep hills",
+   "episode": 4,
+   "mu": 0.2046731266623956,
+   "strategy": "TabPFN early (2.5 s), hold 5 s",
+   "fell": false,
+   "distance": 0.10738209414079052,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341
+  },
+  {
+   "set": "steep hills",
+   "episode": 4,
+   "mu": 0.2046731266623956,
+   "strategy": "TabPFN early + plant",
+   "fell": false,
+   "distance": 0.10778223302723486,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341
+  },
+  {
+   "set": "steep hills",
+   "episode": 5,
+   "mu": 0.8568334397273433,
+   "strategy": "TabPFN early (2.5 s), hold 5 s",
+   "fell": true,
+   "distance": 0.3837525572045965,
+   "braced_s": 0.0,
+   "duration": 0.5320000000000004
+  },
+  {
+   "set": "steep hills",
+   "episode": 5,
+   "mu": 0.8568334397273433,
+   "strategy": "TabPFN early + plant",
+   "fell": true,
+   "distance": 0.3837525572045965,
+   "braced_s": 0.0,
+   "duration": 0.5320000000000004
+  },
+  {
+   "set": "steep hills",
+   "episode": 6,
+   "mu": 0.10382664518618152,
+   "strategy": "TabPFN early (2.5 s), hold 5 s",
+   "fell": true,
+   "distance": 0.42203821552867865,
+   "braced_s": 0.0,
+   "duration": 0.6120000000000004
+  },
+  {
+   "set": "steep hills",
+   "episode": 6,
+   "mu": 0.10382664518618152,
+   "strategy": "TabPFN early + plant",
+   "fell": true,
+   "distance": 0.42203821552867865,
+   "braced_s": 0.0,
+   "duration": 0.6120000000000004
+  },
+  {
+   "set": "steep hills",
+   "episode": 7,
+   "mu": 0.19803120953033673,
+   "strategy": "TabPFN early (2.5 s), hold 5 s",
+   "fell": false,
+   "distance": 2.147630175270897,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341
+  },
+  {
+   "set": "steep hills",
+   "episode": 7,
+   "mu": 0.19803120953033673,
+   "strategy": "TabPFN early + plant",
+   "fell": false,
+   "distance": 2.147630175270897,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341
+  },
+  {
+   "set": "steep hills",
+   "episode": 8,
+   "mu": 0.11397899788672203,
+   "strategy": "TabPFN early (2.5 s), hold 5 s",
+   "fell": false,
+   "distance": 0.4956307796548652,
+   "braced_s": 1.2,
+   "duration": 7.999999999999341
+  },
+  {
+   "set": "steep hills",
+   "episode": 8,
+   "mu": 0.11397899788672203,
+   "strategy": "TabPFN early + plant",
+   "fell": false,
+   "distance": 0.28949816256506894,
+   "braced_s": 1.2,
+   "duration": 7.999999999999341
+  },
+  {
+   "set": "steep hills",
+   "episode": 9,
+   "mu": 0.5581376799459054,
+   "strategy": "TabPFN early (2.5 s), hold 5 s",
+   "fell": false,
+   "distance": 0.033949513009463334,
+   "braced_s": 4.7,
+   "duration": 7.999999999999341
+  },
+  {
+   "set": "steep hills",
+   "episode": 9,
+   "mu": 0.5581376799459054,
+   "strategy": "TabPFN early + plant",
+   "fell": false,
+   "distance": 0.033949513009463334,
+   "braced_s": 4.7,
+   "duration": 7.999999999999341
+  },
+  {
+   "set": "steep hills",
+   "episode": 10,
+   "mu": 0.8141966782205428,
+   "strategy": "TabPFN early (2.5 s), hold 5 s",
+   "fell": false,
+   "distance": 0.5815525599070094,
+   "braced_s": 4.6000000000000005,
+   "duration": 7.999999999999341
+  },
+  {
+   "set": "steep hills",
+   "episode": 10,
+   "mu": 0.8141966782205428,
+   "strategy": "TabPFN early + plant",
+   "fell": false,
+   "distance": 0.539217322872623,
+   "braced_s": 4.6000000000000005,
+   "duration": 7.999999999999341
+  },
+  {
+   "set": "steep hills",
+   "episode": 11,
+   "mu": 0.7727751013664106,
+   "strategy": "TabPFN early (2.5 s), hold 5 s",
+   "fell": false,
+   "distance": 2.0179209974582415,
+   "braced_s": 5.2,
+   "duration": 7.999999999999341
+  },
+  {
+   "set": "steep hills",
+   "episode": 11,
+   "mu": 0.7727751013664106,
+   "strategy": "TabPFN early + plant",
+   "fell": false,
+   "distance": 2.0179209974582415,
+   "braced_s": 5.2,
+   "duration": 7.999999999999341
+  },
+  {
+   "set": "steep hills",
+   "episode": 12,
+   "mu": 0.10457847473749289,
+   "strategy": "TabPFN early (2.5 s), hold 5 s",
+   "fell": false,
+   "distance": 2.5719217462482895,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341
+  },
+  {
+   "set": "steep hills",
+   "episode": 12,
+   "mu": 0.10457847473749289,
+   "strategy": "TabPFN early + plant",
+   "fell": false,
+   "distance": 2.313724957465016,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341
+  },
+  {
+   "set": "steep hills",
+   "episode": 13,
+   "mu": 0.2937039058552874,
+   "strategy": "TabPFN early (2.5 s), hold 5 s",
+   "fell": false,
+   "distance": 2.2187607926125232,
+   "braced_s": 5.5,
+   "duration": 7.999999999999341
+  },
+  {
+   "set": "steep hills",
+   "episode": 13,
+   "mu": 0.2937039058552874,
+   "strategy": "TabPFN early + plant",
+   "fell": false,
+   "distance": 2.2187607926125232,
+   "braced_s": 5.5,
+   "duration": 7.999999999999341
+  },
+  {
+   "set": "steep hills",
+   "episode": 14,
+   "mu": 0.9136632991683807,
+   "strategy": "TabPFN early (2.5 s), hold 5 s",
+   "fell": true,
+   "distance": 0.9666510529799711,
+   "braced_s": 0.362,
+   "duration": 2.9619999999998954
+  },
+  {
+   "set": "steep hills",
+   "episode": 14,
+   "mu": 0.9136632991683807,
+   "strategy": "TabPFN early + plant",
+   "fell": true,
+   "distance": 0.936037735707552,
+   "braced_s": 0.392,
+   "duration": 2.991999999999892
+  },
+  {
+   "set": "steep hills",
+   "episode": 15,
+   "mu": 0.11572567836497968,
+   "strategy": "TabPFN early (2.5 s), hold 5 s",
+   "fell": true,
+   "distance": 0.6264401174723087,
+   "braced_s": 0.032,
+   "duration": 1.0320000000000007
+  },
+  {
+   "set": "steep hills",
+   "episode": 15,
+   "mu": 0.11572567836497968,
+   "strategy": "TabPFN early + plant",
+   "fell": true,
+   "distance": 0.6265941760874987,
+   "braced_s": 0.032,
+   "duration": 1.0320000000000007
+  },
+  {
+   "set": "steep hills",
+   "episode": 16,
+   "mu": 0.8555869211051842,
+   "strategy": "TabPFN early (2.5 s), hold 5 s",
+   "fell": false,
+   "distance": 2.4427900876514834,
+   "braced_s": 4.5,
+   "duration": 7.999999999999341
+  },
+  {
+   "set": "steep hills",
+   "episode": 16,
+   "mu": 0.8555869211051842,
+   "strategy": "TabPFN early + plant",
+   "fell": false,
+   "distance": 2.1834090020853183,
+   "braced_s": 4.5,
+   "duration": 7.999999999999341
+  },
+  {
+   "set": "steep hills",
+   "episode": 17,
+   "mu": 0.46602970062404886,
+   "strategy": "TabPFN early (2.5 s), hold 5 s",
+   "fell": true,
+   "distance": 0.48205294404931387,
+   "braced_s": 0.0,
+   "duration": 0.8920000000000007
+  },
+  {
+   "set": "steep hills",
+   "episode": 17,
+   "mu": 0.46602970062404886,
+   "strategy": "TabPFN early + plant",
+   "fell": true,
+   "distance": 0.48205294404931387,
+   "braced_s": 0.0,
+   "duration": 0.8920000000000007
+  },
+  {
+   "set": "steep hills",
+   "episode": 18,
+   "mu": 0.10820380976763293,
+   "strategy": "TabPFN early (2.5 s), hold 5 s",
+   "fell": false,
+   "distance": 2.197617805957127,
+   "braced_s": 5.9,
+   "duration": 7.999999999999341
+  },
+  {
+   "set": "steep hills",
+   "episode": 18,
+   "mu": 0.10820380976763293,
+   "strategy": "TabPFN early + plant",
+   "fell": false,
+   "distance": 2.197617805957127,
+   "braced_s": 5.9,
+   "duration": 7.999999999999341
+  },
+  {
+   "set": "steep hills",
+   "episode": 19,
+   "mu": 0.13404929766940218,
+   "strategy": "TabPFN early (2.5 s), hold 5 s",
+   "fell": false,
+   "distance": 1.6182384179696754,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341
+  },
+  {
+   "set": "steep hills",
+   "episode": 19,
+   "mu": 0.13404929766940218,
+   "strategy": "TabPFN early + plant",
+   "fell": false,
+   "distance": 2.1717560692668703,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341
+  },
+  {
+   "set": "steep hills",
+   "episode": 20,
+   "mu": 0.47488367674291415,
+   "strategy": "TabPFN early (2.5 s), hold 5 s",
+   "fell": true,
+   "distance": 0.3239321379862392,
+   "braced_s": 0.272,
+   "duration": 2.2719999999999714
+  },
+  {
+   "set": "steep hills",
+   "episode": 20,
+   "mu": 0.47488367674291415,
+   "strategy": "TabPFN early + plant",
+   "fell": true,
+   "distance": 0.3154648794199431,
+   "braced_s": 0.262,
+   "duration": 2.2619999999999725
+  },
+  {
+   "set": "steep hills",
+   "episode": 21,
+   "mu": 0.13982508118950918,
+   "strategy": "TabPFN early (2.5 s), hold 5 s",
+   "fell": false,
+   "distance": 1.5122034091269188,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341
+  },
+  {
+   "set": "steep hills",
+   "episode": 21,
+   "mu": 0.13982508118950918,
+   "strategy": "TabPFN early + plant",
+   "fell": false,
+   "distance": 0.754606547931135,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341
+  },
+  {
+   "set": "steep hills",
+   "episode": 22,
+   "mu": 0.1669219269360578,
+   "strategy": "TabPFN early (2.5 s), hold 5 s",
+   "fell": false,
+   "distance": 0.08672834506519024,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341
+  },
+  {
+   "set": "steep hills",
+   "episode": 22,
+   "mu": 0.1669219269360578,
+   "strategy": "TabPFN early + plant",
+   "fell": false,
+   "distance": 0.08672834506519024,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341
+  },
+  {
+   "set": "steep hills",
+   "episode": 23,
+   "mu": 0.4971384280595478,
+   "strategy": "TabPFN early (2.5 s), hold 5 s",
+   "fell": true,
+   "distance": 0.4696433862424845,
+   "braced_s": 1.252,
+   "duration": 2.2519999999999736
+  },
+  {
+   "set": "steep hills",
+   "episode": 23,
+   "mu": 0.4971384280595478,
+   "strategy": "TabPFN early + plant",
+   "fell": false,
+   "distance": 0.668726163322487,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341
+  },
+  {
+   "set": "steep hills",
+   "episode": 24,
+   "mu": 0.39168682367755253,
+   "strategy": "TabPFN early (2.5 s), hold 5 s",
+   "fell": false,
+   "distance": 2.1441983106593776,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341
+  },
+  {
+   "set": "steep hills",
+   "episode": 24,
+   "mu": 0.39168682367755253,
+   "strategy": "TabPFN early + plant",
+   "fell": false,
+   "distance": 1.9460820133856778,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341
+  },
+  {
+   "set": "steep hills",
+   "episode": 25,
+   "mu": 0.16852356037023372,
+   "strategy": "TabPFN early (2.5 s), hold 5 s",
+   "fell": false,
+   "distance": 0.07628017813141354,
+   "braced_s": 6.9,
+   "duration": 7.999999999999341
+  },
+  {
+   "set": "steep hills",
+   "episode": 25,
+   "mu": 0.16852356037023372,
+   "strategy": "TabPFN early + plant",
+   "fell": false,
+   "distance": 0.060905844774089446,
+   "braced_s": 5.9,
+   "duration": 7.999999999999341
+  },
+  {
+   "set": "steep hills",
+   "episode": 26,
+   "mu": 0.188544034559361,
+   "strategy": "TabPFN early (2.5 s), hold 5 s",
+   "fell": false,
+   "distance": 0.07865387734222795,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341
+  },
+  {
+   "set": "steep hills",
+   "episode": 26,
+   "mu": 0.188544034559361,
+   "strategy": "TabPFN early + plant",
+   "fell": false,
+   "distance": 0.059784782935624066,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341
+  },
+  {
+   "set": "steep hills",
+   "episode": 27,
+   "mu": 0.11966447714345398,
+   "strategy": "TabPFN early (2.5 s), hold 5 s",
+   "fell": false,
+   "distance": 2.1764293924244287,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341
+  },
+  {
+   "set": "steep hills",
+   "episode": 27,
+   "mu": 0.11966447714345398,
+   "strategy": "TabPFN early + plant",
+   "fell": false,
+   "distance": 1.6338184392502912,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341
+  },
+  {
+   "set": "steep hills",
+   "episode": 28,
+   "mu": 0.3150818563904343,
+   "strategy": "TabPFN early (2.5 s), hold 5 s",
+   "fell": false,
+   "distance": 0.059387294770827735,
+   "braced_s": 4.3,
+   "duration": 7.999999999999341
+  },
+  {
+   "set": "steep hills",
+   "episode": 28,
+   "mu": 0.3150818563904343,
+   "strategy": "TabPFN early + plant",
+   "fell": false,
+   "distance": 0.0554013558407312,
+   "braced_s": 4.3,
+   "duration": 7.999999999999341
+  },
+  {
+   "set": "steep hills",
+   "episode": 29,
+   "mu": 0.43458574449387394,
+   "strategy": "TabPFN early (2.5 s), hold 5 s",
+   "fell": false,
+   "distance": 2.4670203577518253,
+   "braced_s": 4.4,
+   "duration": 7.999999999999341
+  },
+  {
+   "set": "steep hills",
+   "episode": 29,
+   "mu": 0.43458574449387394,
+   "strategy": "TabPFN early + plant",
+   "fell": false,
+   "distance": 2.0339422020858846,
+   "braced_s": 4.4,
+   "duration": 7.999999999999341
+  },
+  {
+   "set": "moderate hills",
+   "episode": 0,
+   "mu": 0.17457904673555494,
+   "strategy": "TabPFN early (2.5 s), hold 5 s",
+   "fell": false,
+   "distance": 0.7926799218484729,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341
+  },
+  {
+   "set": "moderate hills",
+   "episode": 0,
+   "mu": 0.17457904673555494,
+   "strategy": "TabPFN early + plant",
+   "fell": false,
+   "distance": 0.4509764854671381,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341
+  },
+  {
+   "set": "moderate hills",
+   "episode": 1,
+   "mu": 0.4233395629967313,
+   "strategy": "TabPFN early (2.5 s), hold 5 s",
+   "fell": false,
+   "distance": 0.4757733258918366,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341
+  },
+  {
+   "set": "moderate hills",
+   "episode": 1,
+   "mu": 0.4233395629967313,
+   "strategy": "TabPFN early + plant",
+   "fell": false,
+   "distance": 0.3772764706235111,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341
+  },
+  {
+   "set": "moderate hills",
+   "episode": 2,
+   "mu": 0.8425390210280322,
+   "strategy": "TabPFN early (2.5 s), hold 5 s",
+   "fell": false,
+   "distance": 1.3999221573296574,
+   "braced_s": 5.7,
+   "duration": 7.999999999999341
+  },
+  {
+   "set": "moderate hills",
+   "episode": 2,
+   "mu": 0.8425390210280322,
+   "strategy": "TabPFN early + plant",
+   "fell": false,
+   "distance": 1.3258806189579684,
+   "braced_s": 5.7,
+   "duration": 7.999999999999341
+  },
+  {
+   "set": "moderate hills",
+   "episode": 3,
+   "mu": 0.6978416565161342,
+   "strategy": "TabPFN early (2.5 s), hold 5 s",
+   "fell": false,
+   "distance": 1.628863760214387,
+   "braced_s": 5.9,
+   "duration": 7.999999999999341
+  },
+  {
+   "set": "moderate hills",
+   "episode": 3,
+   "mu": 0.6978416565161342,
+   "strategy": "TabPFN early + plant",
+   "fell": false,
+   "distance": 1.437965852150739,
+   "braced_s": 5.3,
+   "duration": 7.999999999999341
+  },
+  {
+   "set": "moderate hills",
+   "episode": 4,
+   "mu": 0.5034344415122717,
+   "strategy": "TabPFN early (2.5 s), hold 5 s",
+   "fell": true,
+   "distance": 0.3885510965502548,
+   "braced_s": 0.0,
+   "duration": 0.6720000000000005
+  },
+  {
+   "set": "moderate hills",
+   "episode": 4,
+   "mu": 0.5034344415122717,
+   "strategy": "TabPFN early + plant",
+   "fell": true,
+   "distance": 0.3885510965502548,
+   "braced_s": 0.0,
+   "duration": 0.6720000000000005
+  },
+  {
+   "set": "moderate hills",
+   "episode": 5,
+   "mu": 0.14820410028148134,
+   "strategy": "TabPFN early (2.5 s), hold 5 s",
+   "fell": false,
+   "distance": 1.6276164757728326,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341
+  },
+  {
+   "set": "moderate hills",
+   "episode": 5,
+   "mu": 0.14820410028148134,
+   "strategy": "TabPFN early + plant",
+   "fell": false,
+   "distance": 1.2495145188925307,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341
+  },
+  {
+   "set": "moderate hills",
+   "episode": 6,
+   "mu": 0.23382126620099192,
+   "strategy": "TabPFN early (2.5 s), hold 5 s",
+   "fell": true,
+   "distance": 0.46446504575550285,
+   "braced_s": 0.0,
+   "duration": 0.7520000000000006
+  },
+  {
+   "set": "moderate hills",
+   "episode": 6,
+   "mu": 0.23382126620099192,
+   "strategy": "TabPFN early + plant",
+   "fell": true,
+   "distance": 0.46446504575550285,
+   "braced_s": 0.0,
+   "duration": 0.7520000000000006
+  },
+  {
+   "set": "moderate hills",
+   "episode": 7,
+   "mu": 0.6141417530093086,
+   "strategy": "TabPFN early (2.5 s), hold 5 s",
+   "fell": false,
+   "distance": 0.7312355932769063,
+   "braced_s": 5.1000000000000005,
+   "duration": 7.999999999999341
+  },
+  {
+   "set": "moderate hills",
+   "episode": 7,
+   "mu": 0.6141417530093086,
+   "strategy": "TabPFN early + plant",
+   "fell": false,
+   "distance": 0.31164775227411223,
+   "braced_s": 5.1000000000000005,
+   "duration": 7.999999999999341
+  },
+  {
+   "set": "moderate hills",
+   "episode": 8,
+   "mu": 0.19848242844858877,
+   "strategy": "TabPFN early (2.5 s), hold 5 s",
+   "fell": true,
+   "distance": 0.4719002791394814,
+   "braced_s": 0.0,
+   "duration": 0.6620000000000005
+  },
+  {
+   "set": "moderate hills",
+   "episode": 8,
+   "mu": 0.19848242844858877,
+   "strategy": "TabPFN early + plant",
+   "fell": true,
+   "distance": 0.4719002791394814,
+   "braced_s": 0.0,
+   "duration": 0.6620000000000005
+  },
+  {
+   "set": "moderate hills",
+   "episode": 9,
+   "mu": 0.27839893096039625,
+   "strategy": "TabPFN early (2.5 s), hold 5 s",
+   "fell": false,
+   "distance": 2.4118007703340996,
+   "braced_s": 2.8000000000000003,
+   "duration": 7.999999999999341
+  },
+  {
+   "set": "moderate hills",
+   "episode": 9,
+   "mu": 0.27839893096039625,
+   "strategy": "TabPFN early + plant",
+   "fell": false,
+   "distance": 2.3660174703691492,
+   "braced_s": 2.8000000000000003,
+   "duration": 7.999999999999341
+  },
+  {
+   "set": "moderate hills",
+   "episode": 10,
+   "mu": 0.2088012438293273,
+   "strategy": "TabPFN early (2.5 s), hold 5 s",
+   "fell": false,
+   "distance": 0.014761681063457514,
+   "braced_s": 5.7,
+   "duration": 7.999999999999341
+  },
+  {
+   "set": "moderate hills",
+   "episode": 10,
+   "mu": 0.2088012438293273,
+   "strategy": "TabPFN early + plant",
+   "fell": false,
+   "distance": 0.014761681063457514,
+   "braced_s": 5.7,
+   "duration": 7.999999999999341
+  },
+  {
+   "set": "moderate hills",
+   "episode": 11,
+   "mu": 0.2042244568830859,
+   "strategy": "TabPFN early (2.5 s), hold 5 s",
+   "fell": false,
+   "distance": 0.049869350077565704,
+   "braced_s": 5.1000000000000005,
+   "duration": 7.999999999999341
+  },
+  {
+   "set": "moderate hills",
+   "episode": 11,
+   "mu": 0.2042244568830859,
+   "strategy": "TabPFN early + plant",
+   "fell": false,
+   "distance": 0.049869350077565704,
+   "braced_s": 5.1000000000000005,
+   "duration": 7.999999999999341
+  },
+  {
+   "set": "moderate hills",
+   "episode": 12,
+   "mu": 0.5129368732981874,
+   "strategy": "TabPFN early (2.5 s), hold 5 s",
+   "fell": false,
+   "distance": 1.8714525378915272,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341
+  },
+  {
+   "set": "moderate hills",
+   "episode": 12,
+   "mu": 0.5129368732981874,
+   "strategy": "TabPFN early + plant",
+   "fell": false,
+   "distance": 1.8714525378915272,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341
+  },
+  {
+   "set": "moderate hills",
+   "episode": 13,
+   "mu": 0.5360454206335699,
+   "strategy": "TabPFN early (2.5 s), hold 5 s",
+   "fell": false,
+   "distance": 1.0106148997945268,
+   "braced_s": 1.6,
+   "duration": 7.999999999999341
+  },
+  {
+   "set": "moderate hills",
+   "episode": 13,
+   "mu": 0.5360454206335699,
+   "strategy": "TabPFN early + plant",
+   "fell": false,
+   "distance": 1.0106148997945268,
+   "braced_s": 1.6,
+   "duration": 7.999999999999341
+  },
+  {
+   "set": "moderate hills",
+   "episode": 14,
+   "mu": 0.8016267002808392,
+   "strategy": "TabPFN early (2.5 s), hold 5 s",
+   "fell": true,
+   "distance": 0.7155833961615232,
+   "braced_s": 0.332,
+   "duration": 1.6320000000000012
+  },
+  {
+   "set": "moderate hills",
+   "episode": 14,
+   "mu": 0.8016267002808392,
+   "strategy": "TabPFN early + plant",
+   "fell": true,
+   "distance": 0.6974184050454062,
+   "braced_s": 0.302,
+   "duration": 1.6020000000000012
+  },
+  {
+   "set": "moderate hills",
+   "episode": 15,
+   "mu": 0.6892959452154677,
+   "strategy": "TabPFN early (2.5 s), hold 5 s",
+   "fell": false,
+   "distance": 1.8680888653478334,
+   "braced_s": 3.4,
+   "duration": 7.999999999999341
+  },
+  {
+   "set": "moderate hills",
+   "episode": 15,
+   "mu": 0.6892959452154677,
+   "strategy": "TabPFN early + plant",
+   "fell": false,
+   "distance": 1.7549089417740358,
+   "braced_s": 3.4,
+   "duration": 7.999999999999341
+  },
+  {
+   "set": "moderate hills",
+   "episode": 16,
+   "mu": 0.6000546152695262,
+   "strategy": "TabPFN early (2.5 s), hold 5 s",
+   "fell": true,
+   "distance": 0.3183812510610534,
+   "braced_s": 0.0,
+   "duration": 0.4920000000000004
+  },
+  {
+   "set": "moderate hills",
+   "episode": 16,
+   "mu": 0.6000546152695262,
+   "strategy": "TabPFN early + plant",
+   "fell": true,
+   "distance": 0.3183812510610534,
+   "braced_s": 0.0,
+   "duration": 0.4920000000000004
+  },
+  {
+   "set": "moderate hills",
+   "episode": 17,
+   "mu": 0.36756166893503506,
+   "strategy": "TabPFN early (2.5 s), hold 5 s",
+   "fell": true,
+   "distance": 0.37070896790271507,
+   "braced_s": 0.0,
+   "duration": 0.9820000000000008
+  },
+  {
+   "set": "moderate hills",
+   "episode": 17,
+   "mu": 0.36756166893503506,
+   "strategy": "TabPFN early + plant",
+   "fell": true,
+   "distance": 0.37070896790271507,
+   "braced_s": 0.0,
+   "duration": 0.9820000000000008
+  },
+  {
+   "set": "moderate hills",
+   "episode": 18,
+   "mu": 0.5318774311726726,
+   "strategy": "TabPFN early (2.5 s), hold 5 s",
+   "fell": false,
+   "distance": 0.402475033357315,
+   "braced_s": 5.2,
+   "duration": 7.999999999999341
+  },
+  {
+   "set": "moderate hills",
+   "episode": 18,
+   "mu": 0.5318774311726726,
+   "strategy": "TabPFN early + plant",
+   "fell": false,
+   "distance": 0.402475033357315,
+   "braced_s": 5.2,
+   "duration": 7.999999999999341
+  },
+  {
+   "set": "moderate hills",
+   "episode": 19,
+   "mu": 0.7512834106237389,
+   "strategy": "TabPFN early (2.5 s), hold 5 s",
+   "fell": false,
+   "distance": 1.4170544103657596,
+   "braced_s": 3.4,
+   "duration": 7.999999999999341
+  },
+  {
+   "set": "moderate hills",
+   "episode": 19,
+   "mu": 0.7512834106237389,
+   "strategy": "TabPFN early + plant",
+   "fell": false,
+   "distance": 1.4170544103657596,
+   "braced_s": 3.4,
+   "duration": 7.999999999999341
+  },
+  {
+   "set": "moderate hills",
+   "episode": 20,
+   "mu": 0.2270898903600904,
+   "strategy": "TabPFN early (2.5 s), hold 5 s",
+   "fell": false,
+   "distance": 0.038792667883603436,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341
+  },
+  {
+   "set": "moderate hills",
+   "episode": 20,
+   "mu": 0.2270898903600904,
+   "strategy": "TabPFN early + plant",
+   "fell": false,
+   "distance": 0.038792667883603436,
+   "braced_s": 7.0,
+   "duration": 7.999999999999341
+  },
+  {
+   "set": "moderate hills",
+   "episode": 21,
+   "mu": 0.8362005714469714,
+   "strategy": "TabPFN early (2.5 s), hold 5 s",
+   "fell": false,
+   "distance": 0.05820961887985851,
+   "braced_s": 3.6,
+   "duration": 7.999999999999341
+  },
+  {
+   "set": "moderate hills",
+   "episode": 21,
+   "mu": 0.8362005714469714,
+   "strategy": "TabPFN early + plant",
+   "fell": false,
+   "distance": 0.05820961887985851,
+   "braced_s": 3.6,
+   "duration": 7.999999999999341
+  },
+  {
+   "set": "moderate hills",
+   "episode": 22,
+   "mu": 0.6638066498341065,
+   "strategy": "TabPFN early (2.5 s), hold 5 s",
+   "fell": false,
+   "distance": 0.07467511076048688,
+   "braced_s": 6.8,
+   "duration": 7.999999999999341
+  },
+  {
+   "set": "moderate hills",
+   "episode": 22,
+   "mu": 0.6638066498341065,
+   "strategy": "TabPFN early + plant",
+   "fell": false,
+   "distance": 0.07467511076048688,
+   "braced_s": 6.8,
+   "duration": 7.999999999999341
+  },
+  {
+   "set": "moderate hills",
+   "episode": 23,
+   "mu": 0.9632225238063656,
+   "strategy": "TabPFN early (2.5 s), hold 5 s",
+   "fell": false,
+   "distance": 1.8354709540857084,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341
+  },
+  {
+   "set": "moderate hills",
+   "episode": 23,
+   "mu": 0.9632225238063656,
+   "strategy": "TabPFN early + plant",
+   "fell": false,
+   "distance": 1.8354709540857084,
+   "braced_s": 0.0,
+   "duration": 7.999999999999341
+  },
+  {
+   "set": "moderate hills",
+   "episode": 24,
+   "mu": 0.632808617573083,
+   "strategy": "TabPFN early (2.5 s), hold 5 s",
+   "fell": true,
+   "distance": 0.47448728324321005,
+   "braced_s": 0.0,
+   "duration": 0.8720000000000007
+  },
+  {
+   "set": "moderate hills",
+   "episode": 24,
+   "mu": 0.632808617573083,
+   "strategy": "TabPFN early + plant",
+   "fell": true,
+   "distance": 0.47448728324321005,
+   "braced_s": 0.0,
+   "duration": 0.8720000000000007
+  },
+  {
+   "set": "moderate hills",
+   "episode": 25,
+   "mu": 0.336907772742607,
+   "strategy": "TabPFN early (2.5 s), hold 5 s",
+   "fell": true,
+   "distance": 0.5215388330107565,
+   "braced_s": 0.062,
+   "duration": 1.0620000000000007
+  },
+  {
+   "set": "moderate hills",
+   "episode": 25,
+   "mu": 0.336907772742607,
+   "strategy": "TabPFN early + plant",
+   "fell": true,
+   "distance": 0.5216748327797512,
+   "braced_s": 0.062,
+   "duration": 1.0620000000000007
+  },
+  {
+   "set": "moderate hills",
+   "episode": 26,
+   "mu": 0.19122851898874907,
+   "strategy": "TabPFN early (2.5 s), hold 5 s",
+   "fell": true,
+   "distance": 0.5443363227032152,
+   "braced_s": 0.012,
+   "duration": 1.0120000000000007
+  },
+  {
+   "set": "moderate hills",
+   "episode": 26,
+   "mu": 0.19122851898874907,
+   "strategy": "TabPFN early + plant",
+   "fell": true,
+   "distance": 0.5443536510360045,
+   "braced_s": 0.012,
+   "duration": 1.0120000000000007
+  },
+  {
+   "set": "moderate hills",
+   "episode": 27,
+   "mu": 0.17917225188895794,
+   "strategy": "TabPFN early (2.5 s), hold 5 s",
+   "fell": true,
+   "distance": 0.5434587788699665,
+   "braced_s": 0.0,
+   "duration": 0.8620000000000007
+  },
+  {
+   "set": "moderate hills",
+   "episode": 27,
+   "mu": 0.17917225188895794,
+   "strategy": "TabPFN early + plant",
+   "fell": true,
+   "distance": 0.5434587788699665,
+   "braced_s": 0.0,
+   "duration": 0.8620000000000007
+  },
+  {
+   "set": "moderate hills",
+   "episode": 28,
+   "mu": 0.5391719814574262,
+   "strategy": "TabPFN early (2.5 s), hold 5 s",
+   "fell": false,
+   "distance": 0.03387817344408663,
+   "braced_s": 5.7,
+   "duration": 7.999999999999341
+  },
+  {
+   "set": "moderate hills",
+   "episode": 28,
+   "mu": 0.5391719814574262,
+   "strategy": "TabPFN early + plant",
+   "fell": false,
+   "distance": 0.03387817344408663,
+   "braced_s": 5.7,
+   "duration": 7.999999999999341
+  },
+  {
+   "set": "moderate hills",
+   "episode": 29,
+   "mu": 0.6017804317179122,
+   "strategy": "TabPFN early (2.5 s), hold 5 s",
+   "fell": false,
+   "distance": 1.0448963174817267,
+   "braced_s": 6.9,
+   "duration": 7.999999999999341
+  },
+  {
+   "set": "moderate hills",
+   "episode": 29,
+   "mu": 0.6017804317179122,
+   "strategy": "TabPFN early + plant",
+   "fell": false,
+   "distance": 1.0448963174817267,
+   "braced_s": 6.9,
+   "duration": 7.999999999999341
+  }
+ ]
+}

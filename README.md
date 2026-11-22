@@ -151,6 +151,26 @@ The pattern from the flat slopes holds on real terrain. TabPFN's fall warning tr
 
 ![Terrain AUC](results/figures/terrain_auc.png)
 
+**Can the warning be improved? And does it help a robot that balances?** (`python a1_improve_test.py part2|part3`)
+
+Thresholds follow one rule fixed in advance (5× the label's base rate in the training examples), and TabPFN's examples still come only from the original flat floors.
+
+| unseen hills, blind gait (60 walks) | falls | distance |
+|---|---|---|
+| TabPFN, 1 s warning, hold 3 s | 19 | 0.97 m |
+| TabPFN, "fall within 2.5 s" examples, hold 5 s | 18 | 0.88 m |
+| … + plant all feet while risk > 26% | 17 | 0.82 m |
+| always brace (the ceiling for any warning) | 16 | 0.82 m |
+
+| stress test, balance reflex on: hills up to 35°, shoves up to 120 N (30 new walks) | falls |
+|---|---|
+| reflex alone | 4 |
+| reflex + always brace | 3 |
+| reflex + tilt rule | 2 |
+| reflex + TabPFN (1 s / early / early + plant) | 3 / 3 / 3 |
+
+An earlier warning only gets the blind robot closer to always bracing, because the limit is the brace itself, not the prediction. On top of the balance reflex, every add-on prevented 2 falls and caused 1, which is within noise for 30 walks. **On a robot that balances itself, TabPFN's fall warning adds nothing measurable here.**
+
 **Videos** (`python a1_record_videos.py` → `videos/*.mp4`, offscreen rendering, needs `pip install imageio imageio-ffmpeg`)
 
 Exact replays of logged episodes, with the brace indicator (blue = braced), sliding feet (red), downhill arrow and a text label: `blind_falls`, `tabpfn_braces`, `balance_reflex`, `always_brace` (steep episode 9), `tilt_safe_floor`, `tabpfn_safe_floor` (safe episode 30), and side-by-side `episode9_comparison.mp4` (blind | TabPFN | balance reflex) and `safe_floor_comparison.mp4` (tilt rule | TabPFN). On real hills: `hills_ice_comparison.mp4` (icy, steep episode 12) and `hills_comparison.mp4` (steep episode 24), each blind | TabPFN | balance reflex.
