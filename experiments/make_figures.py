@@ -137,7 +137,7 @@ def manip_figure(csv, out):
     for ax, lab in zip(axes, ["success rate (95% bootstrap CI)", "pushes to success (successful runs)",
                               "median final position error [mm]"]):
         ax.set_xticks(np.arange(len(chs)) + 0.4 - w / 2)
-        ax.set_xticklabels([c.replace("_hetero", "H").split("_")[0] + ("H" if "hetero" in c else "") if False else c.split("_")[0] + ("H" if "hetero" in c else "") for c in chs])
+        ax.set_xticklabels([c.split("_")[0] + ("H" if "hetero" in c else "") for c in chs])
         ax.set_ylabel(lab)
     axes[2].set_yscale("log")
     axes[0].legend(fontsize=7.5, loc="lower left")

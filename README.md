@@ -1,5 +1,7 @@
 # Hacklab
 
+**New: [Learning to Move the Unknown](PUSHING.md)** — few-shot physical learning for robotic pushing with TabPFN (planar lab + Unitree A1). Summary: [docs/EXECUTIVE_SUMMARY.md](docs/EXECUTIVE_SUMMARY.md).
+
 ## How to use
 
 ```python a1_navigation.py```: Run mujoco simulation with Unitree A1 robot navigating in an environment.

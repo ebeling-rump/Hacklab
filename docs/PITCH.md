@@ -1,6 +1,6 @@
 # Pitch (≈4 minutes) — "Learning to Move the Unknown"
 
-Assets: `results/a1/a1_door_rect_tabpfn_transfer_hybrid_s0.mp4` (A1 + crate + doorway),
+Assets: `results/videos/A1_doorway_seed2_tabpfn_transfer_vs_physics.mp4` (A1 + crate + doorway),
 `results/videos/C5_s3_reactive_vs_physics_sysid_vs_tabpfn_hybrid.mp4` (planar doorway, three
 controllers), `results/figures/transfer_hetero.png`, `results/figures/headline_hetero.png`,
 `results/figures/manipulation_v2.png`.
@@ -41,12 +41,14 @@ the object around walls and through doors. After every push, the robot learns.
 * Headline #3: closing the loop matters. All our model-based planners solve every standard task, while
   a reactive controller fails 10% and keeps hitting walls. In the messy tasks the planner can exploit
   errors of the learned model — the robot still mostly succeeds, but physics alone needs fewer pushes.
-  That tells us exactly what to build next.
+  Give TabPFN experience from other objects and that deficit disappears.
 
 **[2:45 – 3:30] The demo** *(A1 video, doorway passage)*
 Here's the A1. It has never seen this crate. The blue ghost is what it *expects* to happen; the crate
 is where it actually goes. Watch the gap shrink as it learns. It turns the crate — 70 cm long, door
-52 cm wide — walks around it, pushes it through, follows it, and parks it. Thirteen pushes.
+52 cm wide — walks around it, pushes it through, follows it, and parks it. Sixteen pushes.
+(Bottom half: the same crate with the physics-only model jams in the door frame. Across 3 crates:
+3/3 vs 2/3 — a demo, not a statistic; say so.)
 
 **[3:30 – 4:00] Vision**
 Today: pushing. The recipe — physics as prior, a foundation model that adapts in context, and

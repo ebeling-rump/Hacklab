@@ -13,11 +13,14 @@ unfamiliar object than strong established alternatives?
   is the most accurate predictor at every budget from 1 to 20 pushes**, beating both physics + sysID
   and the same transfer construction with a GP, with paired 95% CIs excluding zero.
 * TabPFN's uncertainty is **far better calibrated than a GP's in the 2–10-sample regime**.
-* These offline gains **did not translate into better closed-loop control** in the heterogeneous
-  tasks: with the same planner, TabPFN-hybrid needed *more* pushes than physics + sysID
-  (+3.1 pushes, Wilcoxon p = 0.015, 24 paired episodes). In the standard suite, closed-loop results
-  of TabPFN-hybrid and physics + sysID are statistically indistinguishable (all model-based methods
-  100% success; TabPFN-hybrid −0.5 pushes, p = 0.17; −0.38 wall contacts, p = 0.07).
+* Offline gains **did not automatically translate into better closed-loop control**: in the
+  heterogeneous tasks TabPFN-hybrid needed *more* pushes than physics + sysID (+3.1, Wilcoxon
+  p = 0.015, 24 paired episodes). **With prior experience (transfer) the deficit disappears**
+  (+1.25 pushes, p = 0.79) and TabPFN transfer-hybrid places objects most precisely — but it still
+  does not beat physics + sysID on pushes. In the standard suite TabPFN-hybrid and physics + sysID are
+  statistically indistinguishable (all model-based methods 100% success; −0.5 pushes, p = 0.17).
+* Unitree A1 doorway (3D, whole-body pushing, 3 crates): TabPFN transfer-hybrid 3/3, physics + sysID
+  2/3 — a compelling demo, but 3 seeds are not statistical evidence.
 * TabPFN's CPU inference latency (seconds per planning step on a laptop) is the main practical cost.
 
 Everything below is reproducible with the commands in [`PUSHING.md`](../PUSHING.md).
