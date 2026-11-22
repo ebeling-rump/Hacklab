@@ -120,6 +120,23 @@ The blind trot never reads a sensor. `a1_balance.Balancer` adds classic feedback
 
 The balance reflex also had 0 falls on the 40 safe floors (`results/balancer_baseline.json`). In 400 data walks with the balancer, only 1 fell, so there are no fall examples to learn from and nothing left for a fall warning to prevent. **Falls here have one directly measurable cause, sideways tilt, so correcting it beats predicting it.** Slips still happen in 71% of moments with the balancer, and slip prediction on unseen floors remains TabPFN's useful role on this robot. Acting on slip risk on top of the balancer hasn't been tested yet.
 
+**Charts** (`python a1_tabpfn_charts.py` → `results/figures/`, numbers in `results/charts_data.json`)
+
+| | |
+|---|---|
+| ![Fall ROC](results/figures/fall_roc.png) | ![Slip ROC](results/figures/slip_roc.png) |
+| ![Fall lead time](results/figures/fall_lead_time.png) | ![Trade-off](results/figures/tradeoff.png) |
+
+![Learning curve](results/figures/learning_curve.png)
+
+- Fall within 1 s on unseen slopes: TabPFN 0.901 (2,000 rows), XGBoost 0.912 (18,067 rows), logistic 0.866, 2 s tilt average 0.815, model told the true floor 0.447.
+- Slip within 0.2 s on unseen icy + steep floors: TabPFN + slip detector 0.710, sensors only 0.629, XGBoost + detector 0.683 (2,000 rows) / 0.725 (10,290 rows).
+- Lead time: TabPFN's median fall risk is 0.5% on walks that never fell, and 9% / 30% / 89% at 0.5 / 0.3 / 0.1 s before a fall. The warning is accurate but late.
+
+**Videos** (`python a1_record_videos.py` → `videos/*.mp4`, offscreen rendering, needs `pip install imageio imageio-ffmpeg`)
+
+Exact replays of logged episodes, with the brace indicator (blue = braced), sliding feet (red), downhill arrow and a text label: `blind_falls`, `tabpfn_braces`, `balance_reflex`, `always_brace` (steep episode 9), `tilt_safe_floor`, `tabpfn_safe_floor` (safe episode 30), and side-by-side `episode9_comparison.mp4` (blind | TabPFN | balance reflex) and `safe_floor_comparison.mp4` (tilt rule | TabPFN).
+
 `python a1_slip_viewer.py` shows the robot live on a chosen floor, with sliding feet in red and TabPFN's fall risk as a coloured ball.
 
 #### Notebooks

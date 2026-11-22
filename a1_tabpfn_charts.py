@@ -1,0 +1,264 @@
+"""Charts of how well TabPFN predicts slips and falls (PNGs for the README and slides).
+
+Recomputes predictions on the floors the models never saw and draws:
+  fall_roc.png         falls within 1 s on unseen 13-15 deg slopes: ROC curves of
+                       TabPFN, XGBoost, logistic regression, the 2 s tilt average
+                       (a no-ML rule) and a model told the true floor
+  fall_lead_time.png   TabPFN fall risk in the seconds before each fall vs walks
+                       that never fell ("does it see it coming?")
+  slip_roc.png         slips within 0.2 s on unseen icy + steep floors, with and
+                       without the slip-detector history features
+  learning_curve.png   slip ROC-AUC vs number of training rows (results/learning_curve.json)
+  tradeoff.png         danger-mode trade-off incl. the balance reflex
+                       (results/danger_mode.json, results/balancer_baseline.json)
+
+    python a1_tabpfn_charts.py      # -> results/figures/*.png, results/charts_data.json
+"""
+
+import json
+import warnings
+from pathlib import Path
+
+import matplotlib
+matplotlib.use("Agg")
+import matplotlib.pyplot as plt
+import numpy as np
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import roc_auc_score, roc_curve
+from sklearn.pipeline import make_pipeline
+from sklearn.preprocessing import StandardScaler
+from xgboost import XGBClassifier
+
+from a1_collision import CollisionRisk, context_subsample
+from a1_slip_eval import DATA, fall_splits, splits
+
+warnings.filterwarnings("ignore")
+ROOT = Path(__file__).parent
+FIG = ROOT / "results" / "figures"
+# Validated categorical palette (fixed order) + muted ink; every series also has a
+# dash style and a direct label, so identity never relies on colour alone.
+BLUE, ORANGE, AQUA, YELLOW, MAGENTA = "#2a78d6", "#eb6834", "#1baf7a", "#eda100", "#e87ba4"
+INK, SOFT, MUTED, GRID, SURF = "#1E2A3B", "#4A5568", "#898781", "#e1e0d9", "#fcfcfb"
+
+plt.rcParams.update({
+    "figure.facecolor": SURF, "axes.facecolor": SURF, "savefig.facecolor": SURF,
+    "axes.edgecolor": "#c3c2b7", "axes.labelcolor": SOFT, "xtick.color": MUTED, "ytick.color": MUTED,
+    "axes.grid": True, "grid.color": GRID, "grid.linewidth": 1, "axes.spines.top": False,
+    "axes.spines.right": False, "font.size": 15, "axes.titlesize": 19, "axes.titleweight": "bold",
+    "axes.titlecolor": INK, "axes.titlelocation": "left", "legend.frameon": False,
+    "lines.linewidth": 2.5, "lines.solid_capstyle": "round",
+})
+
+
+def xgb(X, y):
+    return XGBClassifier(n_estimators=400, max_depth=5, learning_rate=0.05, subsample=0.8,
+                         colsample_bytree=0.8).fit(X, y)
+
+
+def roc_plot(ax, y, scores, title):
+    ax.plot([0, 1], [0, 1], color=MUTED, lw=1.5, ls=(0, (2, 3)))
+    ax.text(0.62, 0.55, "guessing", color=MUTED, fontsize=13, rotation=33)
+    out = {}
+    for name, (s, colour, ls) in scores.items():
+        fpr, tpr, _ = roc_curve(y, s)
+        auc = roc_auc_score(y, s)
+        out[name] = float(auc)
+        ax.plot(fpr, tpr, color=colour, ls=ls, label=f"{name}  {auc:.3f}",
+                lw=3.2 if name.startswith("TabPFN") else 2.2)
+    ax.set_xlabel("False alarms (share of safe moments flagged)")
+    ax.set_ylabel("Caught (share of real events flagged)")
+    ax.set_xlim(0, 1)
+    ax.set_ylim(0, 1.01)
+    ax.set_title(title)
+    ax.legend(loc="lower right", fontsize=14, title="ROC-AUC", title_fontsize=13)
+    return out
+
+
+def plot_lead_time(lt):
+    c, med, q1, q3 = (np.array(lt[k]) for k in ("seconds_before", "median", "q1", "q3"))
+    fig, ax = plt.subplots(figsize=(11, 6.4), dpi=120)
+    ax.fill_between(c, q1, q3, color=BLUE, alpha=0.15, lw=0)
+    ax.plot(c, med, color=BLUE, lw=3.2, marker="o", ms=7, mec=SURF, mew=2)
+    ax.axhline(0.05, color=ORANGE, lw=1.8, ls=(0, (2, 3)), label="danger-mode threshold: 5%")
+    ax.axhline(lt["never_fell_median"], color=MUTED, lw=2, ls=(0, (6, 3)),
+               label=f"walks that never fell: median {lt['never_fell_median']:.1%}")
+    ax.legend(loc="upper left", fontsize=13)
+    for x, v in zip(c[:3], med[:3]):
+        ax.text(x - 0.04, v, f"{v:.0%}", color=BLUE, fontsize=14, va="center", ha="left",
+                fontweight="bold")
+    ax.set_xlim(3.0, 0)
+    ax.set_ylim(0, 1.05)
+    ax.yaxis.set_major_formatter(matplotlib.ticker.PercentFormatter(1.0, decimals=0))
+    ax.set_xlabel("Seconds before the fall")
+    ax.set_ylabel("TabPFN fall risk (median; band = middle 50%)")
+    ax.set_title(f"Fall risk climbs in the last second before a fall ({lt['falls']} falls)")
+    fig.tight_layout()
+    fig.savefig(FIG / "fall_lead_time.png")
+    plt.close(fig)
+
+
+def spread_labels(values, min_gap):
+    """Nudge label y positions apart (keeps order) so text never overlaps."""
+    order = np.argsort(values)
+    ys = np.array(values, float)
+    for a, b in zip(order[:-1], order[1:]):
+        if ys[b] - ys[a] < min_gap:
+            ys[b] = ys[a] + min_gap
+    return ys
+
+
+def plot_learning_curve():
+    lc = json.loads((ROOT / "results" / "learning_curve.json").read_text())
+    tests = ["same floors", "icier (unseen)", "steeper (unseen)"]
+    sizes = sorted({r["n"] for r in lc})
+    models = (("TabPFN", BLUE, "-"), ("XGBoost", ORANGE, (0, (6, 3))), ("logistic", AQUA, (0, (1, 2))))
+    fig, axes = plt.subplots(1, 3, figsize=(15, 5.6), dpi=120, sharey=True)
+    for ax, test in zip(axes, tests):
+        ends = []
+        for model, colour, ls in models:
+            v = np.array([[r["roc_auc"] for r in lc if r["model"] == model and r["n"] == n
+                           and r["test"] == test] for n in sizes])
+            ax.fill_between(sizes, v.min(1), v.max(1), color=colour, alpha=0.12, lw=0)
+            ax.plot(sizes, v.mean(1), color=colour, ls=ls, marker="o", ms=5, mec=SURF, mew=1.5,
+                    lw=3 if model == "TabPFN" else 2.2)
+            ends.append(v.mean(1)[-1])
+        for (model, colour, _), y_end, y_lab in zip(models, ends, spread_labels(ends, 0.022)):
+            ax.text(sizes[-1] * 1.12, y_lab, f"{model} {y_end:.2f}", color=colour, fontsize=12,
+                    va="center", fontweight="bold")
+        ax.axhline(0.5, color=MUTED, lw=1.2, ls=(0, (2, 3)))
+        ax.set_xscale("log")
+        ax.set_xticks(sizes)
+        ax.set_xticklabels([f"{n:,}" if n in (20, 100, 500, 2000) else "" for n in sizes],
+                           fontsize=12)
+        ax.minorticks_off()
+        ax.set_xlim(15, 9000)
+        ax.set_title(test.capitalize(), fontsize=16)
+        ax.set_xlabel("Training rows")
+    axes[0].set_ylabel("Slip ROC-AUC (band = range of 3 draws)")
+    fig.suptitle("Learning curve: slip prediction with limited data", x=0.01, ha="left",
+                 fontsize=19, fontweight="bold", color=INK)
+    fig.tight_layout()
+    fig.savefig(FIG / "learning_curve.png")
+    plt.close(fig)
+
+
+def main():
+    FIG.mkdir(parents=True, exist_ok=True)
+    d = dict(np.load(DATA))
+    base, hist = d["features"], d["history"]
+    names = list(d["history_names"])
+    keep = [i for i, n in enumerate(names) if not n.startswith("grav_")]
+    gz = names.index("grav_z_2s")
+    data_out = {}
+
+    # ---- Falls on unseen steep slopes ------------------------------------------------
+    X = np.hstack([base, hist[:, keep]])
+    y = d["fall_next"].astype(int)
+    sp = fall_splits(d)
+    tr, te = sp["train"], sp["steeper (unseen)"]
+    risk = CollisionRisk().fit(X[tr], y[tr], n=2000, pos_fraction=0.25)
+    p_tab = risk.predict(X[te])
+    p_xgb = xgb(X[tr], y[tr]).predict_proba(X[te])[:, 1]
+    p_log = make_pipeline(StandardScaler(), LogisticRegression(max_iter=3000)).fit(
+        X[tr], y[tr]).predict_proba(X[te])[:, 1]
+    tilt = np.degrees(np.arccos(np.clip(-hist[:, gz], -1, 1)))
+    cond = np.c_[d["mu"], d["slope_deg"], base[:, -2:]]
+    p_floor = XGBClassifier(n_estimators=300, max_depth=4, learning_rate=0.05).fit(
+        cond[tr], y[tr]).predict_proba(cond[te])[:, 1]
+    fig, ax = plt.subplots(figsize=(11, 7.2), dpi=120)
+    data_out["fall_roc_auc"] = roc_plot(ax, y[te], {
+        "TabPFN, 2,000 rows": (p_tab, BLUE, "-"),
+        "XGBoost, 18,067 rows": (p_xgb, ORANGE, (0, (6, 3))),
+        "Logistic regression": (p_log, AQUA, (0, (1, 2))),
+        "Tilt rule, 2 s average (no ML)": (tilt[te], YELLOW, (0, (8, 2, 2, 2))),
+        "Told the true floor": (p_floor, MAGENTA, (0, (3, 2))),
+    }, "Fall within 1 s, on 13–15° slopes never seen in training")
+    fig.tight_layout()
+    fig.savefig(FIG / "fall_roc.png")
+    plt.close(fig)
+
+    # ---- Lead time: TabPFN risk before each fall --------------------------------------
+    ep, t = d["episode"][te], d["t"][te]
+    fell = d["episode_fell"][te]
+    t_end = {e: t[ep == e].max() for e in np.unique(ep)}
+    before = np.array([t_end[e] - ti for e, ti in zip(ep, t)])
+    bins = np.arange(0, 3.01, 0.2)
+    centres, med, q1, q3 = [], [], [], []
+    for lo, hi in zip(bins[:-1], bins[1:]):
+        m = fell & (before >= lo) & (before < hi)
+        if m.sum() >= 5:
+            centres.append((lo + hi) / 2)
+            med.append(np.median(p_tab[m]))
+            q1.append(np.percentile(p_tab[m], 25))
+            q3.append(np.percentile(p_tab[m], 75))
+    safe_med = float(np.median(p_tab[~fell]))
+    safe_q3 = float(np.percentile(p_tab[~fell], 75))
+    n_falls = len({e for e, f in zip(ep, fell) if f})
+    data_out["lead_time"] = dict(seconds_before=[float(c) for c in centres],
+                                 median=[float(v) for v in med], q1=[float(v) for v in q1],
+                                 q3=[float(v) for v in q3], never_fell_median=safe_med,
+                                 never_fell_q3=safe_q3, falls=n_falls)
+    plot_lead_time(data_out["lead_time"])
+
+    # ---- Slips on unseen icy + steep floors ------------------------------------------
+    ys = d["slip_next"].astype(int)
+    ssp = splits(d)
+    tr, te = ssp["train"], ssp["icier + steeper"]
+    pos = max(ys[tr].mean(), 0.25)
+    Xh = np.hstack([base, hist])
+    tab_h = CollisionRisk().fit(Xh[tr], ys[tr], n=2000, pos_fraction=pos).predict(Xh[te])
+    tab_b = CollisionRisk().fit(base[tr], ys[tr], n=2000, pos_fraction=pos).predict(base[te])
+    Xc, yc = context_subsample(Xh[tr], ys[tr], n=2000, pos_fraction=pos, seed=0)
+    xgb2k = xgb(Xc, yc).predict_proba(Xh[te])[:, 1]
+    xgbal = xgb(Xh[tr], ys[tr]).predict_proba(Xh[te])[:, 1]
+    fig, ax = plt.subplots(figsize=(11, 7.2), dpi=120)
+    data_out["slip_roc_auc"] = roc_plot(ax, ys[te], {
+        "TabPFN + slip detector, 2,000 rows": (tab_h, BLUE, "-"),
+        "TabPFN, sensors only": (tab_b, BLUE, (0, (1, 2))),
+        "XGBoost + slip detector, 2,000 rows": (xgb2k, ORANGE, (0, (6, 3))),
+        "XGBoost + slip detector, 10,290 rows": (xgbal, ORANGE, (0, (1, 2))),
+    }, "Slip within 0.2 s, on icy and steep floors never seen in training")
+    fig.tight_layout()
+    fig.savefig(FIG / "slip_roc.png")
+    plt.close(fig)
+
+    plot_learning_curve()
+
+    # ---- Danger-mode trade-off incl. the balance reflex -------------------------------
+    dm = json.loads((ROOT / "results" / "danger_mode.json").read_text())
+    bb = json.loads((ROOT / "results" / "balancer_baseline.json").read_text())
+
+    def stat(rows, ctrl):
+        falls = sum(r["fell"] for r in rows if r["controller"] == ctrl and r["kind"] == "dangerous")
+        dist = np.mean([r["distance"] for r in rows if r["controller"] == ctrl and r["kind"] == "safe"])
+        return falls, dist
+
+    pts = [("Blind trot", *stat(dm, "never brace"), MUTED, "o"),
+           ("Always brace", *stat(dm, "always brace"), MUTED, "s"),
+           ("Tilt rule (no ML)", *stat(dm, "tilt rule"), YELLOW, "D"),
+           ("Blind trot + TabPFN", *stat(dm, "TabPFN"), BLUE, "o"),
+           ("Balance reflex (no TabPFN)", *stat(bb, "balancer only"), AQUA, "^")]
+    fig, ax = plt.subplots(figsize=(11, 6.6), dpi=120)
+    for name, f, dist, colour, mk in pts:
+        ax.scatter(dist, f, s=260 if "TabPFN" in name else 200, color=colour, marker=mk,
+                   edgecolor=SURF, linewidth=2, zorder=3)
+        ax.annotate(f"{name}\n{f}/40 falls, {dist:.2f} m", (dist, f), textcoords="offset points",
+                    xytext=(-14, 12), ha="right", fontsize=13, color=INK)
+    ax.set_xlim(0.9, 2.3)
+    ax.set_ylim(-3, 32)
+    ax.set_xlabel("Distance walked on 40 safe floors (further = less slowed down)")
+    ax.set_ylabel("Falls on 40 unseen steep slopes")
+    ax.set_title("Danger mode helps a blind robot; a balance reflex does better")
+    fig.tight_layout()
+    fig.savefig(FIG / "tradeoff.png")
+    plt.close(fig)
+    data_out["tradeoff"] = [dict(name=n, falls=int(f), safe_distance=float(dd)) for n, f, dd, _, _ in pts]
+
+    (ROOT / "results" / "charts_data.json").write_text(json.dumps(data_out, indent=1))
+    print(json.dumps({k: v for k, v in data_out.items() if k.endswith("auc")}, indent=1))
+    print("lead time:", {k: v for k, v in data_out["lead_time"].items() if k != "q1"})
+    print(f"wrote {FIG}")
+
+
+if __name__ == "__main__":
+    main()
