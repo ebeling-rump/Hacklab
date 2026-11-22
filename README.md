@@ -20,6 +20,19 @@
 python tour.py   # reads results/*.json; needs no TabPFN, GPU or simulator
 ```
 
+**Or watch the experiments live in the MuJoCo viewer** (same code and layouts as the results; setup under [Run it](#run-it)):
+
+```bash
+python a1_watch.py governor                      # ice patches: TabPFN picks the speed
+python a1_watch.py governor --strategy full      # same course at fixed full speed, to compare
+python a1_watch.py patrol                        # ice patches: the slip map learns where the ice is (6 trips)
+python a1_watch.py outdoor                       # grass, sand, gravel, mud, water, trees: learns what slippery looks like
+python a1_watch.py outdoor --strategy obstacles  # same outdoor course without a slip map
+python a1_danger_replay.py --kind dangerous --episode 9 --controller TabPFN   # replay a logged fall episode
+```
+
+In the viewer, red spheres show sliding feet. The patrol and outdoor runs also draw the slip map on the ground and the planned route (blue dots). Options: `--layout N` picks another course (0–4 ice, 0–2 outdoor), `--speed 2` plays faster than real time, and `--strategy crawl` is the slow fixed speed. TabPFN runs on the CPU, so a run can be slower than real time.
+
 ---
 
 ## The problem
@@ -70,7 +83,7 @@ By legs 4–6 both maps reach similar medians. The TabPFN map learns more steadi
 
 A 12 × 7 m world of 0.5 m tiles: path, grass, wet grass, sand, gravel, mud and water, with trees and rocks as solid obstacles. Sand, mud and water are soft and gravel is bumpy. A pond with a mud rim always lies across the straight line from A to B.
 
-Here TabPFN gets a different job. Every 0.2 s the robot adds one row: what the tile under it looks like to a camera (colour and roughness, with noise) and whether it just felt slippery. Every 2 s, a TabPFN fitted on only these rows from this site (tens to a few hundred, no other sites) predicts the slip risk of every tile the robot has not walked on yet. Trees and rocks are treated as known, as they would be from lidar.
+Here TabPFN gets a different job. Every 0.2 s the robot adds one row: what the tile under it looks like (its colour and a roughness value, with noise) and whether it just felt slippery. No camera image is rendered: these numbers stand in for what a camera would give a real robot. Every 2 s, a TabPFN fitted on only these rows from this site (tens to a few hundred, no other sites) predicts the slip risk of every tile the robot has not walked on yet. Trees and rocks are treated as known, as they would be from lidar.
 
 | outdoor patrol A → B → A → B, 3 layouts | slipping, trip 1 | slipping per trip, trips 2–4 | in mud or water per trip | time per trip |
 |---|---|---|---|---|
@@ -169,6 +182,7 @@ TabPFN runs locally on CPU (model `v3.5-fast`). The first run downloads the weig
 | slip-map patrol | `python a1_ice_patches.py patrol` |
 | outdoor course experiment / figure / video | `python a1_outdoor.py experiment` / `python a1_outdoor.py figure` / `python a1_outdoor_video.py` |
 | ice videos (the GIFs above) | `python a1_ice_videos.py` |
+| live MuJoCo viewer: ice governor / patrol / outdoor | `python a1_watch.py governor` / `patrol` / `outdoor` |
 | live viewer: sliding feet and fall risk | `python a1_slip_viewer.py --mu 0.15 --slope 13.5` |
 | frozen models on real hills | `python a1_terrain_test.py` |
 | regenerate the training data (~4 min) | `python a1_slip_dataset.py` |
@@ -187,6 +201,7 @@ TabPFN runs locally on CPU (model `v3.5-fast`). The first run downloads the weig
 | `a1_terrain.py`, `a1_terrain_test.py` | real hill terrain, frozen-model test |
 | `a1_slip_eval.py`, `a1_slip_history_eval.py`, `a1_learning_curve.py`, `a1_fall_feature_check.py`, `a1_floor_adapt.py` | offline prediction tests |
 | `a1_recovery_demo.py`, `a1_danger_mode.py`, `a1_improve_test.py`, `a1_balance_tune.py` | fall warning → action, balance reflex |
+| `a1_watch.py` | live MuJoCo viewer for the ice governor, ice patrol and outdoor course |
 | `a1_danger_replay.py`, `a1_slip_viewer.py`, `a1_record_videos.py` | viewers, replays, videos |
 | `a1_tabpfn_charts.py` | all charts → `results/figures/` |
 | `a1_safety_filter.py`, `a1_scenarios.py`, `a1_planner.py`, `a1_collision_*.py` | first attempt: lidar collision filter, scenes, A* planner |
