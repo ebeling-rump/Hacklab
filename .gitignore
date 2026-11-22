@@ -224,3 +224,7 @@ __marimo__/
 
 # MuJoCo Menagerie (downloaded by franka_mujoco.py)
 mujoco_menagerie/
+
+# Generated media and OS files
+videos/
+.DS_Store
