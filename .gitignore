@@ -228,3 +228,4 @@ data/
 scratch/
 results/videos/*.mp4.tmp
 results/a1/*.mp4
+results/log_*.txt
