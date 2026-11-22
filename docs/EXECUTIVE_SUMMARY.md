@@ -18,7 +18,7 @@ Everything ran locally on a 4-core laptop CPU; TabPFN v2 open weights, no paid A
 
 ## Which challenges work
 All of them run end to end. Model-based planners solve 100% of C1/C3/C4/C5/C6 (8 seeds each);
-heterogeneous variants 88–100%; A1 doorway 2/3 (physics) and 3/3 (TabPFN transfer).
+heterogeneous variants 88–100%; A1 doorway 4/5 (physics) and 5/5 (TabPFN transfer: 3 crates local v2, 2 crates API v3.5).
 
 ## Methods compared
 Physics + online sysID (A), adaptive reactive (B), GP / GP-residual / GP-hybrid (C), TabPFN /
@@ -47,7 +47,12 @@ transfer-hybrids (F), nominal physics.
 * 3D A1: walking-push outcomes are so noisy that no model beats nominal physics on position error.
 * Latency (uncontended CPU, 96 candidates): TabPFN-hybrid ~2 s, transfer-hybrid ~14 s per decision vs 0.15 s for physics + sysID.
 
+* **A1 doorway with the API model** (2 new crates): 13 and 11 pushes vs 25 and 26 for physics + sysID,
+  both succeed. Over 5 crates: TabPFN transfer 5/5, physics 4/5 — still a demo, not a statistic.
+
 ## Most compelling demonstrations
+* `results/videos/A1_doorway_seed3_tabpfn_api_vs_physics.mp4` — same crate: TabPFN API transfer (top)
+  done in 13 pushes, physics + sysID (bottom) needs 25.
 * `results/videos/A1_doorway_seed2_tabpfn_transfer_vs_physics.mp4` — same unknown 70 cm crate, 52 cm door: TabPFN transfer (top) succeeds in 16 pushes, physics + sysID (bottom) jams it in the frame (1 of 3 seeds; overall 3/3 vs 2/3).
 * `results/videos/C5_s3_reactive_vs_physics_sysid_vs_tabpfn_hybrid.mp4` — three controllers, same
   object and doorway (one representative seed).

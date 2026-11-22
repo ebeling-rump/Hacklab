@@ -220,8 +220,22 @@ all seeds were re-run; the table below is the final run.
 | 2 | **failed** — crate jammed in the door frame, then 15 attempts without a walkable path | success, 16 pushes |
 | total | 2/3 | **3/3** |
 
+*Follow-up (after the overnight run):* two new crates (seeds 3, 4), same planner and 30-push budget,
+comparing physics + sysID with the **API** transfer-hybrid (TabPFN v3.5 via the cloud, same 6-crate
+prior; §6b). Note this is a different TabPFN model than seeds 0–2.
+
+| seed | physics + sysID | TabPFN transfer-hybrid (API, v3.5) |
+|---|---|---|
+| 3 | success, 25 pushes, 2 falls, 7 cm from goal | success, **13 pushes**, 0 falls, 7 cm |
+| 4 | success, 26 pushes, 1 fall, 10 cm | success, **11 pushes**, 2 falls, 13 cm |
+
+Videos: `results/videos/A1_doorway_seed3_tabpfn_api_vs_physics.mp4`, `..._seed4_...` (API top,
+physics bottom). Over all 5 crates physics + sysID succeeds 4/5 and TabPFN transfer (local or API)
+5/5. On the two new crates the API model needs about half the pushes, but the API model also
+places the crate slightly less precisely on seed 4.
+
 The robot rotates the 0.7 m crate to pass the 0.52 m door, walks around and through the door after
-it, and parks it within 0.15 m of the goal. **With 3 seeds this is a demonstration, not statistical
+it, and parks it within 0.15 m of the goal. **With 3–5 seeds this is a demonstration, not statistical
 evidence** of a TabPFN advantage; the offline 3D prediction results above show no position-accuracy
 advantage, so the difference may be due to chance.
 
