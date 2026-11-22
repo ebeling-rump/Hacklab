@@ -40,10 +40,10 @@ transfer-hybrids (F), nominal physics.
 * Closed-loop push counts: never significantly better than physics + sysID; without transfer it is
   significantly worse in heterogeneous tasks (model exploitation by the planner).
 * 3D A1: walking-push outcomes are so noisy that no model beats nominal physics on position error.
-* Latency: seconds (up to ~45 s with a large transfer context) per decision on CPU vs 0.2 s for physics.
+* Latency (uncontended CPU, 96 candidates): TabPFN-hybrid ~2 s, transfer-hybrid ~14 s per decision vs 0.15 s for physics + sysID.
 
 ## Most compelling demonstrations
-* `results/videos/A1_doorway_*.mp4` — the A1 rotates an unknown 70 cm crate through a 52 cm door.
+* `results/videos/A1_doorway_seed2_tabpfn_transfer_vs_physics.mp4` — same unknown 70 cm crate, 52 cm door: TabPFN transfer (top) succeeds in 16 pushes, physics + sysID (bottom) jams it in the frame (1 of 3 seeds; overall 3/3 vs 2/3).
 * `results/videos/C5_s3_reactive_vs_physics_sysid_vs_tabpfn_hybrid.mp4` — three controllers, same
   object and doorway (one representative seed).
 * `results/figures/paired_hetero.png` — the transfer result in one plot.

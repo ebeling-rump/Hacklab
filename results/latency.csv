@@ -1,0 +1,9 @@
+model,n_train,n_query,step_s_median
+physics_sysid,5,96,0.146
+physics_sysid,20,96,0.134
+gp_hybrid,5,96,0.413
+gp_hybrid,20,96,0.481
+tabpfn_hybrid,5,96,1.883
+tabpfn_hybrid,20,96,2.222
+tabpfn_transfer_hybrid,5,96,13.579
+tabpfn_transfer_hybrid,20,96,14.694

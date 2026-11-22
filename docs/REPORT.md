@@ -220,14 +220,18 @@ advantage, so the difference may be due to chance.
 
 Laptop CPU (4 cores, no GPU), TabPFN v2 with 2 ensemble members, one model per output dimension.
 
-| | fit | predict (40–96 queries) |
-|---|---|---|
-| physics + sysID | 0.26 s | 0.08 s (12 posterior samples) |
-| GP-hybrid | 0.8 s | 0.01 s |
-| TabPFN-hybrid | ~2 s* | ~5 s* |
+Uncontended, one process, 4 torch threads, one full planning step = fit on n pushes + predict a
+96-push candidate library (`experiments/bench_latency.py`, `results/latency.csv`):
 
-*measured with 4 benchmark processes sharing the CPU; a single uncontended process predicting 200
-rows with 1 ensemble member takes ~0.5 s per output. TabPFN latency scales with the number of query
+| model | n = 5 | n = 20 |
+|---|---|---|
+| physics + sysID | 0.15 s | 0.13 s |
+| GP-hybrid | 0.41 s | 0.48 s |
+| TabPFN-hybrid | 1.9 s | 2.2 s |
+| TabPFN transfer-hybrid (≈300-row context) | 13.6 s | 14.7 s |
+
+(The benchmark runs above shared the CPU between 2–4 processes, so their per-step times were 2–4×
+higher.) TabPFN latency scales with the number of query
 rows (~2.5 ms/row/ensemble member), which is why the planner predicts a fixed library of candidate
 pushes once per decision and composes it for lookahead. Closed-loop wall time per episode: physics
 4–30 s, TabPFN 30–430 s. On a GPU this would be ≲100 ms.
