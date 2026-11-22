@@ -8,6 +8,7 @@ import numpy as np
 from .actions import ActionSampler, query_from_actions, concat, to_action
 from .physics_model import mean_radius
 from .planner import CostField, FreeSpaceCost, Planner, in_walls, pusher_starts_world
+from .ground import ground_extra
 from .sim import PushSim, body_delta, compose, wrap, PUSHER_R, GAP
 
 
@@ -87,7 +88,7 @@ def run_episode(task, method: str, model=None, seed=0, n_cand=96, record=False, 
                 prior_data=None, sim_noise=True, log_predictions=False):
     """Run one episode. `model` implements reset/fit/predict (None for reactive)."""
     obj = task.obj
-    sim = PushSim(obj, walls=task.walls, seed=seed, noise=sim_noise)
+    sim = PushSim(obj, walls=task.walls, seed=seed, noise=sim_noise, ice=task.ice, mu_ice=task.mu_ice)
     sim.set_pose(task.start)
     sampler = ActionSampler(obj.shape, seed=seed)
     desc = obj.shape.descriptor()
@@ -121,6 +122,8 @@ def run_episode(task, method: str, model=None, seed=0, n_cand=96, record=False, 
             break
         A = sampler.sample(n_cand, v_range=task.v_range)
         Q = query_from_actions(obj.shape, A, desc)
+        if task.ice:  # visible ice under the object at the current (observed) pose
+            Q["extra"] = ground_extra(obj.shape, pose, task.ice, len(A))
         t0 = time.perf_counter()
         if method == "reactive":
             tgt = carrot(cost, pose) if task.walls else task.goal

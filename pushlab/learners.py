@@ -51,7 +51,7 @@ class Learner:
             [FEAT_SCALE, DESC_SCALE if (self.with_desc and "desc" in Q) else []])
         if self.phys_feats:
             X = np.column_stack([X, self.phys.nominal(Q) / Y_SCALE])
-        if "extra" in Q:
+        if "extra" in Q and not getattr(self, "blind", False):
             X = np.column_stack([X, Q["extra"]])
         return X
 
@@ -174,7 +174,10 @@ class TabPFNAPILearner(TabPFNLearner):
             try:
                 return fn(*a, **kw)
             except Exception as e:  # noqa: BLE001
-                if "429" not in str(e) or k == 7:
+                msg = f"{type(e).__name__} {e}"
+                transient = any(t in msg for t in ("429", "Protocol", "Connect", "Timeout", "timed out",
+                                                   "502", "503", "504", "Remote"))
+                if not transient or k == 7:
                     raise
                 time.sleep(15)
 
@@ -240,7 +243,9 @@ class Transfer:
     Optionally a residual over nominal physics.
     """
 
-    def __init__(self, learner: Learner, source: list, residual=True, name=None, max_source=400, seed=0):
+    def __init__(self, learner: Learner, source: list, residual=True, name=None, max_source=400, seed=0,
+                 use_ground=True):
+        self.use_ground = use_ground    # keep observable ground features (Q["extra"]) if present
         self.learner = learner
         self.learner.with_desc = True
         self.source = source            # list of (shape, descriptor, Q, Y)
@@ -273,7 +278,8 @@ class Transfer:
                 idx = self.rng.permutation(len(Y))[:per]
                 q = {k: v[idx] for k, v in Q.items() if isinstance(v, np.ndarray) and len(v) == len(Y)}
                 q["desc"] = np.repeat(np.asarray(desc)[None], len(idx), 0)
-                q["extra"] = np.zeros((len(idx), 1))
+                flag = np.zeros((len(idx), 1))
+                q["extra"] = np.column_stack([Q["extra"][idx], flag]) if (self.use_ground and "extra" in Q) else flag
                 Qs.append(q)
                 Ys.append(Y[idx] - self._base(shape, q, (q, Y[idx]) if self.residual == "sysid" else None))
             self._src_cache = (concat(Qs), np.concatenate(Ys))
@@ -292,7 +298,8 @@ class Transfer:
     def _tag(self, Q):
         q = dict(Q)
         q["desc"] = np.repeat(self.descriptor[None], len(Q["phi"]), 0)
-        q["extra"] = np.ones((len(Q["phi"]), 1))
+        flag = np.ones((len(Q["phi"]), 1))
+        q["extra"] = np.column_stack([Q["extra"], flag]) if (self.use_ground and "extra" in Q) else flag
         return q
 
     def fit(self, Q, Y):
@@ -367,6 +374,16 @@ def make_model(name: str, source=None, n_estimators=2):
         return Residual(TabPFNLearner(n_estimators=n_estimators), refit_physics=True, name=name)
     if name == "gp_hybrid":
         return Residual(GPLearner(), refit_physics=True, name=name)
+    if name in ("gp_transfer_hybrid_blind", "tabpfn_transfer_hybrid_blind"):  # transfer without ground features
+        m = make_model(name.replace("_blind", ""), source, n_estimators)
+        m.use_ground = False
+        m.name = name
+        return m
+    if name in ("gp_hybrid_blind", "tabpfn_hybrid_blind"):  # same model, ignores ground features
+        m = make_model(name.replace("_blind", ""), source, n_estimators)
+        m.learner.blind = True
+        m.name = name
+        return m
     if name == "tabpfn_api_hybrid":
         return Residual(TabPFNAPILearner(), refit_physics=True, name=name)
     if name == "tabpfn_api_transfer_hybrid":

@@ -88,9 +88,11 @@ def action_geometry(obj: PushObject, pose, action: Action, gap=GAP):
 
 class PushSim:
     def __init__(self, obj: PushObject, walls=(), seed: int = 0, timestep=0.002,
-                 noise: bool = True, wall_height=0.12):
+                 noise: bool = True, wall_height=0.12, ice=(), mu_ice=0.05):
         self.obj = obj
         self.walls = list(walls)          # (cx, cy, hx, hy)
+        self.ice = list(ice)              # (cx, cy, hx, hy) low-friction floor patches
+        self.mu_ice = mu_ice
         self.rng = np.random.default_rng(seed)
         self.noise = noise
         self.model = self._build(timestep, wall_height)
@@ -120,6 +122,13 @@ class PushSim:
         floor.friction = [h.mu_floor, 0.005, 0.0001]
         floor.priority = 2
         floor.contype, floor.conaffinity = 1, 1
+        for i, (cx, cy, hx, hy) in enumerate(self.ice):
+            # Thin slab (top 0.5 mm above the floor); its friction decides contacts on it.
+            g = wb.add_geom(name=f"ice{i}", type=mujoco.mjtGeom.mjGEOM_BOX, size=[hx, hy, 0.0005],
+                            pos=[cx, cy, 0.0], rgba=[0.72, 0.87, 0.97, 1])
+            g.friction = [self.mu_ice, 0.005, 0.0001]
+            g.priority = 3
+            g.contype, g.conaffinity = 1, 1
         for i, (cx, cy, hx, hy) in enumerate(self.walls):
             g = wb.add_geom(name=f"wall{i}", type=mujoco.mjtGeom.mjGEOM_BOX,
                             size=[hx, hy, wall_height / 2], pos=[cx, cy, wall_height / 2],

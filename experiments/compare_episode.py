@@ -38,6 +38,9 @@ def frames_from_log(log):
 
 
 def draw_static(ax, task):
+    for cx, cy, hx, hy in getattr(task, "ice", []):
+        ax.add_patch(Rectangle((cx - hx, cy - hy), 2 * hx, 2 * hy, color="#bfe3f7", zorder=0))
+        ax.text(cx, cy + hy - 0.02, "ice", ha="center", va="top", fontsize=9, color="#3b7ea8", zorder=0)
     for cx, cy, hx, hy in task.walls:
         ax.add_patch(Rectangle((cx - hx, cy - hy), 2 * hx, 2 * hy, color="#4a5160"))
     g = task.goal
@@ -112,7 +115,10 @@ def main():
     import torch
     torch.set_num_threads(2)
     source = None
-    if args.source:
+    if args.source and args.source.startswith("ice"):   # e.g. ice20: pushes on 20 other icy floors
+        from experiments.exp_ice import ice_source
+        source = ice_source(int(args.source[3:]))
+    elif args.source:
         from experiments.exp_prediction import load, source_from
         source = source_from(load(args.source))
     task = CHALLENGES[args.challenge](args.seed)

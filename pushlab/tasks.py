@@ -22,6 +22,8 @@ class Task:
     bounds: tuple = (-0.6, 0.6, -0.6, 0.6)
     max_pushes: int = 20
     v_range: tuple = (0.15, 0.15)       # allowed commanded push speeds (m/s)
+    ice: list = field(default_factory=list)  # visible low-friction floor patches (cx, cy, hx, hy)
+    mu_ice: float = 0.05                # hidden ice friction
 
     @property
     def needs_field(self):
@@ -127,6 +129,27 @@ def c6_cluttered(seed):
                 max_pushes=60)
 
 
+def c8_ice(seed):
+    """Push an unknown object across a floor with visible ice patches to a goal pose.
+
+    A large patch covers one half of the corridor between start and goal, so the object is often
+    half on ice and half on grip: it turns in ways a uniform-friction model can't predict. A few
+    small patches are scattered around. Fast pushes make it slide on after release."""
+    rng = np.random.default_rng(80_000 + seed)
+    fam = str(rng.choice(["rect", "L", "T", "square"]))
+    obj = sample_object(rng, fam, com_frac=0.3)
+    side = rng.choice([-1, 1])
+    ice = [(0.0, side * 0.09, 0.22, 0.11)]           # half of the corridor, 0.44 m long
+    for _ in range(3):
+        ice.append((float(rng.uniform(-0.45, 0.45)), float(rng.uniform(-0.4, 0.4)),
+                    float(rng.uniform(0.04, 0.09)), float(rng.uniform(0.04, 0.09))))
+    th0 = rng.uniform(-np.pi, np.pi)
+    start = (-0.42, float(rng.uniform(-0.06, 0.06)), th0)
+    goal = (0.42, float(rng.uniform(-0.06, 0.06)), float(np.angle(np.exp(1j * (th0 + rng.uniform(-1.2, 1.2))))))
+    return Task("C8_ice", seed, obj, start, goal, 0.025, np.radians(12), [], (-0.6, 0.6, -0.5, 0.5),
+                max_pushes=35, v_range=(0.05, 0.4), ice=ice, mu_ice=float(rng.uniform(0.03, 0.08)))
+
+
 def heterogeneous(fn, tag):
     """Same task, but the object may ride on casters (anisotropic friction, p=0.5) and the robot may
     choose its push speed in 0.05-0.4 m/s (fast pushes make objects slide/roll after release)."""
@@ -146,3 +169,4 @@ def heterogeneous(fn, tag):
 CHALLENGES = {"C1": c1_basic, "C2": c2_unknown, "C3": c3_precision, "C4": c4_asymmetric,
               "C5": c5_doorway, "C6": c6_cluttered}
 CHALLENGES.update({k + "H": heterogeneous(v, "_hetero") for k, v in list(CHALLENGES.items())})
+CHALLENGES["C8"] = c8_ice
