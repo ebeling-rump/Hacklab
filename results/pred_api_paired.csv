@@ -1,0 +1,21 @@
+compare,n,objs,diff_mm,lo,hi,wins
+tabpfn_api_hybrid - tabpfn_hybrid,1,8,0.0,0.0,0.0,0.0
+tabpfn_api_hybrid - tabpfn_hybrid,3,8,1.75,-0.43,5.66,0.5
+tabpfn_api_hybrid - tabpfn_hybrid,5,8,-0.52,-1.04,-0.07,0.62
+tabpfn_api_hybrid - tabpfn_hybrid,10,8,1.23,-0.3,3.22,0.5
+tabpfn_api_hybrid - tabpfn_hybrid,20,8,0.37,-0.09,1.18,0.62
+tabpfn_api_transfer_hybrid - tabpfn_transfer_hybrid,1,8,-1.23,-2.18,-0.52,1.0
+tabpfn_api_transfer_hybrid - tabpfn_transfer_hybrid,3,8,-3.94,-7.94,-1.48,1.0
+tabpfn_api_transfer_hybrid - tabpfn_transfer_hybrid,5,8,-4.06,-8.73,-1.34,1.0
+tabpfn_api_transfer_hybrid - tabpfn_transfer_hybrid,10,8,-4.37,-9.19,-1.11,1.0
+tabpfn_api_transfer_hybrid - tabpfn_transfer_hybrid,20,8,-2.98,-6.47,-0.96,1.0
+tabpfn_api_transfer_hybrid - physics_sysid,1,8,-1.22,-1.69,-0.81,1.0
+tabpfn_api_transfer_hybrid - physics_sysid,3,8,-5.55,-12.45,-1.61,1.0
+tabpfn_api_transfer_hybrid - physics_sysid,5,8,-7.18,-17.21,-1.74,1.0
+tabpfn_api_transfer_hybrid - physics_sysid,10,8,-8.91,-20.92,-1.94,1.0
+tabpfn_api_transfer_hybrid - physics_sysid,20,8,-8.83,-20.84,-1.87,1.0
+tabpfn_transfer_hybrid - physics_sysid,1,8,0.01,-0.49,0.59,0.62
+tabpfn_transfer_hybrid - physics_sysid,3,8,-1.6,-4.63,0.05,0.62
+tabpfn_transfer_hybrid - physics_sysid,5,8,-3.13,-8.48,-0.36,1.0
+tabpfn_transfer_hybrid - physics_sysid,10,8,-4.54,-11.75,-0.71,1.0
+tabpfn_transfer_hybrid - physics_sysid,20,8,-5.85,-14.54,-0.78,1.0

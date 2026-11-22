@@ -147,6 +147,58 @@ class TabPFNLearner(Learner):
         return np.column_stack(ms), np.column_stack(ss)
 
 
+class TabPFNAPILearner(TabPFNLearner):
+    """TabPFN through Prior Labs' cloud API (tabpfn-client; server default model, v3.5 at time of
+    writing). Reads the TABPFN_TOKEN environment variable; never prints it. Each fitted target
+    costs one metered predict call per planning step."""
+    name = "tabpfn_api"
+    calls = 0  # class-wide counter of predict requests (for quota bookkeeping)
+
+    def __init__(self, **kw):
+        super().__init__(**kw)
+
+    def _make(self):
+        try:
+            import truststore  # Avast Web Shield re-signs TLS; use the OS store
+            truststore.inject_into_ssl()
+        except ImportError:
+            pass
+        from tabpfn_client import TabPFNRegressor
+        return TabPFNRegressor(random_state=0)
+
+    @staticmethod
+    def _retry(fn, *a, **kw):
+        """The API allows 60 fits per minute; back off and retry on HTTP 429."""
+        import time
+        for k in range(8):
+            try:
+                return fn(*a, **kw)
+            except Exception as e:  # noqa: BLE001
+                if "429" not in str(e) or k == 7:
+                    raise
+                time.sleep(15)
+
+    def _fit(self, X, Y):
+        self.models = []
+        for j in range(Y.shape[1]):
+            m = self._make()
+            y = Y[:, j]
+            if np.ptp(y) < 1e-9:
+                y = y + np.random.default_rng(j).normal(0, 1e-4, len(y))
+            self._retry(m.fit, X, y)
+            self.models.append(m)
+
+    def _predict(self, X):
+        ms, ss = [], []
+        for m in self.models:
+            out = self._retry(m.predict, X, output_type="main")
+            TabPFNAPILearner.calls += 1
+            q = np.asarray(out["quantiles"])
+            ms.append(np.asarray(out["mean"]))
+            ss.append(np.maximum((q[-1] - q[0]) / 2.563, 1e-4))
+        return np.column_stack(ms), np.column_stack(ss)
+
+
 class Residual:
     """Learner on the residual of the (nominal or fitted) physics model."""
 
@@ -315,6 +367,10 @@ def make_model(name: str, source=None, n_estimators=2):
         return Residual(TabPFNLearner(n_estimators=n_estimators), refit_physics=True, name=name)
     if name == "gp_hybrid":
         return Residual(GPLearner(), refit_physics=True, name=name)
+    if name == "tabpfn_api_hybrid":
+        return Residual(TabPFNAPILearner(), refit_physics=True, name=name)
+    if name == "tabpfn_api_transfer_hybrid":
+        return Transfer(TabPFNAPILearner(), source, residual="sysid", name=name, max_source=300)
     if name == "tabpfn_transfer_raw":
         return Transfer(TabPFNLearner(n_estimators=n_estimators), source, residual=False, name=name)
     if name == "tabpfn_transfer_hybrid":

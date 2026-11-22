@@ -30,6 +30,9 @@ transfer-hybrids (F), nominal physics.
   most accurate predictor at every budget from 1 to 20 pushes in the heterogeneous regime (paired
   CIs exclude 0 vs physics + sysID at n = 1, 3, 5, 10, 20), and beats a GP given *identical* inputs at
   every budget (wins on 83–100% of objects). Prior experience is worth ~2–3 own pushes.
+* **Newer TabPFN via the cloud API (v3.5)** makes transfer stronger: on 8 unseen objects it beats the
+  local v2 transfer-hybrid on 8/8 objects at every budget (−1 to −4 mm, paired CIs exclude 0) and
+  physics + sysID on 8/8 (−9 mm at 10 pushes). Without transfer, API and local are equal. (Report §6b.)
 * **Heterogeneous dynamics** (wheels, fast pushes): TabPFN-hybrid beats physics + sysID from ~20 pushes.
 * **Calibration with 2–10 samples**: GPs become wildly over-confident; TabPFN does not.
 * **Closed loop with transfer**: most precise final object placements in all heterogeneous challenges.
@@ -58,5 +61,6 @@ See [`PUSHING.md`](../PUSHING.md); every number in [`REPORT.md`](REPORT.md) come
 * Planner hyperparameters not tuned per model (possible disadvantage for learned residuals).
 * Active exploration in closed loop was re-benchmarked only on the heterogeneous suite (96% success,
   equal to physics + sysID; not on the standard suite).
-* TabPFN v2.5/v3 weights untested (license acceptance needed — the user's decision).
+* Newer TabPFN (v3.5) tested only through the cloud API, on 8 of 24 test objects, prediction only;
+  closed-loop planar benchmarks still use local v2.
 * A1: open-loop gait with stand-up resets; 3 doorway seeds per model; no multi-object rearrangement.

@@ -269,6 +269,42 @@ shared CPU) vs 0.17 s for physics + sysID.
 
 ---
 
+## 6b. Addendum: TabPFN through the cloud API (server model v3.5)
+
+Added after the overnight run. Same learners, with Prior Labs' hosted TabPFN (`tabpfn-client`,
+server default model v3.5, 8 estimators) instead of local v2 weights: `tabpfn_api_hybrid`,
+`tabpfn_api_transfer_hybrid` in `pushlab/learners.py`. Heterogeneous regime, the **first 8**
+held-out test objects only (time budget), same splits and seeds as §2, so the comparison with the
+local models is paired per object. Mean position error (mm), `results/pred_api_means.csv`:
+
+| n own pushes | physics + sysID | TabPFN-hybrid (local v2) | TabPFN-hybrid (API) | transfer-hybrid (local v2) | transfer-hybrid (API) |
+|---|---|---|---|---|---|
+| 1  | 31.5 | 31.5 | 31.5 | 31.5 | **30.2** |
+| 3  | 28.7 | 27.3 | 29.0 | 27.1 | **23.1** |
+| 5  | 26.5 | 22.0 | 21.4 | 23.4 | **19.3** |
+| 10 | 23.4 | 18.3 | 19.6 | 18.9 | **14.5** |
+| 20 | 21.9 | 16.1 | 16.4 | 16.0 | **13.0** |
+
+Paired differences with bootstrap 95% CIs (`results/pred_api_paired.csv`):
+* **Transfer-hybrid, API vs local:** better on 8/8 objects at every budget; −1.2 mm [−2.2, −0.5] at
+  n = 1, −3.9 [−7.9, −1.5] at n = 3, −4.4 [−9.2, −1.1] at n = 10, −3.0 [−6.5, −1.0] at n = 20.
+* **Transfer-hybrid (API) vs physics + sysID:** better on 8/8 objects at every budget, e.g.
+  −5.6 mm [−12.5, −1.6] at n = 3 and −8.9 [−20.9, −1.9] at n = 10.
+* **Hybrid without transfer, API vs local:** no consistent difference (−0.5 to +1.8 mm; only n = 5
+  has a CI excluding 0). The newer model helps where the context is large and heterogeneous
+  (300 rows from 40 other objects), not with 3–20 own pushes.
+* At n = 1 the non-transfer hybrids fall back to physics + sysID, hence identical values.
+
+Latency per planning step (fit + predict 3 targets, network included, median): ~6 s fit + ~2–3 s
+predict for both API models, measured while four A1 simulations shared the CPU. That is faster than
+local transfer-hybrid (~14 s) but slower than local TabPFN-hybrid (~2 s). The API allows 60 fit
+requests per minute; the learner retries on HTTP 429. Each predict call is metered at 10k tokens
+(one call per target per planning step).
+
+Caveat: 8 objects, one seed each — the direction is consistent (8/8) but effect sizes are uncertain.
+
+---
+
 ## 7. Limitations and threats to validity
 
 * All results are from our own MuJoCo simulation; the physics baseline (quasi-static, ellipsoidal

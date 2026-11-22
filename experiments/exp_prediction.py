@@ -95,8 +95,9 @@ def main():
     ap.add_argument("--reps", type=int, default=1)
     ap.add_argument("--workers", type=int, default=4)
     ap.add_argument("--out", default=None)
+    ap.add_argument("--limit", type=int, default=None, help="only the first N objects")
     args = ap.parse_args()
-    recs = load(args.data)
+    recs = load(args.data)[:args.limit]
     source = source_from(load(args.source)) if args.source else None
     jobs = [(r, args.models, args.ns, source, rep * 100 + i) for rep in range(args.reps) for i, r in enumerate(recs)]
     t = time.time()
