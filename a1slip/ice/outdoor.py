@@ -28,6 +28,7 @@ Strategies (same layouts, same start):
     python -m a1slip.ice.outdoor experiment   # all strategies x layouts (parallel) -> results/outdoor/*.json
     python -m a1slip.ice.outdoor summary      # table
     python -m a1slip.ice.outdoor figure       # map figure -> results/figures/outdoor_maps.png
+    python -m a1slip.ice.outdoor map_auc      # map accuracy on unwalked tiles -> results/outdoor_map_auc.json
 """
 
 import heapq
@@ -427,10 +428,62 @@ def summary():
               f"{np.mean([l['time'] for l in allg]) if allg else float('nan'):>9.1f}")
 
 
+MAP_KINDS = ["felt map", "felt + seen (XGBoost)", "felt + seen (TabPFN)"]
+
+
+def map_auc(write=True):
+    """How well each map predicts the tiles the robot has not walked on, after trip 1.
+
+    Uses the map each run planned trip 2 with (risk_leg_start["1"]) and the positions it logged
+    during trip 1. A cell counts as walked if it lies within FELT_SPREAD of one of those
+    positions; walked and blocked cells are left out. A cell is truly slippery if its terrain
+    type's measured slip fraction (results/outdoor_types.json) is above SLIPPERY.
+    -> results/outdoor_map_auc.json"""
+    from sklearn.metrics import roc_auc_score
+
+    types = json.loads((RESULTS / "outdoor_types.json").read_text())
+    auc, pooled = {k: [] for k in MAP_KINDS}, {k: ([], []) for k in MAP_KINDS}
+    for r in sorted(load_runs(), key=lambda r: r["seed"]):
+        if r["kind"] not in MAP_KINDS:
+            continue
+        lay = layout(r["seed"])
+        omap = OutdoorMap(lay)
+        risk = np.array(r["risk_leg_start"]["1"])
+        n_trip1 = int(np.ceil(r["legs"][0]["time"] / P.DECIDE))      # decisions made during trip 1
+        walked = np.zeros((CX, CY), bool)
+        for x, y in r["trace"][:n_trip1]:
+            walked |= np.hypot(omap.cx - x, omap.cy - y) <= FELT_SPREAD
+        slip = np.array([[types[NAMES[g]]["slip_fraction"] for g in row] for row in lay["grid"]])
+        truth = (slip > SLIPPERY)[omap.cell_tile]
+        keep = ~walked & ~omap.blocked
+        auc[r["kind"]].append(float(roc_auc_score(truth[keep], risk[keep])))
+        pooled[r["kind"]][0].append(truth[keep])
+        pooled[r["kind"]][1].append(risk[keep])
+    calibration = {}
+    for k in MAP_KINDS[1:]:
+        y, p = np.concatenate(pooled[k][0]), np.concatenate(pooled[k][1])
+        calibration[k] = dict(mean_risk_safe=float(p[~y].mean()), mean_risk_slippery=float(p[y].mean()),
+                              frac_safe_marked_risky=float((p[~y] > 0.5).mean()))
+    out = dict(roc_auc=auc, calibration=calibration)
+    if not write:
+        return out
+    (RESULTS / "outdoor_map_auc.json").write_text(json.dumps(out, indent=1))
+    for k in MAP_KINDS:
+        extra = (f"  safe tiles marked risky {calibration[k]['frac_safe_marked_risky']:.0%}"
+                 if k in calibration else "")
+        print(f"{k:24s} ROC-AUC {np.mean(auc[k]):.3f}  per layout {np.round(auc[k], 3).tolist()}{extra}")
+    return out
+
+
+def figure():
+    from a1slip.viz import outdoor_figure
+    outdoor_figure.main()
+
+
 if __name__ == "__main__":
     cmd = sys.argv[1]
     if cmd == "run":
         run_one(sys.argv[2], int(sys.argv[3]))
     else:
         {"calibrate": calibrate, "experiment": experiment, "summary": summary,
-         "figure": lambda: __import__("a1_outdoor_figure").main()}[cmd]()
+         "map_auc": map_auc, "figure": figure}[cmd]()

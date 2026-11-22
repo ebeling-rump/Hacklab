@@ -51,7 +51,6 @@ def main():
     d = dict(np.load(DATA))
     names = list(d["history_names"])
     keep = [i for i, n in enumerate(names) if not n.startswith("grav_")]
-    gz = names.index("grav_z_2s")
     Xf = np.hstack([d["features"], d["history"][:, keep]])
     Xs = np.hstack([d["features"], d["history"]])
     trf, trs = fall_splits(d)["train"], splits(d)["train"]

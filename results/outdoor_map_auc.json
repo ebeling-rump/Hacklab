@@ -1,31 +1,31 @@
 {
  "roc_auc": {
   "felt map": [
-   0.49791955617198336,
+   0.5,
    0.5,
    0.5
   ],
   "felt + seen (XGBoost)": [
-   0.883256756089126,
+   0.8832775919732442,
    0.9539468787217149,
    0.9404767184035477
   ],
   "felt + seen (TabPFN)": [
-   0.996012786779301,
+   0.9960070497818614,
    1.0,
    0.7258892128279884
   ]
  },
  "calibration": {
   "felt + seen (XGBoost)": {
-   "mean_risk_safe": 0.37382066276803116,
+   "mean_risk_safe": 0.37363902439024393,
    "mean_risk_slippery": 0.8587994579945799,
-   "frac_safe_marked_risky": 0.3416179337231969
+   "frac_safe_marked_risky": 0.3409756097560976
   },
   "felt + seen (TabPFN)": {
-   "mean_risk_safe": 0.29244875478927207,
+   "mean_risk_safe": 0.2925170100622904,
    "mean_risk_slippery": 0.7593637566137565,
-   "frac_safe_marked_risky": 0.16954022988505746
+   "frac_safe_marked_risky": 0.16962146621945376
   }
  }
 }

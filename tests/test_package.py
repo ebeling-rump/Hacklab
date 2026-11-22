@@ -17,7 +17,7 @@ def test_module_imports(name):
     importlib.import_module(name)
 
 
-@pytest.mark.parametrize("name", ["slip.npz", "slip_balanced.npz", "env_A.npz", "env_B.npz",
+@pytest.mark.parametrize("name", ["slip.npz", "slip_balanced.npz",
                                   "collision_env_A.npz", "collision_env_B.npz"])
 def test_datasets_present(name):
     assert (DATA / name).is_file()

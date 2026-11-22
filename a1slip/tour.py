@@ -99,7 +99,8 @@ def main():
         print("  -> TabPFN's warning helps a blind robot, but a simple IMU balance reflex removes the falls.")
 
     videos = sorted((ROOT / "videos").glob("*comparison*.mp4")) + sorted((ROOT / "videos").glob("ice_patrol*.mp4"))
-    print("\nVideos" + ("" if videos else " (not recorded yet: python -m a1slip.viz.record_videos; python -m a1slip.viz.ice_videos)"))
+    print("\nVideos\n  docs/demo.mp4   77-second demo"
+          + ("" if videos else "\n  more: python -m a1slip.viz.record_videos; python -m a1slip.viz.ice_videos -> videos/"))
     for v in videos:
         print(f"  {v.relative_to(ROOT)}")
     print("\nReproduce / replay (need mujoco + tabpfn):")

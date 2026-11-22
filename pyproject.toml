@@ -27,7 +27,7 @@ dependencies = [
     "pillow",
     "imageio",
     "imageio-ffmpeg",
-    "tabpfn>=2.0",
+    "tabpfn>=10",
 ]
 
 [project.optional-dependencies]

@@ -31,3 +31,19 @@ def test_tour_runs_and_matches_readme():
         for n in numbers:
             assert n in lines[row], f"{row}: tour shows {lines[row]!r}, README expects {n}"
             assert f"**{n}**" in README or n in README, f"README is missing {n}"
+
+
+def test_outdoor_map_scores_match_readme():
+    import numpy as np
+
+    from a1slip.ice.outdoor import map_auc
+
+    out = map_auc(write=False)
+    tab, xgb = out["roc_auc"]["felt + seen (TabPFN)"], out["roc_auc"]["felt + seen (XGBoost)"]
+    assert f"{np.mean(tab):.3f}" == "0.907" and f"{np.mean(xgb):.3f}" == "0.926"
+    assert [f"{a:.3f}" for a in tab] == ["0.996", "1.000", "0.726"]
+    cal = out["calibration"]
+    assert round(100 * cal["felt + seen (TabPFN)"]["frac_safe_marked_risky"]) == 17
+    assert round(100 * cal["felt + seen (XGBoost)"]["frac_safe_marked_risky"]) == 34
+    for n in ("0.907", "0.926", "0.996 / 1.000 / 0.726", "34%", "17%"):
+        assert n in README

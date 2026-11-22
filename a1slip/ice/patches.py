@@ -26,6 +26,7 @@ Experiment 2 - patrol with a slip map (A -> B -> A ... 6 legs):
 
     python -m a1slip.ice.patches governor           # -> results/ice_governor.json
     python -m a1slip.ice.patches governor_baseline  # adds the no-TabPFN detector governor
+    python -m a1slip.ice.patches governor_5000      # TabPFN governor with 5,000 examples -> results/ice_governor_5000.json
     python -m a1slip.ice.patches patrol             # -> results/ice_patrol.json
 """
 
@@ -207,14 +208,14 @@ def steer(data, goal, forward):
     return forward * max(0.3, np.cos(err)), float(np.clip(1.5 * err, -MAX_TURN, MAX_TURN))
 
 
-def models():
+def models(n_examples=2000):
     """Frozen TabPFN slip model + detector-only logistic baseline, and their grippy/icy
     reference risks on the training examples (for scaling the maps)."""
     d = dict(np.load(DATA))
     X = np.hstack([d["features"], d["history"]])
     y = d["slip_next"].astype(int)
     tr = splits(d)["train"]
-    tab = RiskModel().fit(X[tr], y[tr], n=2000, pos_fraction=max(y[tr].mean(), 0.25))
+    tab = RiskModel().fit(X[tr], y[tr], n=n_examples, pos_fraction=max(y[tr].mean(), 0.25))
     names = list(d["history_names"])
     gap = [names.index(n) for n in ("leg_imu_gap_0.1s", "leg_imu_gap_0.5s", "leg_imu_gap_2s",
                                     "feet_disagree_0.5s")]
@@ -260,6 +261,31 @@ def governor_experiment(seeds=range(5)):
         r = [x for x in rows if x["strategy"] == name and x["reached"]]
         print(f"  {name:30s} reached {len(r)}/{len(seeds)}  time {np.mean([x['time'] for x in r]):5.1f} s  "
               f"slip {np.mean([x['slip_s'] for x in r]):4.1f} s")
+
+
+def governor_5000(seeds=range(5)):
+    """The TabPFN governor with 5,000 instead of 2,000 examples: more accurate offline,
+    but it changes how risk rises with speed, so the same risk limits behave differently."""
+    tab, _, _, _ = models(n_examples=5000)
+    fi = feature_names().index("cmd_forward")
+    rows = []
+    for seed in seeds:
+        model = build_patch_model(seed)
+        sensors = PatchSensors(model)
+        for limit in (0.5, 0.65):
+            def gov(f, h, d, g, limit=limit):
+                cands = np.repeat(np.r_[f, h][None], len(SPEEDS), 0)
+                cands[:, fi] = SPEEDS
+                p = tab.predict(cands)
+                ok = [s for s, pi in zip(SPEEDS, p) if pi < limit]
+                return steer(d, g, max(ok) if ok else SPEEDS[int(np.argmin(p))])
+            out = walk(model, sensors, [B], gov, max_time=60)
+            leg = out["legs"][0] if out["legs"] else None
+            rows.append(dict(seed=seed, strategy=f"TabPFN 5000 governor (risk < {limit})", reached=bool(leg),
+                             time=leg["time"] if leg else None, slip_s=leg["slip_s"] if leg else None))
+            print(f"seed {seed} limit {limit}: " + (f"time {leg['time']:5.1f} s  slip {leg['slip_s']:4.1f} s"
+                  if leg else "did not reach B"), flush=True)
+    (RESULTS / "ice_governor_5000.json").write_text(json.dumps(rows, indent=1))
 
 
 def governor_baseline(seeds=range(5)):
@@ -367,5 +393,5 @@ def patrol_experiment(seeds=range(5), n_legs=6):
 
 
 if __name__ == "__main__":
-    {"governor": governor_experiment, "governor_baseline": governor_baseline,
+    {"governor": governor_experiment, "governor_baseline": governor_baseline, "governor_5000": governor_5000,
      "governor_xgb": governor_xgb, "patrol": patrol_experiment}[sys.argv[1]]()

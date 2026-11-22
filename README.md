@@ -172,7 +172,7 @@ We kept the negative results because they show where this approach fits.
 
 ```bash
 make install   # CPU PyTorch, the pinned requirements, then this package
-make test      # 54 tests, under a minute
+make test      # 52 tests, under a minute
 make tour      # headline results from results/*.json
 make watch     # live viewer: TabPFN speed governor on ice patches
 ```
@@ -380,7 +380,7 @@ The scene is flat green ground with white ice patches (friction 0.1) between A a
 
 *Speed governor* (`python -m a1slip.ice.patches governor`, plus `governor_baseline` and `governor_xgb`): see the table in [Results](#1-choosing-a-safe-speed-on-ice-it-cannot-see). At a 0.5 risk limit TabPFN takes 38.5 s with 8.8 s slipping.
 
-*More examples do not give a better governor* (`results/ice_governor_5000.json`). With 5,000 instead of 2,000 examples, offline slip ROC-AUC on unseen icy and steep floors rises from 0.681 to 0.768 and decisions are no slower (about 260 ms). The governor gets worse: 45.0 s with 26.4 s slipping at the 0.65 limit (38.5 s / 8.8 s at 0.5). The 5,000-example model rates full speed on ice slightly lower (0.84 against 0.88, even below 0.8 speed), so 10% of icy moments pass the 0.65 limit instead of 3% and the robot runs onto the ice. The controller depends on how risk changes with speed, not on overall accuracy.
+*More examples do not give a better governor* (`python -m a1slip.ice.patches governor_5000` → `results/ice_governor_5000.json`). With 5,000 instead of 2,000 examples, offline slip ROC-AUC on unseen icy and steep floors rises from 0.681 to 0.768 and decisions are no slower (about 260 ms). The governor gets worse: 45.0 s with 26.4 s slipping at the 0.65 limit (38.5 s / 8.8 s at 0.5). The 5,000-example model rates full speed on ice slightly lower (0.84 against 0.88, even below 0.8 speed), so 10% of icy moments pass the 0.65 limit instead of 3% and the robot runs onto the ice. The controller depends on how risk changes with speed, not on overall accuracy.
 
 *Patrol with a slip map* (`python -m a1slip.ice.patches patrol`): the robot walks A ↔ B six times; slip risk goes into a grid map and A* routes around high-risk cells. From leg 3 on it slips 4.6 s per leg with the TabPFN map, 8.4 s with a detector-only map and 14.4 s with no map. By legs 4–6 both maps end up similar (medians 2–4 s); the detector map routes back into the ice on leg 3.
 
@@ -398,7 +398,7 @@ The scene is flat green ground with white ice patches (friction 0.1) between A a
 
 The frozen body-sensor slip model from the flat floors rates every terrain here 0.72–0.93, with water lowest because the robot gets stuck there. So outdoors the robot uses the slip it measures at its feet every 0.2 s (in simulation from the contacts; on a real robot from the legs-vs-IMU slip detector) and TabPFN learns the link between appearance and slipping on site.
 
-Predicting tiles it has not walked on, after trip 1 (`results/outdoor_map_auc.json`): ROC-AUC TabPFN 0.907 (0.996 / 1.000 / 0.726 per layout), XGBoost 0.926. XGBoost marks 34% of safe unwalked tiles as risky (> 0.5) against 17% for TabPFN.
+Predicting tiles it has not walked on, after trip 1 (`python -m a1slip.ice.outdoor map_auc` → `results/outdoor_map_auc.json`): ROC-AUC TabPFN 0.907 (0.996 / 1.000 / 0.726 per layout), XGBoost 0.926. XGBoost marks 34% of safe unwalked tiles as risky (> 0.5) against 17% for TabPFN.
 
 Trip 1 is expensive for every learner, because the robot has to step on bad ground before it has examples. With only a few examples the map can even send the robot the wrong way (layout 1, trip 1).
 
@@ -419,7 +419,7 @@ Trip 1 is expensive for every learner, because the robot has to step on bad grou
 
 `python -m a1slip.lidar.safety_filter` runs the live demo: every 0.2 s TabPFN scores 21 candidate commands and the robot runs the one closest to "go to the goal" whose risk is below `--risk-limit` (default 0.15). Options: `--seed N`, `--headless`, `--controller none|gap`, `--compare N`, `--scenario random|dense|large|wall|corridor|crossing|oncoming|mixed|all` and `--planner` (lidar occupancy map + A*, defined in `a1slip/lidar/planner.py`).
 
-All 8 scenes × 3 seeds, out of 24 runs (`results/scenarios_no_planner.json`, `results/scenarios_planner.json`):
+All 8 scenes × 3 seeds, out of 24 runs (`python -m a1slip.lidar.safety_filter --compare 3 --scenario all --save results/scenarios_no_planner.json`, and the same with `--planner` for `results/scenarios_planner.json`):
 
 | controller | reached, no planner | reached, with planner | falls (no → with) | collision steps (no → with) |
 |---|---|---|---|---|
