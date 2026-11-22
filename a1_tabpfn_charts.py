@@ -209,6 +209,60 @@ def plot_terrain():
     plt.close(fig)
 
 
+def plot_ice():
+    """Ice patches (results/ice_governor.json, results/ice_patrol.json)."""
+    gv = json.loads((ROOT / "results" / "ice_governor.json").read_text())
+
+    def mean(name):
+        r = [x for x in gv if x["strategy"] == name and x["reached"]]
+        return np.mean([x["time"] for x in r]), np.mean([x["slip_s"] for x in r]), len(r)
+
+    fig, ax = plt.subplots(figsize=(11, 6.6), dpi=120)
+    fixed = [(s, *mean(f"fixed {s}")) for s in (0.3, 0.55, 0.8, 1.0)]
+    for s, t, sl, n in fixed:
+        ax.scatter(t, sl, s=150, color=MUTED, marker="s", edgecolor=SURF, linewidth=2, zorder=3)
+        ax.annotate(f"fixed speed {s}" + ("" if n == 5 else f" (reached {n}/5)"), (t, sl),
+                    textcoords="offset points", xytext=(10, 6), fontsize=12, color=SOFT)
+    pts = [("Detector-only governor", "detector governor (no TabPFN)", AQUA, "^", (-12, -30)),
+           ("XGBoost governor", "XGBoost governor (risk < 0.65)", ORANGE, "D", (10, 8)),
+           ("TabPFN governor", "TabPFN governor (risk < 0.65)", BLUE, "o", (-14, -26))]
+    for label, key, c, mk, off in pts:
+        t, sl, n = mean(key)
+        ax.scatter(t, sl, s=260 if "TabPFN" in label else 200, color=c, marker=mk, edgecolor=SURF,
+                   linewidth=2, zorder=4)
+        ax.annotate(f"{label}\n{t:.0f} s, {sl:.1f} s slipping", (t, sl), textcoords="offset points",
+                    xytext=off, fontsize=13, color=INK, ha="left" if off[0] > 0 else "right",
+                    fontweight="bold" if "TabPFN" in label else "normal")
+    ax.set_xlabel("Time from A to B (faster = left)")
+    ax.set_ylabel("Seconds with a foot slipping (fewer = lower)")
+    ax.set_xlim(26, 54)
+    ax.set_ylim(0, 30)
+    ax.set_title("Ice patches: TabPFN governor slips like crawling, near full speed")
+    fig.tight_layout()
+    fig.savefig(FIG / "ice_governor.png")
+    plt.close(fig)
+
+    pt = json.loads((ROOT / "results" / "ice_patrol.json").read_text())
+    fig, ax = plt.subplots(figsize=(11, 6.2), dpi=120)
+    for name, c, ls, mk in (("no map", MUTED, (0, (6, 3)), "s"), ("detector map", AQUA, (0, (1, 2)), "^"),
+                            ("TabPFN map", BLUE, "-", "o")):
+        legs = sorted({x["leg"] for x in pt})
+        med = [np.median([x["slip_s"] for x in pt if x["strategy"] == name and x["leg"] == l]) for l in legs]
+        ax.plot(np.array(legs) + 1, med, color=c, ls=ls, marker=mk, ms=8, mec=SURF, mew=2,
+                lw=3.2 if "TabPFN" in name else 2.2, label=name)
+        ax.text(6.15, med[-1], f"{name} {med[-1]:.1f} s", color=c, fontsize=13, va="center",
+                fontweight="bold")
+    ax.set_xticks(range(1, 7))
+    ax.set_xlim(0.8, 7.4)
+    ax.set_ylim(0, None)
+    ax.set_xlabel("Leg of the patrol (A→B, B→A, …)")
+    ax.set_ylabel("Seconds slipping per leg (median of 5 layouts)")
+    ax.set_title("Patrol: the slip map learns to route around the ice")
+    fig.tight_layout()
+    fig.savefig(FIG / "ice_patrol.png")
+    plt.close(fig)
+
+
 def main():
     FIG.mkdir(parents=True, exist_ok=True)
     d = dict(np.load(DATA))

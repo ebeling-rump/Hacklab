@@ -171,6 +171,27 @@ Thresholds follow one rule fixed in advance (5× the label's base rate in the tr
 
 An earlier warning only gets the blind robot closer to always bracing, because the limit is the brace itself, not the prediction. On top of the balance reflex, every add-on prevented 2 falls and caused 1, which is within noise for 30 walks. **On a robot that balances itself, TabPFN's fall warning adds nothing measurable here.**
 
+**Where TabPFN wins: choosing speed and route on ice patches** (`a1_ice_patches.py`, videos: `python a1_ice_videos.py`)
+
+The scene is flat green ground with white ice patches (friction 0.1) on the way from A to B. The robot can't see the ice, only feel it. The TabPFN slip model is frozen: its examples are whole floors from the original data, never patches.
+
+*Speed governor* (`python a1_ice_patches.py governor`, plus `governor_baseline` and `governor_xgb`). Every 0.2 s it scores 4 speeds and takes the fastest one whose predicted slip risk is under the limit. Means over 5 layouts:
+
+| strategy | time A→B | seconds slipping |
+|---|---|---|
+| fixed full speed | 31.2 s | 20.5 s |
+| fixed crawl (0.3) | 49.0 s | 8.3 s |
+| detector-only governor (4 slip-detector features, logistic) | 48.1 s | 8.2 s |
+| XGBoost governor (same 62 features, 10,290 rows) | 39.1 s | 8.8 s |
+| **TabPFN governor** | **32.0 s** | **8.9 s** |
+
+TabPFN slips about as little as crawling at nearly full speed, and it held on every layout. XGBoost reaches the same slip level 7 s slower. The detector-only model can't tell ice from grip (median risk 0.53 vs 0.55, against TabPFN's 0.42 vs 0.88), so it crawls everywhere.
+
+*Patrol with a slip map* (`python a1_ice_patches.py patrol`). The robot walks A↔B six times. Its slip risk goes into a grid map, and A* routes around high-risk cells. From leg 3 on, it slips 4.6 s per leg with the TabPFN map, 8.4 s with a detector-only map and 14.4 s with no map. Honestly, by legs 4–6 both maps end up similar (medians 2–4 s). TabPFN's edge is steadier learning: the detector map routes back into the ice on leg 3.
+
+![Ice governor](results/figures/ice_governor.png)
+![Ice patrol](results/figures/ice_patrol.png)
+
 **Videos** (`python a1_record_videos.py` → `videos/*.mp4`, offscreen rendering, needs `pip install imageio imageio-ffmpeg`)
 
 Exact replays of logged episodes, with the brace indicator (blue = braced), sliding feet (red), downhill arrow and a text label: `blind_falls`, `tabpfn_braces`, `balance_reflex`, `always_brace` (steep episode 9), `tilt_safe_floor`, `tabpfn_safe_floor` (safe episode 30), and side-by-side `episode9_comparison.mp4` (blind | TabPFN | balance reflex) and `safe_floor_comparison.mp4` (tilt rule | TabPFN). On real hills: `hills_ice_comparison.mp4` (icy, steep episode 12) and `hills_comparison.mp4` (steep episode 24), each blind | TabPFN | balance reflex.
