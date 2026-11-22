@@ -39,7 +39,17 @@ transfer-hybrids (F), nominal physics.
 * **Active experimentation** lifts TabPFN-hybrid's closed-loop success in heterogeneous tasks from 88% to
   96% (= physics + sysID); best on C3H precision (100%, fewest pushes) — trend, not significant.
 
+* **Ice patches (Challenge 8, new):** visible ice of unknown slipperiness. With experience from 20
+  other icy floors and 3 "where is the ice under the object" columns, TabPFN beats physics + sysID on
+  10/10 unseen objects and floors at every budget (−16% to −27% error) and the GP with the same data
+  (−2.6 to −3.5 mm). The ice columns are worth 2–3 mm. Report §6d.
+* **Versus the GP benchmark** (identical inputs, report §6c): TabPFN wins with transfer (83–96% of
+  objects) and on calibration; without transfer it's a near-tie, and in closed loop the difference is
+  not significant (GP ~1000× faster).
+
 ## Where TabPFN loses / ties
+* Ice without experience: below ~20 own pushes nothing beats physics + sysID; closed loop on ice
+  (no experience): all methods 100%, similar push counts.
 * Rigid quasi-static pushing: physics + sysID is best; TabPFN-hybrid is a close second.
 * Pure TabPFN (no physics prior) is useless below ~10 pushes — like any pure learner.
 * Closed-loop push counts: never significantly better than physics + sysID; without transfer it is

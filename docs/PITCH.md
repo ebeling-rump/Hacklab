@@ -47,6 +47,14 @@ walls and through doors. After every push, the robot learns.
   every model-based planner solves the standard tasks. A good model alone isn't enough — the
   planner will exploit its errors — and experience from other objects is what closes that gap.
 
+* Headline #5 (show `results/figures/tabpfn_input_dark.png` first, then the GP slide): every push is
+  one row of a table — contact, push, lever arm, optional shape and visible ice → what physics got
+  wrong. Against the Gaussian-process benchmark with the *same* rows, TabPFN wins with experience and
+  stays honest about uncertainty; in closed loop the two are not significantly different.
+* Headline #6 (ice, `results/videos/C8_s0_...mp4`): the ground changes — ice the robot can see but not
+  feel. With experience from 20 other icy floors, TabPFN beats physics on 10/10 new objects and floors
+  (~20% less error) and the GP too. Without experience, physics is better early on.
+
 **[2:45 – 3:30] The demo** *(L-crate video, then box-crate seed 3)*
 Here's the A1. It has never seen this L-shaped crate. The blue ghost is what it *expects* to happen;
 the crate is where it actually goes. It turns the L, walks around it, pushes it through a door

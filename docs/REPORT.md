@@ -396,6 +396,48 @@ significant difference; there the GP is far cheaper.
 
 ---
 
+## 6d. Challenge 8: a floor with ice patches (spatially varying ground)
+
+Inspired by the team's A1 slip-prediction branch (`feature/tabpfn-slip-fall-prediction`). The floor
+has **visible ice patches** (one large patch over half the start–goal corridor plus three small ones;
+ice friction 0.03–0.08, hidden; floor 0.2–0.7, hidden). The robot can see where the ice is but not how
+slippery it is. Half-on-ice objects turn the opposite way to the same push on grip, and fast pushes
+slide on. Code: ice slabs in `pushlab/sim.py`, task `c8_ice` in `pushlab/tasks.py`.
+
+**What TabPFN gets** (`pushlab/ground.py`): three extra columns per row — the share of the object's
+footprint on ice, and the centroid of the iced part in the object's body frame. "Blind" variants get
+the same data without these columns. "Experience" = 60 pushes each from **20 other objects on 20 other
+icy floors** (C8 seeds 1000+); the ice features are object-relative, so they carry over.
+
+**Prediction** (`experiments/exp_ice.py`, `experiments/ice_summary.py`; `results/pred_ice*.csv`,
+`results/ice_paired.csv`, `results/figures/ice_prediction.png`). Unseen objects on unseen floors,
+40 held-out pushes each, paired per object, 95% bootstrap CIs. **10 of the planned 16 objects** had
+finished when this section was written; the remaining runs are in progress.
+
+| own pushes | physics + sysID | GP + experience | TabPFN v2 + exp., ice hidden | TabPFN v2 + exp. + ice | TabPFN v3.5 API + exp. + ice |
+|---|---|---|---|---|---|
+| 3  | 26.6 | 26.1 | 25.5 | 23.5 | **22.3** |
+| 10 | 26.1 | 25.8 | 24.6 | 22.8 | **21.0** |
+| 40 | 25.1 | 22.1 | 22.6 | 19.5 | **18.4** |
+
+(mean position error, mm)
+* **TabPFN API + experience vs physics + sysID:** better on 10/10 objects at every budget,
+  −4.3 [−5.4, −3.3] mm at n = 3 to −6.7 [−7.7, −5.6] at n = 40 (−16% to −27%).
+* **TabPFN vs GP, same experience and inputs:** −2.6 to −3.5 mm, better on 90–100% of objects, all CIs
+  exclude 0.
+* **Visible-ice columns:** worth −1.8 to −3.2 mm (CIs exclude 0) — TabPFN uses *where* the ice is.
+* **Without experience** (own pushes only), every learner is worse than physics + sysID below ~20
+  pushes; TabPFN leads only from ~40 pushes (`results/pred_ice.csv`, 16 objects). Learning how ice
+  behaves needs experience from other floors.
+
+**Closed loop** (`results/manip_ice.csv`, 8 seeds, no experience): every method reaches every goal
+(100%); physics + sysID 11.3 pushes, GP-hybrid 12.1, TabPFN-hybrid 11.9, TabPFN blind 12.8. No
+meaningful difference — the planner re-plans after every push and the free floor forgives errors.
+Demo video with experience, one seed: `results/videos/C8_s0_physics_sysid_vs_gp_transfer_hybrid_vs_tabpfn_api_transfer_hybrid.mp4`
+(all three succeed in 8 pushes; final error 15 / 13 / 11 mm).
+
+---
+
 ## 7. Limitations and threats to validity
 
 * All results are from our own MuJoCo simulation; the physics baseline (quasi-static, ellipsoidal

@@ -131,6 +131,11 @@ def main():
          big=[("-38%", "error vs physics after 10 pushes\n(TabPFN v3.5 via Prior Labs API)"),
               ("8 / 8", "unseen objects where v3.5 beats\nour local v2 at every budget"),
               ("6 / 6", "A1 crates through the door\n(physics: 5 / 6)")])
+    card(c("gp.png"), "VERSUS THE GAUSSIAN-PROCESS BENCHMARK  ·  IDENTICAL INPUTS",
+         "Where TabPFN beats the GP, and where it doesn't",
+         big=[("83-96%", "of unseen objects where TabPFN\nis more accurate, with experience"),
+              ("22-38%", "of outcomes inside the GP's ±1σ\nwith 3-10 pushes (ideal: 68%)"),
+              ("p = 0.20", "closed loop: no significant\ndifference; GP ~1000x faster")])
     card(c("lessons.png"), "WHAT WE LEARNED", "Better predictions are not automatically better control",
          ["Planners exploit model errors; experience from other objects closed that gap.",
           "With 2-10 pushes, Gaussian processes were overconfident; TabPFN stayed calibrated.",
@@ -144,6 +149,11 @@ def main():
 
     L = VID / "A1_doorway_Lcrate_tabpfn_api_vs_physics.mp4"
     C6 = VID / "C6H_s1_physics_sysid_vs_tabpfn_api_transfer_hybrid.mp4"
+    C8 = VID / "C8_s0_physics_sysid_vs_gp_transfer_hybrid_vs_tabpfn_api_transfer_hybrid.mp4"
+    ICE_SEGMENT = (C8, "Then the ground changes: ice patches the robot can see but not feel. Half on ice, an "
+                       "object turns the opposite way. We tell TabPFN where the ice lies under the object. With "
+                       "experience from twenty other icy floors, it beats physics on ten of ten new objects and "
+                       "floors, about twenty percent less error, and the Gaussian process too.", 0.45, 0)
     plan = [
         (c("title.png"), "Learning to move the unknown. A robot learns how an unfamiliar object moves "
                          "from a handful of pushes, with TabPFN at its core.", None, 0),
@@ -151,18 +161,19 @@ def main():
             "slippery, or where the weight sits. Push it in the middle, and it may swing sideways and jam "
             "in the door. Physics models need those parameters. Learned models need thousands of trials. "
             "A robot meeting a new object has neither.", 1.0, 0),
-        (c("approach.png"), "We give the robot three things. A physics prior that estimates friction and "
-                            "mass as it goes. TabPFN, which learns what physics gets wrong from just a few "
-                            "pushes, in context, and says how sure it is. And experience: pushes on forty "
-                            "other objects, given to TabPFN as context. A planner imagines about a hundred "
-                            "pushes, looks two steps ahead around walls, pushes, observes, and learns.", None, 0),
-        (c("rigid.png"), "We tested this on eight challenges in MuJoCo, with fixed seeds and held-out shapes. "
-                         "First, the honest result: for ordinary rigid boxes, physics with online system "
+        (ROOT / "results" / "figures" / "tabpfn_input_dark.png",
+         "Here is how TabPFN is used. Every push becomes one row of a table: where we pushed, in which "
+         "direction, how far and how fast, and what physics got wrong. The hundred candidate pushes are rows "
+         "with unknown answers. TabPFN reads the whole table in one pass, with no training, and predicts the "
+         "correction and its uncertainty.", None, 0),
+        (c("rigid.png"), "First, the honest result: for ordinary rigid boxes, physics with online system "
                          "identification is hard to beat. TabPFN comes a close second.", None, 0),
         (c("chart.png"), "But when objects get messy, on caster wheels, with fast pushes that make them "
                          "slide, TabPFN with experience from other objects is the most accurate model from "
-                         "the very first push, even on shapes it has never seen. A Gaussian process given "
-                         "the same information is worse at every budget.", None, 0),
+                         "the very first push, even on shapes it has never seen.", None, 0),
+        (c("gp.png"), "Against the Gaussian process, the classic benchmark, with identical inputs: TabPFN wins "
+                      "clearly with experience, and its uncertainty stays honest where the GP is overconfident. "
+                      "In closed loop, the difference is not significant.", None, 0),
         (c("api.png"), "Then we switched to Prior Labs' newer TabPFN through the API, without changing "
                        "anything else. It beat our local version on all eight test objects, with about forty "
                        "percent less error than physics after ten pushes.", None, 0),
@@ -170,11 +181,10 @@ def main():
             "than the crate is long. The blue ghost is what it expects; the orange crate is what really "
             "happens. Top: TabPFN, done in eight pushes. Bottom: physics, fifteen. Across six crates, "
             "TabPFN got all six through, physics five. A demo, not a statistic.", 2.6, 0),
-        (C6, "In a cluttered room with an L-shaped object on wheels, both succeed; TabPFN parks it twice "
-             "as precisely, but touches walls more often.", 2.0, 0),
+        ICE_SEGMENT,
         (c("lessons.png"), "What we learned: better predictions are not automatically better control, because "
-                           "planners exploit model errors. Experience fixes that. TabPFN's uncertainty stays "
-                           "honest with very few samples. And it is slower than physics, and simulation only.",
+                           "planners exploit model errors; experience fixes that. And TabPFN is slower than "
+                           "physics, and this is simulation only.",
          None, 0),
         (c("vision.png"), "Physics as prior, a foundation model that adapts in context, and experience as "
                           "context. Robots that learn physical skills from experience, not re-programming. "
