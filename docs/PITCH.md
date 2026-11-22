@@ -52,8 +52,8 @@ walls and through doors. After every push, the robot learns.
   wrong. Against the Gaussian-process benchmark with the *same* rows, TabPFN wins with experience and
   stays honest about uncertainty; in closed loop the two are not significantly different.
 * Headline #6 (ice, `results/videos/C8_s0_...mp4`): the ground changes — ice the robot can see but not
-  feel. With experience from 20 other icy floors, TabPFN beats physics on 10/10 new objects and floors
-  (~20% less error) and the GP too. Without experience, physics is better early on.
+  feel. With experience from 20 other icy floors, TabPFN beats physics on 15–16 of 16 new objects and
+  floors (~20% less error) and the GP too. Without experience, physics is better early on.
 
 **[2:45 – 3:30] The demo** *(L-crate video, then box-crate seed 3)*
 Here's the A1. It has never seen this L-shaped crate. The blue ghost is what it *expects* to happen;

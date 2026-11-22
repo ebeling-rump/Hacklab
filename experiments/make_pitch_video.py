@@ -152,8 +152,8 @@ def main():
     C8 = VID / "C8_s0_physics_sysid_vs_gp_transfer_hybrid_vs_tabpfn_api_transfer_hybrid.mp4"
     ICE_SEGMENT = (C8, "Then the ground changes: ice patches the robot can see but not feel. Half on ice, an "
                        "object turns the opposite way. We tell TabPFN where the ice lies under the object. With "
-                       "experience from twenty other icy floors, it beats physics on ten of ten new objects and "
-                       "floors, about twenty percent less error, and the Gaussian process too.", 0.45, 0)
+                       "experience from twenty other icy floors, it beats physics on nearly all sixteen new objects "
+                       "and floors, about twenty percent less error, and the Gaussian process too.", 0.45, 0)
     plan = [
         (c("title.png"), "Learning to move the unknown. A robot learns how an unfamiliar object moves "
                          "from a handful of pushes, with TabPFN at its core.", None, 0),

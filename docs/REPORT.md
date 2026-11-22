@@ -411,21 +411,20 @@ icy floors** (C8 seeds 1000+); the ice features are object-relative, so they car
 
 **Prediction** (`experiments/exp_ice.py`, `experiments/ice_summary.py`; `results/pred_ice*.csv`,
 `results/ice_paired.csv`, `results/figures/ice_prediction.png`). Unseen objects on unseen floors,
-40 held-out pushes each, paired per object, 95% bootstrap CIs. **10 of the planned 16 objects** had
-finished when this section was written; the remaining runs are in progress.
+40 held-out pushes each, paired per object, 95% bootstrap CIs, **16 objects**.
 
 | own pushes | physics + sysID | GP + experience | TabPFN v2 + exp., ice hidden | TabPFN v2 + exp. + ice | TabPFN v3.5 API + exp. + ice |
 |---|---|---|---|---|---|
-| 3  | 26.6 | 26.1 | 25.5 | 23.5 | **22.3** |
-| 10 | 26.1 | 25.8 | 24.6 | 22.8 | **21.0** |
-| 40 | 25.1 | 22.1 | 22.6 | 19.5 | **18.4** |
+| 3  | 26.5 | 25.5 | 25.3 | 23.4 | **22.0** |
+| 10 | 25.1 | 24.2 | 23.5 | 21.6 | **20.2** |
+| 40 | 23.5 | 20.9 | 21.4 | 18.4 | **17.6** |
 
 (mean position error, mm)
-* **TabPFN API + experience vs physics + sysID:** better on 10/10 objects at every budget,
-  −4.3 [−5.4, −3.3] mm at n = 3 to −6.7 [−7.7, −5.6] at n = 40 (−16% to −27%).
-* **TabPFN vs GP, same experience and inputs:** −2.6 to −3.5 mm, better on 90–100% of objects, all CIs
+* **TabPFN API + experience vs physics + sysID:** better on 15–16 of 16 objects at every budget,
+  −4.5 [−5.5, −3.6] mm at n = 3 to −5.9 [−7.1, −4.8] at n = 40 (−17% to −25%).
+* **TabPFN vs GP, same experience and inputs:** −2.1 to −3.2 mm, better on 81–100% of objects, all CIs
   exclude 0.
-* **Visible-ice columns:** worth −1.8 to −3.2 mm (CIs exclude 0) — TabPFN uses *where* the ice is.
+* **Visible-ice columns:** worth −1.8 to −3.0 mm (CIs exclude 0) — TabPFN uses *where* the ice is.
 * **Without experience** (own pushes only), every learner is worse than physics + sysID below ~20
   pushes; TabPFN leads only from ~40 pushes (`results/pred_ice.csv`, 16 objects). Learning how ice
   behaves needs experience from other floors.

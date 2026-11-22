@@ -41,8 +41,8 @@ transfer-hybrids (F), nominal physics.
 
 * **Ice patches (Challenge 8, new):** visible ice of unknown slipperiness. With experience from 20
   other icy floors and 3 "where is the ice under the object" columns, TabPFN beats physics + sysID on
-  10/10 unseen objects and floors at every budget (−16% to −27% error) and the GP with the same data
-  (−2.6 to −3.5 mm). The ice columns are worth 2–3 mm. Report §6d.
+  15–16 of 16 unseen objects and floors at every budget (−17% to −25% error) and the GP with the same
+  data (−2.1 to −3.2 mm). The ice columns are worth 2–3 mm. Report §6d.
 * **Versus the GP benchmark** (identical inputs, report §6c): TabPFN wins with transfer (83–96% of
   objects) and on calibration; without transfer it's a near-tie, and in closed loop the difference is
   not significant (GP ~1000× faster).
