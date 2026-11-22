@@ -142,6 +142,73 @@ def plot_learning_curve():
     plt.close(fig)
 
 
+def plot_terrain():
+    """Unseen real terrain (results/terrain_test.json): fall-prediction ROC-AUC per model
+    across the three unseen conditions, and the falls/distance trade-off on hills."""
+    tt = json.loads((ROOT / "results" / "terrain_test.json").read_text())
+    cd = json.loads((ROOT / "results" / "charts_data.json").read_text())["fall_roc_auc"]
+    conds = ["13–15° slopes\n(tilted gravity)", "Steep real hills", "Moderate real hills"]
+    vals = {
+        "TabPFN, 2,000 rows": [cd["TabPFN, 2,000 rows"], tt["prediction"]["steep hills"]["fall_auc"]["TabPFN"],
+                               tt["prediction"]["moderate hills"]["fall_auc"]["TabPFN"]],
+        "XGBoost, 18,067 rows": [cd["XGBoost, 18,067 rows"], tt["prediction"]["steep hills"]["fall_auc"]["XGBoost"],
+                                 tt["prediction"]["moderate hills"]["fall_auc"]["XGBoost"]],
+        "Logistic regression": [cd["Logistic regression"], tt["prediction"]["steep hills"]["fall_auc"]["logistic"],
+                                tt["prediction"]["moderate hills"]["fall_auc"]["logistic"]],
+        "Tilt rule (no ML)": [cd["Tilt rule, 2 s average (no ML)"],
+                              tt["prediction"]["steep hills"]["fall_auc"]["tilt 2 s (no ML)"],
+                              tt["prediction"]["moderate hills"]["fall_auc"]["tilt 2 s (no ML)"]],
+    }
+    colours = [BLUE, ORANGE, AQUA, YELLOW]
+    hatches = ["", "//", "..", "xx"]
+    fig, ax = plt.subplots(figsize=(13, 6.4), dpi=120)
+    w = 0.2
+    x = np.arange(len(conds))
+    for i, ((name, v), c, hch) in enumerate(zip(vals.items(), colours, hatches)):
+        bars = ax.bar(x + (i - 1.5) * w, np.array(v) - 0.5, w * 0.9, bottom=0.5, color=c, label=name,
+                      hatch=hch, edgecolor=SURF, linewidth=0)
+        for b, val in zip(bars, v):
+            ax.text(b.get_x() + b.get_width() / 2, val + 0.006, f"{val:.2f}", ha="center",
+                    fontsize=12, color=INK)
+    ax.set_xticks(x)
+    ax.set_xticklabels(conds, fontsize=14)
+    ax.set_ylim(0.5, 1.09)
+    ax.grid(axis="x", visible=False)
+    ax.set_ylabel("Fall within 1 s, ROC-AUC (0.5 = guessing)")
+    ax.set_title("Frozen models on conditions never seen in training")
+    ax.legend(loc="upper left", ncols=4, fontsize=13, bbox_to_anchor=(0, 1.0))
+    fig.tight_layout()
+    fig.savefig(FIG / "terrain_auc.png")
+    plt.close(fig)
+
+    rows = tt["behaviour"]
+    pts = [("Blind trot", MUTED, "o"), ("Always brace", MUTED, "s"), ("Tilt rule", YELLOW, "D"),
+           ("TabPFN danger mode", BLUE, "o"), ("Balance reflex", AQUA, "^")]
+    keys = {"Blind trot": "blind trot", "Always brace": "always brace", "Tilt rule": "tilt rule",
+            "TabPFN danger mode": "TabPFN danger mode", "Balance reflex": "balance reflex"}
+    # Label offsets chosen per point so the three close points don't overlap.
+    place = {"Blind trot": ((-14, 12), "right", "bottom"), "Always brace": ((-16, -4), "right", "top"),
+             "Tilt rule": ((4, -22), "left", "top"), "TabPFN danger mode": ((16, 10), "left", "bottom"),
+             "Balance reflex": ((-14, 12), "right", "bottom")}
+    fig, ax = plt.subplots(figsize=(11, 6.4), dpi=120)
+    for name, c, mk in pts:
+        r = [x for x in rows if x["strategy"] == keys[name]]
+        f, dist = sum(x["fell"] for x in r), np.mean([x["distance"] for x in r])
+        ax.scatter(dist, f, s=260 if "TabPFN" in name else 200, color=c, marker=mk,
+                   edgecolor=SURF, linewidth=2, zorder=3)
+        off, ha, va = place[name]
+        ax.annotate(f"{name}\n{f}/{len(r)} falls, {dist:.2f} m", (dist, f), textcoords="offset points",
+                    xytext=off, ha=ha, va=va, fontsize=13, color=INK)
+    ax.set_xlim(0.5, 1.6)
+    ax.set_ylim(-3, 33)
+    ax.set_xlabel("Average distance walked (further = less slowed down)")
+    ax.set_ylabel("Falls in 60 walks on real hills")
+    ax.set_title("On real hills: same pattern as on flat slopes")
+    fig.tight_layout()
+    fig.savefig(FIG / "terrain_tradeoff.png")
+    plt.close(fig)
+
+
 def main():
     FIG.mkdir(parents=True, exist_ok=True)
     d = dict(np.load(DATA))

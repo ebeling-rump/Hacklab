@@ -30,6 +30,7 @@ from PIL import Image, ImageDraw, ImageFont
 from a1_balance import TUNED, Balancer
 from a1_danger_mode import THRESHOLD, TILT_LIMIT, episode_setup, fit_fall_model, make_controllers
 from a1_slip_dataset import NORMAL, A1Sensors, build_model, run_episode
+from a1_terrain import TerrainSensors, build_terrain_model, terrain_episode
 
 warnings.filterwarnings("ignore")
 OUT = Path(__file__).parent / "videos"
@@ -43,10 +44,19 @@ CLIPS = {
     "always_brace": ("dangerous", 9, "always brace", False, "Always brace"),
     "tilt_safe_floor": ("safe", 30, "tilt rule", False, "Tilt rule (no ML)"),
     "tabpfn_safe_floor": ("safe", 30, "TabPFN", False, "TabPFN danger mode"),
+    # Real hills (a1_terrain.py, terrain 1 = steep), frozen models: an unseen condition.
+    "hills_ice_blind": ("hills1", 12, "never brace", False, "Blind trot"),
+    "hills_ice_tabpfn": ("hills1", 12, "TabPFN", False, "Blind trot + TabPFN danger mode"),
+    "hills_ice_balance": ("hills1", 12, "never brace", True, "Balance reflex (no TabPFN)"),
+    "hills_blind": ("hills1", 24, "never brace", False, "Blind trot"),
+    "hills_tabpfn": ("hills1", 24, "TabPFN", False, "Blind trot + TabPFN danger mode"),
+    "hills_balance": ("hills1", 24, "never brace", True, "Balance reflex (no TabPFN)"),
 }
 COMPOSITES = {
     "episode9_comparison": ["blind_falls", "tabpfn_braces", "balance_reflex"],
     "safe_floor_comparison": ["tilt_safe_floor", "tabpfn_safe_floor"],
+    "hills_ice_comparison": ["hills_ice_blind", "hills_ice_tabpfn", "hills_ice_balance"],
+    "hills_comparison": ["hills_blind", "hills_tabpfn", "hills_balance"],
 }
 
 
@@ -88,22 +98,34 @@ def add_geom(scn, kind, size, pos, rgba):
 
 def record(name, risk_keep, sim):
     kind, e, ctrl_name, balanced, title = CLIPS[name]
-    model, data, sensors = sim
     risk, keep = risk_keep
+    start = None
+    if kind.startswith("hills"):            # real 3D terrain (a1_terrain.py)
+        seed = int(kind[-1])
+        model = build_terrain_model(seed)
+        data = mujoco.MjData(model)
+        sensors = TerrainSensors(model)
+        mu, start, rng = terrain_episode(e, base_seed=7000 + 1000 * seed)
+        fl = (mu, 0.0, 0.0)
+    else:
+        model, data, sensors = sim
+        fl, rng = episode_setup(kind, e)
     policy = make_controllers(risk, keep)[ctrl_name]()
     balancer = Balancer(sensors, TUNED) if balanced else None
-    fl, rng = episode_setup(kind, e)
     renderer = mujoco.Renderer(model, H, W)
     cam = mujoco.MjvCamera()
     cam.type = mujoco.mjtCamera.mjCAMERA_TRACKING
     cam.trackbodyid = sensors.trunk
-    cam.distance, cam.elevation, cam.azimuth = 2.3, -18, 120
+    # On hills the camera looks down more steeply so crests never hide the robot.
+    cam.distance, cam.elevation, cam.azimuth = (3.2, -38, 120) if start else (2.3, -18, 120)
     fps = 1.0 / (STEPS_PER_FRAME * model.opt.timestep)
     path = OUT / f"{name}.mp4"
     writer = imageio.get_writer(path, fps=fps, codec="libx264", quality=8, macro_block_size=16)
     step = [0]
     last = [None]
-    floor_txt = f"{'icy ' if fl[0] < 0.2 else ''}{fl[1]:.1f} deg slope, friction {fl[0]:.2f}"
+    floor_txt = (f"real hills ({'steep' if kind == 'hills1' else 'moderate'}), "
+                 f"{'icy, ' if fl[0] < 0.2 else ''}friction {fl[0]:.2f}" if start else
+                 f"{'icy ' if fl[0] < 0.2 else ''}{fl[1]:.1f} deg slope, friction {fl[0]:.2f}")
 
     def on_step(d, reaction, sliding):
         step[0] += 1
@@ -138,9 +160,9 @@ def record(name, risk_keep, sim):
 
     t = time.time()
     ep = run_episode(model, data, sensors, rng, *fl, policy=policy, on_step=on_step,
-                     balancer=balancer)
+                     balancer=balancer, start=start)
     fell = ep["fall_t"] is not None
-    dist = float(np.linalg.norm(data.qpos[:2]))
+    dist = float(np.linalg.norm(data.qpos[:2] - (start.xy if start else 0)))
     renderer.update_scene(data, cam)
     end_lines = last[0][1] if last[0] else [title, floor_txt, ""]
     banner = f"FELL after {dist:.2f} m" if fell else f"Stayed up, {dist:.2f} m"

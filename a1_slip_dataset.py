@@ -227,7 +227,7 @@ NORMAL = Reaction()
 
 
 def run_episode(model, data, sensors, rng, mu, slope, azimuth, policy=None, on_step=None,
-                balancer=None):
+                balancer=None, start=None):
     """Simulate one episode. policy(features, history, cmd_target) -> Reaction is
     called at every sample (0.1 s) and may change the gait; None = never.
     Posture changes are blended in with the same 0.15 s smoothing as commands.
@@ -236,12 +236,15 @@ def run_episode(model, data, sensors, rng, mu, slope, azimuth, policy=None, on_s
     simulation, so a replay with a viewer reproduces a headless run exactly.
     balancer(t, data, cmd, posture) -> joint targets replaces the blind gait
     (a1_balance.Balancer); None = the original open-loop trot.
+    start(model, data) places the robot after the reset (a1_terrain); None = origin.
 
     Returns dict with per-sample features/labels and the fall time (or None).
     """
     sensors.set_floor(mu, slope, azimuth)
     mujoco.mj_resetDataKeyframe(model, data, model.key("home").id)
     mujoco.mj_forward(model, data)
+    if start is not None:
+        start(model, data)
     dt = model.opt.timestep
     alpha = dt / SMOOTHING
     n_steps = int(round(EPISODE / dt))

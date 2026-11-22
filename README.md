@@ -133,9 +133,27 @@ The balance reflex also had 0 falls on the 40 safe floors (`results/balancer_bas
 - Slip within 0.2 s on unseen icy + steep floors: TabPFN + slip detector 0.710, sensors only 0.629, XGBoost + detector 0.683 (2,000 rows) / 0.725 (10,290 rows).
 - Lead time: TabPFN's median fall risk is 0.5% on walks that never fell, and 9% / 30% / 89% at 0.5 / 0.3 / 0.1 s before a fall. The warning is accurate but late.
 
+**Unseen real terrain** (`a1_terrain.py`, `python a1_terrain_test.py` → `results/terrain_test.json`)
+
+In every other experiment, slopes are tilted gravity on a flat floor. `a1_terrain.py` builds real rolling hills instead: a heightfield with slopes up to 28° that change as the robot walks, normal gravity, and a checker-textured ground tinted by friction (green = grippy, pale blue = icy). The fall check measures height above the ground under the robot. **Nothing is retrained:** every model keeps its original examples or training data.
+
+| fall within 1 s, ROC-AUC | TabPFN | XGBoost (9× data) | logistic | tilt rule |
+|---|---|---|---|---|
+| steep hills (avg slope 16°) | 0.859 | 0.888 | 0.805 | 0.829 |
+| moderate hills (avg slope 11°) | 0.944 | 0.970 | 0.810 | 0.824 |
+
+| falls in 30 + 30 paired hill walks | blind | always brace | tilt rule | TabPFN danger mode | balance reflex |
+|---|---|---|---|---|---|
+| falls | 28 | 16 | 17 | 19 | **0** |
+| mean distance | 1.07 m | 0.82 m | 0.84 m | 0.97 m | 1.40 m |
+
+The pattern from the flat slopes holds on real terrain. TabPFN's fall warning transfers well: it beats logistic regression and the tilt rule, but stays slightly behind XGBoost trained on 9× the data. Danger mode cuts falls while walking further than always bracing, and the balance reflex is best on both counts.
+
+![Terrain AUC](results/figures/terrain_auc.png)
+
 **Videos** (`python a1_record_videos.py` → `videos/*.mp4`, offscreen rendering, needs `pip install imageio imageio-ffmpeg`)
 
-Exact replays of logged episodes, with the brace indicator (blue = braced), sliding feet (red), downhill arrow and a text label: `blind_falls`, `tabpfn_braces`, `balance_reflex`, `always_brace` (steep episode 9), `tilt_safe_floor`, `tabpfn_safe_floor` (safe episode 30), and side-by-side `episode9_comparison.mp4` (blind | TabPFN | balance reflex) and `safe_floor_comparison.mp4` (tilt rule | TabPFN).
+Exact replays of logged episodes, with the brace indicator (blue = braced), sliding feet (red), downhill arrow and a text label: `blind_falls`, `tabpfn_braces`, `balance_reflex`, `always_brace` (steep episode 9), `tilt_safe_floor`, `tabpfn_safe_floor` (safe episode 30), and side-by-side `episode9_comparison.mp4` (blind | TabPFN | balance reflex) and `safe_floor_comparison.mp4` (tilt rule | TabPFN). On real hills: `hills_ice_comparison.mp4` (icy, steep episode 12) and `hills_comparison.mp4` (steep episode 24), each blind | TabPFN | balance reflex.
 
 `python a1_slip_viewer.py` shows the robot live on a chosen floor, with sliding feet in red and TabPFN's fall risk as a coloured ball.
 
