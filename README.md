@@ -11,6 +11,9 @@
 #### Notebooks
 fit_tabPFN.ipynb: should fit the tabPFN model and do the data wrangling (create a table out of the data).
 
+#### TabPFN terrain study
+[tabpfn_terrain_nav/](tabpfn_terrain_nav/): simulated study of a wheeled robot with a lidar that learns how slippery the terrain is at each new site from a few hundred self-labelled cells. It compares TabPFN with tree models, neural nets and geometric baselines, runs closed-loop navigation on the predicted costmaps and includes an explainer video. See its README for results and how to rerun.
+
 
 Simulation environments:
 
