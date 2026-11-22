@@ -56,6 +56,7 @@ flowchart LR
 |---|---|---|---|
 | 1 | Can TabPFN choose a safe speed on ice it can't see? | **yes:** 32 s / 8.9 s slipping, against crawling 49 s / 8.3 s and XGBoost 39 s / 8.8 s | `python a1_ice_patches.py governor` |
 | 2 | Can it learn where the ice is over repeated trips? | **yes:** 4.6 s slipping per trip, against 14.4 s with no map (8.4 s with a detector-only map) | `python a1_ice_patches.py patrol` |
+| 2b | Outdoors (grass, wet grass, sand, gravel, mud, water, trees, rocks): can it learn *what slippery looks like* on site? | **yes:** 4.5 s slipping per trip after trip 1, against 14.9 s with a felt-only map and 23.0 s with no slip map; XGBoost on the same rows 4.7 s but marks twice as many safe tiles as risky | `python a1_outdoor.py experiment` |
 | 3 | Does slip prediction transfer to unseen floors? | ROC-AUC 0.736 on unseen icy floors, ahead of XGBoost on equal data (0.706) | `python a1_slip_history_eval.py` |
 | 4 | Does fall prediction transfer to real hills? | ROC-AUC 0.86–0.94 frozen; XGBoost with 9× the data 0.89–0.97; tilt rule 0.82–0.83 | `python a1_terrain_test.py` |
 | 5 | Does acting on the fall warning prevent falls? | blind robot: 28 → 13 falls of 40; **but a simple balance reflex has 0**, and TabPFN adds nothing on top | `python a1_danger_mode.py`, `python a1_improve_test.py part3` |
@@ -78,7 +79,7 @@ flowchart LR
 pip install mujoco tabpfn xgboost scikit-learn matplotlib imageio imageio-ffmpeg
 ```
 
-TabPFN runs locally on CPU (model `v3.5-fast`). The first run downloads the weights, which needs the TabPFN licence accepted (see docs.priorlabs.ai). The MuJoCo Menagerie A1 model is cloned automatically on first use.
+TabPFN runs locally on CPU (model `v3.5-fast`). The first run downloads the weights, which needs the TabPFN licence accepted (see docs.priorlabs.ai). The MuJoCo Menagerie A1 model is cloned automatically on first use. Exact versions are in `requirements.txt` (Python 3.13; install PyTorch first with `pip install torch==2.15.0 --index-url https://download.pytorch.org/whl/cpu`).
 
 ### Repository layout
 
@@ -90,6 +91,7 @@ TabPFN runs locally on CPU (model `v3.5-fast`). The first run downloads the weig
 | `a1_collision.py` | TabPFN wrapper (`CollisionRisk`, generic despite the name) |
 | `a1_ice_patches.py`, `a1_ice_videos.py` | ice-patch course: speed governor, slip-map patrol, videos |
 | `a1_terrain.py`, `a1_terrain_test.py` | real hill terrain, frozen-model test |
+| `a1_outdoor.py`, `a1_outdoor_figure.py`, `a1_outdoor_video.py` | outdoor course (grass, sand, gravel, mud, water, trees, rocks): on-site TabPFN slip map from appearance |
 | `a1_slip_eval.py`, `a1_slip_history_eval.py`, `a1_learning_curve.py`, `a1_fall_feature_check.py`, `a1_floor_adapt.py` | offline prediction tests |
 | `a1_recovery_demo.py`, `a1_danger_mode.py`, `a1_improve_test.py`, `a1_balance_tune.py` | fall warning → action, balance reflex |
 | `a1_danger_replay.py`, `a1_slip_viewer.py`, `a1_record_videos.py` | viewers, replays, videos |
@@ -287,6 +289,32 @@ TabPFN slips about as little as crawling at nearly full speed, and it held on ev
 
 ![Ice governor](results/figures/ice_governor.png)
 ![Ice patrol](results/figures/ice_patrol.png)
+
+**Outdoor course: grass, sand, gravel, mud, water, trees and rocks** (`a1_outdoor.py`, figure: `python a1_outdoor.py figure`, video: `python a1_outdoor_video.py`)
+
+A 12 × 7 m MuJoCo world of 0.5 m terrain tiles, each with its own friction; sand, mud and water are soft, and gravel has small bumps. A pond with a mud rim always lies across the straight line from A to B, a dirt path winds around it, and trees and rocks are solid obstacles. Each terrain's true slip rate was measured by walking a floor made only of it (`python a1_outdoor.py calibrate`):
+
+| | path | grass | sand | gravel | wet grass | mud | water |
+|---|---|---|---|---|---|---|---|
+| friction | 0.90 | 0.75 | 0.45 | 0.60 | 0.35 | 0.20 | 0.10 |
+| time slipping, walking straight | 6% | 6% | 12% | 13% | 37% | 54% | 88% (stuck) |
+
+**An honest negative first:** the frozen body-sensor TabPFN slip model from the flat floors does not transfer here. On these soft, bumpy tiles it rates every terrain 0.72–0.93, and water lowest, because the robot is stuck there. So outdoors the robot uses the slip it measures at its feet, every 0.2 s (in simulation from the contacts; on a real robot from the legs-vs-IMU slip detector).
+
+**TabPFN's new job: learn on site, in context, what slippery ground looks like.** Every 0.2 s the robot adds one row: what the tile under it looks like to a camera (colour + roughness, with noise) and whether it just felt slippery. Every 2 s a TabPFN fitted on only these rows (tens to a few hundred, no training, no other sites) predicts every tile it hasn't walked on. A* routes around high-risk cells and around trees and rocks, which are assumed known (e.g. from lidar). Patrol A → B → A → B, 3 layouts:
+
+| strategy | slipping, trip 1 | slipping per trip, trips 2–4 | in mud/water per trip | time per trip |
+|---|---|---|---|---|
+| obstacles only (no slip map) | 41.1 s | 23.0 s | 29.6 s | 42.8 s |
+| felt map only (where it walked) | 18.6 s | 14.9 s | 14.7 s | 32.2 s |
+| felt + seen, XGBoost (same rows) | 40.5 s | 4.7 s | 12.4 s | 33.2 s |
+| **felt + seen, TabPFN** | 27.3 s | **4.5 s** | **7.8 s** | **28.7 s** |
+
+Predicting the tiles it hasn't walked on, after trip 1 (`results/outdoor_map_auc.json`): ROC-AUC TabPFN 0.907 (0.996 / 1.000 / 0.726 per layout) and XGBoost 0.926. They rank tiles about equally well, but XGBoost marks 34% of safe unwalked tiles as risky (> 0.5), against 17% for TabPFN, so its routes are longer.
+
+Honestly: once the map has examples, TabPFN and XGBoost avoid slipping about equally (4.5 vs 4.7 s). TabPFN's edge is fewer false alarms, and with them shorter trips and less time in mud and water. Trip 1 is expensive for every learner, because the robot has to step on bad ground before it has examples. With a few examples, the map can even send the robot the wrong way (layout 1, trip 1). The sample is 3 layouts.
+
+![Outdoor maps](results/figures/outdoor_maps.png)
 
 **Videos** (`python a1_record_videos.py` → `videos/*.mp4`, offscreen rendering, needs `pip install imageio imageio-ffmpeg`)
 

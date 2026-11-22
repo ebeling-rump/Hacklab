@@ -55,6 +55,19 @@ def main():
         table("2. Patrol A <-> B with a slip map, legs 3-6, 5 layouts",
               ("strategy", "mean slipping per leg", "median"), rows)
 
+    od = sorted((R / "outdoor").glob("*.json")) if (R / "outdoor").exists() else []
+    if od:
+        runs = [json.loads(p.read_text()) for p in od]
+        rows = []
+        for name in ("obstacles only", "felt map", "felt + seen (XGBoost)", "felt + seen (TabPFN)"):
+            legs = [l for r in runs if r["kind"] == name for l in r["legs"]]
+            if legs:
+                rows.append((name, f"{np.mean([l['slip_s'] for l in legs if l['leg'] == 0]):.1f} s",
+                             f"{np.mean([l['slip_s'] for l in legs if l['leg'] >= 1]):.1f} s",
+                             f"{np.mean([l['time'] for l in legs]):.1f} s"))
+        table("2b. Outdoor course (grass, sand, gravel, mud, water, trees), patrol, 3 layouts",
+              ("strategy", "slipping trip 1", "slipping trips 2-4", "time per trip"), rows)
+
     cd, tt = load("charts_data.json"), load("terrain_test.json")
     if cd and tt:
         f = cd["fall_roc_auc"]
