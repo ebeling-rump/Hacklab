@@ -231,9 +231,23 @@ pushes once per decision and composes it for lookahead. Closed-loop wall time pe
 
 ---
 
-## 6. Late results
+## 6. Closed-loop transfer (Challenge 7 in closed loop)
 
-(Appended as the remaining overnight runs finished — see bottom of the file.)
+TabPFN transfer-hybrid (context: 40 training objects × ≤8 pushes, heterogeneous regime) on the same
+24 heterogeneous task seeds (`results/manip_hetero_transfer.csv`, `results/manip_stats_hetero.csv`):
+
+| challenge | physics + sysID | TabPFN-hybrid | **TabPFN transfer-hybrid** |
+|---|---|---|---|
+| C3H precision | 100%, 10.3 pushes, 13.6 mm | 75%, 12.5, 16.4 mm | 88%, 10.1, **12.5 mm** |
+| C4H asymmetric | 100%, 7.0, 12.1 mm | 100%, 9.6, 11.0 mm | 100%, 7.0, **7.8 mm** |
+| C5H doorway | 88%, 14.9, 22.7 mm, 2.9 wall hits | 88%, 19.4, 19.0 mm, 6.8 | 88%, 18.8, **16.6 mm**, 4.1 |
+
+(success, mean pushes, median final position error). Paired vs physics + sysID (24 episodes):
+TabPFN-hybrid +3.1 pushes (p = 0.015); **TabPFN transfer-hybrid +1.25 pushes (p = 0.79), +0.4 wall
+contacts (p = 0.44)** — prior experience removes the significant closed-loop deficit of the single-object
+residual model and gives the most precise final placements, but does not beat physics + sysID on
+number of pushes. Cost: ≈45 s of CPU per decision (300-row context, 2 ensemble members × 3 outputs,
+shared CPU) vs 0.17 s for physics + sysID.
 
 ---
 

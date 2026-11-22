@@ -137,7 +137,7 @@ def manip_figure(csv, out):
     for ax, lab in zip(axes, ["success rate (95% bootstrap CI)", "pushes to success (successful runs)",
                               "median final position error [mm]"]):
         ax.set_xticks(np.arange(len(chs)) + 0.4 - w / 2)
-        ax.set_xticklabels(chs)
+        ax.set_xticklabels([c.replace("_hetero", "H").split("_")[0] + ("H" if "hetero" in c else "") if False else c.split("_")[0] + ("H" if "hetero" in c else "") for c in chs])
         ax.set_ylabel(lab)
     axes[2].set_yscale("log")
     axes[0].legend(fontsize=7.5, loc="lower left")
@@ -195,8 +195,12 @@ def main():
         if t is not None:
             print(name)
             print(t.to_string(index=False))
-    for tag in ["v1", "v2", "hetero"]:
+    for tag in ["v2"]:
         manip_figure(RES / f"manip_{tag}.csv", FIG / f"manipulation_{tag}.png")
+    if (RES / "manip_hetero_transfer.csv").exists():
+        pd.concat([pd.read_csv(RES / "manip_hetero.csv"), pd.read_csv(RES / "manip_hetero_transfer.csv")]).to_csv(
+            RES / "manip_hetero_all.csv", index=False)
+        manip_figure(RES / "manip_hetero_all.csv", FIG / "manipulation_hetero.png")
     active_figure(RES / "active_htest.csv", FIG / "active_hetero.png")
     active_figure(RES / "active_test.csv", FIG / "active_standard.png")
     print("figures ->", FIG)
