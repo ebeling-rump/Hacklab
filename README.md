@@ -2,7 +2,7 @@
 
 **TabPFN on a simulated Unitree A1.** The robot reads only its own body sensors. With 2,000 example rows and no training, it decides how fast it can safely walk, remembers where the ice was and learns on site what slippery ground looks like.
 
-**▶ [Watch the 77-second demo video](docs/demo.mp4)**
+**▶ [Watch the 77-second demo video](docs/demo.mp4?raw=true)** (MP4, 2.7 MB)
 
 ![TabPFN speed governor on ice patches](docs/ice_governor.gif)
 
