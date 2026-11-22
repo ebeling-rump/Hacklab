@@ -7,12 +7,15 @@ wide as the robot) is free of lidar hits, steer towards the one closest to the
 goal.
 
     pip install mujoco
-    python a1_lidar.py               # viewer (lidar rays drawn in the scene)
+    python a1_lidar.py               # viewer (use mjpython on macOS)
+    mjpython a1_lidar.py             # macOS: required for the interactive viewer
     python a1_lidar.py --headless    # prints progress only
     python a1_lidar.py --seed 3      # different random obstacle layout
 """
 
 import argparse
+import os
+import platform
 import subprocess
 import time
 from pathlib import Path
@@ -225,6 +228,16 @@ def main() -> None:
                       f"closest obstacle={read_lidar(data).min():.2f} m")
         print(f"{'Success' if state['done'] else 'Did not reach the goal'}; "
               f"closest lidar reading on the way: {state['min_clear']:.2f} m")
+        return
+
+    # On macOS the interactive viewer must run under mjpython, not plain python.
+    # mjpython keeps sys.executable pointing at the normal interpreter but sets
+    # MJPYTHON_BIN in the environment, so use that to detect it. Fail early with a
+    # clear hint instead of a raw MuJoCo traceback.
+    if platform.system() == "Darwin" and "MJPYTHON_BIN" not in os.environ:
+        print("The interactive viewer needs mjpython on macOS. Run one of:")
+        print(f"    mjpython {Path(__file__).name}")
+        print(f"    python {Path(__file__).name} --headless")
         return
 
     with mujoco.viewer.launch_passive(model, data) as viewer:
