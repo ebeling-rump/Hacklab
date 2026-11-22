@@ -1,0 +1,157 @@
+{
+ "episodes_per_config": 40,
+ "floors": "training slopes 9-13 deg, friction 0.1-1.0, seeds 50000+",
+ "chosen": "roll trio x0.5",
+ "rows": [
+  {
+   "name": "blind gait",
+   "falls": 8,
+   "distance": 2.41,
+   "note": "part 1, copied from the console (run hit the time limit before writing JSON)"
+  },
+  {
+   "name": "lean_pitch = +0.80",
+   "falls": 11,
+   "distance": 2.54,
+   "note": "part 1, copied from the console (run hit the time limit before writing JSON)"
+  },
+  {
+   "name": "lean_pitch = -0.80",
+   "falls": 27,
+   "distance": 1.16,
+   "note": "part 1, copied from the console (run hit the time limit before writing JSON)"
+  },
+  {
+   "name": "lean_roll = +0.80",
+   "falls": 2,
+   "distance": 2.38,
+   "note": "part 1, copied from the console (run hit the time limit before writing JSON)"
+  },
+  {
+   "name": "lean_roll = -0.80",
+   "falls": 23,
+   "distance": 1.78,
+   "note": "part 1, copied from the console (run hit the time limit before writing JSON)"
+  },
+  {
+   "name": "level_pitch = +0.50",
+   "falls": 14,
+   "distance": 1.85,
+   "note": "part 1, copied from the console (run hit the time limit before writing JSON)"
+  },
+  {
+   "name": "level_pitch = -0.50",
+   "falls": 28,
+   "distance": 1.17,
+   "note": "part 1, copied from the console (run hit the time limit before writing JSON)"
+  },
+  {
+   "name": "level_roll = +0.50",
+   "falls": 40,
+   "distance": 0.3,
+   "note": "part 1, copied from the console (run hit the time limit before writing JSON)"
+  },
+  {
+   "name": "level_roll = -0.50",
+   "falls": 2,
+   "distance": 2.05,
+   "note": "part 1, copied from the console (run hit the time limit before writing JSON)"
+  },
+  {
+   "name": "damp = +0.03",
+   "falls": 40,
+   "distance": 0.66,
+   "note": "part 1, copied from the console (run hit the time limit before writing JSON)"
+  },
+  {
+   "name": "damp = -0.03",
+   "falls": 4,
+   "distance": 2.33,
+   "note": "part 1, copied from the console (run hit the time limit before writing JSON)"
+  },
+  {
+   "name": "vel_x = +0.30",
+   "gains": {
+    "lean_pitch": 0.0,
+    "lean_roll": 0.0,
+    "level_pitch": 0.0,
+    "level_roll": 0.0,
+    "damp": 0.0,
+    "vel_x": 0.3,
+    "vel_y": 0.0
+   },
+   "falls": 35,
+   "distance": 0.9060981149852875
+  },
+  {
+   "name": "vel_x = -0.30",
+   "gains": {
+    "lean_pitch": 0.0,
+    "lean_roll": 0.0,
+    "level_pitch": 0.0,
+    "level_roll": 0.0,
+    "damp": 0.0,
+    "vel_x": -0.3,
+    "vel_y": 0.0
+   },
+   "falls": 14,
+   "distance": 2.0111758708468686
+  },
+  {
+   "name": "vel_y = +0.30",
+   "gains": {
+    "lean_pitch": 0.0,
+    "lean_roll": 0.0,
+    "level_pitch": 0.0,
+    "level_roll": 0.0,
+    "damp": 0.0,
+    "vel_x": 0.0,
+    "vel_y": 0.3
+   },
+   "falls": 6,
+   "distance": 2.3934422701710574
+  },
+  {
+   "name": "vel_y = -0.30",
+   "gains": {
+    "lean_pitch": 0.0,
+    "lean_roll": 0.0,
+    "level_pitch": 0.0,
+    "level_roll": 0.0,
+    "damp": 0.0,
+    "vel_x": 0.0,
+    "vel_y": -0.3
+   },
+   "falls": 27,
+   "distance": 1.6629601054604237
+  },
+  {
+   "name": "roll trio x0.5",
+   "gains": {
+    "lean_pitch": 0.0,
+    "lean_roll": 0.4,
+    "level_pitch": 0.0,
+    "level_roll": -0.25,
+    "damp": -0.015,
+    "vel_x": 0.0,
+    "vel_y": 0.0
+   },
+   "falls": 0,
+   "distance": 2.3220097370579227
+  },
+  {
+   "name": "roll trio x1",
+   "gains": {
+    "lean_pitch": 0.0,
+    "lean_roll": 0.8,
+    "level_pitch": 0.0,
+    "level_roll": -0.5,
+    "damp": -0.03,
+    "vel_x": 0.0,
+    "vel_y": 0.0
+   },
+   "falls": 0,
+   "distance": 1.6169958542984737
+  }
+ ]
+}

@@ -1,0 +1,1122 @@
+[
+ {
+  "kind": "dangerous",
+  "episode": 0,
+  "controller": "balancer only",
+  "fell": false,
+  "distance": 0.6788715612381715
+ },
+ {
+  "kind": "dangerous",
+  "episode": 1,
+  "controller": "balancer only",
+  "fell": false,
+  "distance": 3.1373254786882416
+ },
+ {
+  "kind": "dangerous",
+  "episode": 2,
+  "controller": "balancer only",
+  "fell": false,
+  "distance": 3.5544718574909835
+ },
+ {
+  "kind": "dangerous",
+  "episode": 3,
+  "controller": "balancer only",
+  "fell": false,
+  "distance": 2.4089957827054995
+ },
+ {
+  "kind": "dangerous",
+  "episode": 4,
+  "controller": "balancer only",
+  "fell": false,
+  "distance": 2.852611607197717
+ },
+ {
+  "kind": "dangerous",
+  "episode": 5,
+  "controller": "balancer only",
+  "fell": false,
+  "distance": 2.4477395997881275
+ },
+ {
+  "kind": "dangerous",
+  "episode": 6,
+  "controller": "balancer only",
+  "fell": false,
+  "distance": 1.6868944352783053
+ },
+ {
+  "kind": "dangerous",
+  "episode": 7,
+  "controller": "balancer only",
+  "fell": false,
+  "distance": 1.317125593696937
+ },
+ {
+  "kind": "dangerous",
+  "episode": 8,
+  "controller": "balancer only",
+  "fell": false,
+  "distance": 1.4162704794885295
+ },
+ {
+  "kind": "dangerous",
+  "episode": 9,
+  "controller": "balancer only",
+  "fell": false,
+  "distance": 2.2865396576403185
+ },
+ {
+  "kind": "dangerous",
+  "episode": 10,
+  "controller": "balancer only",
+  "fell": false,
+  "distance": 3.131661456866011
+ },
+ {
+  "kind": "dangerous",
+  "episode": 11,
+  "controller": "balancer only",
+  "fell": false,
+  "distance": 3.2058932945146528
+ },
+ {
+  "kind": "dangerous",
+  "episode": 12,
+  "controller": "balancer only",
+  "fell": false,
+  "distance": 1.7837152274649148
+ },
+ {
+  "kind": "dangerous",
+  "episode": 13,
+  "controller": "balancer only",
+  "fell": false,
+  "distance": 1.614059540410274
+ },
+ {
+  "kind": "dangerous",
+  "episode": 14,
+  "controller": "balancer only",
+  "fell": false,
+  "distance": 1.9098659937323261
+ },
+ {
+  "kind": "dangerous",
+  "episode": 15,
+  "controller": "balancer only",
+  "fell": false,
+  "distance": 1.0425438250010723
+ },
+ {
+  "kind": "dangerous",
+  "episode": 16,
+  "controller": "balancer only",
+  "fell": false,
+  "distance": 2.5296975137587068
+ },
+ {
+  "kind": "dangerous",
+  "episode": 17,
+  "controller": "balancer only",
+  "fell": false,
+  "distance": 3.0936312384171694
+ },
+ {
+  "kind": "dangerous",
+  "episode": 18,
+  "controller": "balancer only",
+  "fell": false,
+  "distance": 2.9863707752456485
+ },
+ {
+  "kind": "dangerous",
+  "episode": 19,
+  "controller": "balancer only",
+  "fell": false,
+  "distance": 2.810766525135097
+ },
+ {
+  "kind": "dangerous",
+  "episode": 20,
+  "controller": "balancer only",
+  "fell": false,
+  "distance": 3.636834590503185
+ },
+ {
+  "kind": "dangerous",
+  "episode": 21,
+  "controller": "balancer only",
+  "fell": false,
+  "distance": 2.120857675891744
+ },
+ {
+  "kind": "dangerous",
+  "episode": 22,
+  "controller": "balancer only",
+  "fell": false,
+  "distance": 2.1165531032791747
+ },
+ {
+  "kind": "dangerous",
+  "episode": 23,
+  "controller": "balancer only",
+  "fell": false,
+  "distance": 2.6574971895264787
+ },
+ {
+  "kind": "dangerous",
+  "episode": 24,
+  "controller": "balancer only",
+  "fell": false,
+  "distance": 1.5406601979996242
+ },
+ {
+  "kind": "dangerous",
+  "episode": 25,
+  "controller": "balancer only",
+  "fell": false,
+  "distance": 2.753216923963927
+ },
+ {
+  "kind": "dangerous",
+  "episode": 26,
+  "controller": "balancer only",
+  "fell": false,
+  "distance": 2.571685558926341
+ },
+ {
+  "kind": "dangerous",
+  "episode": 27,
+  "controller": "balancer only",
+  "fell": false,
+  "distance": 2.826540369292409
+ },
+ {
+  "kind": "dangerous",
+  "episode": 28,
+  "controller": "balancer only",
+  "fell": false,
+  "distance": 2.7509668651066272
+ },
+ {
+  "kind": "dangerous",
+  "episode": 29,
+  "controller": "balancer only",
+  "fell": false,
+  "distance": 2.402309662827896
+ },
+ {
+  "kind": "dangerous",
+  "episode": 30,
+  "controller": "balancer only",
+  "fell": false,
+  "distance": 1.5452771866981598
+ },
+ {
+  "kind": "dangerous",
+  "episode": 31,
+  "controller": "balancer only",
+  "fell": false,
+  "distance": 3.342830634788968
+ },
+ {
+  "kind": "dangerous",
+  "episode": 32,
+  "controller": "balancer only",
+  "fell": false,
+  "distance": 2.8146027822731003
+ },
+ {
+  "kind": "dangerous",
+  "episode": 33,
+  "controller": "balancer only",
+  "fell": false,
+  "distance": 2.796386549031665
+ },
+ {
+  "kind": "dangerous",
+  "episode": 34,
+  "controller": "balancer only",
+  "fell": false,
+  "distance": 0.9179914681812128
+ },
+ {
+  "kind": "dangerous",
+  "episode": 35,
+  "controller": "balancer only",
+  "fell": false,
+  "distance": 2.9285465979786016
+ },
+ {
+  "kind": "dangerous",
+  "episode": 36,
+  "controller": "balancer only",
+  "fell": false,
+  "distance": 2.8204060024105595
+ },
+ {
+  "kind": "dangerous",
+  "episode": 37,
+  "controller": "balancer only",
+  "fell": false,
+  "distance": 2.0113715275834188
+ },
+ {
+  "kind": "dangerous",
+  "episode": 38,
+  "controller": "balancer only",
+  "fell": false,
+  "distance": 1.825988687571744
+ },
+ {
+  "kind": "dangerous",
+  "episode": 39,
+  "controller": "balancer only",
+  "fell": false,
+  "distance": 3.287014410968549
+ },
+ {
+  "kind": "dangerous",
+  "episode": 0,
+  "controller": "balancer + always brace",
+  "fell": false,
+  "distance": 0.831255550817645
+ },
+ {
+  "kind": "dangerous",
+  "episode": 1,
+  "controller": "balancer + always brace",
+  "fell": false,
+  "distance": 1.9250796877560146
+ },
+ {
+  "kind": "dangerous",
+  "episode": 2,
+  "controller": "balancer + always brace",
+  "fell": false,
+  "distance": 2.004656762838095
+ },
+ {
+  "kind": "dangerous",
+  "episode": 3,
+  "controller": "balancer + always brace",
+  "fell": false,
+  "distance": 1.2761164392032283
+ },
+ {
+  "kind": "dangerous",
+  "episode": 4,
+  "controller": "balancer + always brace",
+  "fell": false,
+  "distance": 1.599466978816786
+ },
+ {
+  "kind": "dangerous",
+  "episode": 5,
+  "controller": "balancer + always brace",
+  "fell": false,
+  "distance": 0.8455366775235664
+ },
+ {
+  "kind": "dangerous",
+  "episode": 6,
+  "controller": "balancer + always brace",
+  "fell": false,
+  "distance": 1.1061382224952625
+ },
+ {
+  "kind": "dangerous",
+  "episode": 7,
+  "controller": "balancer + always brace",
+  "fell": false,
+  "distance": 0.5194513223222927
+ },
+ {
+  "kind": "dangerous",
+  "episode": 8,
+  "controller": "balancer + always brace",
+  "fell": false,
+  "distance": 0.9883817074090576
+ },
+ {
+  "kind": "dangerous",
+  "episode": 9,
+  "controller": "balancer + always brace",
+  "fell": false,
+  "distance": 1.4937559801115994
+ },
+ {
+  "kind": "dangerous",
+  "episode": 10,
+  "controller": "balancer + always brace",
+  "fell": false,
+  "distance": 2.0205431135881637
+ },
+ {
+  "kind": "dangerous",
+  "episode": 11,
+  "controller": "balancer + always brace",
+  "fell": false,
+  "distance": 1.610580835387721
+ },
+ {
+  "kind": "dangerous",
+  "episode": 12,
+  "controller": "balancer + always brace",
+  "fell": false,
+  "distance": 0.35730597572752737
+ },
+ {
+  "kind": "dangerous",
+  "episode": 13,
+  "controller": "balancer + always brace",
+  "fell": false,
+  "distance": 1.002159510685181
+ },
+ {
+  "kind": "dangerous",
+  "episode": 14,
+  "controller": "balancer + always brace",
+  "fell": false,
+  "distance": 1.0281478470282803
+ },
+ {
+  "kind": "dangerous",
+  "episode": 15,
+  "controller": "balancer + always brace",
+  "fell": false,
+  "distance": 0.6280537370974573
+ },
+ {
+  "kind": "dangerous",
+  "episode": 16,
+  "controller": "balancer + always brace",
+  "fell": false,
+  "distance": 0.36832870701275083
+ },
+ {
+  "kind": "dangerous",
+  "episode": 17,
+  "controller": "balancer + always brace",
+  "fell": false,
+  "distance": 1.7897671453967623
+ },
+ {
+  "kind": "dangerous",
+  "episode": 18,
+  "controller": "balancer + always brace",
+  "fell": false,
+  "distance": 1.7307737875793077
+ },
+ {
+  "kind": "dangerous",
+  "episode": 19,
+  "controller": "balancer + always brace",
+  "fell": false,
+  "distance": 1.5361550778326556
+ },
+ {
+  "kind": "dangerous",
+  "episode": 20,
+  "controller": "balancer + always brace",
+  "fell": false,
+  "distance": 2.278856972343728
+ },
+ {
+  "kind": "dangerous",
+  "episode": 21,
+  "controller": "balancer + always brace",
+  "fell": false,
+  "distance": 1.3226768646184606
+ },
+ {
+  "kind": "dangerous",
+  "episode": 22,
+  "controller": "balancer + always brace",
+  "fell": false,
+  "distance": 0.47151120291523757
+ },
+ {
+  "kind": "dangerous",
+  "episode": 23,
+  "controller": "balancer + always brace",
+  "fell": false,
+  "distance": 1.524216856758146
+ },
+ {
+  "kind": "dangerous",
+  "episode": 24,
+  "controller": "balancer + always brace",
+  "fell": false,
+  "distance": 0.5033070101618111
+ },
+ {
+  "kind": "dangerous",
+  "episode": 25,
+  "controller": "balancer + always brace",
+  "fell": false,
+  "distance": 1.7002083871679725
+ },
+ {
+  "kind": "dangerous",
+  "episode": 26,
+  "controller": "balancer + always brace",
+  "fell": false,
+  "distance": 1.3928348696440673
+ },
+ {
+  "kind": "dangerous",
+  "episode": 27,
+  "controller": "balancer + always brace",
+  "fell": false,
+  "distance": 1.3685872627483622
+ },
+ {
+  "kind": "dangerous",
+  "episode": 28,
+  "controller": "balancer + always brace",
+  "fell": false,
+  "distance": 1.379537612543202
+ },
+ {
+  "kind": "dangerous",
+  "episode": 29,
+  "controller": "balancer + always brace",
+  "fell": false,
+  "distance": 1.4430410234946014
+ },
+ {
+  "kind": "dangerous",
+  "episode": 30,
+  "controller": "balancer + always brace",
+  "fell": false,
+  "distance": 0.5269650598532502
+ },
+ {
+  "kind": "dangerous",
+  "episode": 31,
+  "controller": "balancer + always brace",
+  "fell": false,
+  "distance": 1.49428151141095
+ },
+ {
+  "kind": "dangerous",
+  "episode": 32,
+  "controller": "balancer + always brace",
+  "fell": false,
+  "distance": 1.8869114256729227
+ },
+ {
+  "kind": "dangerous",
+  "episode": 33,
+  "controller": "balancer + always brace",
+  "fell": false,
+  "distance": 1.4783079091132625
+ },
+ {
+  "kind": "dangerous",
+  "episode": 34,
+  "controller": "balancer + always brace",
+  "fell": false,
+  "distance": 0.9847215874984571
+ },
+ {
+  "kind": "dangerous",
+  "episode": 35,
+  "controller": "balancer + always brace",
+  "fell": false,
+  "distance": 1.3732883446246826
+ },
+ {
+  "kind": "dangerous",
+  "episode": 36,
+  "controller": "balancer + always brace",
+  "fell": false,
+  "distance": 1.379952404230853
+ },
+ {
+  "kind": "dangerous",
+  "episode": 37,
+  "controller": "balancer + always brace",
+  "fell": false,
+  "distance": 0.7864761124102484
+ },
+ {
+  "kind": "dangerous",
+  "episode": 38,
+  "controller": "balancer + always brace",
+  "fell": false,
+  "distance": 1.087140759744575
+ },
+ {
+  "kind": "dangerous",
+  "episode": 39,
+  "controller": "balancer + always brace",
+  "fell": false,
+  "distance": 1.1060975990223272
+ },
+ {
+  "kind": "safe",
+  "episode": 0,
+  "controller": "balancer only",
+  "fell": false,
+  "distance": 1.0061647528268092
+ },
+ {
+  "kind": "safe",
+  "episode": 1,
+  "controller": "balancer only",
+  "fell": false,
+  "distance": 1.3512953303630495
+ },
+ {
+  "kind": "safe",
+  "episode": 2,
+  "controller": "balancer only",
+  "fell": false,
+  "distance": 1.7539655554457676
+ },
+ {
+  "kind": "safe",
+  "episode": 3,
+  "controller": "balancer only",
+  "fell": false,
+  "distance": 1.5683540875933106
+ },
+ {
+  "kind": "safe",
+  "episode": 4,
+  "controller": "balancer only",
+  "fell": false,
+  "distance": 1.4340512014925864
+ },
+ {
+  "kind": "safe",
+  "episode": 5,
+  "controller": "balancer only",
+  "fell": false,
+  "distance": 1.051110782972438
+ },
+ {
+  "kind": "safe",
+  "episode": 6,
+  "controller": "balancer only",
+  "fell": false,
+  "distance": 2.386757870147264
+ },
+ {
+  "kind": "safe",
+  "episode": 7,
+  "controller": "balancer only",
+  "fell": false,
+  "distance": 2.9622824465182105
+ },
+ {
+  "kind": "safe",
+  "episode": 8,
+  "controller": "balancer only",
+  "fell": false,
+  "distance": 1.1840746179604749
+ },
+ {
+  "kind": "safe",
+  "episode": 9,
+  "controller": "balancer only",
+  "fell": false,
+  "distance": 2.901053411058129
+ },
+ {
+  "kind": "safe",
+  "episode": 10,
+  "controller": "balancer only",
+  "fell": false,
+  "distance": 2.583882450715478
+ },
+ {
+  "kind": "safe",
+  "episode": 11,
+  "controller": "balancer only",
+  "fell": false,
+  "distance": 2.133384024226877
+ },
+ {
+  "kind": "safe",
+  "episode": 12,
+  "controller": "balancer only",
+  "fell": false,
+  "distance": 1.7028918817918481
+ },
+ {
+  "kind": "safe",
+  "episode": 13,
+  "controller": "balancer only",
+  "fell": false,
+  "distance": 2.157899176622875
+ },
+ {
+  "kind": "safe",
+  "episode": 14,
+  "controller": "balancer only",
+  "fell": false,
+  "distance": 1.2503389970673076
+ },
+ {
+  "kind": "safe",
+  "episode": 15,
+  "controller": "balancer only",
+  "fell": false,
+  "distance": 2.363120750184178
+ },
+ {
+  "kind": "safe",
+  "episode": 16,
+  "controller": "balancer only",
+  "fell": false,
+  "distance": 1.1669877682875431
+ },
+ {
+  "kind": "safe",
+  "episode": 17,
+  "controller": "balancer only",
+  "fell": false,
+  "distance": 2.030535975682888
+ },
+ {
+  "kind": "safe",
+  "episode": 18,
+  "controller": "balancer only",
+  "fell": false,
+  "distance": 1.3401252337142084
+ },
+ {
+  "kind": "safe",
+  "episode": 19,
+  "controller": "balancer only",
+  "fell": false,
+  "distance": 1.262776239096802
+ },
+ {
+  "kind": "safe",
+  "episode": 20,
+  "controller": "balancer only",
+  "fell": false,
+  "distance": 1.853522638299131
+ },
+ {
+  "kind": "safe",
+  "episode": 21,
+  "controller": "balancer only",
+  "fell": false,
+  "distance": 1.1032657318792771
+ },
+ {
+  "kind": "safe",
+  "episode": 22,
+  "controller": "balancer only",
+  "fell": false,
+  "distance": 2.160158329309746
+ },
+ {
+  "kind": "safe",
+  "episode": 23,
+  "controller": "balancer only",
+  "fell": false,
+  "distance": 2.4738461917165524
+ },
+ {
+  "kind": "safe",
+  "episode": 24,
+  "controller": "balancer only",
+  "fell": false,
+  "distance": 2.4021356912796605
+ },
+ {
+  "kind": "safe",
+  "episode": 25,
+  "controller": "balancer only",
+  "fell": false,
+  "distance": 1.2785184904706652
+ },
+ {
+  "kind": "safe",
+  "episode": 26,
+  "controller": "balancer only",
+  "fell": false,
+  "distance": 2.7494134651073106
+ },
+ {
+  "kind": "safe",
+  "episode": 27,
+  "controller": "balancer only",
+  "fell": false,
+  "distance": 2.9877681830152674
+ },
+ {
+  "kind": "safe",
+  "episode": 28,
+  "controller": "balancer only",
+  "fell": false,
+  "distance": 1.8534540253406155
+ },
+ {
+  "kind": "safe",
+  "episode": 29,
+  "controller": "balancer only",
+  "fell": false,
+  "distance": 3.0552716290121085
+ },
+ {
+  "kind": "safe",
+  "episode": 30,
+  "controller": "balancer only",
+  "fell": false,
+  "distance": 1.3349714907499592
+ },
+ {
+  "kind": "safe",
+  "episode": 31,
+  "controller": "balancer only",
+  "fell": false,
+  "distance": 2.9891460115207833
+ },
+ {
+  "kind": "safe",
+  "episode": 32,
+  "controller": "balancer only",
+  "fell": false,
+  "distance": 2.694356527548728
+ },
+ {
+  "kind": "safe",
+  "episode": 33,
+  "controller": "balancer only",
+  "fell": false,
+  "distance": 1.2025602031646916
+ },
+ {
+  "kind": "safe",
+  "episode": 34,
+  "controller": "balancer only",
+  "fell": false,
+  "distance": 2.160041730190661
+ },
+ {
+  "kind": "safe",
+  "episode": 35,
+  "controller": "balancer only",
+  "fell": false,
+  "distance": 3.257858367608307
+ },
+ {
+  "kind": "safe",
+  "episode": 36,
+  "controller": "balancer only",
+  "fell": false,
+  "distance": 1.6630132211443276
+ },
+ {
+  "kind": "safe",
+  "episode": 37,
+  "controller": "balancer only",
+  "fell": false,
+  "distance": 2.1747842087286076
+ },
+ {
+  "kind": "safe",
+  "episode": 38,
+  "controller": "balancer only",
+  "fell": false,
+  "distance": 2.3341438403685206
+ },
+ {
+  "kind": "safe",
+  "episode": 39,
+  "controller": "balancer only",
+  "fell": false,
+  "distance": 1.6490330740337913
+ },
+ {
+  "kind": "safe",
+  "episode": 0,
+  "controller": "balancer + always brace",
+  "fell": false,
+  "distance": 0.7160326572201603
+ },
+ {
+  "kind": "safe",
+  "episode": 1,
+  "controller": "balancer + always brace",
+  "fell": false,
+  "distance": 0.4299714852792219
+ },
+ {
+  "kind": "safe",
+  "episode": 2,
+  "controller": "balancer + always brace",
+  "fell": false,
+  "distance": 0.7889688873237747
+ },
+ {
+  "kind": "safe",
+  "episode": 3,
+  "controller": "balancer + always brace",
+  "fell": false,
+  "distance": 0.755943936257115
+ },
+ {
+  "kind": "safe",
+  "episode": 4,
+  "controller": "balancer + always brace",
+  "fell": false,
+  "distance": 0.5749382490555202
+ },
+ {
+  "kind": "safe",
+  "episode": 5,
+  "controller": "balancer + always brace",
+  "fell": false,
+  "distance": 0.17395505296690406
+ },
+ {
+  "kind": "safe",
+  "episode": 6,
+  "controller": "balancer + always brace",
+  "fell": false,
+  "distance": 0.8439431715104981
+ },
+ {
+  "kind": "safe",
+  "episode": 7,
+  "controller": "balancer + always brace",
+  "fell": false,
+  "distance": 1.734694251497153
+ },
+ {
+  "kind": "safe",
+  "episode": 8,
+  "controller": "balancer + always brace",
+  "fell": false,
+  "distance": 0.38156150017923207
+ },
+ {
+  "kind": "safe",
+  "episode": 9,
+  "controller": "balancer + always brace",
+  "fell": false,
+  "distance": 1.3293400362416792
+ },
+ {
+  "kind": "safe",
+  "episode": 10,
+  "controller": "balancer + always brace",
+  "fell": false,
+  "distance": 1.2434946069977872
+ },
+ {
+  "kind": "safe",
+  "episode": 11,
+  "controller": "balancer + always brace",
+  "fell": false,
+  "distance": 1.1316571175469858
+ },
+ {
+  "kind": "safe",
+  "episode": 12,
+  "controller": "balancer + always brace",
+  "fell": false,
+  "distance": 1.005151993932093
+ },
+ {
+  "kind": "safe",
+  "episode": 13,
+  "controller": "balancer + always brace",
+  "fell": false,
+  "distance": 0.7225560700781459
+ },
+ {
+  "kind": "safe",
+  "episode": 14,
+  "controller": "balancer + always brace",
+  "fell": false,
+  "distance": 0.5975712708494545
+ },
+ {
+  "kind": "safe",
+  "episode": 15,
+  "controller": "balancer + always brace",
+  "fell": false,
+  "distance": 1.3068331696705875
+ },
+ {
+  "kind": "safe",
+  "episode": 16,
+  "controller": "balancer + always brace",
+  "fell": false,
+  "distance": 0.5917844315778947
+ },
+ {
+  "kind": "safe",
+  "episode": 17,
+  "controller": "balancer + always brace",
+  "fell": false,
+  "distance": 0.9147647017183895
+ },
+ {
+  "kind": "safe",
+  "episode": 18,
+  "controller": "balancer + always brace",
+  "fell": false,
+  "distance": 0.7921094746770673
+ },
+ {
+  "kind": "safe",
+  "episode": 19,
+  "controller": "balancer + always brace",
+  "fell": false,
+  "distance": 0.451221636530244
+ },
+ {
+  "kind": "safe",
+  "episode": 20,
+  "controller": "balancer + always brace",
+  "fell": false,
+  "distance": 0.9014823502232838
+ },
+ {
+  "kind": "safe",
+  "episode": 21,
+  "controller": "balancer + always brace",
+  "fell": false,
+  "distance": 0.611325161126261
+ },
+ {
+  "kind": "safe",
+  "episode": 22,
+  "controller": "balancer + always brace",
+  "fell": false,
+  "distance": 1.268269642790224
+ },
+ {
+  "kind": "safe",
+  "episode": 23,
+  "controller": "balancer + always brace",
+  "fell": false,
+  "distance": 1.1964726161131987
+ },
+ {
+  "kind": "safe",
+  "episode": 24,
+  "controller": "balancer + always brace",
+  "fell": false,
+  "distance": 1.389168135361386
+ },
+ {
+  "kind": "safe",
+  "episode": 25,
+  "controller": "balancer + always brace",
+  "fell": false,
+  "distance": 0.6417134782462737
+ },
+ {
+  "kind": "safe",
+  "episode": 26,
+  "controller": "balancer + always brace",
+  "fell": false,
+  "distance": 1.2438320764103141
+ },
+ {
+  "kind": "safe",
+  "episode": 27,
+  "controller": "balancer + always brace",
+  "fell": false,
+  "distance": 1.4308179530944165
+ },
+ {
+  "kind": "safe",
+  "episode": 28,
+  "controller": "balancer + always brace",
+  "fell": false,
+  "distance": 0.7688080578071442
+ },
+ {
+  "kind": "safe",
+  "episode": 29,
+  "controller": "balancer + always brace",
+  "fell": false,
+  "distance": 1.349504866516221
+ },
+ {
+  "kind": "safe",
+  "episode": 30,
+  "controller": "balancer + always brace",
+  "fell": false,
+  "distance": 0.7413699755587366
+ },
+ {
+  "kind": "safe",
+  "episode": 31,
+  "controller": "balancer + always brace",
+  "fell": false,
+  "distance": 1.1692447776163795
+ },
+ {
+  "kind": "safe",
+  "episode": 32,
+  "controller": "balancer + always brace",
+  "fell": false,
+  "distance": 1.206465543199949
+ },
+ {
+  "kind": "safe",
+  "episode": 33,
+  "controller": "balancer + always brace",
+  "fell": false,
+  "distance": 0.8963263959160259
+ },
+ {
+  "kind": "safe",
+  "episode": 34,
+  "controller": "balancer + always brace",
+  "fell": false,
+  "distance": 1.3029123096711004
+ },
+ {
+  "kind": "safe",
+  "episode": 35,
+  "controller": "balancer + always brace",
+  "fell": false,
+  "distance": 1.8647201649802188
+ },
+ {
+  "kind": "safe",
+  "episode": 36,
+  "controller": "balancer + always brace",
+  "fell": false,
+  "distance": 0.3807589354398723
+ },
+ {
+  "kind": "safe",
+  "episode": 37,
+  "controller": "balancer + always brace",
+  "fell": false,
+  "distance": 1.3416357343985355
+ },
+ {
+  "kind": "safe",
+  "episode": 38,
+  "controller": "balancer + always brace",
+  "fell": false,
+  "distance": 1.198592456200365
+ },
+ {
+  "kind": "safe",
+  "episode": 39,
+  "controller": "balancer + always brace",
+  "fell": false,
+  "distance": 0.320552777517934
+ }
+]

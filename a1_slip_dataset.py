@@ -26,7 +26,8 @@ floors (mu >= 0.5, flat or 12 deg) and in 6-8% of checks on slippery floors or
 slopes, measured with a steady 0.6 forward command. The robot
 never sees foot speeds, friction or slope - only the label does.
 
-    python a1_slip_dataset.py            # -> datasets/slip.npz
+    python a1_slip_dataset.py              # blind gait     -> datasets/slip.npz
+    python a1_slip_dataset.py --balanced   # balance ctrl   -> datasets/slip_balanced.npz
 """
 
 import time
@@ -225,13 +226,16 @@ class Reaction:
 NORMAL = Reaction()
 
 
-def run_episode(model, data, sensors, rng, mu, slope, azimuth, policy=None, on_step=None):
+def run_episode(model, data, sensors, rng, mu, slope, azimuth, policy=None, on_step=None,
+                balancer=None):
     """Simulate one episode. policy(features, history, cmd_target) -> Reaction is
     called at every sample (0.1 s) and may change the gait; None = never.
     Posture changes are blended in with the same 0.15 s smoothing as commands.
     on_step(data, reaction, sliding_feet) is called after every physics step
     (for a viewer); returning False stops the episode. It does not change the
     simulation, so a replay with a viewer reproduces a headless run exactly.
+    balancer(t, data, cmd, posture) -> joint targets replaces the blind gait
+    (a1_balance.Balancer); None = the original open-loop trot.
 
     Returns dict with per-sample features/labels and the fall time (or None).
     """
@@ -274,7 +278,8 @@ def run_episode(model, data, sensors, rng, mu, slope, azimuth, policy=None, on_s
         cmd += alpha * (target * [reaction.scale, reaction.turn_scale] - cmd)
         posture += alpha * (np.array([reaction.stance, reaction.crouch, reaction.lift]) - posture)
         reacting_steps += reaction != NORMAL
-        data.ctrl[:] = gait(t, *cmd, *posture)
+        data.ctrl[:] = (gait(t, *cmd, *posture) if balancer is None
+                        else balancer(t, data, cmd, posture))
         mujoco.mj_step(model, data)
         fell_now = False
         if k % CHECK_EVERY == 0:
@@ -315,17 +320,21 @@ def random_floor(rng):
     return mu, float(rng.uniform(0, SLOPE_MAX)), float(rng.uniform(0, 2 * np.pi))
 
 
-def main(n_episodes=N_EPISODES, seed=0, out=OUT):
+def main(n_episodes=N_EPISODES, seed=0, out=OUT, balanced=False):
     model = build_model()
     data = mujoco.MjData(model)
     sensors = A1Sensors(model)
     rng = np.random.default_rng(seed)
+    balancer = None
+    if balanced:
+        from a1_balance import TUNED, Balancer
+        balancer = Balancer(sensors, TUNED)
     cols = {k: [] for k in ("features", "history", "true_slip_2s", "slip_now", "slip_next",
                             "fall_next", "episode", "t", "mu", "slope_deg", "episode_fell")}
     t0, falls = time.time(), 0
     for e in range(n_episodes):
         mu, slope, az = random_floor(rng)
-        ep = run_episode(model, data, sensors, rng, mu, slope, az)
+        ep = run_episode(model, data, sensors, rng, mu, slope, az, balancer=balancer)
         now, nxt, fall = labels(ep)
         n = len(ep["t"])
         falls += ep["fall_t"] is not None
@@ -347,5 +356,13 @@ def main(n_episodes=N_EPISODES, seed=0, out=OUT):
           f"episodes with a fall {falls}/{n_episodes}")
 
 
+BALANCED_OUT = Path(__file__).parent / "datasets" / "slip_balanced.npz"
+
 if __name__ == "__main__":
-    main()
+    import argparse
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--balanced", action="store_true",
+                    help="walk with the feedback balance controller (a1_balance.TUNED) "
+                         "-> datasets/slip_balanced.npz")
+    a = ap.parse_args()
+    main(out=BALANCED_OUT if a.balanced else OUT, balanced=a.balanced)

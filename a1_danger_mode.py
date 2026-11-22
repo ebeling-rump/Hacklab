@@ -76,8 +76,8 @@ def tilt_deg(h):
     return float(np.degrees(np.arccos(np.clip(-h[GRAV_Z], -1, 1))))
 
 
-def fit_fall_model():
-    d = dict(np.load(DATA))
+def fit_fall_model(data_path=DATA):
+    d = dict(np.load(data_path))
     keep = [i for i, nm in enumerate(d["history_names"]) if not nm.startswith("grav_")]
     X = np.hstack([d["features"], d["history"][:, keep]])
     tr = fall_splits(d)["train"]
@@ -101,20 +101,30 @@ def make_controllers(risk, keep):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--episodes", type=int, default=40, help="per floor kind")
+    ap.add_argument("--balanced", action="store_true",
+                    help="every strategy walks with the feedback balance controller; TabPFN's "
+                         "examples come from datasets/slip_balanced.npz")
     args = ap.parse_args()
 
     t0 = time.time()
-    risk, keep = fit_fall_model()
-    controllers = make_controllers(risk, keep)
     model = build_model()
     data = mujoco.MjData(model)
     sensors = A1Sensors(model)
+    balancer, out = None, OUT
+    if args.balanced:
+        from a1_balance import TUNED, Balancer
+        from a1_slip_dataset import BALANCED_OUT
+        balancer, out = Balancer(sensors, TUNED), OUT.with_name("danger_mode_balanced.json")
+        risk, keep = fit_fall_model(BALANCED_OUT)
+    else:
+        risk, keep = fit_fall_model()
+    controllers = make_controllers(risk, keep)
     rows = []
     for kind in ("dangerous", "safe"):
         for e in range(args.episodes):
             for name, make in controllers.items():
                 fl, rng = episode_setup(kind, e)
-                ep = run_episode(model, data, sensors, rng, *fl, policy=make())
+                ep = run_episode(model, data, sensors, rng, *fl, policy=make(), balancer=balancer)
                 rows.append(dict(kind=kind, episode=e, mu=fl[0], slope=fl[1], controller=name,
                                  fell=ep["fall_t"] is not None,
                                  distance=float(np.linalg.norm(data.qpos[:2])),
@@ -122,8 +132,8 @@ def main():
                                  duration=float(data.time)))
             print(f"{kind} {e + 1}/{args.episodes} done ({time.time() - t0:.0f}s)", flush=True)
 
-    OUT.parent.mkdir(exist_ok=True)
-    OUT.write_text(json.dumps(rows, indent=1))
+    out.parent.mkdir(exist_ok=True)
+    out.write_text(json.dumps(rows, indent=1))
     print(f"\n{'controller':14s}{'falls (danger)':>16s}{'falls (safe)':>14s}"
           f"{'dist danger':>13s}{'dist safe':>11s}{'braced on safe':>16s}")
     for name in controllers:
@@ -134,7 +144,7 @@ def main():
               f"{np.mean([x['distance'] for x in r['dangerous']]):>11.2f} m"
               f"{np.mean([x['distance'] for x in r['safe']]):>9.2f} m"
               f"{np.mean([x['braced_s'] / x['duration'] for x in r['safe']]):>15.0%}")
-    print(f"wrote {OUT}")
+    print(f"wrote {out}")
 
 
 if __name__ == "__main__":

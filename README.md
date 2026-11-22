@@ -108,6 +108,18 @@ Posture is the lever, not speed: bracing all the time cuts falls by about two-th
 
 TabPFN prevents 15 of the 18 falls that always-bracing prevents, and costs nothing on safe floors. The simple tilt rule is a bit safer (10 vs 13 falls) but braces needlessly 26% of the time on safe floors. Neither threshold was tuned on these floors. The steep and safe slopes don't overlap (0–8° vs 13–15°), so a tuned tilt threshold could probably do as well; on real terrain, slopes aren't so cleanly separated.
 
+**Against a stronger baseline: a balance controller** (`a1_balance.py`, `python a1_balance_tune.py`, `python a1_slip_dataset.py --balanced`)
+
+The blind trot never reads a sensor. `a1_balance.Balancer` adds classic feedback reflexes on top of the same trot: lean the legs against sideways tilt, level the body by changing individual leg lengths, and damp rotation with the gyro. Foot placement (Raibert-style) is implemented, but tuning showed it didn't help. Gains were tuned on training slopes only (9–13°): the blind gait had 8 of 40 falls, the chosen `TUNED` gains (IMU only) 0 of 40 (`results/balance_tune.json`).
+
+| same 40 unseen 13–15° slopes | falls |
+|---|---|
+| blind trot | 28 |
+| blind trot + TabPFN danger mode | 13 |
+| **balance reflex, no TabPFN** | **0** |
+
+The balance reflex also had 0 falls on the 40 safe floors (`results/balancer_baseline.json`). In 400 data walks with the balancer, only 1 fell, so there are no fall examples to learn from and nothing left for a fall warning to prevent. **Falls here have one directly measurable cause, sideways tilt, so correcting it beats predicting it.** Slips still happen in 71% of moments with the balancer, and slip prediction on unseen floors remains TabPFN's useful role on this robot. Acting on slip risk on top of the balancer hasn't been tested yet.
+
 `python a1_slip_viewer.py` shows the robot live on a chosen floor, with sliding feet in red and TabPFN's fall risk as a coloured ball.
 
 #### Notebooks
