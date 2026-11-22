@@ -1,7 +1,10 @@
 model,auc_score,vs_physics_sysid,ci_lo,ci_hi,wins,n_obj
+tabpfn_transfer_hybrid,3.643,-0.251,-0.432,-0.114,0.917,24
 tabpfn_hybrid,3.807,-0.087,-0.408,0.125,0.25,24
 gp_hybrid,3.874,-0.02,-0.306,0.188,0.167,24
 physics_sysid,3.893,0.0,0.0,0.0,0.0,24
+tabpfn_transfer,4.022,0.129,-0.422,0.566,0.25,24
+gp_transfer_hybrid,4.134,0.24,0.001,0.479,0.167,24
 tabpfn_res,4.735,0.841,0.322,1.313,0.125,24
 physics_nominal,4.775,0.882,0.581,1.178,0.083,24
 gp_res,4.804,0.911,0.356,1.351,0.125,24

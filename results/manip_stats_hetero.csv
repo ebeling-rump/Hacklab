@@ -1,0 +1,13 @@
+scope,method,ref,n,success,ref_success,d_pushes,p_pushes,d_wall_contacts,p_wall_contacts
+pooled,tabpfn_hybrid,physics_sysid,24,0.875,0.9583,3.125,0.0155,1.2917,0.1065
+pooled,reactive,physics_sysid,24,0.75,0.9583,6.9167,0.0004,2.5833,0.0204
+pooled,gp_hybrid,physics_sysid,24,0.9167,0.9583,2.2083,0.0901,1.1667,0.0578
+C3_precision_hetero,tabpfn_hybrid,physics_sysid,8,0.75,1.0,2.25,0.4375,0.0,1.0
+C3_precision_hetero,reactive,physics_sysid,8,0.625,1.0,3.5,0.1094,0.0,1.0
+C3_precision_hetero,gp_hybrid,physics_sysid,8,0.875,1.0,1.75,0.7188,0.0,1.0
+C4_asymmetric_hetero,tabpfn_hybrid,physics_sysid,8,1.0,1.0,2.625,0.25,0.0,1.0
+C4_asymmetric_hetero,reactive,physics_sysid,8,0.875,1.0,3.75,0.0312,0.0,1.0
+C4_asymmetric_hetero,gp_hybrid,physics_sysid,8,1.0,1.0,1.0,0.6875,0.0,1.0
+C5_doorway_hetero,tabpfn_hybrid,physics_sysid,8,0.875,0.875,4.5,0.0625,3.875,0.125
+C5_doorway_hetero,reactive,physics_sysid,8,0.75,0.875,13.5,0.0156,7.75,0.0234
+C5_doorway_hetero,gp_hybrid,physics_sysid,8,0.875,0.875,3.875,0.0625,3.5,0.0938

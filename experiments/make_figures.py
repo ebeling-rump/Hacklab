@@ -79,7 +79,8 @@ def learning_curves(csvs, title, out, models=None):
     fig.savefig(out)
     plt.close(fig)
     # table
-    tab = df[df.model.isin(models)].groupby(["model", "n"])[["pos_mm", "ang_deg", "nll", "cov1", "pred_s"]].mean()
+    cols = [c for c in ["pos_mm", "ang_deg", "nll", "cov1", "pred_s"] if c in df]
+    tab = df[df.model.isin(models)].groupby(["model", "n"])[cols].mean()
     tab.round(3).to_csv(str(out).replace(".png", ".csv"))
 
 
@@ -201,5 +202,82 @@ def main():
     print("figures ->", FIG)
 
 
-if __name__ == "__main__":
+if __name__ == "__main__" and len(sys.argv) == 1:
     main()
+
+
+def manip_stats(csvs, out, ref="physics_sysid"):
+    """Paired (same task seed) comparisons of every method against `ref`."""
+    from scipy.stats import wilcoxon
+    df = pd.concat([pd.read_csv(c) for c in csvs if Path(c).exists()], ignore_index=True)
+    rows = []
+    for scope, d in [("pooled", df)] + list(df.groupby("challenge")):
+        for m in d.method.unique():
+            if m == ref:
+                continue
+            a = d[d.method == m].set_index(["challenge", "seed"])
+            b = d[d.method == ref].set_index(["challenge", "seed"])
+            idx = a.index.intersection(b.index)
+            if len(idx) < 3:
+                continue
+            a, b = a.loc[idx], b.loc[idx]
+            r = dict(scope=scope, method=m, ref=ref, n=len(idx), success=a.success.mean(), ref_success=b.success.mean())
+            for col in ["pushes", "wall_contacts"]:
+                diff = (a[col] - b[col]).values.astype(float)
+                r[f"d_{col}"] = diff.mean()
+                r[f"p_{col}"] = wilcoxon(diff).pvalue if np.any(diff != 0) else 1.0
+            rows.append(r)
+    t = pd.DataFrame(rows)
+    t.round(4).to_csv(out, index=False)
+    return t
+
+
+if __name__ == "__main__" and len(sys.argv) > 1 and sys.argv[1] == "stats":
+    pd.set_option("display.width", 220)
+    print(manip_stats([RES / "manip_v2.csv"], RES / "manip_stats_v2.csv").round(3).to_string())
+    print(manip_stats([RES / "manip_hetero.csv", RES / "manip_hetero_transfer.csv"], RES / "manip_stats_hetero.csv").round(3).to_string())
+
+
+def paired_figure(csvs, out, title, models, ref="physics_sysid", ns=(0, 1, 2, 3, 5, 10, 20, 40)):
+    df = pd.concat([pd.read_csv(c) for c in csvs if Path(c).exists()], ignore_index=True)
+    df = df.drop_duplicates(["model", "n", "obj", "seed"])
+    df["score"] = df.pos_mm / 10 + df.ang_deg / 5
+    piv = df.pivot_table(index=["obj", "seed", "n"], columns="model", values="score")
+    fig, ax = plt.subplots(figsize=(7.5, 4.3))
+    for k, m in enumerate(models):
+        xs, mu, lo, hi = [], [], [], []
+        for n in ns:
+            try:
+                p = piv.xs(n, level="n")
+            except KeyError:
+                continue
+            if m not in p or ref not in p:
+                continue
+            d = (p[m] - p[ref]).dropna().values
+            if len(d) < 3:
+                continue
+            l, h = ci(d, 2000)
+            xs.append(n); mu.append(d.mean()); lo.append(l); hi.append(h)
+        xs = np.array(xs, float)
+        xp = np.where(xs == 0, 0.5, xs) * (1 + 0.04 * (k - len(models) / 2))
+        ax.errorbar(xp, mu, yerr=[np.array(mu) - lo, np.array(hi) - mu], fmt="-o", ms=4, capsize=3,
+                    color=COLORS.get(m), label=LABELS.get(m, m), lw=2)
+    ax.axhline(0, color=COLORS[ref], lw=2, ls="--", label=LABELS[ref] + " (reference)")
+    ax.set_xscale("log")
+    ax.set_xticks([0.5, 1, 2, 3, 5, 10, 20, 40]); ax.set_xticklabels(["0", "1", "2", "3", "5", "10", "20", "40"])
+    ax.set_xlabel("pushes observed on the new object")
+    ax.set_ylabel("error score difference vs reference\n(pos/10mm + ang/5deg; below 0 = better)")
+    ax.set_title(title, fontsize=10)
+    ax.legend(fontsize=7.5)
+    fig.tight_layout()
+    fig.savefig(out)
+    plt.close(fig)
+
+
+if __name__ == "__main__" and len(sys.argv) > 1 and sys.argv[1] == "paired":
+    paired_figure([RES / "pred_hetero.csv", RES / "pred_transfer_het.csv"], FIG / "paired_hetero.png",
+                  "Heterogeneous regime, 24 unseen objects: paired difference to physics + online sysID (95% CI)",
+                  ["gp_hybrid", "tabpfn_hybrid", "gp_transfer_hybrid", "tabpfn_transfer_hybrid"])
+    paired_figure([RES / "pred_std_fast.csv", RES / "pred_std_tabpfn.csv"], FIG / "paired_standard.png",
+                  "Standard regime, 24 unseen objects: paired difference to physics + online sysID (95% CI)",
+                  ["gp_hybrid", "tabpfn_hybrid"])

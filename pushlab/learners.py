@@ -158,12 +158,14 @@ class Residual:
 
     def reset(self, shape, descriptor=None):
         self.phys = PhysicsModel(fit_params=self.refit, n_samples=0).reset(shape)
+        self.phys_unc = PhysicsModel(fit_params=self.refit, n_samples=8).reset(shape)
         self.learner.reset(shape, descriptor)
         return self
 
     def fit(self, Q, Y):
         if self.refit:
             self.phys.fit(Q, Y)
+            self.phys_unc.theta, self.phys_unc.cov, self.phys_unc.noise, self.phys_unc.n =                 self.phys.theta, self.phys.cov, self.phys.noise, self.phys.n
         base = self.phys.predict(Q)[0]
         self.learner.fit(Q, np.asarray(Y) - base)
         self.n = len(Y)
@@ -173,7 +175,8 @@ class Residual:
         base = self.phys.predict(Q)[0]
         m, s = self.learner.predict(Q)
         if self.learner.n < self.learner.min_n:
-            s = np.tile([0.012, 0.012, 0.12], (len(m), 1))  # prior residual scale
+            # not enough data for the learner yet: use the physics posterior (Laplace) uncertainty
+            s = self.phys_unc.predict(Q)[1]
         return base + m, s
 
 
