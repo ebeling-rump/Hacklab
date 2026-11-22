@@ -185,7 +185,9 @@ The scene is flat green ground with white ice patches (friction 0.1) on the way 
 | XGBoost governor (same 62 features, 10,290 rows) | 39.1 s | 8.8 s |
 | **TabPFN governor** | **32.0 s** | **8.9 s** |
 
-TabPFN slips about as little as crawling at nearly full speed, and it held on every layout. XGBoost reaches the same slip level 7 s slower. The detector-only model can't tell ice from grip (median risk 0.53 vs 0.55, against TabPFN's 0.42 vs 0.88), so it crawls everywhere.
+TabPFN slips about as little as crawling at nearly full speed, and it held on every layout.
+
+*More examples ≠ better governor* (`results/ice_governor_5000.json`). With 5,000 instead of 2,000 TabPFN examples, offline slip ROC-AUC on unseen icy and steep floors rises from 0.681 to 0.768, and each decision isn't slower (about 260 ms). But the governor gets worse: 45.0 s / 26.4 s slipping at the 0.65 limit (38.5 s / 8.8 s at 0.5). The 5,000-example model rates full speed on ice slightly lower (0.84 vs 0.88, even below 0.8 speed), so 10% of icy moments pass the 0.65 limit instead of 3%, and the robot runs onto the ice. The controller depends on how risk changes with speed, not on overall accuracy, so changing the model means re-checking the threshold. XGBoost reaches the same slip level 7 s slower. The detector-only model can't tell ice from grip (median risk 0.53 vs 0.55, against TabPFN's 0.42 vs 0.88), so it crawls everywhere.
 
 *Patrol with a slip map* (`python a1_ice_patches.py patrol`). The robot walks A↔B six times. Its slip risk goes into a grid map, and A* routes around high-risk cells. From leg 3 on, it slips 4.6 s per leg with the TabPFN map, 8.4 s with a detector-only map and 14.4 s with no map. Honestly, by legs 4–6 both maps end up similar (medians 2–4 s). TabPFN's edge is steadier learning: the detector map routes back into the ice on leg 3.
 
