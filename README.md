@@ -2,6 +2,8 @@
 
 **TabPFN on a simulated Unitree A1.** The robot reads only its own body sensors. With 2,000 example rows and no training, it decides how fast it can safely walk, remembers where the ice was and learns on site what slippery ground looks like.
 
+**▶ [Watch the 77-second demo video](docs/demo.mp4)**
+
 ![TabPFN speed governor on ice patches](docs/ice_governor.gif)
 
 *Same ice-patch course, same start. Left: fixed full speed (slips a lot). Middle: crawling (slow). Right: **TabPFN choosing the speed** (fast with few slips). White = ice, green = grip. 2× speed.*
@@ -230,7 +232,7 @@ a1slip/                  the Python package; run any module with python -m a1sli
 └── viz/                 charts, figures, videos, replays and viewers
 data/                    simulated training data (.npz)
 results/                 every reported number (JSON) and figures/
-docs/                    README GIFs
+docs/                    README GIFs and the demo video
 tests/                   pytest suite
 pyproject.toml, requirements.txt, Makefile, LICENSE
 ```
