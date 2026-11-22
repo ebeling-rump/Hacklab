@@ -22,7 +22,7 @@ COLORS = {
     "gp_transfer": "#8c4a1f",
     "tabpfn": "#9ad1a5", "tabpfn_res": "#5cb874", "tabpfn_physfeat": "#2e9e57", "tabpfn_hybrid": "#127a3d",
     "tabpfn_transfer": "#0b4f28", "tabpfn_transfer_raw": "#6a3d9a",
-    "tabpfn_hybrid_active": "#b5179e", "physics_sysid_active": "#7209b7", "gp_hybrid_active": "#f72585",
+    "tabpfn_hybrid_active": "#b5179e", "tabpfn_transfer_hybrid": "#00a6a6", "gp_transfer_hybrid": "#a0522d", "physics_sysid_active": "#7209b7", "gp_hybrid_active": "#f72585",
 }
 LABELS = {
     "physics_nominal": "Physics (nominal, no learning)", "physics_sysid": "Physics + online sysID (A)",
@@ -30,7 +30,8 @@ LABELS = {
     "gp_hybrid": "GP hybrid (sysID + GP residual)", "gp_transfer": "GP transfer",
     "tabpfn": "TabPFN (D)", "tabpfn_res": "TabPFN residual", "tabpfn_physfeat": "TabPFN + physics feats",
     "tabpfn_hybrid": "TabPFN hybrid (sysID + TabPFN residual)", "tabpfn_transfer": "TabPFN transfer (F)",
-    "tabpfn_transfer_raw": "TabPFN transfer (no physics)", "tabpfn_hybrid_active": "TabPFN hybrid + active (E)",
+    "tabpfn_transfer_raw": "TabPFN transfer (no physics)",
+    "tabpfn_transfer_hybrid": "TabPFN transfer-hybrid (F)", "gp_transfer_hybrid": "GP transfer-hybrid", "tabpfn_hybrid_active": "TabPFN hybrid + active (E)",
 }
 
 plt.rcParams.update({"figure.dpi": 130, "axes.spines.top": False, "axes.spines.right": False,
@@ -58,14 +59,14 @@ def learning_curves(csvs, title, out, models=None):
         d = df[df.model == m]
         for ax, col in zip(axes, ["pos_mm", "ang_deg", "nll"]):
             g = d.groupby("n")[col]
-            mu = g.mean()
+            mu = g.median() if col == "nll" else g.mean()
             lo_hi = np.array([ci(v) for _, v in g])
             x = mu.index.values
             xs = np.where(x == 0, 0.5, x)
             ax.plot(xs, mu.values, "-o", ms=3, color=COLORS.get(m), label=LABELS.get(m, m),
                     lw=2.2 if "tabpfn" in m or m == "physics_sysid" else 1.3)
             ax.fill_between(xs, lo_hi[:, 0], lo_hi[:, 1], color=COLORS.get(m), alpha=0.12)
-    for ax, lab in zip(axes, ["position error [mm]", "orientation error [deg]", "Gaussian NLL (lower=better)"]):
+    for ax, lab in zip(axes, ["position error [mm]", "orientation error [deg]", "median Gaussian NLL (lower=better)"]):
         ax.set_xscale("log")
         ax.set_xticks([0.5, 1, 2, 3, 5, 10, 20, 40])
         ax.set_xticklabels(["0", "1", "2", "3", "5", "10", "20", "40"])
@@ -172,6 +173,13 @@ def main():
     learning_curves([RES / "pred_hetero.csv"],
                     "Heterogeneous regime (variable push speed, caster-wheeled objects): few-shot prediction",
                     FIG / "learning_curves_hetero.png")
+    head = ["physics_nominal", "physics_sysid", "gp_hybrid", "tabpfn_hybrid"]
+    learning_curves([RES / "pred_std_fast.csv", RES / "pred_std_tabpfn.csv"],
+                    "Standard regime: headline comparison", FIG / "headline_standard.png", models=head)
+    learning_curves([RES / "pred_hetero.csv"], "Heterogeneous regime: headline comparison",
+                    FIG / "headline_hetero.png", models=head)
+    learning_curves([RES / "a1_prediction.csv"], "Unitree A1 whole-body pushes (3D, leave-one-crate-out)",
+                    FIG / "a1_prediction.png")
     learning_curves([RES / "pred_transfer_std.csv", RES / "pred_std_fast.csv", RES / "pred_std_tabpfn.csv"],
                     "Challenge 7 - transfer to unseen objects (standard regime)", FIG / "transfer_standard.png",
                     models=["physics_nominal", "physics_sysid", "gp_hybrid", "tabpfn_hybrid", "gp_transfer",
@@ -179,7 +187,7 @@ def main():
     learning_curves([RES / "pred_transfer_het.csv", RES / "pred_hetero.csv"],
                     "Challenge 7 - transfer to unseen objects (heterogeneous regime)", FIG / "transfer_hetero.png",
                     models=["physics_nominal", "physics_sysid", "gp_hybrid", "tabpfn_hybrid", "gp_transfer",
-                            "tabpfn_transfer", "tabpfn_transfer_raw"])
+                            "tabpfn_transfer", "tabpfn_transfer_raw", "gp_transfer_hybrid", "tabpfn_transfer_hybrid"])
     for name, csvs in [("standard", [RES / "pred_std_fast.csv", RES / "pred_std_tabpfn.csv", RES / "pred_transfer_std.csv"]),
                        ("hetero", [RES / "pred_hetero.csv", RES / "pred_transfer_het.csv"])]:
         t = auc_table(csvs, RES / f"auc_{name}.csv")

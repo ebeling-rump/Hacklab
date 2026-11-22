@@ -1,0 +1,12 @@
+mujoco>=3.2
+numpy
+scipy
+scikit-learn
+shapely>=2
+matplotlib
+pandas
+imageio
+imageio-ffmpeg
+pillow
+tabpfn>=2.0   # local CPU inference, open v2 weights
+# torch: install the CPU wheel first (see PUSHING.md)

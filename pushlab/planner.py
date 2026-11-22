@@ -163,7 +163,7 @@ class Planner:
         self.beta0, self.n_explore = beta0, n_explore
         self.start_offset, self.start_margin = start_offset, start_margin
 
-    def choose(self, pose, Q, mean, std, n_data: int):
+    def choose(self, pose, Q, mean, std, n_data: int, extra_blocked=None):
         pose = np.asarray(pose)
         unc = np.linalg.norm(std[:, :2], axis=1) + self.w_theta * std[:, 2]
         p1 = compose(pose, mean)
@@ -171,6 +171,8 @@ class Planner:
         # pusher must be placeable (not inside a wall)
         starts = pusher_starts_world(Q, pose, self.start_offset)
         blocked = in_walls(starts, self.walls, self.start_margin) if self.walls else np.zeros(len(mean), bool)
+        if extra_blocked is not None:
+            blocked = blocked | extra_blocked
         score1 = c1 + self.lam_u * unc
         best_future = c1.copy()
         if self.depth >= 2:

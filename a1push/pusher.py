@@ -45,10 +45,10 @@ class Navigator:
         occ[s] = False
         occ[g] = False
         # Free a small disc around the start (robot may currently be touching the crate)
-        for di in range(-3, 4):
-            for dj in range(-3, 4):
+        for di in range(-6, 7):
+            for dj in range(-6, 7):
                 i, j = s[0] + di, s[1] + dj
-                if 0 <= i < occ.shape[0] and 0 <= j < occ.shape[1] and di * di + dj * dj <= 9:
+                if 0 <= i < occ.shape[0] and 0 <= j < occ.shape[1] and di * di + dj * dj <= 36:
                     occ[i, j] = occ[i, j] and contains_xy(crate_poly.buffer(0.12), self.X[i, j], self.Y[i, j])
         nb = [(1, 0), (-1, 0), (0, 1), (0, -1), (1, 1), (1, -1), (-1, 1), (-1, -1)]
         dist = {s: 0.0}
@@ -75,7 +75,8 @@ class Navigator:
             path.append(prev[path[-1]])
         pts = [np.array([self.xs[i], self.ys[j]]) for i, j in path[::-1]]
         # shortcut: keep every 4th point
-        return pts[::4] + [np.array(goal[:2])]
+        step = max(1, int(round(0.2 / self.res)))
+        return pts[::step] + [np.array(goal[:2])]
 
 
 def crate_world_poly(shape, pose):

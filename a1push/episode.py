@@ -115,7 +115,7 @@ def run(model_name: str, seed: int = 0, max_pushes: int = 18, video: bool = Fals
     m, d = build(sc)
     robot = A1(m, d)
     bounds = (-0.4, 3.6, -1.7, 1.7)
-    nav = Navigator(sc.walls, (-1.0, 4.0, -1.95, 1.95))
+    nav = Navigator(sc.walls, (-1.0, 4.0, -1.95, 1.95), res=0.025)
     field = CostField(shape, sc.walls, bounds, goal, pos_tol=0.12, ang_tol=None, res=0.05, n_theta=24,
                       margin=0.04, w_theta=0.15)
     planner = Planner(field, walls=sc.walls, lam_u=0.5, w_theta=0.15, step_cost=0.02, depth=2,
@@ -139,7 +139,15 @@ def run(model_name: str, seed: int = 0, max_pushes: int = 18, video: bool = Fals
         Q = query_from_actions(shape, A, desc)
         t0 = time.perf_counter()
         mean, std = model.predict(Q)
-        i, info = planner.choose(cp, Q, mean, std, len(Ys))
+        # only consider pushes whose pre-push stance the robot can actually walk to
+        from .pusher import push_geometry, crate_world_poly
+        unreachable = np.zeros(len(A), bool)
+        for _ in range(12):
+            i, info = planner.choose(cp, Q, mean, std, len(Ys), extra_blocked=unreachable)
+            pre, _, _ = push_geometry(shape, cp, A[i])
+            if nav.plan(robot.pose, pre, crate_world_poly(shape, cp)) is not None:
+                break
+            unreachable[i] = True
         t_plan = time.perf_counter() - t0
         pred = compose(cp, mean[i])
         d.mocap_pos[gid] = [pred[0], pred[1], 0.001]
@@ -185,6 +193,14 @@ def run(model_name: str, seed: int = 0, max_pushes: int = 18, video: bool = Fals
     return out
 
 
+def load_prior():
+    """Prior experience: A1 pushes on 6 other crates (a1push/gen_data.py)."""
+    from pushlab.actions import query_from_actions
+    with open(ROOT / "data" / "a1_prior.pkl", "rb") as f:
+        data = pickle.load(f)
+    return [(o["shape"], o["shape"].descriptor(), query_from_actions(o["shape"], o["actions"]), o["Y"]) for o in data]
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--model", default="tabpfn_hybrid")
@@ -192,10 +208,12 @@ def main():
     ap.add_argument("--crate", default="rect", choices=["rect", "L"])
     ap.add_argument("--max-pushes", type=int, default=18)
     ap.add_argument("--video", action="store_true")
+    ap.add_argument("--threads", type=int, default=2)
     args = ap.parse_args()
     import torch
-    torch.set_num_threads(2)
-    out = run(args.model, args.seed, args.max_pushes, args.video, crate_kind=args.crate)
+    torch.set_num_threads(args.threads)
+    prior = load_prior() if "transfer" in args.model else None
+    out = run(args.model, args.seed, args.max_pushes, args.video, crate_kind=args.crate, prior=prior)
     print(json.dumps(out, indent=1))
 
 
