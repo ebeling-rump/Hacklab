@@ -21,6 +21,7 @@ class Task:
     walls: list = field(default_factory=list)
     bounds: tuple = (-0.6, 0.6, -0.6, 0.6)
     max_pushes: int = 20
+    v_range: tuple = (0.15, 0.15)       # allowed commanded push speeds (m/s)
 
     @property
     def needs_field(self):
@@ -126,5 +127,22 @@ def c6_cluttered(seed):
                 max_pushes=60)
 
 
+def heterogeneous(fn, tag):
+    """Same task, but the object may ride on casters (anisotropic friction, p=0.5) and the robot may
+    choose its push speed in 0.05-0.4 m/s (fast pushes make objects slide/roll after release)."""
+    def make(seed):
+        t = fn(seed)
+        rng = np.random.default_rng(90_000 + seed)
+        h = t.obj.hidden
+        h.casters = bool(rng.random() < 0.5)
+        h.caster_axis = float(rng.choice([0.0, np.pi / 2]) + rng.normal(0, 0.1))
+        h.roll_damping = float(10 ** rng.uniform(-5, -3.5))
+        t.v_range = (0.05, 0.4)
+        t.challenge = t.challenge + tag
+        return t
+    return make
+
+
 CHALLENGES = {"C1": c1_basic, "C2": c2_unknown, "C3": c3_precision, "C4": c4_asymmetric,
               "C5": c5_doorway, "C6": c6_cluttered}
+CHALLENGES.update({k + "H": heterogeneous(v, "_hetero") for k, v in list(CHALLENGES.items())})

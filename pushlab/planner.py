@@ -95,7 +95,22 @@ class CostField:
         if len(goals) == 0:
             raise RuntimeError("goal set is empty / in collision")
         d = dijkstra(G, directed=False, indices=goals, min_only=True)
-        self.ctg = d.reshape(nx, ny, nt)
+        ctg = d.reshape(nx, ny, nt)
+        # Recovery gradient: cells in collision / unreachable get the cost of nearby free cells plus
+        # a penalty growing with depth, so the planner can push an object back out of contact.
+        from scipy.ndimage import minimum_filter
+        filled = ctg.copy()
+        pen = 0.0
+        for it in range(12):
+            bad = ~np.isfinite(filled)
+            if not bad.any():
+                break
+            pen += 0.15
+            nbr = minimum_filter(np.where(np.isfinite(filled), filled, 1e9), size=(3, 3, 3), mode="nearest")
+            upd = bad & (nbr < 1e8)
+            filled[upd] = nbr[upd] + self.res * 3 + (0.3 if it == 0 else 0.0)
+        self.ctg = filled
+        self.ctg_raw = ctg
 
     def __call__(self, poses):
         """Cost-to-go for poses (..., 3); BIG for collision / out of bounds."""
@@ -132,8 +147,8 @@ class FreeSpaceCost:
         return c
 
 
-def pusher_starts_world(Q, pose):
-    start_b = Q["p"] - Q["u"] * (PUSHER_R + GAP)
+def pusher_starts_world(Q, pose, offset=PUSHER_R + GAP):
+    start_b = Q["p"] - Q["u"] * offset
     x, y, th = pose
     c, s = np.cos(th), np.sin(th)
     return np.stack([x + c * start_b[:, 0] - s * start_b[:, 1], y + s * start_b[:, 0] + c * start_b[:, 1]], 1)
@@ -141,11 +156,12 @@ def pusher_starts_world(Q, pose):
 
 class Planner:
     def __init__(self, cost, walls=(), lam_u=0.5, w_theta=0.06, depth=2, beam=12, step_cost=0.004,
-                 beta0=0.0, n_explore=5):
+                 beta0=0.0, n_explore=5, start_offset=PUSHER_R + GAP, start_margin=PUSHER_R + 0.003):
         self.cost, self.walls = cost, list(walls)
         self.lam_u, self.w_theta, self.depth, self.beam = lam_u, w_theta, depth, beam
         self.step_cost = step_cost
         self.beta0, self.n_explore = beta0, n_explore
+        self.start_offset, self.start_margin = start_offset, start_margin
 
     def choose(self, pose, Q, mean, std, n_data: int):
         pose = np.asarray(pose)
@@ -153,8 +169,8 @@ class Planner:
         p1 = compose(pose, mean)
         c1 = self.cost(p1)
         # pusher must be placeable (not inside a wall)
-        starts = pusher_starts_world(Q, pose)
-        blocked = in_walls(starts, self.walls, PUSHER_R + 0.003) if self.walls else np.zeros(len(mean), bool)
+        starts = pusher_starts_world(Q, pose, self.start_offset)
+        blocked = in_walls(starts, self.walls, self.start_margin) if self.walls else np.zeros(len(mean), bool)
         score1 = c1 + self.lam_u * unc
         best_future = c1.copy()
         if self.depth >= 2:

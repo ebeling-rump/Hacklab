@@ -196,9 +196,18 @@ class Transfer:
         self.timer = learner.timer
         self._src_cache = None
 
-    def _base(self, shape, Q):
+    def _base(self, shape, Q, fit_data=None):
         if not self.residual:
             return np.zeros((len(Q["phi"]), 3))
+        if self.residual == "sysid" and fit_data is not None:
+            cache = getattr(self, "_pm_cache", None)
+            if cache is not None and cache[0] is fit_data:
+                pm = cache[1]
+            else:
+                pm = PhysicsModel(fit_params=True, n_samples=0).reset(shape)
+                pm.fit(*fit_data)
+                self._pm_cache = (fit_data, pm)
+            return pm._pred(Q, pm.theta)
         return PhysicsModel(fit_params=False, n_samples=0).reset(shape).nominal(Q)
 
     def _source_rows(self):
@@ -211,11 +220,12 @@ class Transfer:
                 q["desc"] = np.repeat(np.asarray(desc)[None], len(idx), 0)
                 q["extra"] = np.zeros((len(idx), 1))
                 Qs.append(q)
-                Ys.append(Y[idx] - self._base(shape, q))
+                Ys.append(Y[idx] - self._base(shape, q, (q, Y[idx]) if self.residual == "sysid" else None))
             self._src_cache = (concat(Qs), np.concatenate(Ys))
         return self._src_cache
 
     def reset(self, shape, descriptor):
+        self._fit_data = None
         self.shape, self.descriptor = shape, np.asarray(descriptor)
         self.learner.reset(shape, descriptor)
         self.learner.min_n = 2
@@ -233,10 +243,11 @@ class Transfer:
     def fit(self, Q, Y):
         Qs, Ys = self._source_rows()
         self.n = len(Y)
+        self._fit_data = (Q, np.asarray(Y)) if self.n else None
         if self.n:
             qt = self._tag(Q)
             q = concat([Qs, {k: qt[k] for k in Qs}])
-            y = np.concatenate([Ys, np.asarray(Y) - self._base(self.shape, Q)])
+            y = np.concatenate([Ys, np.asarray(Y) - self._base(self.shape, Q, self._fit_data)])
         else:
             q, y = Qs, Ys
         self.learner.fit(q, y)
@@ -244,7 +255,7 @@ class Transfer:
 
     def predict(self, Q):
         m, s = self.learner.predict(self._tag(Q))
-        return self._base(self.shape, Q) + m, s
+        return self._base(self.shape, Q, getattr(self, "_fit_data", None)) + m, s
 
 
 class PhysicsWrapper:
@@ -303,8 +314,12 @@ def make_model(name: str, source=None, n_estimators=2):
         return Residual(GPLearner(), refit_physics=True, name=name)
     if name == "tabpfn_transfer_raw":
         return Transfer(TabPFNLearner(n_estimators=n_estimators), source, residual=False, name=name)
+    if name == "tabpfn_transfer_hybrid":
+        return Transfer(TabPFNLearner(n_estimators=n_estimators), source, residual="sysid", name=name, max_source=300)
+    if name == "gp_transfer_hybrid":
+        return Transfer(GPLearner(restarts=0), source, residual="sysid", name=name, max_source=150)
     if name == "tabpfn_transfer":
         return Transfer(TabPFNLearner(n_estimators=n_estimators), source, residual=True, name=name)
     if name == "gp_transfer":
-        return Transfer(GPLearner(restarts=1), source, residual=True, name=name)
+        return Transfer(GPLearner(restarts=0), source, residual=True, name=name, max_source=150)
     raise ValueError(name)

@@ -119,7 +119,7 @@ def run_episode(task, method: str, model=None, seed=0, n_cand=96, record=False, 
         if _success(task, pose):
             success = True
             break
-        A = sampler.sample(n_cand)
+        A = sampler.sample(n_cand, v_range=task.v_range)
         Q = query_from_actions(obj.shape, A, desc)
         t0 = time.perf_counter()
         if method == "reactive":
@@ -176,7 +176,7 @@ def run_episode(task, method: str, model=None, seed=0, n_cand=96, record=False, 
                invalid_pushes=stalls, pusher_path_m=pusher_path,
                model_s_mean=float(np.mean(log["model_s"])) if log["model_s"] else 0.0,
                plan_s_mean=float(np.mean(log["plan_s"])) if log["plan_s"] else 0.0, field_s=field_s,
-               sim_time_s=sum((GAP + a[2]) / 0.15 + 0.15 for a in log["actions"]))
+               sim_time_s=sum((GAP + a[2]) / (a[3] if len(a) > 3 else 0.15) + 0.15 for a in log["actions"]))
     return out, log
 
 

@@ -100,12 +100,15 @@ def main():
     source = source_from(load(args.source)) if args.source else None
     jobs = [(r, args.models, args.ns, source, rep * 100 + i) for rep in range(args.reps) for i, r in enumerate(recs)]
     t = time.time()
-    with Pool(args.workers) as pool:
-        rows = [x for res in pool.imap_unordered(eval_object, jobs) for x in res]
-    df = pd.DataFrame(rows)
     out = Path(args.out or ROOT / "results" / f"prediction_{args.data}.csv")
     out.parent.mkdir(exist_ok=True, parents=True)
-    df.to_csv(out, index=False)
+    rows = []
+    with Pool(args.workers) as pool:
+        for i, res in enumerate(pool.imap_unordered(eval_object, jobs)):
+            rows.extend(res)
+            pd.DataFrame(rows).to_csv(out, index=False)
+            print(f"[{i + 1}/{len(jobs)}] {time.time() - t:.0f}s", flush=True)
+    df = pd.DataFrame(rows)
     pd.set_option("display.width", 200)
     print(df.groupby(["model", "n"])[["pos_mm", "ang_deg", "nll", "cov1", "pred_s"]].mean().unstack(0).round(2).to_string())
     print(f"{time.time() - t:.0f}s -> {out}")
