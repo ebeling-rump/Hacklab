@@ -111,9 +111,23 @@ objects including 3 unseen families. `results/pred_transfer_het.csv`, `results/f
 * Best median NLL from n = 3 on.
 
 ### 2.4 Active experimentation (E)
-`experiments/exp_active.py`: pool-based, 60 candidate pushes, uncertainty sampling vs random, 12 steps.
-Results: see `results/active_htest.csv` / `results/figures/active_hetero.png` (section filled in
-below in §6 if the run completed).
+`experiments/exp_active.py`: pool-based, 60 candidate pushes per object, uncertainty sampling
+(argmax of the model's own normalised predictive σ) vs random, 12 steps, 16 heterogeneous test objects.
+`results/active_htest.csv`, `results/figures/active_hetero.png`. Mean position error [mm]:
+
+| n | GP-hybrid rand / unc | physics + sysID rand / unc | TabPFN-hybrid rand / unc |
+|---|---|---|---|
+| 3 | 30.2 / **23.6** | 26.6 / 24.7 | 30.2 / **23.5** |
+| 4 | 28.9 / **22.5** | 24.4 / 23.6 | 25.4 / **20.9** |
+| 8 | 21.7 / **18.1** | **20.8** / 22.4 | 19.6 / **18.1** |
+| 12 | 17.9 / 17.0 | **19.8** / 22.2 | 17.2 / 17.7 |
+
+Paired score difference (uncertainty − random): TabPFN-hybrid −0.25 … −0.43 for n = 2–8 (CI excludes
+0 at n = 8: −0.36 [−0.77, −0.02]); GP-hybrid similar (−0.6 [−1.44, 0.01] at n = 4); for physics + sysID
+uncertainty sampling is **worse** (+0.45 [0.04, 1.03] at n = 6): its parametric (Laplace) uncertainty
+points at pushes that are informative about its *parameters* but not about its *model error*.
+**Active experimentation helps the learned residual models by ~2 pushes' worth in the 3–8 push range;
+the advantage vanishes by n = 12.** TabPFN and GP benefit similarly.
 
 ---
 

@@ -227,3 +227,4 @@ mujoco_menagerie/
 data/
 scratch/
 results/videos/*.mp4.tmp
+results/a1/*.mp4

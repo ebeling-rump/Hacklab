@@ -1,0 +1,2 @@
+challenge,seed,method,obj,success,pushes,pos_err_mm,ang_err_deg,wall_contacts,invalid_pushes,pusher_path_m,model_s_mean,plan_s_mean,field_s,sim_time_s,wall_s
+C3_precision_hetero,0,tabpfn_transfer_hybrid,square_199605,True,6,9.563474540238076,4.5024842655831865,0,0,1.3839915428818246,66.96472113333282,0.000860316667361379,1.2400003470247611e-05,3.174324983327938,463.66255354881287
