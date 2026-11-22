@@ -23,7 +23,7 @@ from sklearn.metrics import average_precision_score, roc_auc_score
 from xgboost import XGBClassifier
 
 from a1slip.paths import ROOT
-from a1slip.models.tabpfn_risk import CollisionRisk
+from a1slip.models.tabpfn_risk import RiskModel
 from a1slip.prediction.slip_eval import DATA, fall_splits
 
 warnings.filterwarnings("ignore")
@@ -57,7 +57,7 @@ def main():
             n_estimators=400, max_depth=5, learning_rate=0.05, subsample=0.8,
             colsample_bytree=0.8).fit(X[tr], y[tr]).predict_proba}
         for seed in (0, 1):
-            r = CollisionRisk(seed=seed).fit(X[tr], y[tr], n=2000, pos_fraction=0.25, seed=seed)
+            r = RiskModel(seed=seed).fit(X[tr], y[tr], n=2000, pos_fraction=0.25, seed=seed)
             models[f"TabPFN seed {seed}"] = lambda Z, r=r: np.c_[1 - r.predict(Z), r.predict(Z)]
         for name, predict in models.items():
             for k, idx in tests.items():

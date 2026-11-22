@@ -34,7 +34,7 @@ from sklearn.metrics import log_loss, roc_auc_score
 from xgboost import XGBClassifier
 
 from a1slip.paths import ROOT
-from a1slip.models.tabpfn_risk import CollisionRisk
+from a1slip.models.tabpfn_risk import RiskModel
 from a1slip.sim.slip_dataset import A1Sensors, build_model, labels, run_episode
 from a1slip.prediction.slip_eval import DATA, splits
 
@@ -60,7 +60,7 @@ def collect(model, data, sensors, mu, slope, seeds):
 
 
 def tabpfn(X, y):
-    m = CollisionRisk().model
+    m = RiskModel().model
     t = time.time()
     m.fit(X, y)
     return m, time.time() - t

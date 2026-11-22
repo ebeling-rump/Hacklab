@@ -29,7 +29,7 @@ from xgboost import XGBClassifier
 
 from a1slip.paths import ROOT
 from a1slip.sim.balance import TUNED, Balancer
-from a1slip.models.tabpfn_risk import CollisionRisk
+from a1slip.models.tabpfn_risk import RiskModel
 from a1slip.falls.danger_mode import BRACE, THRESHOLD, TILT_LIMIT, DangerMode, tilt_deg
 from a1slip.sim.slip_dataset import labels, run_episode
 from a1slip.prediction.slip_eval import DATA, fall_splits, splits
@@ -56,10 +56,10 @@ def main():
     Xs = np.hstack([d["features"], d["history"]])
     trf, trs = fall_splits(d)["train"], splits(d)["train"]
     yf, ys = d["fall_next"].astype(int), d["slip_next"].astype(int)
-    fall_tab = CollisionRisk().fit(Xf[trf], yf[trf], n=2000, pos_fraction=0.25)
+    fall_tab = RiskModel().fit(Xf[trf], yf[trf], n=2000, pos_fraction=0.25)
     fall_xgb = xgb(Xf[trf], yf[trf])
     fall_log = make_pipeline(StandardScaler(), LogisticRegression(max_iter=3000)).fit(Xf[trf], yf[trf])
-    slip_tab = CollisionRisk().fit(Xs[trs], ys[trs], n=2000, pos_fraction=max(ys[trs].mean(), 0.25))
+    slip_tab = RiskModel().fit(Xs[trs], ys[trs], n=2000, pos_fraction=max(ys[trs].mean(), 0.25))
     slip_xgb = xgb(Xs[trs], ys[trs])
     print(f"frozen models ready ({time.time() - t0:.0f}s)", flush=True)
 

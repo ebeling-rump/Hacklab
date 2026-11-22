@@ -23,7 +23,7 @@ from sklearn.metrics import average_precision_score, roc_auc_score
 from xgboost import XGBClassifier
 
 from a1slip.paths import ROOT
-from a1slip.models.tabpfn_risk import CollisionRisk, context_subsample
+from a1slip.models.tabpfn_risk import RiskModel, context_subsample
 from a1slip.prediction.slip_eval import DATA, fall_splits, splits
 
 warnings.filterwarnings("ignore")
@@ -46,7 +46,7 @@ def run(task, y, sets, sp):
         models = {"XGBoost (all rows)": xgb(X[tr], y[tr]).predict_proba,
                   "XGBoost (2000 rows)": xgb(Xc, yc).predict_proba}
         t = time.time()
-        risk = CollisionRisk().fit(X[tr], y[tr], n=CONTEXT, pos_fraction=pos)
+        risk = RiskModel().fit(X[tr], y[tr], n=CONTEXT, pos_fraction=pos)
         models["TabPFN (2000 rows)"] = lambda Z, r=risk: np.c_[1 - r.predict(Z), r.predict(Z)]
         print(f"  [{fs_name}] TabPFN fit {time.time() - t:.0f}s", flush=True)
         for split, mask in sp.items():

@@ -24,7 +24,7 @@ import mujoco
 import numpy as np
 
 from a1slip.paths import ROOT
-from a1slip.models.tabpfn_risk import CollisionRisk
+from a1slip.models.tabpfn_risk import RiskModel
 from a1slip.sim.slip_dataset import NORMAL, A1Sensors, Reaction, SLOPE_MAX, build_model, run_episode
 from a1slip.prediction.slip_eval import DATA, fall_splits, splits
 
@@ -72,7 +72,7 @@ def main():
     tr = (fall_splits(d) if args.risk == "fall" else splits(d))["train"]
     y = d["fall_next" if args.risk == "fall" else "slip_next"].astype(int)
     t = time.time()
-    risk = CollisionRisk().fit(d["features"][tr], y[tr], n=2000,
+    risk = RiskModel().fit(d["features"][tr], y[tr], n=2000,
                                pos_fraction=max(y[tr].mean(), 0.25))
     print(f"TabPFN {args.risk} model ready ({time.time() - t:.0f}s), threshold {threshold}")
 

@@ -28,7 +28,7 @@ import mujoco
 import mujoco.viewer
 import numpy as np
 
-from a1slip.models.tabpfn_risk import CollisionRisk
+from a1slip.models.tabpfn_risk import RiskModel
 from a1slip.sim.robot import MAX_TURN, SMOOTHING, gait
 from a1slip.sim.slip_dataset import (CHECK_EVERY, CONTACT_FORCE, PUSH_FORCE, PUSH_RATE, PUSH_TIME,
                              SUSTAIN, A1Sensors, History, build_model)
@@ -51,8 +51,8 @@ def fit_models():
     tr_s, tr_f = splits(d)["train"], fall_splits(d)["train"]
     ys, yf = d["slip_next"][tr_s].astype(int), d["fall_next"][tr_f].astype(int)
     t = time.time()
-    slip = CollisionRisk().fit(Xs[tr_s], ys, n=2000, pos_fraction=max(ys.mean(), 0.25))
-    fall = CollisionRisk().fit(Xf[tr_f], yf, n=2000, pos_fraction=0.25)
+    slip = RiskModel().fit(Xs[tr_s], ys, n=2000, pos_fraction=max(ys.mean(), 0.25))
+    fall = RiskModel().fit(Xf[tr_f], yf, n=2000, pos_fraction=0.25)
     print(f"TabPFN slip + fall models ready ({time.time() - t:.0f}s)", flush=True)
     return slip, fall, keep
 

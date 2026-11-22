@@ -24,7 +24,7 @@ from sklearn.preprocessing import StandardScaler
 from xgboost import XGBClassifier
 
 from a1slip.paths import ROOT
-from a1slip.models.tabpfn_risk import CollisionRisk
+from a1slip.models.tabpfn_risk import RiskModel
 from a1slip.prediction.slip_eval import DATA, splits
 
 warnings.filterwarnings("ignore")
@@ -36,7 +36,7 @@ OUT = ROOT / "results" / "learning_curve.json"
 
 
 def tabpfn_scorer(X, y):
-    m = CollisionRisk().model          # TabPFN v3.5-fast, CPU, 4 estimators
+    m = RiskModel().model          # TabPFN v3.5-fast, CPU, 4 estimators
     m.fit(X, y)
     return lambda Z: m.predict_proba(Z)[:, 1]
 

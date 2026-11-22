@@ -29,7 +29,7 @@ from sklearn.preprocessing import StandardScaler
 from xgboost import XGBClassifier
 
 from a1slip.paths import ROOT
-from a1slip.models.tabpfn_risk import CollisionRisk, context_subsample
+from a1slip.models.tabpfn_risk import RiskModel, context_subsample
 from a1slip.prediction.slip_eval import DATA, fall_splits, splits
 
 warnings.filterwarnings("ignore")
@@ -276,7 +276,7 @@ def main():
     y = d["fall_next"].astype(int)
     sp = fall_splits(d)
     tr, te = sp["train"], sp["steeper (unseen)"]
-    risk = CollisionRisk().fit(X[tr], y[tr], n=2000, pos_fraction=0.25)
+    risk = RiskModel().fit(X[tr], y[tr], n=2000, pos_fraction=0.25)
     p_tab = risk.predict(X[te])
     p_xgb = xgb(X[tr], y[tr]).predict_proba(X[te])[:, 1]
     p_log = make_pipeline(StandardScaler(), LogisticRegression(max_iter=3000)).fit(
@@ -326,8 +326,8 @@ def main():
     tr, te = ssp["train"], ssp["icier + steeper"]
     pos = max(ys[tr].mean(), 0.25)
     Xh = np.hstack([base, hist])
-    tab_h = CollisionRisk().fit(Xh[tr], ys[tr], n=2000, pos_fraction=pos).predict(Xh[te])
-    tab_b = CollisionRisk().fit(base[tr], ys[tr], n=2000, pos_fraction=pos).predict(base[te])
+    tab_h = RiskModel().fit(Xh[tr], ys[tr], n=2000, pos_fraction=pos).predict(Xh[te])
+    tab_b = RiskModel().fit(base[tr], ys[tr], n=2000, pos_fraction=pos).predict(base[te])
     Xc, yc = context_subsample(Xh[tr], ys[tr], n=2000, pos_fraction=pos, seed=0)
     xgb2k = xgb(Xc, yc).predict_proba(Xh[te])[:, 1]
     xgbal = xgb(Xh[tr], ys[tr]).predict_proba(Xh[te])[:, 1]

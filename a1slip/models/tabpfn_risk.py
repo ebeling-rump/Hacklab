@@ -1,6 +1,11 @@
-"""Shared pieces of the TabPFN collision safety filter for the Unitree A1.
+"""TabPFN risk model used by every experiment, and the lidar collision table it started with.
 
-Turns the samples written by a1slip/lidar/collision_dataset.py into a table:
+RiskModel wraps TabPFN (local, v3.5-fast on CPU) as a binary risk model: it stores a
+class-rebalanced context of example rows, never trains, and corrects its probabilities
+back to the true base rate. The ice, outdoor, slip and fall experiments all use it.
+
+The rest of this module turns the samples written by a1slip/lidar/collision_dataset.py
+into a table for the first experiment, the lidar collision filter:
 
     one row per sample =  lidar scan (min-pooled into sectors)
                         + the candidate command (forward, turn)
@@ -8,8 +13,6 @@ Turns the samples written by a1slip/lidar/collision_dataset.py into a table:
                           still matters at the start)
     label              =  did the robot touch a box while holding the candidate
                           command for the next 0.8 s?
-
-and wraps TabPFN (local, v3.5-fast on CPU) as a collision-risk model.
 """
 
 
@@ -65,11 +68,11 @@ def context_subsample(X, y, n=CONTEXT_ROWS, pos_fraction=0.3, seed=0):
     return X[idx], y[idx]
 
 
-class CollisionRisk:
-    """P(collision during the next step) from TabPFN.
+class RiskModel:
+    """P(event) from TabPFN, e.g. a slip within 0.2 s, a fall within 1 s or a collision.
 
     The context is class-rebalanced, so raw TabPFN probabilities are too high;
-    they are shifted back to the real collision rate (Bayes prior correction).
+    they are shifted back to the real event rate (Bayes prior correction).
     """
 
     def __init__(self, n_estimators=N_ESTIMATORS, seed=0):
@@ -95,3 +98,6 @@ class CollisionRisk:
         p = self.model.predict_proba(np.atleast_2d(X))[:, 1]
         odds = self.odds_scale * p / np.clip(1 - p, 1e-6, None)
         return odds / (1 + odds)
+
+
+CollisionRisk = RiskModel  # alias so code written against the first experiment keeps working

@@ -28,7 +28,7 @@ import mujoco
 import numpy as np
 
 from a1slip.paths import ROOT
-from a1slip.models.tabpfn_risk import CollisionRisk
+from a1slip.models.tabpfn_risk import RiskModel
 from a1slip.falls.recovery_demo import MOVES
 from a1slip.sim.slip_dataset import HISTORY_NAMES, NORMAL, A1Sensors, build_model, run_episode
 from a1slip.prediction.slip_eval import DATA, fall_splits
@@ -82,7 +82,7 @@ def fit_fall_model(data_path=DATA):
     X = np.hstack([d["features"], d["history"][:, keep]])
     tr = fall_splits(d)["train"]
     t0 = time.time()
-    risk = CollisionRisk().fit(X[tr], d["fall_next"][tr].astype(int), n=2000, pos_fraction=0.25)
+    risk = RiskModel().fit(X[tr], d["fall_next"][tr].astype(int), n=2000, pos_fraction=0.25)
     print(f"TabPFN fall model ready ({time.time() - t0:.0f}s)", flush=True)
     return risk, keep
 

@@ -24,7 +24,7 @@ from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler
 from xgboost import XGBClassifier
 
-from a1slip.models.tabpfn_risk import N_SECTORS, CollisionRisk, load_table
+from a1slip.models.tabpfn_risk import N_SECTORS, RiskModel, load_table
 
 warnings.filterwarnings("ignore")
 HOLDOUT_FRACTION = 0.2  # last 20% of env_A samples
@@ -75,7 +75,7 @@ def main():
         scorers[name] = lambda X, m=m: m.predict_proba(X)[:, 1]
 
     t = time.time()
-    risk = CollisionRisk().fit(XA[tr], yA[tr])
+    risk = RiskModel().fit(XA[tr], yA[tr])
     print(f"TabPFN fit on {risk.model.n_features_in_} features: {time.time() - t:.0f}s")
     scorers["TabPFN v3.5-fast"] = risk.predict
 

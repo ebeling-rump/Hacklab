@@ -30,7 +30,7 @@ from a1slip.paths import ROOT
 from a1slip.sim import slip_dataset as D
 from a1slip.sim import terrain as T
 from a1slip.sim.balance import TUNED, Balancer
-from a1slip.models.tabpfn_risk import CollisionRisk
+from a1slip.models.tabpfn_risk import RiskModel
 from a1slip.falls.danger_mode import BRACE, THRESHOLD, TILT_LIMIT, DangerMode, tilt_deg
 from a1slip.falls.recovery_demo import MOVES
 from a1slip.prediction.slip_eval import DATA, fall_splits
@@ -56,8 +56,8 @@ def fit_models():
     rate = float(y_early[tr].mean())
     thr = round(5 * rate, 3)
     t0 = time.time()
-    m1 = CollisionRisk().fit(X[tr], y_1s[tr], n=2000, pos_fraction=0.25)
-    me = CollisionRisk().fit(X[tr], y_early[tr], n=2000, pos_fraction=0.25)
+    m1 = RiskModel().fit(X[tr], y_1s[tr], n=2000, pos_fraction=0.25)
+    me = RiskModel().fit(X[tr], y_early[tr], n=2000, pos_fraction=0.25)
     print(f"models ready ({time.time() - t0:.0f}s): 1 s model threshold {THRESHOLD:.0%} "
           f"(base rate {y_1s[tr].mean():.2%}); 2.5 s model threshold {thr:.1%} "
           f"(base rate {rate:.2%}), plant above {3 * thr:.1%}", flush=True)

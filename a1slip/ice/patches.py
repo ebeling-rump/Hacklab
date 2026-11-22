@@ -40,7 +40,7 @@ import numpy as np
 from sklearn.linear_model import LogisticRegression
 
 from a1slip.paths import ROOT
-from a1slip.models.tabpfn_risk import CollisionRisk
+from a1slip.models.tabpfn_risk import RiskModel
 from a1slip.sim.robot import MAX_TURN, SMOOTHING, ensure_model, gait, wrap, yaw
 from a1slip.sim.slip_dataset import CHECK_EVERY, SUSTAIN, A1Sensors, History, feature_names
 from a1slip.prediction.slip_eval import DATA, splits
@@ -214,7 +214,7 @@ def models():
     X = np.hstack([d["features"], d["history"]])
     y = d["slip_next"].astype(int)
     tr = splits(d)["train"]
-    tab = CollisionRisk().fit(X[tr], y[tr], n=2000, pos_fraction=max(y[tr].mean(), 0.25))
+    tab = RiskModel().fit(X[tr], y[tr], n=2000, pos_fraction=max(y[tr].mean(), 0.25))
     names = list(d["history_names"])
     gap = [names.index(n) for n in ("leg_imu_gap_0.1s", "leg_imu_gap_0.5s", "leg_imu_gap_2s",
                                     "feet_disagree_0.5s")]

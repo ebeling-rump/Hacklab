@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools>=69"]
+requires = ["setuptools>=77"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -7,6 +7,14 @@ name = "a1slip"
 version = "1.0.0"
 description = "A simulated Unitree A1 that uses TabPFN in context to choose its speed, map ice and learn what slippery ground looks like."
 readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [
+    { name = "Mehraj Fathima Zakir Hussain" },
+    { name = "Moritz Ebeling-Rump" },
+    { name = "Lukas Emminger" },
+    { name = "Juan Pablo Fiorenza" },
+]
 requires-python = ">=3.11"
 dependencies = [
     "mujoco>=3.3",
@@ -31,7 +39,7 @@ include = ["a1slip*"]
 [tool.ruff]
 line-length = 120
 target-version = "py311"
-extend-exclude = ["mujoco_menagerie", "notebooks", "extras"]
+extend-exclude = ["mujoco_menagerie"]
 
 [tool.ruff.lint]
 select = ["E9", "F63", "F7", "F82", "F401"]

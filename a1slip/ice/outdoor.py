@@ -43,7 +43,7 @@ import numpy as np
 
 from a1slip.paths import ROOT
 from a1slip.ice import patches as P
-from a1slip.models.tabpfn_risk import CollisionRisk
+from a1slip.models.tabpfn_risk import RiskModel
 from a1slip.sim.robot import ensure_model
 
 warnings.filterwarnings("ignore")
@@ -280,7 +280,7 @@ class SeenModel:
         X, y = np.array(self.X), np.array(self.y)
         flat = feats.reshape(-1, feats.shape[-1])
         if self.kind == "TabPFN":
-            m = CollisionRisk(n_estimators=4).fit(X, y, n=1500, pos_fraction=0.5)
+            m = RiskModel(n_estimators=4).fit(X, y, n=1500, pos_fraction=0.5)
             p = m.predict(flat)
         else:
             from xgboost import XGBClassifier

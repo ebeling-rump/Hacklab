@@ -31,7 +31,7 @@ import mujoco
 import mujoco.viewer
 import numpy as np
 
-from a1slip.models.tabpfn_risk import CollisionRisk, features, load_table
+from a1slip.models.tabpfn_risk import RiskModel, features, load_table
 from a1slip.sim.robot import (GOAL, MAX_TURN, SMOOTHING, STAND, Navigator, gait, read_lidar,
                       wrap, yaw)
 from a1slip.lidar.planner import Planner
@@ -48,12 +48,12 @@ TIME_LIMIT = 60.0                    # simulated seconds per run
 FALL_HEIGHT = 0.15
 
 
-def train_risk_model() -> CollisionRisk:
+def train_risk_model() -> RiskModel:
     tables = [load_table(env) for env in ("env_A", "env_B")]
     X = np.vstack([t[0] for t in tables])
     y = np.concatenate([t[1] for t in tables])
     t = time.time()
-    risk = CollisionRisk().fit(X, y)
+    risk = RiskModel().fit(X, y)
     print(f"TabPFN collision model ready ({time.time() - t:.0f}s, context from "
           f"{len(y)} recorded samples, collision rate {y.mean():.1%})")
     return risk
@@ -83,7 +83,7 @@ class SafetyFilter:
     commits to one side for DETOUR_STEPS decisions.
     """
 
-    def __init__(self, risk: CollisionRisk, risk_limit: float):
+    def __init__(self, risk: RiskModel, risk_limit: float):
         self.risk, self.limit = risk, risk_limit
         self.prev = np.zeros(2)
         self.last_risk = None

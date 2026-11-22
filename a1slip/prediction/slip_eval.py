@@ -33,7 +33,7 @@ from sklearn.preprocessing import StandardScaler
 from xgboost import XGBClassifier
 
 from a1slip.paths import ROOT
-from a1slip.models.tabpfn_risk import CollisionRisk
+from a1slip.models.tabpfn_risk import RiskModel
 
 warnings.filterwarnings("ignore")
 DATA = ROOT / "data" / "slip.npz"
@@ -83,7 +83,7 @@ def evaluate(task, X, y, d, sp, extra_ref=None):
 
     t = time.time()
     pos = y[tr].mean()
-    risk = CollisionRisk().fit(X[tr], y[tr], n=TABPFN_CONTEXT, pos_fraction=max(pos, 0.25))
+    risk = RiskModel().fit(X[tr], y[tr], n=TABPFN_CONTEXT, pos_fraction=max(pos, 0.25))
     print(f"TabPFN fit {time.time() - t:.0f}s")
     scorers["TabPFN"] = lambda idx: risk.predict(X[idx])
 

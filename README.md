@@ -219,7 +219,7 @@ a1slip/                  the Python package; run any module with python -m a1sli
 │   ├── balance.py       IMU balance reflex
 │   └── terrain.py       rolling-hill terrain
 ├── models/
-│   └── tabpfn_risk.py   TabPFN risk model (CollisionRisk, generic despite the name)
+│   └── tabpfn_risk.py   TabPFN risk model (RiskModel) used by every experiment
 ├── ice/                 headline experiments
 │   ├── patches.py       speed governor and slip-map patrol on ice patches
 │   ├── outdoor.py       outdoor course: on-site slip map from appearance
@@ -232,9 +232,7 @@ data/                    simulated training data (.npz)
 results/                 every reported number (JSON) and figures/
 docs/                    README GIFs
 tests/                   pytest suite
-notebooks/               early exploration
-extras/                  a separate MuJoCo demo (Franka arm playing tic-tac-toe)
-pyproject.toml, requirements.txt, Makefile
+pyproject.toml, requirements.txt, Makefile, LICENSE
 ```
 
 ---
@@ -440,8 +438,19 @@ The planner does most of the work. Once it is on, the TabPFN filter is no better
 
 </details>
 
+## Team
+
+- **Mehraj Fathima Zakir Hussain** ([@MehrajFathima](https://github.com/MehrajFathima))
+- **Moritz Ebeling-Rump** ([@ebeling-rump](https://github.com/ebeling-rump))
+- **Lukas Emminger** ([@emminator](https://github.com/emminator))
+- **Juan Pablo Fiorenza** ([@Juanfio](https://github.com/Juanfio))
+
 ## Built with
 
 - [MuJoCo](https://github.com/google-deepmind/mujoco) and the [MuJoCo Menagerie](https://github.com/google-deepmind/mujoco_menagerie) Unitree A1 model
 - [TabPFN](https://github.com/PriorLabs/TabPFN) by Prior Labs (local, `v3.5-fast`)
 - XGBoost and scikit-learn for baselines; matplotlib and imageio for charts and videos
+
+## Licence
+
+MIT, see [LICENSE](LICENSE).
