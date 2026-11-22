@@ -1,0 +1,6 @@
+method,success,pushes,pos_err_mm,wall_contacts,model_s_mean
+physics_sysid,0.958,10.708,33.079,0.958,0.169
+gp_hybrid,0.917,12.917,31.687,2.125,0.019
+tabpfn_hybrid,0.875,13.833,28.067,2.25,8.544
+gp_transfer_hybrid,0.917,13.208,14.521,1.708,0.021
+tabpfn_transfer_hybrid,0.917,11.958,34.606,1.375,45.931

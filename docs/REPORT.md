@@ -333,6 +333,69 @@ Caveat: 8 objects, one seed each — the direction is consistent (8/8) but effec
 
 ---
 
+## 6c. TabPFN vs the Gaussian-process benchmark, head to head
+
+The GP (ARD-RBF, Bauza & Rodriguez-style) is the literature's data-efficient pushing model, so every
+TabPFN variant has a GP twin with **identical inputs** (same features, same physics residual, same
+transfer context). `experiments/gp_vs_tabpfn.py` → `results/gp_vs_tabpfn.csv`,
+`results/figures/gp_vs_tabpfn.png` (24 test objects per regime, paired per object, 95% bootstrap CIs).
+
+**Prediction accuracy (position error, TabPFN minus GP):**
+
+| model pair | regime | n = 3 | n = 5 | n = 10 | n = 20 | TabPFN more accurate on |
+|---|---|---|---|---|---|---|
+| raw learner | standard | +4.7 [−1.4, 10.9] | **−4.2** [−6.7, −1.7] | **−3.1** [−4.6, −1.6] | +0.4 [−0.4, 1.0] | 46–79% of objects |
+| hybrid | standard | +0.1 | +0.1 | **−0.7** [−1.0, −0.4] | **−1.0** [−1.4, −0.7] | 54–96% |
+| raw learner | heterogeneous | +1.2 | **−4.8** [−7.5, −2.3] | **−7.9** [−12.3, −4.6] | −0.7 | 58–88% |
+| hybrid | heterogeneous | **−1.2** [−2.4, −0.2] | −1.1 | −0.3 | +0.1 | 62–75% |
+| transfer-hybrid | heterogeneous | **−4.1** [−5.9, −2.6] | **−3.8** [−5.7, −2.3] | **−3.8** [−5.1, −2.7] | **−2.5** [−3.6, −1.3] | 83–96% |
+
+(mm; bold = CI excludes 0. At n = 1 both hybrids fall back to physics + sysID and tie.)
+
+**Calibration** (share of outcomes inside ±1σ, ideal 68%): with 3–10 pushes the GPs cover only
+22–38% — they are confidently wrong — while TabPFN covers 36–67%. With transfer context the GP is
+slightly under-confident (77%), TabPFN close to ideal (57–67%).
+
+**Closed loop, heterogeneous C3H/C4H/C5H, 8 seeds each** (`results/manip_hetero_gptransfer.csv`,
+`results/manip_gp_vs_tabpfn_summary.csv`):
+
+| method | success | pushes | final error (successes, median) | model time / decision |
+|---|---|---|---|---|
+| physics + sysID | 96% | **10.7** | 14.1 mm | 0.17 s |
+| GP-hybrid | 92% | 12.9 | 12.9 mm | 0.02 s |
+| TabPFN-hybrid | 88% | 13.8 | 15.4 mm | 8.5 s* |
+| GP transfer-hybrid | 92% | 13.2 | **11.1 mm** | 0.02 s |
+| TabPFN transfer-hybrid | 92% | 12.0 | 11.3 mm | 46 s* |
+
+\*contended CPU (several benchmarks in parallel); uncontended ~2 s and ~14 s (§5).
+Paired push differences: TabPFN transfer − GP transfer −1.25 [−3.0, +0.4] (p = 0.20); TabPFN-hybrid −
+GP-hybrid +0.9 [−0.5, +2.5] (p = 0.52). **In closed loop the two learners are statistically
+indistinguishable**; the GP is ~1000× cheaper per decision. Physics + sysID still needs the fewest
+pushes.
+
+**Demo scenarios with all three models** (one seed each, chosen before running; videos
+`results/videos/*_physics_sysid_vs_gp_transfer_hybrid_vs_tabpfn_api_transfer_hybrid.mp4`):
+
+| scenario | physics + sysID | GP transfer-hybrid | TabPFN v3.5 API transfer-hybrid |
+|---|---|---|---|
+| C4H Z-shape on casters, precise pose | 5 pushes, 20 mm | 14 pushes, **4 mm / 0.1°** | 7 pushes, 11 mm |
+| C5H T-shape on casters, doorway | 13 pushes | **11 pushes** | 14 pushes |
+| C6H L-shape on casters, cluttered room | 46 pushes, 24 mm | **failed** (60 pushes, 24 wall contacts) | 43 pushes, **12 mm** |
+| A1, L-shaped crate through the door | 15 pushes | 13 pushes | **8 pushes** |
+| A1, box crate (seed 3) through the door | 25 pushes, 2 falls | 20 pushes, 1 fall | **13 pushes**, 0 falls |
+
+A1 three-way videos: `results/videos/A1_doorway_Lcrate_tabpfn_vs_gp_vs_physics.mp4`,
+`results/videos/A1_doorway_seed3_tabpfn_vs_gp_vs_physics.mp4` (top TabPFN, middle GP, bottom physics).
+In these 5 single-seed demos TabPFN needs the fewest pushes in 3 and the GP in 1, and the GP fails
+once; that is suggestive but, unlike the 24-episode benchmark above, not a statistical result.
+
+**Bottom line.** TabPFN's clear, consistent advantage over the GP is (1) **cross-object transfer** —
+more accurate on 83–96% of unseen objects at every budget — and (2) **honest uncertainty with very few
+samples**. Without transfer, accuracy is a near-tie, and in closed loop we could not show a
+significant difference; there the GP is far cheaper.
+
+---
+
 ## 7. Limitations and threats to validity
 
 * All results are from our own MuJoCo simulation; the physics baseline (quasi-static, ellipsoidal
