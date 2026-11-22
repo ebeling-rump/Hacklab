@@ -1,14 +1,108 @@
-# Hacklab
+# Can a robot dog learn where the ice is from a table?
 
-## How to use
+**TabPFN on a simulated Unitree A1.** From its own body sensors, with no training and no camera, it learns how fast it's safe to walk and where the ice is, on ground it has never seen.
 
-```python a1_navigation.py```: Run mujoco simulation with Unitree A1 robot navigating in an environment.
+![TabPFN speed governor on ice patches](docs/ice_governor.gif)
 
-```python a1_lidar.py```: Run mujoco simulation with Unitree A1 robot with LiDAR sensors navigating in an environment.
+*Same ice-patch course, same start: fixed full speed (slips a lot) | crawling (slow) | **TabPFN choosing the speed** (fast and few slips). White = ice, green = grip. 2× speed.*
 
-```python a1_dataset.py```: Simulated datasets (/datasets/env_A.npz & env_B.npz).
+**Slides:** [add the shared deck link] · **Video:** [add the YouTube link] · **No-setup tour:** `python tour.py`
 
-### TabPFN collision safety filter
+### The result
+
+| ice patches, A → B, 5 layouts the model never saw | time | seconds slipping |
+|---|---|---|
+| fixed full speed | 31.2 s | 20.5 s |
+| fixed crawl | 49.0 s | 8.3 s |
+| XGBoost choosing the speed (same features, same rule) | 39.1 s | 8.8 s |
+| **TabPFN choosing the speed** | **32.0 s** | **8.9 s** |
+
+TabPFN slips as little as crawling at nearly full speed. With the same predictions stored in a map of the ground, the robot also learns to **route around the ice** on later trips: 4.6 s of slipping per trip instead of 14.4 s.
+
+### Just let me see it
+
+```
+python tour.py      # prints every headline result from results/*.json - no TabPFN, GPU or simulation needed
+```
+
+| Real hills, never seen in training | Patrol: the slip map learns where the ice is |
+|---|---|
+| ![Blind trot falls, TabPFN braces, balance reflex](docs/hills.gif) | ![Slip map patrol](docs/ice_patrol.gif) |
+
+### How it works
+
+1. **Simulate and label.** 400 walks of a MuJoCo Unitree A1 with a blind trot, on random friction (0.1–1.0), slopes and shoves. Every 0.1 s we save one row of what the robot can sense, and label it from the simulator: did a foot slip within 0.2 s? did it fall within 1 s?
+2. **Store, don't train.** 2,000 labelled rows become TabPFN's examples. Its weights never change.
+3. **Predict live.** Every 0.1–0.2 s, the robot's 62 sensor numbers go in as one row. Those are IMU, joint angles and speeds, motor torques, foot forces, the command, and a legs-vs-IMU slip detector. The output is a probability.
+4. **Act.** A simple rule turns the probability into movement: choose a speed, avoid mapped ice, or brace against a fall.
+
+```mermaid
+flowchart LR
+  subgraph offline["once, offline"]
+    A["400 simulated walks<br/>random floors, commands, shoves"] --> B["labels from the simulator<br/>slip in 0.2 s? fall in 1 s?"] --> C[("2,000 example rows")]
+  end
+  S["robot sensors<br/>62 numbers"] --> T["TabPFN<br/>risk %"]
+  C --> T
+  T --> D{"decision rule"}
+  D -->|"speed governor"| G["trot gait<br/>12 joint targets"]
+  D -->|"slip map + A*"| G
+  D -->|"danger mode"| G
+  G --> P["MuJoCo physics"] --> S
+```
+
+### What's in here
+
+| # | question | result | run |
+|---|---|---|---|
+| 1 | Can TabPFN choose a safe speed on ice it can't see? | **yes:** 32 s / 8.9 s slipping, against crawling 49 s / 8.3 s and XGBoost 39 s / 8.8 s | `python a1_ice_patches.py governor` |
+| 2 | Can it learn where the ice is over repeated trips? | **yes:** 4.6 s slipping per trip, against 14.4 s with no map (8.4 s with a detector-only map) | `python a1_ice_patches.py patrol` |
+| 3 | Does slip prediction transfer to unseen floors? | ROC-AUC 0.736 on unseen icy floors, ahead of XGBoost on equal data (0.706) | `python a1_slip_history_eval.py` |
+| 4 | Does fall prediction transfer to real hills? | ROC-AUC 0.86–0.94 frozen; XGBoost with 9× the data 0.89–0.97; tilt rule 0.82–0.83 | `python a1_terrain_test.py` |
+| 5 | Does acting on the fall warning prevent falls? | blind robot: 28 → 13 falls of 40; **but a simple balance reflex has 0**, and TabPFN adds nothing on top | `python a1_danger_mode.py`, `python a1_improve_test.py part3` |
+| 6 | First attempt: lidar collision filter | a lidar map + A* solved navigation; TabPFN added nothing | `python a1_safety_filter.py --compare 3 --scenario all --planner` |
+
+### What this shows, and what it doesn't
+
+- **Shows:** a frozen TabPFN, fed only body sensors, predicts slips and falls on terrain it never saw. On ice patches, it chooses speeds and routes better than fixed strategies, a slip-detector-only model, and XGBoost with the same features.
+- **Doesn't show:**
+  - **Simulation only.** On a real A1, slip labels would come from the slip detector, not from the simulator.
+  - **Fall prevention:** a simple IMU balance reflex beats every warning-based strategy, so TabPFN is not the right tool for falls here.
+  - **Small samples:** 5 layouts per ice test and 30–40 walks per fall test.
+  - **The governor is sensitive to the model:** with 5,000 examples, predictions got more accurate but the governor got worse. Its threshold has to be re-checked whenever the model changes.
+  - **Exact positions:** the patrol uses the simulator's exact position.
+  - **Speed:** decisions take about 0.26 s on a laptop CPU.
+
+### Setup
+
+```
+pip install mujoco tabpfn xgboost scikit-learn matplotlib imageio imageio-ffmpeg
+```
+
+TabPFN runs locally on CPU (model `v3.5-fast`). The first run downloads the weights, which needs the TabPFN licence accepted (see docs.priorlabs.ai). The MuJoCo Menagerie A1 model is cloned automatically on first use.
+
+### Repository layout
+
+| files | what |
+|---|---|
+| `tour.py` | no-setup summary of all results |
+| `a1_lidar.py`, `a1_balance.py` | A1 scene, trot gait (with posture options), balance reflex |
+| `a1_slip_dataset.py` | data generation, sensors, legs-vs-IMU slip detector, `run_episode` |
+| `a1_collision.py` | TabPFN wrapper (`CollisionRisk`, generic despite the name) |
+| `a1_ice_patches.py`, `a1_ice_videos.py` | ice-patch course: speed governor, slip-map patrol, videos |
+| `a1_terrain.py`, `a1_terrain_test.py` | real hill terrain, frozen-model test |
+| `a1_slip_eval.py`, `a1_slip_history_eval.py`, `a1_learning_curve.py`, `a1_fall_feature_check.py`, `a1_floor_adapt.py` | offline prediction tests |
+| `a1_recovery_demo.py`, `a1_danger_mode.py`, `a1_improve_test.py`, `a1_balance_tune.py` | fall warning → action, balance reflex |
+| `a1_danger_replay.py`, `a1_slip_viewer.py`, `a1_record_videos.py` | viewers, replays, videos |
+| `a1_tabpfn_charts.py` | all charts → `results/figures/` |
+| `a1_safety_filter.py`, `a1_scenarios.py`, `a1_planner.py`, `a1_collision_*.py` | first attempt: lidar collision filter, scenes, A* planner |
+| `a1_navigation.py`, `a1_dataset.py` | original A1 navigation and lidar datasets |
+| `datasets/`, `results/`, `docs/` | data, results (JSON + figures), README GIFs |
+
+---
+
+## Detailed results
+
+### First attempt: TabPFN collision safety filter
 
 Needs `pip install mujoco tabpfn xgboost scikit-learn` (TabPFN runs locally on CPU, model v3.5-fast).
 
@@ -185,9 +279,9 @@ The scene is flat green ground with white ice patches (friction 0.1) on the way 
 | XGBoost governor (same 62 features, 10,290 rows) | 39.1 s | 8.8 s |
 | **TabPFN governor** | **32.0 s** | **8.9 s** |
 
-TabPFN slips about as little as crawling at nearly full speed, and it held on every layout.
+TabPFN slips about as little as crawling at nearly full speed, and it held on every layout. XGBoost reaches the same slip level 7 s slower. The detector-only model can't tell ice from grip (median risk 0.53 vs 0.55, against TabPFN's 0.42 vs 0.88), so it crawls everywhere.
 
-*More examples ≠ better governor* (`results/ice_governor_5000.json`). With 5,000 instead of 2,000 TabPFN examples, offline slip ROC-AUC on unseen icy and steep floors rises from 0.681 to 0.768, and each decision isn't slower (about 260 ms). But the governor gets worse: 45.0 s / 26.4 s slipping at the 0.65 limit (38.5 s / 8.8 s at 0.5). The 5,000-example model rates full speed on ice slightly lower (0.84 vs 0.88, even below 0.8 speed), so 10% of icy moments pass the 0.65 limit instead of 3%, and the robot runs onto the ice. The controller depends on how risk changes with speed, not on overall accuracy, so changing the model means re-checking the threshold. XGBoost reaches the same slip level 7 s slower. The detector-only model can't tell ice from grip (median risk 0.53 vs 0.55, against TabPFN's 0.42 vs 0.88), so it crawls everywhere.
+*More examples ≠ better governor* (`results/ice_governor_5000.json`). With 5,000 instead of 2,000 TabPFN examples, offline slip ROC-AUC on unseen icy and steep floors rises from 0.681 to 0.768, and each decision isn't slower (about 260 ms). But the governor gets worse: 45.0 s / 26.4 s slipping at the 0.65 limit (38.5 s / 8.8 s at 0.5). The 5,000-example model rates full speed on ice slightly lower (0.84 vs 0.88, even below 0.8 speed), so 10% of icy moments pass the 0.65 limit instead of 3%, and the robot runs onto the ice. The controller depends on how risk changes with speed, not on overall accuracy, so changing the model means re-checking the threshold.
 
 *Patrol with a slip map* (`python a1_ice_patches.py patrol`). The robot walks A↔B six times. Its slip risk goes into a grid map, and A* routes around high-risk cells. From leg 3 on, it slips 4.6 s per leg with the TabPFN map, 8.4 s with a detector-only map and 14.4 s with no map. Honestly, by legs 4–6 both maps end up similar (medians 2–4 s). TabPFN's edge is steadier learning: the detector map routes back into the ice on leg 3.
 
@@ -200,15 +294,9 @@ Exact replays of logged episodes, with the brace indicator (blue = braced), slid
 
 `python a1_slip_viewer.py` shows the robot live on a chosen floor, with sliding feet in red and TabPFN's fall risk as a coloured ball.
 
-#### Notebooks
-fit_tabPFN.ipynb: should fit the tabPFN model and do the data wrangling (create a table out of the data).
+### Built with
 
-
-Simulation environments:
-
-https://pybullet.org/
-
-https://github.com/google-deepmind/mujoco
-
-TabPFN Demo:
-https://colab.research.google.com/github/PriorLabs/TabPFN/blob/main/examples/notebooks/TabPFN_Demo_Local.ipynb
+- [MuJoCo](https://github.com/google-deepmind/mujoco) and the [MuJoCo Menagerie](https://github.com/google-deepmind/mujoco_menagerie) Unitree A1 model
+- [TabPFN](https://github.com/PriorLabs/TabPFN) by Prior Labs (local, `v3.5-fast`)
+- XGBoost and scikit-learn for baselines; matplotlib, imageio for charts and videos
+- `fit_tabPFN.ipynb`: an early notebook fitting TabPFN on the lidar navigation data
