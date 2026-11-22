@@ -1,0 +1,1388 @@
+[
+ {
+  "model": "TabPFN",
+  "n": 20,
+  "rep": 0,
+  "test": "same floors",
+  "roc_auc": 0.49888865069783705
+ },
+ {
+  "model": "TabPFN",
+  "n": 20,
+  "rep": 0,
+  "test": "icier (unseen)",
+  "roc_auc": 0.49177302383613636
+ },
+ {
+  "model": "TabPFN",
+  "n": 20,
+  "rep": 0,
+  "test": "steeper (unseen)",
+  "roc_auc": 0.5184764135776951,
+  "seconds": 25.729254961013794
+ },
+ {
+  "model": "XGBoost",
+  "n": 20,
+  "rep": 0,
+  "test": "same floors",
+  "roc_auc": 0.48386004896706575
+ },
+ {
+  "model": "XGBoost",
+  "n": 20,
+  "rep": 0,
+  "test": "icier (unseen)",
+  "roc_auc": 0.5068623118712797
+ },
+ {
+  "model": "XGBoost",
+  "n": 20,
+  "rep": 0,
+  "test": "steeper (unseen)",
+  "roc_auc": 0.5351040374810528,
+  "seconds": 1.0101211071014404
+ },
+ {
+  "model": "logistic",
+  "n": 20,
+  "rep": 0,
+  "test": "same floors",
+  "roc_auc": 0.472171136509799
+ },
+ {
+  "model": "logistic",
+  "n": 20,
+  "rep": 0,
+  "test": "icier (unseen)",
+  "roc_auc": 0.4222921161394297
+ },
+ {
+  "model": "logistic",
+  "n": 20,
+  "rep": 0,
+  "test": "steeper (unseen)",
+  "roc_auc": 0.48868908180607223,
+  "seconds": 0.03574967384338379
+ },
+ {
+  "model": "TabPFN",
+  "n": 20,
+  "rep": 1,
+  "test": "same floors",
+  "roc_auc": 0.5287653304148661
+ },
+ {
+  "model": "TabPFN",
+  "n": 20,
+  "rep": 1,
+  "test": "icier (unseen)",
+  "roc_auc": 0.4832991084193289
+ },
+ {
+  "model": "TabPFN",
+  "n": 20,
+  "rep": 1,
+  "test": "steeper (unseen)",
+  "roc_auc": 0.5805544072389877,
+  "seconds": 20.210444688796997
+ },
+ {
+  "model": "XGBoost",
+  "n": 20,
+  "rep": 1,
+  "test": "same floors",
+  "roc_auc": 0.555161286682989
+ },
+ {
+  "model": "XGBoost",
+  "n": 20,
+  "rep": 1,
+  "test": "icier (unseen)",
+  "roc_auc": 0.4490135426685036
+ },
+ {
+  "model": "XGBoost",
+  "n": 20,
+  "rep": 1,
+  "test": "steeper (unseen)",
+  "roc_auc": 0.5584665380552111,
+  "seconds": 1.0182056427001953
+ },
+ {
+  "model": "logistic",
+  "n": 20,
+  "rep": 1,
+  "test": "same floors",
+  "roc_auc": 0.5050603062134017
+ },
+ {
+  "model": "logistic",
+  "n": 20,
+  "rep": 1,
+  "test": "icier (unseen)",
+  "roc_auc": 0.4702243248160952
+ },
+ {
+  "model": "logistic",
+  "n": 20,
+  "rep": 1,
+  "test": "steeper (unseen)",
+  "roc_auc": 0.5474254742547426,
+  "seconds": 0.032021284103393555
+ },
+ {
+  "model": "TabPFN",
+  "n": 20,
+  "rep": 2,
+  "test": "same floors",
+  "roc_auc": 0.6198057113199671
+ },
+ {
+  "model": "TabPFN",
+  "n": 20,
+  "rep": 2,
+  "test": "icier (unseen)",
+  "roc_auc": 0.5979309089963869
+ },
+ {
+  "model": "TabPFN",
+  "n": 20,
+  "rep": 2,
+  "test": "steeper (unseen)",
+  "roc_auc": 0.6026824675026411,
+  "seconds": 19.853627681732178
+ },
+ {
+  "model": "XGBoost",
+  "n": 20,
+  "rep": 2,
+  "test": "same floors",
+  "roc_auc": 0.5985603231375026
+ },
+ {
+  "model": "XGBoost",
+  "n": 20,
+  "rep": 2,
+  "test": "icier (unseen)",
+  "roc_auc": 0.6218840165319331
+ },
+ {
+  "model": "XGBoost",
+  "n": 20,
+  "rep": 2,
+  "test": "steeper (unseen)",
+  "roc_auc": 0.6141598915989159,
+  "seconds": 1.0008082389831543
+ },
+ {
+  "model": "logistic",
+  "n": 20,
+  "rep": 2,
+  "test": "same floors",
+  "roc_auc": 0.5580891561643218
+ },
+ {
+  "model": "logistic",
+  "n": 20,
+  "rep": 2,
+  "test": "icier (unseen)",
+  "roc_auc": 0.6262639390709885
+ },
+ {
+  "model": "logistic",
+  "n": 20,
+  "rep": 2,
+  "test": "steeper (unseen)",
+  "roc_auc": 0.5927150796931698,
+  "seconds": 0.027210712432861328
+ },
+ {
+  "model": "TabPFN",
+  "n": 50,
+  "rep": 0,
+  "test": "same floors",
+  "roc_auc": 0.6492987780799042
+ },
+ {
+  "model": "TabPFN",
+  "n": 50,
+  "rep": 0,
+  "test": "icier (unseen)",
+  "roc_auc": 0.5360141405214317
+ },
+ {
+  "model": "TabPFN",
+  "n": 50,
+  "rep": 0,
+  "test": "steeper (unseen)",
+  "roc_auc": 0.5630540627440174,
+  "seconds": 19.94294786453247
+ },
+ {
+  "model": "XGBoost",
+  "n": 50,
+  "rep": 0,
+  "test": "same floors",
+  "roc_auc": 0.6581105933589827
+ },
+ {
+  "model": "XGBoost",
+  "n": 50,
+  "rep": 0,
+  "test": "icier (unseen)",
+  "roc_auc": 0.6117595071612383
+ },
+ {
+  "model": "XGBoost",
+  "n": 50,
+  "rep": 0,
+  "test": "steeper (unseen)",
+  "roc_auc": 0.5796242708189794,
+  "seconds": 1.0411996841430664
+ },
+ {
+  "model": "logistic",
+  "n": 50,
+  "rep": 0,
+  "test": "same floors",
+  "roc_auc": 0.5710868657693132
+ },
+ {
+  "model": "logistic",
+  "n": 50,
+  "rep": 0,
+  "test": "icier (unseen)",
+  "roc_auc": 0.6139429700293728
+ },
+ {
+  "model": "logistic",
+  "n": 50,
+  "rep": 0,
+  "test": "steeper (unseen)",
+  "roc_auc": 0.5631574112351293,
+  "seconds": 0.03397560119628906
+ },
+ {
+  "model": "TabPFN",
+  "n": 50,
+  "rep": 1,
+  "test": "same floors",
+  "roc_auc": 0.6215545350949442
+ },
+ {
+  "model": "TabPFN",
+  "n": 50,
+  "rep": 1,
+  "test": "icier (unseen)",
+  "roc_auc": 0.5468534740453849
+ },
+ {
+  "model": "TabPFN",
+  "n": 50,
+  "rep": 1,
+  "test": "steeper (unseen)",
+  "roc_auc": 0.5948050158467686,
+  "seconds": 20.369425296783447
+ },
+ {
+  "model": "XGBoost",
+  "n": 50,
+  "rep": 1,
+  "test": "same floors",
+  "roc_auc": 0.599603976035473
+ },
+ {
+  "model": "XGBoost",
+  "n": 50,
+  "rep": 1,
+  "test": "icier (unseen)",
+  "roc_auc": 0.5807231421070417
+ },
+ {
+  "model": "XGBoost",
+  "n": 50,
+  "rep": 1,
+  "test": "steeper (unseen)",
+  "roc_auc": 0.5963322768820908,
+  "seconds": 0.9838747978210449
+ },
+ {
+  "model": "logistic",
+  "n": 50,
+  "rep": 1,
+  "test": "same floors",
+  "roc_auc": 0.5998578375511954
+ },
+ {
+  "model": "logistic",
+  "n": 50,
+  "rep": 1,
+  "test": "icier (unseen)",
+  "roc_auc": 0.6361415091887396
+ },
+ {
+  "model": "logistic",
+  "n": 50,
+  "rep": 1,
+  "test": "steeper (unseen)",
+  "roc_auc": 0.6058173717330394,
+  "seconds": 0.0300600528717041
+ },
+ {
+  "model": "TabPFN",
+  "n": 50,
+  "rep": 2,
+  "test": "same floors",
+  "roc_auc": 0.6883144723629431
+ },
+ {
+  "model": "TabPFN",
+  "n": 50,
+  "rep": 2,
+  "test": "icier (unseen)",
+  "roc_auc": 0.6664500532868914
+ },
+ {
+  "model": "TabPFN",
+  "n": 50,
+  "rep": 2,
+  "test": "steeper (unseen)",
+  "roc_auc": 0.6277042855174315,
+  "seconds": 20.251472234725952
+ },
+ {
+  "model": "XGBoost",
+  "n": 50,
+  "rep": 2,
+  "test": "same floors",
+  "roc_auc": 0.6866559104602228
+ },
+ {
+  "model": "XGBoost",
+  "n": 50,
+  "rep": 2,
+  "test": "icier (unseen)",
+  "roc_auc": 0.6948090769670661
+ },
+ {
+  "model": "XGBoost",
+  "n": 50,
+  "rep": 2,
+  "test": "steeper (unseen)",
+  "roc_auc": 0.6398649579716136,
+  "seconds": 1.0129127502441406
+ },
+ {
+  "model": "logistic",
+  "n": 50,
+  "rep": 2,
+  "test": "same floors",
+  "roc_auc": 0.6355564080287937
+ },
+ {
+  "model": "logistic",
+  "n": 50,
+  "rep": 2,
+  "test": "icier (unseen)",
+  "roc_auc": 0.7111070676613553
+ },
+ {
+  "model": "logistic",
+  "n": 50,
+  "rep": 2,
+  "test": "steeper (unseen)",
+  "roc_auc": 0.5777869643103211,
+  "seconds": 0.03125476837158203
+ },
+ {
+  "model": "TabPFN",
+  "n": 100,
+  "rep": 0,
+  "test": "same floors",
+  "roc_auc": 0.6900181652017917
+ },
+ {
+  "model": "TabPFN",
+  "n": 100,
+  "rep": 0,
+  "test": "icier (unseen)",
+  "roc_auc": 0.5299056432117699
+ },
+ {
+  "model": "TabPFN",
+  "n": 100,
+  "rep": 0,
+  "test": "steeper (unseen)",
+  "roc_auc": 0.6160488723531303,
+  "seconds": 21.75165057182312
+ },
+ {
+  "model": "XGBoost",
+  "n": 100,
+  "rep": 0,
+  "test": "same floors",
+  "roc_auc": 0.6445713125204499
+ },
+ {
+  "model": "XGBoost",
+  "n": 100,
+  "rep": 0,
+  "test": "icier (unseen)",
+  "roc_auc": 0.5431883756595877
+ },
+ {
+  "model": "XGBoost",
+  "n": 100,
+  "rep": 0,
+  "test": "steeper (unseen)",
+  "roc_auc": 0.6359262321436774,
+  "seconds": 1.575300931930542
+ },
+ {
+  "model": "logistic",
+  "n": 100,
+  "rep": 0,
+  "test": "same floors",
+  "roc_auc": 0.629486297119518
+ },
+ {
+  "model": "logistic",
+  "n": 100,
+  "rep": 0,
+  "test": "icier (unseen)",
+  "roc_auc": 0.6319045514803359
+ },
+ {
+  "model": "logistic",
+  "n": 100,
+  "rep": 0,
+  "test": "steeper (unseen)",
+  "roc_auc": 0.585216572504708,
+  "seconds": 0.05139756202697754
+ },
+ {
+  "model": "TabPFN",
+  "n": 100,
+  "rep": 1,
+  "test": "same floors",
+  "roc_auc": 0.6504044860150512
+ },
+ {
+  "model": "TabPFN",
+  "n": 100,
+  "rep": 1,
+  "test": "icier (unseen)",
+  "roc_auc": 0.505783577239999
+ },
+ {
+  "model": "TabPFN",
+  "n": 100,
+  "rep": 1,
+  "test": "steeper (unseen)",
+  "roc_auc": 0.5718272013228607,
+  "seconds": 22.33291459083557
+ },
+ {
+  "model": "XGBoost",
+  "n": 100,
+  "rep": 1,
+  "test": "same floors",
+  "roc_auc": 0.6229535941149259
+ },
+ {
+  "model": "XGBoost",
+  "n": 100,
+  "rep": 1,
+  "test": "icier (unseen)",
+  "roc_auc": 0.5804632060513113
+ },
+ {
+  "model": "XGBoost",
+  "n": 100,
+  "rep": 1,
+  "test": "steeper (unseen)",
+  "roc_auc": 0.5642483119746452,
+  "seconds": 1.4138154983520508
+ },
+ {
+  "model": "logistic",
+  "n": 100,
+  "rep": 1,
+  "test": "same floors",
+  "roc_auc": 0.5822342069930385
+ },
+ {
+  "model": "logistic",
+  "n": 100,
+  "rep": 1,
+  "test": "icier (unseen)",
+  "roc_auc": 0.6072626133971043
+ },
+ {
+  "model": "logistic",
+  "n": 100,
+  "rep": 1,
+  "test": "steeper (unseen)",
+  "roc_auc": 0.5210371595241375,
+  "seconds": 0.03278613090515137
+ },
+ {
+  "model": "TabPFN",
+  "n": 100,
+  "rep": 2,
+  "test": "same floors",
+  "roc_auc": 0.6516568694926155
+ },
+ {
+  "model": "TabPFN",
+  "n": 100,
+  "rep": 2,
+  "test": "icier (unseen)",
+  "roc_auc": 0.6657742195419928
+ },
+ {
+  "model": "TabPFN",
+  "n": 100,
+  "rep": 2,
+  "test": "steeper (unseen)",
+  "roc_auc": 0.6094690184189977,
+  "seconds": 22.3873028755188
+ },
+ {
+  "model": "XGBoost",
+  "n": 100,
+  "rep": 2,
+  "test": "same floors",
+  "roc_auc": 0.6393135584614864
+ },
+ {
+  "model": "XGBoost",
+  "n": 100,
+  "rep": 2,
+  "test": "icier (unseen)",
+  "roc_auc": 0.6556887005796573
+ },
+ {
+  "model": "XGBoost",
+  "n": 100,
+  "rep": 2,
+  "test": "steeper (unseen)",
+  "roc_auc": 0.5994786642781682,
+  "seconds": 1.1899874210357666
+ },
+ {
+  "model": "logistic",
+  "n": 100,
+  "rep": 2,
+  "test": "same floors",
+  "roc_auc": 0.6116595773487832
+ },
+ {
+  "model": "logistic",
+  "n": 100,
+  "rep": 2,
+  "test": "icier (unseen)",
+  "roc_auc": 0.6519716149827143
+ },
+ {
+  "model": "logistic",
+  "n": 100,
+  "rep": 2,
+  "test": "steeper (unseen)",
+  "roc_auc": 0.5506981764732902,
+  "seconds": 0.03232598304748535
+ },
+ {
+  "model": "TabPFN",
+  "n": 200,
+  "rep": 0,
+  "test": "same floors",
+  "roc_auc": 0.6797847254346673
+ },
+ {
+  "model": "TabPFN",
+  "n": 200,
+  "rep": 0,
+  "test": "icier (unseen)",
+  "roc_auc": 0.6550908476514777
+ },
+ {
+  "model": "TabPFN",
+  "n": 200,
+  "rep": 0,
+  "test": "steeper (unseen)",
+  "roc_auc": 0.6321942032979652,
+  "seconds": 22.19808340072632
+ },
+ {
+  "model": "XGBoost",
+  "n": 200,
+  "rep": 0,
+  "test": "same floors",
+  "roc_auc": 0.6563279213819093
+ },
+ {
+  "model": "XGBoost",
+  "n": 200,
+  "rep": 0,
+  "test": "icier (unseen)",
+  "roc_auc": 0.6387668633516156
+ },
+ {
+  "model": "XGBoost",
+  "n": 200,
+  "rep": 0,
+  "test": "steeper (unseen)",
+  "roc_auc": 0.5845735152266778,
+  "seconds": 1.227250576019287
+ },
+ {
+  "model": "logistic",
+  "n": 200,
+  "rep": 0,
+  "test": "same floors",
+  "roc_auc": 0.6388058354300414
+ },
+ {
+  "model": "logistic",
+  "n": 200,
+  "rep": 0,
+  "test": "icier (unseen)",
+  "roc_auc": 0.6963426996958747
+ },
+ {
+  "model": "logistic",
+  "n": 200,
+  "rep": 0,
+  "test": "steeper (unseen)",
+  "roc_auc": 0.5875706214689266,
+  "seconds": 0.04431724548339844
+ },
+ {
+  "model": "TabPFN",
+  "n": 200,
+  "rep": 1,
+  "test": "same floors",
+  "roc_auc": 0.6960995588450993
+ },
+ {
+  "model": "TabPFN",
+  "n": 200,
+  "rep": 1,
+  "test": "icier (unseen)",
+  "roc_auc": 0.6222089366015959
+ },
+ {
+  "model": "TabPFN",
+  "n": 200,
+  "rep": 1,
+  "test": "steeper (unseen)",
+  "roc_auc": 0.5945983188645446,
+  "seconds": 22.257299423217773
+ },
+ {
+  "model": "XGBoost",
+  "n": 200,
+  "rep": 1,
+  "test": "same floors",
+  "roc_auc": 0.6852794169083053
+ },
+ {
+  "model": "XGBoost",
+  "n": 200,
+  "rep": 1,
+  "test": "icier (unseen)",
+  "roc_auc": 0.6555587325517922
+ },
+ {
+  "model": "XGBoost",
+  "n": 200,
+  "rep": 1,
+  "test": "steeper (unseen)",
+  "roc_auc": 0.5845046162326031,
+  "seconds": 1.4346203804016113
+ },
+ {
+  "model": "logistic",
+  "n": 200,
+  "rep": 1,
+  "test": "same floors",
+  "roc_auc": 0.6140515169635907
+ },
+ {
+  "model": "logistic",
+  "n": 200,
+  "rep": 1,
+  "test": "icier (unseen)",
+  "roc_auc": 0.6836838137818096
+ },
+ {
+  "model": "logistic",
+  "n": 200,
+  "rep": 1,
+  "test": "steeper (unseen)",
+  "roc_auc": 0.544370952184098,
+  "seconds": 0.03687024116516113
+ },
+ {
+  "model": "TabPFN",
+  "n": 200,
+  "rep": 2,
+  "test": "same floors",
+  "roc_auc": 0.6640001805237444
+ },
+ {
+  "model": "TabPFN",
+  "n": 200,
+  "rep": 2,
+  "test": "icier (unseen)",
+  "roc_auc": 0.4964908632476411
+ },
+ {
+  "model": "TabPFN",
+  "n": 200,
+  "rep": 2,
+  "test": "steeper (unseen)",
+  "roc_auc": 0.5640645813237793,
+  "seconds": 23.487189769744873
+ },
+ {
+  "model": "XGBoost",
+  "n": 200,
+  "rep": 2,
+  "test": "same floors",
+  "roc_auc": 0.6468842729970327
+ },
+ {
+  "model": "XGBoost",
+  "n": 200,
+  "rep": 2,
+  "test": "icier (unseen)",
+  "roc_auc": 0.5405630214967119
+ },
+ {
+  "model": "XGBoost",
+  "n": 200,
+  "rep": 2,
+  "test": "steeper (unseen)",
+  "roc_auc": 0.575869275641909,
+  "seconds": 1.2895231246948242
+ },
+ {
+  "model": "logistic",
+  "n": 200,
+  "rep": 2,
+  "test": "same floors",
+  "roc_auc": 0.6316412993196512
+ },
+ {
+  "model": "logistic",
+  "n": 200,
+  "rep": 2,
+  "test": "icier (unseen)",
+  "roc_auc": 0.5912245587585454
+ },
+ {
+  "model": "logistic",
+  "n": 200,
+  "rep": 2,
+  "test": "steeper (unseen)",
+  "roc_auc": 0.5160075329566854,
+  "seconds": 0.041806936264038086
+ },
+ {
+  "model": "TabPFN",
+  "n": 500,
+  "rep": 0,
+  "test": "same floors",
+  "roc_auc": 0.7108573749591001
+ },
+ {
+  "model": "TabPFN",
+  "n": 500,
+  "rep": 0,
+  "test": "icier (unseen)",
+  "roc_auc": 0.6178680044709002
+ },
+ {
+  "model": "TabPFN",
+  "n": 500,
+  "rep": 0,
+  "test": "steeper (unseen)",
+  "roc_auc": 0.6734761839143815,
+  "seconds": 27.960259437561035
+ },
+ {
+  "model": "XGBoost",
+  "n": 500,
+  "rep": 0,
+  "test": "same floors",
+  "roc_auc": 0.6799990973812775
+ },
+ {
+  "model": "XGBoost",
+  "n": 500,
+  "rep": 0,
+  "test": "icier (unseen)",
+  "roc_auc": 0.643679654804918
+ },
+ {
+  "model": "XGBoost",
+  "n": 500,
+  "rep": 0,
+  "test": "steeper (unseen)",
+  "roc_auc": 0.6436199531486839,
+  "seconds": 1.6252515316009521
+ },
+ {
+  "model": "logistic",
+  "n": 500,
+  "rep": 0,
+  "test": "same floors",
+  "roc_auc": 0.6438153693402984
+ },
+ {
+  "model": "logistic",
+  "n": 500,
+  "rep": 0,
+  "test": "icier (unseen)",
+  "roc_auc": 0.6225728470796184
+ },
+ {
+  "model": "logistic",
+  "n": 500,
+  "rep": 0,
+  "test": "steeper (unseen)",
+  "roc_auc": 0.5864682375637316,
+  "seconds": 0.054360151290893555
+ },
+ {
+  "model": "TabPFN",
+  "n": 500,
+  "rep": 1,
+  "test": "same floors",
+  "roc_auc": 0.7368189459669867
+ },
+ {
+  "model": "TabPFN",
+  "n": 500,
+  "rep": 1,
+  "test": "icier (unseen)",
+  "roc_auc": 0.6112656286553508
+ },
+ {
+  "model": "TabPFN",
+  "n": 500,
+  "rep": 1,
+  "test": "steeper (unseen)",
+  "roc_auc": 0.6830761104221211,
+  "seconds": 28.14227795600891
+ },
+ {
+  "model": "XGBoost",
+  "n": 500,
+  "rep": 1,
+  "test": "same floors",
+  "roc_auc": 0.6958287732283286
+ },
+ {
+  "model": "XGBoost",
+  "n": 500,
+  "rep": 1,
+  "test": "icier (unseen)",
+  "roc_auc": 0.6046372592342283
+ },
+ {
+  "model": "XGBoost",
+  "n": 500,
+  "rep": 1,
+  "test": "steeper (unseen)",
+  "roc_auc": 0.6778972027008405,
+  "seconds": 1.3707592487335205
+ },
+ {
+  "model": "logistic",
+  "n": 500,
+  "rep": 1,
+  "test": "same floors",
+  "roc_auc": 0.6649027992463135
+ },
+ {
+  "model": "logistic",
+  "n": 500,
+  "rep": 1,
+  "test": "icier (unseen)",
+  "roc_auc": 0.6162823945309454
+ },
+ {
+  "model": "logistic",
+  "n": 500,
+  "rep": 1,
+  "test": "steeper (unseen)",
+  "roc_auc": 0.5853199209958202,
+  "seconds": 0.05659317970275879
+ },
+ {
+  "model": "TabPFN",
+  "n": 500,
+  "rep": 2,
+  "test": "same floors",
+  "roc_auc": 0.7613363270187631
+ },
+ {
+  "model": "TabPFN",
+  "n": 500,
+  "rep": 2,
+  "test": "icier (unseen)",
+  "roc_auc": 0.6267838111824491
+ },
+ {
+  "model": "TabPFN",
+  "n": 500,
+  "rep": 2,
+  "test": "steeper (unseen)",
+  "roc_auc": 0.6720982040328878,
+  "seconds": 26.949158668518066
+ },
+ {
+  "model": "XGBoost",
+  "n": 500,
+  "rep": 2,
+  "test": "same floors",
+  "roc_auc": 0.7106994166826506
+ },
+ {
+  "model": "XGBoost",
+  "n": 500,
+  "rep": 2,
+  "test": "icier (unseen)",
+  "roc_auc": 0.6421200384705362
+ },
+ {
+  "model": "XGBoost",
+  "n": 500,
+  "rep": 2,
+  "test": "steeper (unseen)",
+  "roc_auc": 0.6712828992696707,
+  "seconds": 1.5400447845458984
+ },
+ {
+  "model": "logistic",
+  "n": 500,
+  "rep": 2,
+  "test": "same floors",
+  "roc_auc": 0.6690322799020658
+ },
+ {
+  "model": "logistic",
+  "n": 500,
+  "rep": 2,
+  "test": "icier (unseen)",
+  "roc_auc": 0.6842556731044163
+ },
+ {
+  "model": "logistic",
+  "n": 500,
+  "rep": 2,
+  "test": "steeper (unseen)",
+  "roc_auc": 0.5964471085388819,
+  "seconds": 0.054318904876708984
+ },
+ {
+  "model": "TabPFN",
+  "n": 1000,
+  "rep": 0,
+  "test": "same floors",
+  "roc_auc": 0.7775834640250024
+ },
+ {
+  "model": "TabPFN",
+  "n": 1000,
+  "rep": 0,
+  "test": "icier (unseen)",
+  "roc_auc": 0.6523615190663098
+ },
+ {
+  "model": "TabPFN",
+  "n": 1000,
+  "rep": 0,
+  "test": "steeper (unseen)",
+  "roc_auc": 0.6574801341233751,
+  "seconds": 36.600446462631226
+ },
+ {
+  "model": "XGBoost",
+  "n": 1000,
+  "rep": 0,
+  "test": "same floors",
+  "roc_auc": 0.7328361408536517
+ },
+ {
+  "model": "XGBoost",
+  "n": 1000,
+  "rep": 0,
+  "test": "icier (unseen)",
+  "roc_auc": 0.6257960541706741
+ },
+ {
+  "model": "XGBoost",
+  "n": 1000,
+  "rep": 0,
+  "test": "steeper (unseen)",
+  "roc_auc": 0.6356047035046621,
+  "seconds": 1.366549015045166
+ },
+ {
+  "model": "logistic",
+  "n": 1000,
+  "rep": 0,
+  "test": "same floors",
+  "roc_auc": 0.6973180941205674
+ },
+ {
+  "model": "logistic",
+  "n": 1000,
+  "rep": 0,
+  "test": "icier (unseen)",
+  "roc_auc": 0.6730004418912948
+ },
+ {
+  "model": "logistic",
+  "n": 1000,
+  "rep": 0,
+  "test": "steeper (unseen)",
+  "roc_auc": 0.5877084194570759,
+  "seconds": 0.05701398849487305
+ },
+ {
+  "model": "TabPFN",
+  "n": 1000,
+  "rep": 1,
+  "test": "same floors",
+  "roc_auc": 0.7695727228622039
+ },
+ {
+  "model": "TabPFN",
+  "n": 1000,
+  "rep": 1,
+  "test": "icier (unseen)",
+  "roc_auc": 0.6554807517350731
+ },
+ {
+  "model": "TabPFN",
+  "n": 1000,
+  "rep": 1,
+  "test": "steeper (unseen)",
+  "roc_auc": 0.699014744384732,
+  "seconds": 36.97695350646973
+ },
+ {
+  "model": "XGBoost",
+  "n": 1000,
+  "rep": 1,
+  "test": "same floors",
+  "roc_auc": 0.7150658347530774
+ },
+ {
+  "model": "XGBoost",
+  "n": 1000,
+  "rep": 1,
+  "test": "icier (unseen)",
+  "roc_auc": 0.6762496425879233
+ },
+ {
+  "model": "XGBoost",
+  "n": 1000,
+  "rep": 1,
+  "test": "steeper (unseen)",
+  "roc_auc": 0.6643011345367691,
+  "seconds": 1.471013069152832
+ },
+ {
+  "model": "logistic",
+  "n": 1000,
+  "rep": 1,
+  "test": "same floors",
+  "roc_auc": 0.6670126705103182
+ },
+ {
+  "model": "logistic",
+  "n": 1000,
+  "rep": 1,
+  "test": "icier (unseen)",
+  "roc_auc": 0.6887265732629774
+ },
+ {
+  "model": "logistic",
+  "n": 1000,
+  "rep": 1,
+  "test": "steeper (unseen)",
+  "roc_auc": 0.6004776996922512,
+  "seconds": 0.05475473403930664
+ },
+ {
+  "model": "TabPFN",
+  "n": 1000,
+  "rep": 2,
+  "test": "same floors",
+  "roc_auc": 0.7631189989958368
+ },
+ {
+  "model": "TabPFN",
+  "n": 1000,
+  "rep": 2,
+  "test": "icier (unseen)",
+  "roc_auc": 0.6764056042213615
+ },
+ {
+  "model": "TabPFN",
+  "n": 1000,
+  "rep": 2,
+  "test": "steeper (unseen)",
+  "roc_auc": 0.7077304671351798,
+  "seconds": 36.605247020721436
+ },
+ {
+  "model": "XGBoost",
+  "n": 1000,
+  "rep": 2,
+  "test": "same floors",
+  "roc_auc": 0.7237761054258668
+ },
+ {
+  "model": "XGBoost",
+  "n": 1000,
+  "rep": 2,
+  "test": "icier (unseen)",
+  "roc_auc": 0.7050765511684125
+ },
+ {
+  "model": "XGBoost",
+  "n": 1000,
+  "rep": 2,
+  "test": "steeper (unseen)",
+  "roc_auc": 0.6863143631436315,
+  "seconds": 1.9472875595092773
+ },
+ {
+  "model": "logistic",
+  "n": 1000,
+  "rep": 2,
+  "test": "same floors",
+  "roc_auc": 0.672112466292832
+ },
+ {
+  "model": "logistic",
+  "n": 1000,
+  "rep": 2,
+  "test": "icier (unseen)",
+  "roc_auc": 0.7090275792155128
+ },
+ {
+  "model": "logistic",
+  "n": 1000,
+  "rep": 2,
+  "test": "steeper (unseen)",
+  "roc_auc": 0.6075168802535482,
+  "seconds": 0.0634756088256836
+ },
+ {
+  "model": "TabPFN",
+  "n": 2000,
+  "rep": 0,
+  "test": "same floors",
+  "roc_auc": 0.8241698728435876
+ },
+ {
+  "model": "TabPFN",
+  "n": 2000,
+  "rep": 0,
+  "test": "icier (unseen)",
+  "roc_auc": 0.7040108133399183
+ },
+ {
+  "model": "TabPFN",
+  "n": 2000,
+  "rep": 0,
+  "test": "steeper (unseen)",
+  "roc_auc": 0.7425014928115382,
+  "seconds": 57.81375336647034
+ },
+ {
+  "model": "XGBoost",
+  "n": 2000,
+  "rep": 0,
+  "test": "same floors",
+  "roc_auc": 0.7453712583633266
+ },
+ {
+  "model": "XGBoost",
+  "n": 2000,
+  "rep": 0,
+  "test": "icier (unseen)",
+  "roc_auc": 0.7196069766837359
+ },
+ {
+  "model": "XGBoost",
+  "n": 2000,
+  "rep": 0,
+  "test": "steeper (unseen)",
+  "roc_auc": 0.7012539616921594,
+  "seconds": 1.6117613315582275
+ },
+ {
+  "model": "logistic",
+  "n": 2000,
+  "rep": 0,
+  "test": "same floors",
+  "roc_auc": 0.6756213965768185
+ },
+ {
+  "model": "logistic",
+  "n": 2000,
+  "rep": 0,
+  "test": "icier (unseen)",
+  "roc_auc": 0.7159678719035116
+ },
+ {
+  "model": "logistic",
+  "n": 2000,
+  "rep": 0,
+  "test": "steeper (unseen)",
+  "roc_auc": 0.6291856138900372,
+  "seconds": 0.0608220100402832
+ },
+ {
+  "model": "TabPFN",
+  "n": 2000,
+  "rep": 1,
+  "test": "same floors",
+  "roc_auc": 0.8143538942356512
+ },
+ {
+  "model": "TabPFN",
+  "n": 2000,
+  "rep": 1,
+  "test": "icier (unseen)",
+  "roc_auc": 0.7440669595279562
+ },
+ {
+  "model": "TabPFN",
+  "n": 2000,
+  "rep": 1,
+  "test": "steeper (unseen)",
+  "roc_auc": 0.7335905562445454,
+  "seconds": 56.40531945228577
+ },
+ {
+  "model": "XGBoost",
+  "n": 2000,
+  "rep": 1,
+  "test": "same floors",
+  "roc_auc": 0.7591136284144375
+ },
+ {
+  "model": "XGBoost",
+  "n": 2000,
+  "rep": 1,
+  "test": "icier (unseen)",
+  "roc_auc": 0.7346572743105197
+ },
+ {
+  "model": "XGBoost",
+  "n": 2000,
+  "rep": 1,
+  "test": "steeper (unseen)",
+  "roc_auc": 0.7188002388498461,
+  "seconds": 2.3999617099761963
+ },
+ {
+  "model": "logistic",
+  "n": 2000,
+  "rep": 1,
+  "test": "same floors",
+  "roc_auc": 0.6827182362830161
+ },
+ {
+  "model": "logistic",
+  "n": 2000,
+  "rep": 1,
+  "test": "icier (unseen)",
+  "roc_auc": 0.725065633854072
+ },
+ {
+  "model": "logistic",
+  "n": 2000,
+  "rep": 1,
+  "test": "steeper (unseen)",
+  "roc_auc": 0.6394974966698819,
+  "seconds": 0.08809018135070801
+ },
+ {
+  "model": "TabPFN",
+  "n": 2000,
+  "rep": 2,
+  "test": "same floors",
+  "roc_auc": 0.8073360336676784
+ },
+ {
+  "model": "TabPFN",
+  "n": 2000,
+  "rep": 2,
+  "test": "icier (unseen)",
+  "roc_auc": 0.6763796106157886
+ },
+ {
+  "model": "TabPFN",
+  "n": 2000,
+  "rep": 2,
+  "test": "steeper (unseen)",
+  "roc_auc": 0.7407216021312755,
+  "seconds": 90.26461839675903
+ },
+ {
+  "model": "XGBoost",
+  "n": 2000,
+  "rep": 2,
+  "test": "same floors",
+  "roc_auc": 0.7416479561327302
+ },
+ {
+  "model": "XGBoost",
+  "n": 2000,
+  "rep": 2,
+  "test": "icier (unseen)",
+  "roc_auc": 0.6687894777884641
+ },
+ {
+  "model": "XGBoost",
+  "n": 2000,
+  "rep": 2,
+  "test": "steeper (unseen)",
+  "roc_auc": 0.7249552156538513,
+  "seconds": 4.279787063598633
+ },
+ {
+  "model": "logistic",
+  "n": 2000,
+  "rep": 2,
+  "test": "same floors",
+  "roc_auc": 0.6842639708454152
+ },
+ {
+  "model": "logistic",
+  "n": 2000,
+  "rep": 2,
+  "test": "icier (unseen)",
+  "roc_auc": 0.7092095344545242
+ },
+ {
+  "model": "logistic",
+  "n": 2000,
+  "rep": 2,
+  "test": "steeper (unseen)",
+  "roc_auc": 0.6154517477378163,
+  "seconds": 0.09915709495544434
+ }
+]

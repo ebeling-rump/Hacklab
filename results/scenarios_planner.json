@@ -1,0 +1,722 @@
+[
+ {
+  "scenario": "random",
+  "seed": 0,
+  "controller": "none+plan",
+  "reached": true,
+  "fell": false,
+  "collision_steps": 0,
+  "decisions": 78,
+  "time": 15.6
+ },
+ {
+  "scenario": "random",
+  "seed": 0,
+  "controller": "tabpfn+plan",
+  "reached": true,
+  "fell": false,
+  "collision_steps": 0,
+  "decisions": 76,
+  "time": 15.2
+ },
+ {
+  "scenario": "random",
+  "seed": 0,
+  "controller": "gap+plan",
+  "reached": true,
+  "fell": false,
+  "collision_steps": 0,
+  "decisions": 80,
+  "time": 16.0
+ },
+ {
+  "scenario": "random",
+  "seed": 1,
+  "controller": "none+plan",
+  "reached": true,
+  "fell": false,
+  "collision_steps": 0,
+  "decisions": 76,
+  "time": 15.2
+ },
+ {
+  "scenario": "random",
+  "seed": 1,
+  "controller": "tabpfn+plan",
+  "reached": true,
+  "fell": false,
+  "collision_steps": 0,
+  "decisions": 74,
+  "time": 14.8
+ },
+ {
+  "scenario": "random",
+  "seed": 1,
+  "controller": "gap+plan",
+  "reached": true,
+  "fell": false,
+  "collision_steps": 0,
+  "decisions": 87,
+  "time": 17.4
+ },
+ {
+  "scenario": "random",
+  "seed": 2,
+  "controller": "none+plan",
+  "reached": true,
+  "fell": false,
+  "collision_steps": 0,
+  "decisions": 86,
+  "time": 17.2
+ },
+ {
+  "scenario": "random",
+  "seed": 2,
+  "controller": "tabpfn+plan",
+  "reached": true,
+  "fell": false,
+  "collision_steps": 0,
+  "decisions": 87,
+  "time": 17.4
+ },
+ {
+  "scenario": "random",
+  "seed": 2,
+  "controller": "gap+plan",
+  "reached": true,
+  "fell": false,
+  "collision_steps": 0,
+  "decisions": 89,
+  "time": 17.8
+ },
+ {
+  "scenario": "dense",
+  "seed": 0,
+  "controller": "none+plan",
+  "reached": true,
+  "fell": false,
+  "collision_steps": 0,
+  "decisions": 100,
+  "time": 20.0
+ },
+ {
+  "scenario": "dense",
+  "seed": 0,
+  "controller": "tabpfn+plan",
+  "reached": true,
+  "fell": false,
+  "collision_steps": 0,
+  "decisions": 95,
+  "time": 19.0
+ },
+ {
+  "scenario": "dense",
+  "seed": 0,
+  "controller": "gap+plan",
+  "reached": true,
+  "fell": false,
+  "collision_steps": 0,
+  "decisions": 101,
+  "time": 20.2
+ },
+ {
+  "scenario": "dense",
+  "seed": 1,
+  "controller": "none+plan",
+  "reached": true,
+  "fell": false,
+  "collision_steps": 0,
+  "decisions": 94,
+  "time": 18.8
+ },
+ {
+  "scenario": "dense",
+  "seed": 1,
+  "controller": "tabpfn+plan",
+  "reached": true,
+  "fell": false,
+  "collision_steps": 0,
+  "decisions": 93,
+  "time": 18.6
+ },
+ {
+  "scenario": "dense",
+  "seed": 1,
+  "controller": "gap+plan",
+  "reached": true,
+  "fell": false,
+  "collision_steps": 0,
+  "decisions": 95,
+  "time": 19.0
+ },
+ {
+  "scenario": "dense",
+  "seed": 2,
+  "controller": "none+plan",
+  "reached": true,
+  "fell": false,
+  "collision_steps": 0,
+  "decisions": 97,
+  "time": 19.4
+ },
+ {
+  "scenario": "dense",
+  "seed": 2,
+  "controller": "tabpfn+plan",
+  "reached": true,
+  "fell": false,
+  "collision_steps": 0,
+  "decisions": 98,
+  "time": 19.6
+ },
+ {
+  "scenario": "dense",
+  "seed": 2,
+  "controller": "gap+plan",
+  "reached": true,
+  "fell": false,
+  "collision_steps": 0,
+  "decisions": 104,
+  "time": 20.8
+ },
+ {
+  "scenario": "large",
+  "seed": 0,
+  "controller": "none+plan",
+  "reached": true,
+  "fell": false,
+  "collision_steps": 0,
+  "decisions": 81,
+  "time": 16.2
+ },
+ {
+  "scenario": "large",
+  "seed": 0,
+  "controller": "tabpfn+plan",
+  "reached": true,
+  "fell": false,
+  "collision_steps": 0,
+  "decisions": 81,
+  "time": 16.2
+ },
+ {
+  "scenario": "large",
+  "seed": 0,
+  "controller": "gap+plan",
+  "reached": true,
+  "fell": false,
+  "collision_steps": 0,
+  "decisions": 87,
+  "time": 17.4
+ },
+ {
+  "scenario": "large",
+  "seed": 1,
+  "controller": "none+plan",
+  "reached": true,
+  "fell": false,
+  "collision_steps": 0,
+  "decisions": 93,
+  "time": 18.6
+ },
+ {
+  "scenario": "large",
+  "seed": 1,
+  "controller": "tabpfn+plan",
+  "reached": true,
+  "fell": false,
+  "collision_steps": 0,
+  "decisions": 95,
+  "time": 19.0
+ },
+ {
+  "scenario": "large",
+  "seed": 1,
+  "controller": "gap+plan",
+  "reached": true,
+  "fell": false,
+  "collision_steps": 0,
+  "decisions": 100,
+  "time": 20.0
+ },
+ {
+  "scenario": "large",
+  "seed": 2,
+  "controller": "none+plan",
+  "reached": true,
+  "fell": false,
+  "collision_steps": 0,
+  "decisions": 88,
+  "time": 17.6
+ },
+ {
+  "scenario": "large",
+  "seed": 2,
+  "controller": "tabpfn+plan",
+  "reached": true,
+  "fell": false,
+  "collision_steps": 0,
+  "decisions": 84,
+  "time": 16.8
+ },
+ {
+  "scenario": "large",
+  "seed": 2,
+  "controller": "gap+plan",
+  "reached": true,
+  "fell": false,
+  "collision_steps": 0,
+  "decisions": 91,
+  "time": 18.2
+ },
+ {
+  "scenario": "wall",
+  "seed": 0,
+  "controller": "none+plan",
+  "reached": true,
+  "fell": false,
+  "collision_steps": 0,
+  "decisions": 76,
+  "time": 15.2
+ },
+ {
+  "scenario": "wall",
+  "seed": 0,
+  "controller": "tabpfn+plan",
+  "reached": true,
+  "fell": false,
+  "collision_steps": 0,
+  "decisions": 77,
+  "time": 15.4
+ },
+ {
+  "scenario": "wall",
+  "seed": 0,
+  "controller": "gap+plan",
+  "reached": true,
+  "fell": false,
+  "collision_steps": 0,
+  "decisions": 79,
+  "time": 15.8
+ },
+ {
+  "scenario": "wall",
+  "seed": 1,
+  "controller": "none+plan",
+  "reached": true,
+  "fell": false,
+  "collision_steps": 0,
+  "decisions": 81,
+  "time": 16.2
+ },
+ {
+  "scenario": "wall",
+  "seed": 1,
+  "controller": "tabpfn+plan",
+  "reached": true,
+  "fell": false,
+  "collision_steps": 0,
+  "decisions": 82,
+  "time": 16.4
+ },
+ {
+  "scenario": "wall",
+  "seed": 1,
+  "controller": "gap+plan",
+  "reached": true,
+  "fell": false,
+  "collision_steps": 0,
+  "decisions": 86,
+  "time": 17.2
+ },
+ {
+  "scenario": "wall",
+  "seed": 2,
+  "controller": "none+plan",
+  "reached": true,
+  "fell": false,
+  "collision_steps": 0,
+  "decisions": 78,
+  "time": 15.6
+ },
+ {
+  "scenario": "wall",
+  "seed": 2,
+  "controller": "tabpfn+plan",
+  "reached": true,
+  "fell": false,
+  "collision_steps": 0,
+  "decisions": 74,
+  "time": 14.8
+ },
+ {
+  "scenario": "wall",
+  "seed": 2,
+  "controller": "gap+plan",
+  "reached": true,
+  "fell": false,
+  "collision_steps": 0,
+  "decisions": 79,
+  "time": 15.8
+ },
+ {
+  "scenario": "corridor",
+  "seed": 0,
+  "controller": "none+plan",
+  "reached": true,
+  "fell": false,
+  "collision_steps": 0,
+  "decisions": 76,
+  "time": 15.2
+ },
+ {
+  "scenario": "corridor",
+  "seed": 0,
+  "controller": "tabpfn+plan",
+  "reached": true,
+  "fell": false,
+  "collision_steps": 0,
+  "decisions": 81,
+  "time": 16.2
+ },
+ {
+  "scenario": "corridor",
+  "seed": 0,
+  "controller": "gap+plan",
+  "reached": true,
+  "fell": false,
+  "collision_steps": 0,
+  "decisions": 101,
+  "time": 20.2
+ },
+ {
+  "scenario": "corridor",
+  "seed": 1,
+  "controller": "none+plan",
+  "reached": true,
+  "fell": false,
+  "collision_steps": 0,
+  "decisions": 76,
+  "time": 15.2
+ },
+ {
+  "scenario": "corridor",
+  "seed": 1,
+  "controller": "tabpfn+plan",
+  "reached": true,
+  "fell": false,
+  "collision_steps": 0,
+  "decisions": 74,
+  "time": 14.8
+ },
+ {
+  "scenario": "corridor",
+  "seed": 1,
+  "controller": "gap+plan",
+  "reached": false,
+  "fell": false,
+  "collision_steps": 153,
+  "decisions": 300,
+  "time": 60.0
+ },
+ {
+  "scenario": "corridor",
+  "seed": 2,
+  "controller": "none+plan",
+  "reached": true,
+  "fell": false,
+  "collision_steps": 0,
+  "decisions": 76,
+  "time": 15.2
+ },
+ {
+  "scenario": "corridor",
+  "seed": 2,
+  "controller": "tabpfn+plan",
+  "reached": true,
+  "fell": false,
+  "collision_steps": 0,
+  "decisions": 81,
+  "time": 16.2
+ },
+ {
+  "scenario": "corridor",
+  "seed": 2,
+  "controller": "gap+plan",
+  "reached": true,
+  "fell": false,
+  "collision_steps": 0,
+  "decisions": 101,
+  "time": 20.2
+ },
+ {
+  "scenario": "crossing",
+  "seed": 0,
+  "controller": "none+plan",
+  "reached": true,
+  "fell": false,
+  "collision_steps": 15,
+  "decisions": 79,
+  "time": 15.8
+ },
+ {
+  "scenario": "crossing",
+  "seed": 0,
+  "controller": "tabpfn+plan",
+  "reached": true,
+  "fell": false,
+  "collision_steps": 37,
+  "decisions": 116,
+  "time": 23.2
+ },
+ {
+  "scenario": "crossing",
+  "seed": 0,
+  "controller": "gap+plan",
+  "reached": false,
+  "fell": true,
+  "collision_steps": 8,
+  "decisions": 32,
+  "time": 6.4
+ },
+ {
+  "scenario": "crossing",
+  "seed": 1,
+  "controller": "none+plan",
+  "reached": true,
+  "fell": false,
+  "collision_steps": 0,
+  "decisions": 75,
+  "time": 15.0
+ },
+ {
+  "scenario": "crossing",
+  "seed": 1,
+  "controller": "tabpfn+plan",
+  "reached": true,
+  "fell": false,
+  "collision_steps": 0,
+  "decisions": 77,
+  "time": 15.4
+ },
+ {
+  "scenario": "crossing",
+  "seed": 1,
+  "controller": "gap+plan",
+  "reached": true,
+  "fell": false,
+  "collision_steps": 0,
+  "decisions": 79,
+  "time": 15.8
+ },
+ {
+  "scenario": "crossing",
+  "seed": 2,
+  "controller": "none+plan",
+  "reached": true,
+  "fell": false,
+  "collision_steps": 7,
+  "decisions": 79,
+  "time": 15.8
+ },
+ {
+  "scenario": "crossing",
+  "seed": 2,
+  "controller": "tabpfn+plan",
+  "reached": true,
+  "fell": false,
+  "collision_steps": 3,
+  "decisions": 75,
+  "time": 15.0
+ },
+ {
+  "scenario": "crossing",
+  "seed": 2,
+  "controller": "gap+plan",
+  "reached": true,
+  "fell": false,
+  "collision_steps": 29,
+  "decisions": 149,
+  "time": 29.8
+ },
+ {
+  "scenario": "oncoming",
+  "seed": 0,
+  "controller": "none+plan",
+  "reached": true,
+  "fell": false,
+  "collision_steps": 0,
+  "decisions": 75,
+  "time": 15.0
+ },
+ {
+  "scenario": "oncoming",
+  "seed": 0,
+  "controller": "tabpfn+plan",
+  "reached": true,
+  "fell": false,
+  "collision_steps": 0,
+  "decisions": 74,
+  "time": 14.8
+ },
+ {
+  "scenario": "oncoming",
+  "seed": 0,
+  "controller": "gap+plan",
+  "reached": true,
+  "fell": false,
+  "collision_steps": 0,
+  "decisions": 76,
+  "time": 15.2
+ },
+ {
+  "scenario": "oncoming",
+  "seed": 1,
+  "controller": "none+plan",
+  "reached": true,
+  "fell": false,
+  "collision_steps": 0,
+  "decisions": 76,
+  "time": 15.2
+ },
+ {
+  "scenario": "oncoming",
+  "seed": 1,
+  "controller": "tabpfn+plan",
+  "reached": true,
+  "fell": false,
+  "collision_steps": 0,
+  "decisions": 76,
+  "time": 15.2
+ },
+ {
+  "scenario": "oncoming",
+  "seed": 1,
+  "controller": "gap+plan",
+  "reached": true,
+  "fell": false,
+  "collision_steps": 0,
+  "decisions": 78,
+  "time": 15.6
+ },
+ {
+  "scenario": "oncoming",
+  "seed": 2,
+  "controller": "none+plan",
+  "reached": true,
+  "fell": false,
+  "collision_steps": 0,
+  "decisions": 79,
+  "time": 15.8
+ },
+ {
+  "scenario": "oncoming",
+  "seed": 2,
+  "controller": "tabpfn+plan",
+  "reached": true,
+  "fell": false,
+  "collision_steps": 0,
+  "decisions": 77,
+  "time": 15.4
+ },
+ {
+  "scenario": "oncoming",
+  "seed": 2,
+  "controller": "gap+plan",
+  "reached": true,
+  "fell": false,
+  "collision_steps": 0,
+  "decisions": 78,
+  "time": 15.6
+ },
+ {
+  "scenario": "mixed",
+  "seed": 0,
+  "controller": "none+plan",
+  "reached": false,
+  "fell": true,
+  "collision_steps": 4,
+  "decisions": 32,
+  "time": 6.4
+ },
+ {
+  "scenario": "mixed",
+  "seed": 0,
+  "controller": "tabpfn+plan",
+  "reached": false,
+  "fell": true,
+  "collision_steps": 16,
+  "decisions": 43,
+  "time": 8.6
+ },
+ {
+  "scenario": "mixed",
+  "seed": 0,
+  "controller": "gap+plan",
+  "reached": true,
+  "fell": false,
+  "collision_steps": 8,
+  "decisions": 93,
+  "time": 18.6
+ },
+ {
+  "scenario": "mixed",
+  "seed": 1,
+  "controller": "none+plan",
+  "reached": true,
+  "fell": false,
+  "collision_steps": 0,
+  "decisions": 82,
+  "time": 16.4
+ },
+ {
+  "scenario": "mixed",
+  "seed": 1,
+  "controller": "tabpfn+plan",
+  "reached": true,
+  "fell": false,
+  "collision_steps": 0,
+  "decisions": 77,
+  "time": 15.4
+ },
+ {
+  "scenario": "mixed",
+  "seed": 1,
+  "controller": "gap+plan",
+  "reached": true,
+  "fell": false,
+  "collision_steps": 0,
+  "decisions": 84,
+  "time": 16.8
+ },
+ {
+  "scenario": "mixed",
+  "seed": 2,
+  "controller": "none+plan",
+  "reached": true,
+  "fell": false,
+  "collision_steps": 5,
+  "decisions": 80,
+  "time": 16.0
+ },
+ {
+  "scenario": "mixed",
+  "seed": 2,
+  "controller": "tabpfn+plan",
+  "reached": true,
+  "fell": false,
+  "collision_steps": 2,
+  "decisions": 77,
+  "time": 15.4
+ },
+ {
+  "scenario": "mixed",
+  "seed": 2,
+  "controller": "gap+plan",
+  "reached": false,
+  "fell": true,
+  "collision_steps": 16,
+  "decisions": 46,
+  "time": 9.2
+ }
+]

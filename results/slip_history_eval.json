@@ -1,0 +1,386 @@
+[
+ {
+  "task": "slip in next 0.2 s",
+  "features": "base",
+  "model": "XGBoost (all rows)",
+  "split": "same floors",
+  "roc_auc": 0.8088309456657764,
+  "pr_auc": 0.8452425624034565
+ },
+ {
+  "task": "slip in next 0.2 s",
+  "features": "base",
+  "model": "XGBoost (2000 rows)",
+  "split": "same floors",
+  "roc_auc": 0.7653373531766402,
+  "pr_auc": 0.8086681169632852
+ },
+ {
+  "task": "slip in next 0.2 s",
+  "features": "base",
+  "model": "TabPFN (2000 rows)",
+  "split": "same floors",
+  "roc_auc": 0.8256862061880769,
+  "pr_auc": 0.8607986546758777
+ },
+ {
+  "task": "slip in next 0.2 s",
+  "features": "base",
+  "model": "XGBoost (all rows)",
+  "split": "icier (unseen)",
+  "roc_auc": 0.7366205479108705,
+  "pr_auc": 0.9547184562447033
+ },
+ {
+  "task": "slip in next 0.2 s",
+  "features": "base",
+  "model": "XGBoost (2000 rows)",
+  "split": "icier (unseen)",
+  "roc_auc": 0.6716770684512621,
+  "pr_auc": 0.9354636515161528
+ },
+ {
+  "task": "slip in next 0.2 s",
+  "features": "base",
+  "model": "TabPFN (2000 rows)",
+  "split": "icier (unseen)",
+  "roc_auc": 0.6782022040086556,
+  "pr_auc": 0.9414377494719048
+ },
+ {
+  "task": "slip in next 0.2 s",
+  "features": "base",
+  "model": "XGBoost (all rows)",
+  "split": "steeper (unseen)",
+  "roc_auc": 0.7562786987917661,
+  "pr_auc": 0.8180716531453283
+ },
+ {
+  "task": "slip in next 0.2 s",
+  "features": "base",
+  "model": "XGBoost (2000 rows)",
+  "split": "steeper (unseen)",
+  "roc_auc": 0.7114364498451045,
+  "pr_auc": 0.7791576153217352
+ },
+ {
+  "task": "slip in next 0.2 s",
+  "features": "base",
+  "model": "TabPFN (2000 rows)",
+  "split": "steeper (unseen)",
+  "roc_auc": 0.7285143739740142,
+  "pr_auc": 0.7968422966293185
+ },
+ {
+  "task": "slip in next 0.2 s",
+  "features": "base",
+  "model": "XGBoost (all rows)",
+  "split": "icier + steeper",
+  "roc_auc": 0.728606641242675,
+  "pr_auc": 0.9074442434300231
+ },
+ {
+  "task": "slip in next 0.2 s",
+  "features": "base",
+  "model": "XGBoost (2000 rows)",
+  "split": "icier + steeper",
+  "roc_auc": 0.6495226357681013,
+  "pr_auc": 0.8704517177397058
+ },
+ {
+  "task": "slip in next 0.2 s",
+  "features": "base",
+  "model": "TabPFN (2000 rows)",
+  "split": "icier + steeper",
+  "roc_auc": 0.6290660669439387,
+  "pr_auc": 0.8757602718115733
+ },
+ {
+  "task": "slip in next 0.2 s",
+  "features": "+history",
+  "model": "XGBoost (all rows)",
+  "split": "same floors",
+  "roc_auc": 0.8572642179629287,
+  "pr_auc": 0.8910225527904622
+ },
+ {
+  "task": "slip in next 0.2 s",
+  "features": "+history",
+  "model": "XGBoost (2000 rows)",
+  "split": "same floors",
+  "roc_auc": 0.8332887852941233,
+  "pr_auc": 0.8662979490057302
+ },
+ {
+  "task": "slip in next 0.2 s",
+  "features": "+history",
+  "model": "TabPFN (2000 rows)",
+  "split": "same floors",
+  "roc_auc": 0.8543646236613851,
+  "pr_auc": 0.8866448046311628
+ },
+ {
+  "task": "slip in next 0.2 s",
+  "features": "+history",
+  "model": "XGBoost (all rows)",
+  "split": "icier (unseen)",
+  "roc_auc": 0.7741513564094209,
+  "pr_auc": 0.9644388782642415
+ },
+ {
+  "task": "slip in next 0.2 s",
+  "features": "+history",
+  "model": "XGBoost (2000 rows)",
+  "split": "icier (unseen)",
+  "roc_auc": 0.7061027980382819,
+  "pr_auc": 0.9468094855412432
+ },
+ {
+  "task": "slip in next 0.2 s",
+  "features": "+history",
+  "model": "TabPFN (2000 rows)",
+  "split": "icier (unseen)",
+  "roc_auc": 0.7361593603529087,
+  "pr_auc": 0.9563202108747785
+ },
+ {
+  "task": "slip in next 0.2 s",
+  "features": "+history",
+  "model": "XGBoost (all rows)",
+  "split": "steeper (unseen)",
+  "roc_auc": 0.75420118868521,
+  "pr_auc": 0.8230510033186311
+ },
+ {
+  "task": "slip in next 0.2 s",
+  "features": "+history",
+  "model": "XGBoost (2000 rows)",
+  "split": "steeper (unseen)",
+  "roc_auc": 0.7274266049341791,
+  "pr_auc": 0.7950141977700995
+ },
+ {
+  "task": "slip in next 0.2 s",
+  "features": "+history",
+  "model": "TabPFN (2000 rows)",
+  "split": "steeper (unseen)",
+  "roc_auc": 0.746037905667212,
+  "pr_auc": 0.8147324754432077
+ },
+ {
+  "task": "slip in next 0.2 s",
+  "features": "+history",
+  "model": "XGBoost (all rows)",
+  "split": "icier + steeper",
+  "roc_auc": 0.7254100947420173,
+  "pr_auc": 0.9185658698541298
+ },
+ {
+  "task": "slip in next 0.2 s",
+  "features": "+history",
+  "model": "XGBoost (2000 rows)",
+  "split": "icier + steeper",
+  "roc_auc": 0.6830627051304199,
+  "pr_auc": 0.8971089851451531
+ },
+ {
+  "task": "slip in next 0.2 s",
+  "features": "+history",
+  "model": "TabPFN (2000 rows)",
+  "split": "icier + steeper",
+  "roc_auc": 0.7102844253690686,
+  "pr_auc": 0.9168280564227697
+ },
+ {
+  "task": "slip in next 0.2 s",
+  "features": "+true past slip",
+  "model": "XGBoost (all rows)",
+  "split": "same floors",
+  "roc_auc": 0.8694532055588224,
+  "pr_auc": 0.8957674828879063
+ },
+ {
+  "task": "slip in next 0.2 s",
+  "features": "+true past slip",
+  "model": "XGBoost (2000 rows)",
+  "split": "same floors",
+  "roc_auc": 0.8411573644993563,
+  "pr_auc": 0.8689205717456514
+ },
+ {
+  "task": "slip in next 0.2 s",
+  "features": "+true past slip",
+  "model": "TabPFN (2000 rows)",
+  "split": "same floors",
+  "roc_auc": 0.866474390888756,
+  "pr_auc": 0.8943236762149794
+ },
+ {
+  "task": "slip in next 0.2 s",
+  "features": "+true past slip",
+  "model": "XGBoost (all rows)",
+  "split": "icier (unseen)",
+  "roc_auc": 0.7903564177757726,
+  "pr_auc": 0.9650028691597714
+ },
+ {
+  "task": "slip in next 0.2 s",
+  "features": "+true past slip",
+  "model": "XGBoost (2000 rows)",
+  "split": "icier (unseen)",
+  "roc_auc": 0.7085917069788038,
+  "pr_auc": 0.9468745187434465
+ },
+ {
+  "task": "slip in next 0.2 s",
+  "features": "+true past slip",
+  "model": "TabPFN (2000 rows)",
+  "split": "icier (unseen)",
+  "roc_auc": 0.7264034054356634,
+  "pr_auc": 0.9543581655037964
+ },
+ {
+  "task": "slip in next 0.2 s",
+  "features": "+true past slip",
+  "model": "XGBoost (all rows)",
+  "split": "steeper (unseen)",
+  "roc_auc": 0.7844654402309648,
+  "pr_auc": 0.8415526579422735
+ },
+ {
+  "task": "slip in next 0.2 s",
+  "features": "+true past slip",
+  "model": "XGBoost (2000 rows)",
+  "split": "steeper (unseen)",
+  "roc_auc": 0.74067105198385,
+  "pr_auc": 0.8037397341021264
+ },
+ {
+  "task": "slip in next 0.2 s",
+  "features": "+true past slip",
+  "model": "TabPFN (2000 rows)",
+  "split": "steeper (unseen)",
+  "roc_auc": 0.7567122129196031,
+  "pr_auc": 0.8187424244421834
+ },
+ {
+  "task": "slip in next 0.2 s",
+  "features": "+true past slip",
+  "model": "XGBoost (all rows)",
+  "split": "icier + steeper",
+  "roc_auc": 0.7443128213986738,
+  "pr_auc": 0.9124621149467589
+ },
+ {
+  "task": "slip in next 0.2 s",
+  "features": "+true past slip",
+  "model": "XGBoost (2000 rows)",
+  "split": "icier + steeper",
+  "roc_auc": 0.6786611212246036,
+  "pr_auc": 0.8861637762699636
+ },
+ {
+  "task": "slip in next 0.2 s",
+  "features": "+true past slip",
+  "model": "TabPFN (2000 rows)",
+  "split": "icier + steeper",
+  "roc_auc": 0.7274373148012809,
+  "pr_auc": 0.9171835022655319
+ },
+ {
+  "task": "fall in next 1 s",
+  "features": "base",
+  "model": "XGBoost (all rows)",
+  "split": "same floors",
+  "roc_auc": 0.9090206373514184,
+  "pr_auc": 0.4484668479343679
+ },
+ {
+  "task": "fall in next 1 s",
+  "features": "base",
+  "model": "XGBoost (2000 rows)",
+  "split": "same floors",
+  "roc_auc": 0.9146867935535622,
+  "pr_auc": 0.4780245958267323
+ },
+ {
+  "task": "fall in next 1 s",
+  "features": "base",
+  "model": "TabPFN (2000 rows)",
+  "split": "same floors",
+  "roc_auc": 0.9572522423977248,
+  "pr_auc": 0.4993601408682301
+ },
+ {
+  "task": "fall in next 1 s",
+  "features": "base",
+  "model": "XGBoost (all rows)",
+  "split": "steeper (unseen)",
+  "roc_auc": 0.8837669144272918,
+  "pr_auc": 0.6507870059453889
+ },
+ {
+  "task": "fall in next 1 s",
+  "features": "base",
+  "model": "XGBoost (2000 rows)",
+  "split": "steeper (unseen)",
+  "roc_auc": 0.8738346515469158,
+  "pr_auc": 0.6236783417211255
+ },
+ {
+  "task": "fall in next 1 s",
+  "features": "base",
+  "model": "TabPFN (2000 rows)",
+  "split": "steeper (unseen)",
+  "roc_auc": 0.8868400991042501,
+  "pr_auc": 0.6423068496213511
+ },
+ {
+  "task": "fall in next 1 s",
+  "features": "+history",
+  "model": "XGBoost (all rows)",
+  "split": "same floors",
+  "roc_auc": 0.947837818128783,
+  "pr_auc": 0.5467570654266793
+ },
+ {
+  "task": "fall in next 1 s",
+  "features": "+history",
+  "model": "XGBoost (2000 rows)",
+  "split": "same floors",
+  "roc_auc": 0.9528403704513965,
+  "pr_auc": 0.511592778303001
+ },
+ {
+  "task": "fall in next 1 s",
+  "features": "+history",
+  "model": "TabPFN (2000 rows)",
+  "split": "same floors",
+  "roc_auc": 0.9706191205425508,
+  "pr_auc": 0.4885145503737312
+ },
+ {
+  "task": "fall in next 1 s",
+  "features": "+history",
+  "model": "XGBoost (all rows)",
+  "split": "steeper (unseen)",
+  "roc_auc": 0.9078382091353789,
+  "pr_auc": 0.6740089049323814
+ },
+ {
+  "task": "fall in next 1 s",
+  "features": "+history",
+  "model": "XGBoost (2000 rows)",
+  "split": "steeper (unseen)",
+  "roc_auc": 0.8906895209961248,
+  "pr_auc": 0.6070587396288651
+ },
+ {
+  "task": "fall in next 1 s",
+  "features": "+history",
+  "model": "TabPFN (2000 rows)",
+  "split": "steeper (unseen)",
+  "roc_auc": 0.8507817959468902,
+  "pr_auc": 0.5134242269844856
+ }
+]

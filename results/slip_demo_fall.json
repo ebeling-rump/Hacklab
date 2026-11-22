@@ -1,0 +1,602 @@
+[
+ {
+  "episode": 0,
+  "mu": 0.3321893753408923,
+  "slope": 14.207683694012658,
+  "baseline": {
+   "fell": true,
+   "alarms": 0,
+   "distance": 0.5567834284322963
+  },
+  "warning": {
+   "fell": true,
+   "alarms": 1,
+   "distance": 0.5587770616252015
+  }
+ },
+ {
+  "episode": 1,
+  "mu": 0.4098216793016776,
+  "slope": 13.031400935640663,
+  "baseline": {
+   "fell": false,
+   "alarms": 0,
+   "distance": 4.159298307983035
+  },
+  "warning": {
+   "fell": false,
+   "alarms": 0,
+   "distance": 4.159298307983035
+  }
+ },
+ {
+  "episode": 2,
+  "mu": 0.2403372898038387,
+  "slope": 13.714378675341894,
+  "baseline": {
+   "fell": true,
+   "alarms": 0,
+   "distance": 0.35928022345407346
+  },
+  "warning": {
+   "fell": true,
+   "alarms": 0,
+   "distance": 0.35928022345407346
+  }
+ },
+ {
+  "episode": 3,
+  "mu": 0.15408393759759734,
+  "slope": 13.513411620437644,
+  "baseline": {
+   "fell": true,
+   "alarms": 0,
+   "distance": 0.5080172427303259
+  },
+  "warning": {
+   "fell": true,
+   "alarms": 1,
+   "distance": 0.5104768227641642
+  }
+ },
+ {
+  "episode": 4,
+  "mu": 0.1002029373753109,
+  "slope": 13.260302624255264,
+  "baseline": {
+   "fell": false,
+   "alarms": 0,
+   "distance": 3.5092683257149377
+  },
+  "warning": {
+   "fell": false,
+   "alarms": 0,
+   "distance": 3.5092683257149377
+  }
+ },
+ {
+  "episode": 5,
+  "mu": 0.12084235298725088,
+  "slope": 14.861124084777208,
+  "baseline": {
+   "fell": true,
+   "alarms": 0,
+   "distance": 0.7192065585776065
+  },
+  "warning": {
+   "fell": true,
+   "alarms": 2,
+   "distance": 0.586153068188781
+  }
+ },
+ {
+  "episode": 6,
+  "mu": 0.21723081599870475,
+  "slope": 14.20171388759931,
+  "baseline": {
+   "fell": true,
+   "alarms": 0,
+   "distance": 0.33172832103053845
+  },
+  "warning": {
+   "fell": true,
+   "alarms": 1,
+   "distance": 0.33172832103053845
+  }
+ },
+ {
+  "episode": 7,
+  "mu": 0.11782160579638477,
+  "slope": 14.631960690355886,
+  "baseline": {
+   "fell": true,
+   "alarms": 0,
+   "distance": 0.31434471569718014
+  },
+  "warning": {
+   "fell": true,
+   "alarms": 0,
+   "distance": 0.31434471569718014
+  }
+ },
+ {
+  "episode": 8,
+  "mu": 0.14697814065932063,
+  "slope": 14.626101495457558,
+  "baseline": {
+   "fell": false,
+   "alarms": 0,
+   "distance": 3.0352631897761637
+  },
+  "warning": {
+   "fell": true,
+   "alarms": 2,
+   "distance": 2.5525147551021634
+  }
+ },
+ {
+  "episode": 9,
+  "mu": 0.11389389936120317,
+  "slope": 13.653831175345724,
+  "baseline": {
+   "fell": true,
+   "alarms": 0,
+   "distance": 1.8595780276715939
+  },
+  "warning": {
+   "fell": true,
+   "alarms": 1,
+   "distance": 1.933147206292265
+  }
+ },
+ {
+  "episode": 10,
+  "mu": 0.12444924980164185,
+  "slope": 14.071611462473687,
+  "baseline": {
+   "fell": false,
+   "alarms": 0,
+   "distance": 3.6867377329148976
+  },
+  "warning": {
+   "fell": true,
+   "alarms": 2,
+   "distance": 3.7665054460068004
+  }
+ },
+ {
+  "episode": 11,
+  "mu": 0.19236446117229802,
+  "slope": 14.126647071018791,
+  "baseline": {
+   "fell": true,
+   "alarms": 0,
+   "distance": 3.3174170089301223
+  },
+  "warning": {
+   "fell": false,
+   "alarms": 1,
+   "distance": 3.8219191359956897
+  }
+ },
+ {
+  "episode": 12,
+  "mu": 0.20245125964126476,
+  "slope": 14.561293368755985,
+  "baseline": {
+   "fell": true,
+   "alarms": 0,
+   "distance": 0.8429637787156836
+  },
+  "warning": {
+   "fell": true,
+   "alarms": 1,
+   "distance": 0.8388447639602128
+  }
+ },
+ {
+  "episode": 13,
+  "mu": 0.6230069841644793,
+  "slope": 13.157958943148513,
+  "baseline": {
+   "fell": true,
+   "alarms": 0,
+   "distance": 0.5315589678715392
+  },
+  "warning": {
+   "fell": true,
+   "alarms": 1,
+   "distance": 0.5326293157459675
+  }
+ },
+ {
+  "episode": 14,
+  "mu": 0.2725988388637087,
+  "slope": 14.17140461060083,
+  "baseline": {
+   "fell": true,
+   "alarms": 0,
+   "distance": 1.2409900509580667
+  },
+  "warning": {
+   "fell": true,
+   "alarms": 1,
+   "distance": 1.2046022072394575
+  }
+ },
+ {
+  "episode": 15,
+  "mu": 0.2290355701327828,
+  "slope": 14.214135657214731,
+  "baseline": {
+   "fell": true,
+   "alarms": 0,
+   "distance": 0.3178474525769248
+  },
+  "warning": {
+   "fell": true,
+   "alarms": 0,
+   "distance": 0.3178474525769248
+  }
+ },
+ {
+  "episode": 16,
+  "mu": 0.16904082231359172,
+  "slope": 13.885387982188623,
+  "baseline": {
+   "fell": true,
+   "alarms": 0,
+   "distance": 0.5070574787513248
+  },
+  "warning": {
+   "fell": true,
+   "alarms": 1,
+   "distance": 0.39769671490593184
+  }
+ },
+ {
+  "episode": 17,
+  "mu": 0.828613022333993,
+  "slope": 14.64266374726763,
+  "baseline": {
+   "fell": false,
+   "alarms": 0,
+   "distance": 3.511721882375581
+  },
+  "warning": {
+   "fell": false,
+   "alarms": 1,
+   "distance": 3.5117335141934056
+  }
+ },
+ {
+  "episode": 18,
+  "mu": 0.39262273967835837,
+  "slope": 13.909918151390217,
+  "baseline": {
+   "fell": false,
+   "alarms": 0,
+   "distance": 4.0898926138991385
+  },
+  "warning": {
+   "fell": false,
+   "alarms": 0,
+   "distance": 4.0898926138991385
+  }
+ },
+ {
+  "episode": 19,
+  "mu": 0.16478848408118926,
+  "slope": 13.791990095787446,
+  "baseline": {
+   "fell": true,
+   "alarms": 0,
+   "distance": 0.7033578267050868
+  },
+  "warning": {
+   "fell": true,
+   "alarms": 1,
+   "distance": 0.6917364749812416
+  }
+ },
+ {
+  "episode": 20,
+  "mu": 0.37905326603019673,
+  "slope": 13.567350562576403,
+  "baseline": {
+   "fell": true,
+   "alarms": 0,
+   "distance": 2.4429421272817016
+  },
+  "warning": {
+   "fell": true,
+   "alarms": 1,
+   "distance": 2.424535877767266
+  }
+ },
+ {
+  "episode": 21,
+  "mu": 0.2368035138916878,
+  "slope": 13.161702825444683,
+  "baseline": {
+   "fell": false,
+   "alarms": 0,
+   "distance": 3.449846127965294
+  },
+  "warning": {
+   "fell": false,
+   "alarms": 1,
+   "distance": 3.3915273134259594
+  }
+ },
+ {
+  "episode": 22,
+  "mu": 0.10012133814556586,
+  "slope": 14.836833512112495,
+  "baseline": {
+   "fell": true,
+   "alarms": 0,
+   "distance": 0.41225607673608755
+  },
+  "warning": {
+   "fell": true,
+   "alarms": 1,
+   "distance": 0.42301816686623694
+  }
+ },
+ {
+  "episode": 23,
+  "mu": 0.21820720174293615,
+  "slope": 14.811797470165354,
+  "baseline": {
+   "fell": false,
+   "alarms": 0,
+   "distance": 3.787349411048516
+  },
+  "warning": {
+   "fell": false,
+   "alarms": 1,
+   "distance": 3.5503983670007093
+  }
+ },
+ {
+  "episode": 24,
+  "mu": 0.21011737625795374,
+  "slope": 13.516705620045903,
+  "baseline": {
+   "fell": true,
+   "alarms": 0,
+   "distance": 0.4514731917925344
+  },
+  "warning": {
+   "fell": true,
+   "alarms": 1,
+   "distance": 0.4511743519770397
+  }
+ },
+ {
+  "episode": 25,
+  "mu": 0.6623954896376951,
+  "slope": 14.258014989850441,
+  "baseline": {
+   "fell": true,
+   "alarms": 0,
+   "distance": 1.3162586508112424
+  },
+  "warning": {
+   "fell": false,
+   "alarms": 1,
+   "distance": 4.2466689119900565
+  }
+ },
+ {
+  "episode": 26,
+  "mu": 0.14816212421467165,
+  "slope": 14.190234529134642,
+  "baseline": {
+   "fell": false,
+   "alarms": 0,
+   "distance": 4.837671445122677
+  },
+  "warning": {
+   "fell": true,
+   "alarms": 1,
+   "distance": 3.5976684313866563
+  }
+ },
+ {
+  "episode": 27,
+  "mu": 0.10665336346932154,
+  "slope": 14.12429128682081,
+  "baseline": {
+   "fell": false,
+   "alarms": 0,
+   "distance": 2.0543391545222156
+  },
+  "warning": {
+   "fell": false,
+   "alarms": 2,
+   "distance": 1.4547520084460555
+  }
+ },
+ {
+  "episode": 28,
+  "mu": 0.6548941011526942,
+  "slope": 13.77203288716593,
+  "baseline": {
+   "fell": true,
+   "alarms": 0,
+   "distance": 0.24748155218560913
+  },
+  "warning": {
+   "fell": true,
+   "alarms": 0,
+   "distance": 0.24748155218560913
+  }
+ },
+ {
+  "episode": 29,
+  "mu": 0.6867162688999848,
+  "slope": 14.64587224466836,
+  "baseline": {
+   "fell": false,
+   "alarms": 0,
+   "distance": 3.1364004741674467
+  },
+  "warning": {
+   "fell": false,
+   "alarms": 1,
+   "distance": 3.137442325269773
+  }
+ },
+ {
+  "episode": 30,
+  "mu": 0.17253004984931025,
+  "slope": 13.050374195777213,
+  "baseline": {
+   "fell": true,
+   "alarms": 0,
+   "distance": 0.36616332765727017
+  },
+  "warning": {
+   "fell": true,
+   "alarms": 0,
+   "distance": 0.36616332765727017
+  }
+ },
+ {
+  "episode": 31,
+  "mu": 0.4926822481289233,
+  "slope": 14.900980454344388,
+  "baseline": {
+   "fell": true,
+   "alarms": 0,
+   "distance": 0.30519488555723057
+  },
+  "warning": {
+   "fell": true,
+   "alarms": 0,
+   "distance": 0.30519488555723057
+  }
+ },
+ {
+  "episode": 32,
+  "mu": 0.7546403212241874,
+  "slope": 13.469380864230471,
+  "baseline": {
+   "fell": true,
+   "alarms": 0,
+   "distance": 2.498906259733722
+  },
+  "warning": {
+   "fell": true,
+   "alarms": 1,
+   "distance": 2.5004540238642523
+  }
+ },
+ {
+  "episode": 33,
+  "mu": 0.6731907301961599,
+  "slope": 14.745995010439504,
+  "baseline": {
+   "fell": false,
+   "alarms": 0,
+   "distance": 4.083845639856492
+  },
+  "warning": {
+   "fell": false,
+   "alarms": 0,
+   "distance": 4.083845639856492
+  }
+ },
+ {
+  "episode": 34,
+  "mu": 0.9555674333943673,
+  "slope": 13.322209550448614,
+  "baseline": {
+   "fell": true,
+   "alarms": 0,
+   "distance": 1.106327348222865
+  },
+  "warning": {
+   "fell": true,
+   "alarms": 1,
+   "distance": 1.1077700346768131
+  }
+ },
+ {
+  "episode": 35,
+  "mu": 0.20887693005977226,
+  "slope": 13.76026753607206,
+  "baseline": {
+   "fell": true,
+   "alarms": 0,
+   "distance": 0.3016046588640078
+  },
+  "warning": {
+   "fell": true,
+   "alarms": 0,
+   "distance": 0.3016046588640078
+  }
+ },
+ {
+  "episode": 36,
+  "mu": 0.19681497749082774,
+  "slope": 14.601844006219446,
+  "baseline": {
+   "fell": true,
+   "alarms": 0,
+   "distance": 0.6379870107448365
+  },
+  "warning": {
+   "fell": true,
+   "alarms": 1,
+   "distance": 0.6109228778150207
+  }
+ },
+ {
+  "episode": 37,
+  "mu": 0.21005519307139162,
+  "slope": 13.618117772024233,
+  "baseline": {
+   "fell": true,
+   "alarms": 0,
+   "distance": 0.6948795821288704
+  },
+  "warning": {
+   "fell": true,
+   "alarms": 1,
+   "distance": 0.7747763691665864
+  }
+ },
+ {
+  "episode": 38,
+  "mu": 0.21220541861377745,
+  "slope": 13.19704225770483,
+  "baseline": {
+   "fell": true,
+   "alarms": 0,
+   "distance": 0.9235221478073523
+  },
+  "warning": {
+   "fell": true,
+   "alarms": 1,
+   "distance": 0.9163993032933254
+  }
+ },
+ {
+  "episode": 39,
+  "mu": 0.7401553602510935,
+  "slope": 13.961242188745722,
+  "baseline": {
+   "fell": true,
+   "alarms": 0,
+   "distance": 0.5701592841982764
+  },
+  "warning": {
+   "fell": false,
+   "alarms": 2,
+   "distance": 3.2100548977836074
+  }
+ }
+]

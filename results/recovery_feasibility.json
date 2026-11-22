@@ -1,0 +1,37 @@
+{
+ "baseline": {
+  "name": "unchanged gait",
+  "falls": 28,
+  "episodes": 40,
+  "distance": 1.6931730372792593,
+  "reacting_s": 0.0
+ },
+ "slow": {
+  "name": "slow (always on)",
+  "falls": 29,
+  "episodes": 40,
+  "distance": 1.4884898169711547,
+  "reacting_s": 3.0361000000000002
+ },
+ "brace": {
+  "name": "brace (always on)",
+  "falls": 10,
+  "episodes": 40,
+  "distance": 1.3127568649801322,
+  "reacting_s": 5.2719000000000005
+ },
+ "plant": {
+  "name": "plant (always on)",
+  "falls": 11,
+  "episodes": 40,
+  "distance": 0.38288067096364414,
+  "reacting_s": 5.10795
+ },
+ "stop": {
+  "name": "stop (always on)",
+  "falls": 15,
+  "episodes": 40,
+  "distance": 0.40704215859323245,
+  "reacting_s": 4.4764
+ }
+}
