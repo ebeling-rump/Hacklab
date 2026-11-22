@@ -175,9 +175,20 @@ model, whose residual is anchored by hundreds of rows, is the natural fix; its c
 avoid tuning on test seeds).
 
 The active variant (exploration bonus) behaved identically to plain TabPFN-hybrid in the standard
-suite: the hybrid model's uncertainty is constant until 2 pushes are observed, so the bonus carried no
-signal. Fixed afterwards (physics Laplace uncertainty used until the learner has data) but not re-run
-on the full suite.
+suite: the hybrid model's uncertainty was constant until 2 pushes are observed, so the bonus carried no
+signal. After the fix (physics Laplace uncertainty used until the learner has data) it was re-run on the
+heterogeneous suite (`results/manip_hetero_active.csv`, same 24 seeds):
+
+| challenge | physics + sysID | TabPFN-hybrid | **TabPFN-hybrid + active** |
+|---|---|---|---|
+| C3H precision | 100%, 10.3 pushes | 75%, 12.5 | **100%, 9.1** |
+| C4H asymmetric | 100%, 7.0 | 100%, 9.6 | 100%, 8.1 |
+| C5H doorway | 88%, 14.9 | 88%, 19.4 | 88%, 19.0 |
+
+Pooled: success 96% (= physics + sysID, vs 88% without exploration); −1.75 pushes vs TabPFN-hybrid
+(Wilcoxon p = 0.12), +1.4 vs physics + sysID (p = 0.31). **Deliberately informative early pushes
+recover most of the closed-loop deficit of the learned residual** — consistent with the offline
+active-learning result (§2.4) — but the effect is not significant with 8 seeds per task.
 
 ---
 

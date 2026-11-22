@@ -33,6 +33,8 @@ transfer-hybrids (F), nominal physics.
 * **Heterogeneous dynamics** (wheels, fast pushes): TabPFN-hybrid beats physics + sysID from ~20 pushes.
 * **Calibration with 2–10 samples**: GPs become wildly over-confident; TabPFN does not.
 * **Closed loop with transfer**: most precise final object placements in all heterogeneous challenges.
+* **Active experimentation** lifts TabPFN-hybrid's closed-loop success in heterogeneous tasks from 88% to
+  96% (= physics + sysID); best on C3H precision (100%, fewest pushes) — trend, not significant.
 
 ## Where TabPFN loses / ties
 * Rigid quasi-static pushing: physics + sysID is best; TabPFN-hybrid is a close second.
@@ -54,6 +56,7 @@ See [`PUSHING.md`](../PUSHING.md); every number in [`REPORT.md`](REPORT.md) come
 ## Unfinished
 * No hardware or MIT-pushing-dataset validation; simulation only.
 * Planner hyperparameters not tuned per model (possible disadvantage for learned residuals).
-* Active exploration in closed loop re-implemented after the main run but not re-benchmarked.
+* Active exploration in closed loop was re-benchmarked only on the heterogeneous suite (96% success,
+  equal to physics + sysID; not on the standard suite).
 * TabPFN v2.5/v3 weights untested (license acceptance needed — the user's decision).
 * A1: open-loop gait with stand-up resets; 3 doorway seeds per model; no multi-object rearrangement.
