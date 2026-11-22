@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "a1slip"
+version = "1.0.0"
+description = "A simulated Unitree A1 that uses TabPFN in context to choose its speed, map ice and learn what slippery ground looks like."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "mujoco>=3.3",
+    "numpy>=2.0",
+    "scipy",
+    "pandas",
+    "scikit-learn",
+    "xgboost",
+    "matplotlib",
+    "pillow",
+    "imageio",
+    "imageio-ffmpeg",
+    "tabpfn>=2.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest", "ruff"]
+
+[tool.setuptools.packages.find]
+include = ["a1slip*"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py311"
+extend-exclude = ["mujoco_menagerie", "notebooks", "extras"]
+
+[tool.ruff.lint]
+select = ["E9", "F63", "F7", "F82", "F401"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = ["sim: runs the MuJoCo simulation (downloads the A1 model on first use)"]

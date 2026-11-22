@@ -14,30 +14,30 @@
 </tr>
 </table>
 
-**See every result in a few seconds, with only Python and numpy:**
+**See every result in a few seconds, with only Python and numpy** (from the repository root):
 
 ```bash
-python tour.py   # reads results/*.json; needs no TabPFN, GPU or simulator
+python -m a1slip.tour   # reads results/*.json; needs no TabPFN, GPU or simulator
 ```
 
 **Or watch the experiments live in the MuJoCo viewer** (same code and layouts as the results; setup under [Run it](#run-it)):
 
 ```bash
-python a1_watch.py governor                      # ice patches: TabPFN picks the speed
-python a1_watch.py governor --strategy full      # same course at fixed full speed, to compare
-python a1_watch.py patrol                        # ice patches: the slip map learns where the ice is (6 trips)
-python a1_watch.py outdoor                       # grass, sand, gravel, mud, water, trees: learns what slippery looks like
-python a1_watch.py outdoor --strategy obstacles  # same outdoor course without a slip map
-python a1_danger_replay.py --kind dangerous --episode 9 --controller TabPFN   # replay a logged fall episode
+python -m a1slip.ice.watch governor                      # ice patches: TabPFN picks the speed
+python -m a1slip.ice.watch governor --strategy full      # same course at fixed full speed, to compare
+python -m a1slip.ice.watch patrol                        # ice patches: the slip map learns where the ice is (6 trips)
+python -m a1slip.ice.watch outdoor                       # grass, sand, gravel, mud, water, trees: learns what slippery looks like
+python -m a1slip.ice.watch outdoor --strategy obstacles  # same outdoor course without a slip map
+python -m a1slip.viz.danger_replay --kind dangerous --episode 9 --controller TabPFN   # replay a logged fall episode
 ```
 
-In the viewer, red spheres show sliding feet. The patrol and outdoor runs also draw the slip map on the ground and the planned route (blue dots). Options: `--layout N` picks another course (0–4 ice, 0–2 outdoor), `--speed 2` plays faster than real time, and `--strategy crawl` is the slow fixed speed. TabPFN runs on the CPU, so a run can be slower than real time.
+In the viewer, red spheres show sliding feet. The patrol and outdoor runs also draw the slip map on the ground and the planned route (blue dots). Options: `--layout N` picks another course (0–4 ice, 0–2 outdoor), `--speed 2` plays faster than real time and `--strategy crawl` is the slow fixed speed. TabPFN runs on the CPU, so a run can be slower than real time.
 
 ---
 
 ## The problem
 
-A legged robot cannot see whether the floor ahead is icy. It finds out when a foot slides and on a slope or at speed that can already mean a fall. The usual options each have a cost: walk slowly everywhere and lose most of the robot's speed or train a controller over millions of simulated steps and retrain it when the ground changes.
+A legged robot cannot see whether the floor ahead is icy. It finds out when a foot slides. On a slope or at speed, that can already mean a fall. Both usual answers have a cost. Walking slowly everywhere gives up most of the robot's speed. Training a controller takes millions of simulated steps and has to be repeated when the ground changes.
 
 We asked whether a tabular foundation model can fill that gap in context. Each moment of walking becomes one row of a table: what the robot senses and what happened next. TabPFN gets a few thousand such rows as examples and is asked about the moment the robot is in right now. Its weights never change.
 
@@ -59,7 +59,7 @@ TabPFN slips about as little as crawling at close to full speed and it reached B
 
 <p align="center"><img src="results/figures/ice_governor.png" width="720" alt="Time against seconds slipping for every strategy"/></p>
 
-`python a1_ice_patches.py governor`
+`python -m a1slip.ice.patches governor`
 
 ### 2. Remembering where the ice was
 
@@ -77,7 +77,7 @@ By legs 4–6 both maps reach similar medians. The TabPFN map learns more steadi
 |---|---|
 | ![Slip map patrol](docs/ice_patrol.gif) | ![Patrol chart](results/figures/ice_patrol.png) |
 
-`python a1_ice_patches.py patrol`
+`python -m a1slip.ice.patches patrol`
 
 ### 3. Outdoors: learning on site what slippery looks like
 
@@ -98,7 +98,7 @@ Once the map has examples, TabPFN and XGBoost avoid slipping about equally. The 
 
 *Layout 1: the true terrain, its measured slip rate and the map each strategy planned trip 2 with. Green line = the route actually walked.*
 
-`python a1_outdoor.py experiment`
+`python -m a1slip.ice.outdoor experiment`
 
 ### 4. Prediction on ground it has never seen
 
@@ -169,44 +169,73 @@ We kept the negative results because they show where this approach fits.
 ## Run it
 
 ```bash
-pip install torch==2.15.0 --index-url https://download.pytorch.org/whl/cpu
-pip install -r requirements.txt
+make install   # CPU PyTorch, the pinned requirements, then this package
+make test      # 54 tests, under a minute
+make tour      # headline results from results/*.json
+make watch     # live viewer: TabPFN speed governor on ice patches
 ```
 
-TabPFN runs locally on CPU (model `v3.5-fast`). The first run downloads the weights, which needs the TabPFN licence accepted (see [docs.priorlabs.ai](https://docs.priorlabs.ai)). The MuJoCo Menagerie A1 model is cloned automatically on first use. All results were produced with Python 3.13 and the versions in `requirements.txt`.
+Without `make`:
 
-| what | command |
-|---|---|
-| summary of all results, no setup | `python tour.py` |
-| speed governor on ice patches | `python a1_ice_patches.py governor` |
-| slip-map patrol | `python a1_ice_patches.py patrol` |
-| outdoor course experiment / figure / video | `python a1_outdoor.py experiment` / `python a1_outdoor.py figure` / `python a1_outdoor_video.py` |
-| ice videos (the GIFs above) | `python a1_ice_videos.py` |
-| live MuJoCo viewer: ice governor / patrol / outdoor | `python a1_watch.py governor` / `patrol` / `outdoor` |
-| live viewer: sliding feet and fall risk | `python a1_slip_viewer.py --mu 0.15 --slope 13.5` |
-| frozen models on real hills | `python a1_terrain_test.py` |
-| regenerate the training data (~4 min) | `python a1_slip_dataset.py` |
-| redraw all charts | `python a1_tabpfn_charts.py` |
+```bash
+pip install torch==2.15.0 --index-url https://download.pytorch.org/whl/cpu
+pip install -r requirements.txt
+pip install -e . --no-deps
+```
+
+TabPFN runs locally on CPU (model `v3.5-fast`). The first run downloads the weights, which needs the TabPFN licence accepted (see [docs.priorlabs.ai](https://docs.priorlabs.ai)). The MuJoCo Menagerie A1 model is cloned automatically on first use. All results were produced with Python 3.13 and the versions in `requirements.txt`. Every module runs from the repository root with `python -m` or from anywhere after `pip install -e .`.
+
+| what | command | shortcut |
+|---|---|---|
+| summary of all results, no setup | `python -m a1slip.tour` | `make tour` |
+| speed governor on ice patches | `python -m a1slip.ice.patches governor` | `make governor` |
+| slip-map patrol | `python -m a1slip.ice.patches patrol` | `make patrol` |
+| outdoor course | `python -m a1slip.ice.outdoor experiment` | `make outdoor` |
+| live MuJoCo viewer: ice governor / patrol / outdoor | `python -m a1slip.ice.watch governor` / `patrol` / `outdoor` | `make watch` |
+| live viewer: sliding feet and fall risk | `python -m a1slip.viz.slip_viewer --mu 0.15 --slope 13.5` | |
+| frozen models on real hills | `python -m a1slip.prediction.terrain_test` | |
+| redraw all charts and the outdoor figure | `python -m a1slip.viz.charts`, `python -m a1slip.ice.outdoor figure` | `make figures` |
+| record the videos and GIF sources | `python -m a1slip.viz.ice_videos`, `python -m a1slip.viz.record_videos` | `make videos` |
+| regenerate the training data (~4 min) | `python -m a1slip.sim.slip_dataset` | `make data` |
+
+**What the tests check** (`tests/`, also run by GitHub Actions on every push):
+
+- every module imports and every dataset and figure the README uses is in place
+- the headline numbers in this README match `results/*.json`, so the page cannot drift from the data
+- the simulation replays saved runs exactly: the fixed-speed ice runs reproduce their recorded time and slip seconds to 0.01 s
+- one simulated walk produces the 62-number rows TabPFN reads
+
+The TabPFN runs themselves are not part of CI, because the weights need a licence.
 
 ## Repository layout
 
-| files | what |
-|---|---|
-| `tour.py` | no-setup summary of all results |
-| `a1_lidar.py`, `a1_balance.py` | A1 scene, trot gait (with posture options), balance reflex |
-| `a1_slip_dataset.py` | data generation, sensors, legs-vs-IMU slip detector, `run_episode` |
-| `a1_collision.py` | TabPFN wrapper (`CollisionRisk`, generic despite the name) |
-| `a1_ice_patches.py`, `a1_ice_videos.py` | ice-patch course: speed governor, slip-map patrol, videos |
-| `a1_outdoor.py`, `a1_outdoor_figure.py`, `a1_outdoor_video.py` | outdoor course: on-site TabPFN slip map from appearance |
-| `a1_terrain.py`, `a1_terrain_test.py` | real hill terrain, frozen-model test |
-| `a1_slip_eval.py`, `a1_slip_history_eval.py`, `a1_learning_curve.py`, `a1_fall_feature_check.py`, `a1_floor_adapt.py` | offline prediction tests |
-| `a1_recovery_demo.py`, `a1_danger_mode.py`, `a1_improve_test.py`, `a1_balance_tune.py` | fall warning → action, balance reflex |
-| `a1_watch.py` | live MuJoCo viewer for the ice governor, ice patrol and outdoor course |
-| `a1_danger_replay.py`, `a1_slip_viewer.py`, `a1_record_videos.py` | viewers, replays, videos |
-| `a1_tabpfn_charts.py` | all charts → `results/figures/` |
-| `a1_safety_filter.py`, `a1_scenarios.py`, `a1_planner.py`, `a1_collision_*.py` | first attempt: lidar collision filter, scenes, A* planner |
-| `a1_navigation.py`, `a1_dataset.py` | original A1 navigation and lidar datasets |
-| `datasets/`, `results/`, `docs/` | data, results (JSON and figures), README GIFs |
+```
+a1slip/                  the Python package; run any module with python -m a1slip.<path>
+├── paths.py             repository locations shared by every script
+├── tour.py              headline results from results/*.json, no simulator needed
+├── sim/                 simulation building blocks
+│   ├── robot.py         A1 scene, trot gait with posture options, lidar
+│   ├── slip_dataset.py  sensors, legs-vs-IMU slip detector, episodes, training data
+│   ├── balance.py       IMU balance reflex
+│   └── terrain.py       rolling-hill terrain
+├── models/
+│   └── tabpfn_risk.py   TabPFN risk model (CollisionRisk, generic despite the name)
+├── ice/                 headline experiments
+│   ├── patches.py       speed governor and slip-map patrol on ice patches
+│   ├── outdoor.py       outdoor course: on-site slip map from appearance
+│   └── watch.py         live MuJoCo viewer for all three
+├── prediction/          offline slip and fall prediction on unseen floors and hills
+├── falls/               fall warning to action: brace, danger mode, balance tuning
+├── lidar/               first attempt: lidar navigation and a collision safety filter
+└── viz/                 charts, figures, videos, replays and viewers
+data/                    simulated training data (.npz)
+results/                 every reported number (JSON) and figures/
+docs/                    README GIFs
+tests/                   pytest suite
+notebooks/               early exploration
+extras/                  a separate MuJoCo demo (Franka arm playing tic-tac-toe)
+pyproject.toml, requirements.txt, Makefile
+```
 
 ---
 
@@ -219,11 +248,11 @@ Every number below comes from a JSON file in `results/`. Click a section to expa
 
 The task: predict from the A1's own sensors (IMU, joint angles and speeds, motor torques, foot forces, command) whether a foot slips in the next 0.2 s or the robot falls in the next 1 s. Friction (μ 0.1–1.0), slope (0–15°), random commands and pushes vary per episode and the model is never told the friction or slope.
 
-- `python a1_slip_dataset.py`: 400 episodes, about 25k samples, written to `datasets/slip.npz` (~4 min)
-- `python a1_slip_eval.py`: compares TabPFN, XGBoost, logistic regression and privileged references on the same floors and on unseen icier and steeper floors; writes `results/slip_eval.json`
-- `python a1_learning_curve.py`: accuracy against number of training rows (20–2,000); writes `results/learning_curve.json`
-- `python a1_floor_adapt.py`: does adding 10 s (100 rows) from a new floor help? Writes `results/floor_adapt.json`
-- `python a1_slip_demo.py --risk fall`: paired episodes on unseen 13–15° slopes, where the robot slows down when TabPFN's fall risk is high; writes `results/slip_demo_fall.json`
+- `python -m a1slip.sim.slip_dataset`: 400 episodes, about 25k samples, written to `data/slip.npz` (~4 min)
+- `python -m a1slip.prediction.slip_eval`: compares TabPFN, XGBoost, logistic regression and privileged references on the same floors and on unseen icier and steeper floors; writes `results/slip_eval.json`
+- `python -m a1slip.prediction.learning_curve`: accuracy against number of training rows (20–2,000); writes `results/learning_curve.json`
+- `python -m a1slip.prediction.floor_adapt`: does adding 10 s (100 rows) from a new floor help? Writes `results/floor_adapt.json`
+- `python -m a1slip.falls.slow_down_demo --risk fall`: paired episodes on unseen 13–15° slopes, where the robot slows down when TabPFN's fall risk is high; writes `results/slip_demo_fall.json`
 
 Findings (ROC-AUC, 0.5 = guessing):
 - With equal data, TabPFN is the best slip predictor from about 100 rows up on familiar floors (0.815 against 0.749 for XGBoost at 2,000 rows). With sensor features only it has no edge on unseen icy floors (about 0.71 for every model). With 20–50 rows every model is near guessing.
@@ -231,9 +260,9 @@ Findings (ROC-AUC, 0.5 = guessing):
 - Adding 10 s from a new floor barely helps (0.709 → 0.711) and refitting TabPFN took 33–85 s on CPU.
 - Slowing down on a fall warning did not prevent falls (28/40 with and without). The open-loop gait has no way to recover.
 
-**Short-history features** (`python a1_slip_history_eval.py`, `python a1_floor_adapt.py --features history`)
+**Short-history features** (`python -m a1slip.prediction.slip_history_eval`, `python -m a1slip.prediction.floor_adapt --features history`)
 
-`a1_slip_dataset.py` also records 11 history features the robot can compute itself. The main one is the legs-vs-IMU slip detector, which catches current slips with AUC 0.873. Its 0.1 / 0.5 / 2 s averages give the robot a sense of how slippery the floor has been lately. The other features are the 2 s mean tilt and the 0.5 s variability of joints, forces and gyro.
+`a1slip/sim/slip_dataset.py` also records 11 history features the robot can compute itself. The main one is the legs-vs-IMU slip detector, which catches current slips with AUC 0.873. Its 0.1 / 0.5 / 2 s averages give the robot a sense of how slippery the floor has been lately. The other features are the 2 s mean tilt and the 0.5 s variability of joints, forces and gyro.
 
 | Slip ROC-AUC, base → +history | TabPFN, 2,000 rows | XGBoost, 2,000 rows | XGBoost, all rows |
 |---|---|---|---|
@@ -242,7 +271,7 @@ Findings (ROC-AUC, 0.5 = guessing):
 | icier + steeper (unseen) | 0.629 → 0.710 | 0.650 → 0.683 | 0.729 → 0.725 |
 
 - History features help TabPFN most on unseen floors and with equal data it beats XGBoost there. The robot's own detector does as well as being told the true recent slip rate (0.736 against 0.726, icier).
-- Falls on unseen steep slopes got worse for TabPFN (0.887 → 0.851) while XGBoost improved (0.884 → 0.908). `python a1_fall_feature_check.py` shows why: on 13–15° slopes, 27% of rows have a 2 s tilt average outside the training range. Dropping those 3 features gives TabPFN 0.901 / 0.914 (two different 2,000-row samples) against XGBoost's 0.912. The difference between the two samples (about 0.015) is much smaller than the tilt effect (about 0.05). For falls, use history features without the tilt averages.
+- Falls on unseen steep slopes got worse for TabPFN (0.887 → 0.851) while XGBoost improved (0.884 → 0.908). `python -m a1slip.prediction.fall_feature_check` shows why: on 13–15° slopes, 27% of rows have a 2 s tilt average outside the training range. Dropping those 3 features gives TabPFN 0.901 / 0.914 (two different 2,000-row samples) against XGBoost's 0.912. The difference between the two samples (about 0.015) is much smaller than the tilt effect (about 0.05). For falls, use history features without the tilt averages.
 - Adding 10 s from a new floor now gives a small gain for TabPFN (0.723 → 0.736 over 6 floors) and a small loss for XGBoost (0.722 → 0.706). Shrinking the context to 300 + 100 rows makes things worse (0.693), even though the refit drops from about 47 s to about 8 s.
 
 | | |
@@ -256,16 +285,16 @@ Findings (ROC-AUC, 0.5 = guessing):
 - Slip within 0.2 s on unseen icy and steep floors: TabPFN + slip detector 0.710, sensors only 0.629, XGBoost + detector 0.683 (2,000 rows) / 0.725 (10,290 rows).
 - Lead time: TabPFN's median fall risk is 0.5% on walks that never fell and 9% / 30% / 89% at 0.5 / 0.3 / 0.1 s before a fall. The warning is accurate but late.
 
-Charts: `python a1_tabpfn_charts.py` → `results/figures/`, numbers in `results/charts_data.json`.
+Charts: `python -m a1slip.viz.charts` → `results/figures/`, numbers in `results/charts_data.json`.
 
 </details>
 
 <details>
 <summary><b>Turning the fall warning into an action: brace, danger mode, balance reflex</b></summary>
 
-**Posture** (`python a1_recovery_demo.py --feasibility`, `python a1_recovery_demo.py --move brace`)
+**Posture** (`python -m a1slip.falls.recovery_demo --feasibility`, `python -m a1slip.falls.recovery_demo --move brace`)
 
-`a1_lidar.gait` takes optional `stance` (wider feet), `crouch` (lower body) and `lift` (0 = stop stepping). With the defaults it is identical to the plain trot. Paired episodes on 40 unseen 13–15° slopes:
+`a1slip.sim.robot.gait` takes optional `stance` (wider feet), `crouch` (lower body) and `lift` (0 = stop stepping). With the defaults it is identical to the plain trot. Paired episodes on 40 unseen 13–15° slopes:
 
 | move | falls | distance |
 |---|---|---|
@@ -278,7 +307,7 @@ Charts: `python a1_tabpfn_charts.py` → `results/figures/`, numbers in `results
 
 Posture matters more than speed: bracing all the time cuts falls by about two-thirds. Bracing only on TabPFN's 1 s warning does not help, because the warning comes too late to change posture and the robot was braced for only 0.7 s per episode.
 
-**Danger mode** (`python a1_danger_mode.py`): brace while a signal says the floor is risky and return to the normal gait after 3 s of quiet. Paired runs on 40 unseen steep floors (13–15°) and 40 safe floors (0–8°, any friction):
+**Danger mode** (`python -m a1slip.falls.danger_mode`): brace while a signal says the floor is risky and return to the normal gait after 3 s of quiet. Paired runs on 40 unseen steep floors (13–15°) and 40 safe floors (0–8°, any friction):
 
 | controller | falls, steep | falls, safe | distance, safe | braced on safe floors |
 |---|---|---|---|---|
@@ -289,9 +318,9 @@ Posture matters more than speed: bracing all the time cuts falls by about two-th
 
 TabPFN prevents 15 of the 18 falls that always-bracing prevents and costs nothing on safe floors. The tilt rule is a bit safer (10 against 13 falls) but braces needlessly 26% of the time on safe floors. Neither threshold was tuned on these floors and since steep and safe slopes do not overlap here, a tuned tilt threshold could probably do as well.
 
-**A stronger baseline: a balance controller** (`a1_balance.py`, `python a1_balance_tune.py`, `python a1_slip_dataset.py --balanced`)
+**A stronger baseline: a balance controller** (`a1slip/sim/balance.py`, `python -m a1slip.falls.balance_tune`, `python -m a1slip.sim.slip_dataset --balanced`)
 
-`a1_balance.Balancer` adds classic feedback reflexes on top of the same trot: lean the legs against sideways tilt, level the body by changing individual leg lengths and damp rotation with the gyro. Raibert-style foot placement is implemented but did not help in tuning. Gains were tuned on training slopes only (9–13°): the blind gait had 8 of 40 falls there, the chosen `TUNED` gains (IMU only) 0 of 40 (`results/balance_tune.json`).
+`a1slip.sim.balance.Balancer` adds classic feedback reflexes on top of the same trot: lean the legs against sideways tilt, level the body by changing individual leg lengths and damp rotation with the gyro. Raibert-style foot placement is implemented but did not help in tuning. Gains were tuned on training slopes only (9–13°): the blind gait had 8 of 40 falls there, the chosen `TUNED` gains (IMU only) 0 of 40 (`results/balance_tune.json`).
 
 | same 40 unseen 13–15° slopes | falls |
 |---|---|
@@ -301,7 +330,7 @@ TabPFN prevents 15 of the 18 falls that always-bracing prevents and costs nothin
 
 The balance reflex also had 0 falls on the 40 safe floors (`results/balancer_baseline.json`). In 400 data walks with the balancer only 1 fell, so there is nothing left for a fall warning to prevent. Slips still happen in 71% of moments with the balancer, which is why the rest of the project focuses on slip prediction.
 
-**Can the warning be improved? Does it help a robot that balances?** (`python a1_improve_test.py part2|part3`)
+**Can the warning be improved? Does it help a robot that balances?** (`python -m a1slip.falls.improve_test part2|part3`)
 
 Thresholds follow one rule fixed in advance (5× the label's base rate in the training examples) and TabPFN's examples still come only from the original flat floors.
 
@@ -326,7 +355,7 @@ An earlier warning only brings the blind robot closer to always bracing, because
 <details>
 <summary><b>Unseen real terrain: rolling hills</b></summary>
 
-In the other fall experiments, slopes are tilted gravity on a flat floor. `a1_terrain.py` builds real rolling hills: a heightfield with slopes up to 28° that change as the robot walks, normal gravity and a checker-textured ground tinted by friction (green = grippy, pale blue = icy). The fall check measures height above the ground under the robot. Nothing is retrained (`python a1_terrain_test.py` → `results/terrain_test.json`).
+In the other fall experiments, slopes are tilted gravity on a flat floor. `a1slip/sim/terrain.py` builds real rolling hills: a heightfield with slopes up to 28° that change as the robot walks, normal gravity and a checker-textured ground tinted by friction (green = grippy, pale blue = icy). The fall check measures height above the ground under the robot. Nothing is retrained (`python -m a1slip.prediction.terrain_test` → `results/terrain_test.json`).
 
 | fall within 1 s, ROC-AUC | TabPFN | XGBoost (9× data) | logistic | tilt rule |
 |---|---|---|---|---|
@@ -349,18 +378,18 @@ The pattern from the flat slopes holds. TabPFN's fall warning transfers: it beat
 
 The scene is flat green ground with white ice patches (friction 0.1) between A and B. The robot cannot see the ice, only feel it. The TabPFN slip model is frozen and its examples are whole floors from the original data, never patches.
 
-*Speed governor* (`python a1_ice_patches.py governor`, plus `governor_baseline` and `governor_xgb`): see the table in [Results](#1-choosing-a-safe-speed-on-ice-it-cannot-see). At a 0.5 risk limit TabPFN takes 38.5 s with 8.8 s slipping.
+*Speed governor* (`python -m a1slip.ice.patches governor`, plus `governor_baseline` and `governor_xgb`): see the table in [Results](#1-choosing-a-safe-speed-on-ice-it-cannot-see). At a 0.5 risk limit TabPFN takes 38.5 s with 8.8 s slipping.
 
 *More examples do not give a better governor* (`results/ice_governor_5000.json`). With 5,000 instead of 2,000 examples, offline slip ROC-AUC on unseen icy and steep floors rises from 0.681 to 0.768 and decisions are no slower (about 260 ms). The governor gets worse: 45.0 s with 26.4 s slipping at the 0.65 limit (38.5 s / 8.8 s at 0.5). The 5,000-example model rates full speed on ice slightly lower (0.84 against 0.88, even below 0.8 speed), so 10% of icy moments pass the 0.65 limit instead of 3% and the robot runs onto the ice. The controller depends on how risk changes with speed, not on overall accuracy.
 
-*Patrol with a slip map* (`python a1_ice_patches.py patrol`): the robot walks A ↔ B six times; slip risk goes into a grid map and A* routes around high-risk cells. From leg 3 on it slips 4.6 s per leg with the TabPFN map, 8.4 s with a detector-only map and 14.4 s with no map. By legs 4–6 both maps end up similar (medians 2–4 s); the detector map routes back into the ice on leg 3.
+*Patrol with a slip map* (`python -m a1slip.ice.patches patrol`): the robot walks A ↔ B six times; slip risk goes into a grid map and A* routes around high-risk cells. From leg 3 on it slips 4.6 s per leg with the TabPFN map, 8.4 s with a detector-only map and 14.4 s with no map. By legs 4–6 both maps end up similar (medians 2–4 s); the detector map routes back into the ice on leg 3.
 
 </details>
 
 <details>
 <summary><b>Outdoor course details</b></summary>
 
-`a1_outdoor.py` builds a 12 × 7 m MuJoCo world of 0.5 m terrain tiles, each with its own friction. A dirt path winds around a pond with a mud rim. Each terrain's true slip rate was measured by walking a floor made only of it (`python a1_outdoor.py calibrate`):
+`a1slip/ice/outdoor.py` builds a 12 × 7 m MuJoCo world of 0.5 m terrain tiles, each with its own friction. A dirt path winds around a pond with a mud rim. Each terrain's true slip rate was measured by walking a floor made only of it (`python -m a1slip.ice.outdoor calibrate`):
 
 | | path | grass | sand | gravel | wet grass | mud | water |
 |---|---|---|---|---|---|---|---|
@@ -378,9 +407,9 @@ Trip 1 is expensive for every learner, because the robot has to step on bad grou
 <details>
 <summary><b>First attempt: lidar collision safety filter</b></summary>
 
-`python a1_collision_dataset.py` generates `datasets/collision_env_A.npz` and `collision_env_B.npz` (3,000 samples each, ~15 min). Each sample is a lidar scan, the previous command, a candidate command and whether holding that command for 0.8 s hits a box.
+`python -m a1slip.lidar.collision_dataset` generates `data/collision_env_A.npz` and `collision_env_B.npz` (3,000 samples each, ~15 min). Each sample is a lidar scan, the previous command, a candidate command and whether holding that command for 0.8 s hits a box.
 
-`python a1_collision_eval.py` trains on env_A and tests on held-out env_A samples and on the unseen env_B layout, against a nearest-obstacle rule, logistic regression and XGBoost.
+`python -m a1slip.lidar.collision_eval` trains on env_A and tests on held-out env_A samples and on the unseen env_B layout, against a nearest-obstacle rule, logistic regression and XGBoost.
 
 | test (env_B, unseen layout) | ROC-AUC | PR-AUC |
 |---|---|---|
@@ -388,7 +417,7 @@ Trip 1 is expensive for every learner, because the robot has to step on bad grou
 | XGBoost | 0.984 | 0.948 |
 | TabPFN | 0.989 | 0.957 |
 
-`python a1_safety_filter.py` runs the live demo: every 0.2 s TabPFN scores 21 candidate commands and the robot runs the one closest to "go to the goal" whose risk is below `--risk-limit` (default 0.15). Options: `--seed N`, `--headless`, `--controller none|gap`, `--compare N`, `--scenario random|dense|large|wall|corridor|crossing|oncoming|mixed|all` and `--planner` (lidar occupancy map + A*, defined in `a1_planner.py`).
+`python -m a1slip.lidar.safety_filter` runs the live demo: every 0.2 s TabPFN scores 21 candidate commands and the robot runs the one closest to "go to the goal" whose risk is below `--risk-limit` (default 0.15). Options: `--seed N`, `--headless`, `--controller none|gap`, `--compare N`, `--scenario random|dense|large|wall|corridor|crossing|oncoming|mixed|all` and `--planner` (lidar occupancy map + A*, defined in `a1slip/lidar/planner.py`).
 
 All 8 scenes × 3 seeds, out of 24 runs (`results/scenarios_no_planner.json`, `results/scenarios_planner.json`):
 
@@ -405,9 +434,9 @@ The planner does most of the work. Once it is on, the TabPFN filter is no better
 <details>
 <summary><b>Videos</b></summary>
 
-`python a1_ice_videos.py` records the ice-patch GIFs above. `python a1_record_videos.py` → `videos/*.mp4` records exact replays of logged fall episodes with a brace indicator (blue = braced), sliding feet (red), a downhill arrow and a label: `blind_falls`, `tabpfn_braces`, `balance_reflex`, `always_brace`, `tilt_safe_floor`, `tabpfn_safe_floor`. Side by side: `episode9_comparison.mp4` and `safe_floor_comparison.mp4`; on real hills `hills_ice_comparison.mp4` and `hills_comparison.mp4` (blind | TabPFN | balance reflex). Offscreen rendering needs `imageio` and `imageio-ffmpeg`.
+`python -m a1slip.viz.ice_videos` records the ice-patch GIFs above. `python -m a1slip.viz.record_videos` → `videos/*.mp4` records exact replays of logged fall episodes with a brace indicator (blue = braced), sliding feet (red), a downhill arrow and a label: `blind_falls`, `tabpfn_braces`, `balance_reflex`, `always_brace`, `tilt_safe_floor`, `tabpfn_safe_floor`. Side by side: `episode9_comparison.mp4` and `safe_floor_comparison.mp4`; on real hills `hills_ice_comparison.mp4` and `hills_comparison.mp4` (blind | TabPFN | balance reflex). Offscreen rendering needs `imageio` and `imageio-ffmpeg`.
 
-`python a1_slip_viewer.py` shows the robot live on a chosen floor, with sliding feet in red and TabPFN's fall risk as a coloured ball. `python a1_danger_replay.py --list` lists danger-mode episodes to replay in the viewer.
+`python -m a1slip.viz.slip_viewer` shows the robot live on a chosen floor, with sliding feet in red and TabPFN's fall risk as a coloured ball. `python -m a1slip.viz.danger_replay --list` lists danger-mode episodes to replay in the viewer.
 
 </details>
 
