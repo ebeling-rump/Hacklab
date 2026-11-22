@@ -1,0 +1,72 @@
+[
+ {
+  "seed": 0,
+  "strategy": "TabPFN 5000 governor (risk < 0.5)",
+  "reached": true,
+  "time": 37.85000000000029,
+  "slip_s": 6.809999999999899
+ },
+ {
+  "seed": 0,
+  "strategy": "TabPFN 5000 governor (risk < 0.65)",
+  "reached": true,
+  "time": 46.03000000001029,
+  "slip_s": 25.440000000001177
+ },
+ {
+  "seed": 1,
+  "strategy": "TabPFN 5000 governor (risk < 0.5)",
+  "reached": true,
+  "time": 36.20999999999829,
+  "slip_s": 8.14999999999987
+ },
+ {
+  "seed": 1,
+  "strategy": "TabPFN 5000 governor (risk < 0.65)",
+  "reached": true,
+  "time": 40.780000000003874,
+  "slip_s": 22.32000000000069
+ },
+ {
+  "seed": 2,
+  "strategy": "TabPFN 5000 governor (risk < 0.5)",
+  "reached": true,
+  "time": 38.11000000000061,
+  "slip_s": 8.329999999999867
+ },
+ {
+  "seed": 2,
+  "strategy": "TabPFN 5000 governor (risk < 0.65)",
+  "reached": true,
+  "time": 45.830000000010045,
+  "slip_s": 26.09000000000128
+ },
+ {
+  "seed": 3,
+  "strategy": "TabPFN 5000 governor (risk < 0.5)",
+  "reached": true,
+  "time": 39.620000000002456,
+  "slip_s": 10.189999999999827
+ },
+ {
+  "seed": 3,
+  "strategy": "TabPFN 5000 governor (risk < 0.65)",
+  "reached": true,
+  "time": 57.670000000024515,
+  "slip_s": 40.39000000000053
+ },
+ {
+  "seed": 4,
+  "strategy": "TabPFN 5000 governor (risk < 0.5)",
+  "reached": true,
+  "time": 40.90000000000402,
+  "slip_s": 10.739999999999815
+ },
+ {
+  "seed": 4,
+  "strategy": "TabPFN 5000 governor (risk < 0.65)",
+  "reached": true,
+  "time": 34.489999999996186,
+  "slip_s": 17.70999999999997
+ }
+]

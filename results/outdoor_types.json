@@ -1,0 +1,51 @@
+{
+ "path": {
+  "mu": 0.9,
+  "reached": true,
+  "fell": false,
+  "time": 17.340000000001268,
+  "slip_fraction": 0.06055363321799308
+ },
+ "grass": {
+  "mu": 0.75,
+  "reached": true,
+  "fell": false,
+  "time": 17.080000000001412,
+  "slip_fraction": 0.06440281030444965
+ },
+ "wet grass": {
+  "mu": 0.35,
+  "reached": true,
+  "fell": false,
+  "time": 15.350000000001796,
+  "slip_fraction": 0.3656026058631922
+ },
+ "gravel": {
+  "mu": 0.6,
+  "reached": true,
+  "fell": false,
+  "time": 16.45000000000176,
+  "slip_fraction": 0.1331306990881459
+ },
+ "sand": {
+  "mu": 0.45,
+  "reached": true,
+  "fell": false,
+  "time": 16.820000000001556,
+  "slip_fraction": 0.1206896551724138
+ },
+ "mud": {
+  "mu": 0.2,
+  "reached": true,
+  "fell": false,
+  "time": 19.350000000000154,
+  "slip_fraction": 0.5441860465116279
+ },
+ "water": {
+  "mu": 0.1,
+  "reached": false,
+  "fell": false,
+  "time": 25.00199999999702,
+  "slip_fraction": 0.8784897208223342
+ }
+}

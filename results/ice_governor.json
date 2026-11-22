@@ -1,0 +1,407 @@
+[
+ {
+  "seed": 0,
+  "strategy": "fixed 0.3",
+  "reached": true,
+  "fell": false,
+  "time": 48.080000000012795,
+  "slip_s": 5.409999999999929,
+  "ice_s": 12.329999999999782
+ },
+ {
+  "seed": 0,
+  "strategy": "fixed 0.55",
+  "reached": true,
+  "fell": false,
+  "time": 42.06000000000544,
+  "slip_s": 21.220000000000518,
+  "ice_s": 22.97000000000079
+ },
+ {
+  "seed": 0,
+  "strategy": "fixed 0.8",
+  "reached": true,
+  "fell": false,
+  "time": 30.46999999999399,
+  "slip_s": 16.75999999999982,
+  "ice_s": 17.109999999999875
+ },
+ {
+  "seed": 0,
+  "strategy": "fixed 1.0",
+  "reached": true,
+  "fell": false,
+  "time": 21.639999999998885,
+  "slip_s": 10.299999999999825,
+  "ice_s": 9.989999999999831
+ },
+ {
+  "seed": 0,
+  "strategy": "TabPFN governor (risk < 0.5)",
+  "reached": true,
+  "fell": false,
+  "time": 29.27999999999465,
+  "slip_s": 5.8599999999999195,
+  "ice_s": 10.819999999999814
+ },
+ {
+  "seed": 0,
+  "strategy": "TabPFN governor (risk < 0.65)",
+  "reached": true,
+  "fell": false,
+  "time": 27.83999999999545,
+  "slip_s": 5.969999999999917,
+  "ice_s": 11.529999999999799
+ },
+ {
+  "seed": 1,
+  "strategy": "fixed 0.3",
+  "reached": true,
+  "fell": false,
+  "time": 47.34000000001189,
+  "slip_s": 7.009999999999895,
+  "ice_s": 15.489999999999714
+ },
+ {
+  "seed": 1,
+  "strategy": "fixed 0.55",
+  "reached": true,
+  "fell": false,
+  "time": 26.369999999996264,
+  "slip_s": 7.919999999999876,
+  "ice_s": 7.929999999999875
+ },
+ {
+  "seed": 1,
+  "strategy": "fixed 0.8",
+  "reached": true,
+  "fell": false,
+  "time": 37.089999999999364,
+  "slip_s": 24.320000000001002,
+  "ice_s": 23.580000000000886
+ },
+ {
+  "seed": 1,
+  "strategy": "fixed 1.0",
+  "reached": true,
+  "fell": false,
+  "time": 37.07999999999935,
+  "slip_s": 25.490000000001185,
+  "ice_s": 25.52000000000119
+ },
+ {
+  "seed": 1,
+  "strategy": "TabPFN governor (risk < 0.5)",
+  "reached": true,
+  "fell": false,
+  "time": 31.78999999999326,
+  "slip_s": 7.71999999999988,
+  "ice_s": 15.21999999999972
+ },
+ {
+  "seed": 1,
+  "strategy": "TabPFN governor (risk < 0.65)",
+  "reached": true,
+  "fell": false,
+  "time": 29.219999999994684,
+  "slip_s": 8.719999999999859,
+  "ice_s": 13.249999999999762
+ },
+ {
+  "seed": 2,
+  "strategy": "fixed 0.3",
+  "reached": true,
+  "fell": false,
+  "time": 49.67000000001474,
+  "slip_s": 8.439999999999864,
+  "ice_s": 19.45000000000024
+ },
+ {
+  "seed": 2,
+  "strategy": "fixed 0.55",
+  "reached": false,
+  "fell": false,
+  "time": null,
+  "slip_s": null,
+  "ice_s": null
+ },
+ {
+  "seed": 2,
+  "strategy": "fixed 0.8",
+  "reached": true,
+  "fell": false,
+  "time": 37.34999999999968,
+  "slip_s": 24.400000000001015,
+  "ice_s": 23.710000000000907
+ },
+ {
+  "seed": 2,
+  "strategy": "fixed 1.0",
+  "reached": true,
+  "fell": false,
+  "time": 32.409999999993644,
+  "slip_s": 21.42000000000055,
+  "ice_s": 20.360000000000383
+ },
+ {
+  "seed": 2,
+  "strategy": "TabPFN governor (risk < 0.5)",
+  "reached": true,
+  "fell": false,
+  "time": 33.50999999999499,
+  "slip_s": 8.889999999999855,
+  "ice_s": 18.790000000000138
+ },
+ {
+  "seed": 2,
+  "strategy": "TabPFN governor (risk < 0.65)",
+  "reached": true,
+  "fell": false,
+  "time": 34.27999999999593,
+  "slip_s": 8.839999999999856,
+  "ice_s": 18.950000000000163
+ },
+ {
+  "seed": 3,
+  "strategy": "fixed 0.3",
+  "reached": true,
+  "fell": false,
+  "time": 48.64000000001348,
+  "slip_s": 9.639999999999839,
+  "ice_s": 20.4600000000004
+ },
+ {
+  "seed": 3,
+  "strategy": "fixed 0.55",
+  "reached": false,
+  "fell": false,
+  "time": null,
+  "slip_s": null,
+  "ice_s": null
+ },
+ {
+  "seed": 3,
+  "strategy": "fixed 0.8",
+  "reached": true,
+  "fell": false,
+  "time": 45.01000000000904,
+  "slip_s": 32.83000000000204,
+  "ice_s": 32.540000000002095
+ },
+ {
+  "seed": 3,
+  "strategy": "fixed 1.0",
+  "reached": true,
+  "fell": false,
+  "time": 40.32000000000331,
+  "slip_s": 30.19000000000192,
+  "ice_s": 30.780000000002012
+ },
+ {
+  "seed": 3,
+  "strategy": "TabPFN governor (risk < 0.5)",
+  "reached": true,
+  "fell": false,
+  "time": 36.38999999999851,
+  "slip_s": 9.729999999999837,
+  "ice_s": 19.430000000000238
+ },
+ {
+  "seed": 3,
+  "strategy": "TabPFN governor (risk < 0.65)",
+  "reached": true,
+  "fell": false,
+  "time": 32.74999999999406,
+  "slip_s": 9.809999999999835,
+  "ice_s": 17.65999999999996
+ },
+ {
+  "seed": 4,
+  "strategy": "fixed 0.3",
+  "reached": true,
+  "fell": false,
+  "time": 51.06000000001644,
+  "slip_s": 10.99999999999981,
+  "ice_s": 25.07000000000112
+ },
+ {
+  "seed": 4,
+  "strategy": "fixed 0.55",
+  "reached": false,
+  "fell": false,
+  "time": null,
+  "slip_s": null,
+  "ice_s": null
+ },
+ {
+  "seed": 4,
+  "strategy": "fixed 0.8",
+  "reached": true,
+  "fell": false,
+  "time": 44.96000000000898,
+  "slip_s": 33.250000000001954,
+  "ice_s": 34.99000000000161
+ },
+ {
+  "seed": 4,
+  "strategy": "fixed 1.0",
+  "reached": true,
+  "fell": false,
+  "time": 24.459999999997322,
+  "slip_s": 15.309999999999718,
+  "ice_s": 14.809999999999729
+ },
+ {
+  "seed": 4,
+  "strategy": "TabPFN governor (risk < 0.5)",
+  "reached": true,
+  "fell": false,
+  "time": 39.36000000000214,
+  "slip_s": 11.01999999999981,
+  "ice_s": 24.310000000001
+ },
+ {
+  "seed": 4,
+  "strategy": "TabPFN governor (risk < 0.65)",
+  "reached": true,
+  "fell": false,
+  "time": 35.66999999999763,
+  "slip_s": 11.279999999999804,
+  "ice_s": 23.870000000000932
+ },
+ {
+  "seed": 0,
+  "strategy": "detector governor (no TabPFN)",
+  "reached": true,
+  "fell": false,
+  "time": 47.16000000001167,
+  "slip_s": 5.339999999999931,
+  "ice_s": 12.239999999999783
+ },
+ {
+  "seed": 1,
+  "strategy": "detector governor (no TabPFN)",
+  "reached": true,
+  "fell": false,
+  "time": 46.29000000001061,
+  "slip_s": 6.999999999999895,
+  "ice_s": 15.479999999999714
+ },
+ {
+  "seed": 2,
+  "strategy": "detector governor (no TabPFN)",
+  "reached": true,
+  "fell": false,
+  "time": 48.86000000001375,
+  "slip_s": 8.429999999999865,
+  "ice_s": 19.460000000000242
+ },
+ {
+  "seed": 3,
+  "strategy": "detector governor (no TabPFN)",
+  "reached": true,
+  "fell": false,
+  "time": 47.73000000001237,
+  "slip_s": 9.489999999999842,
+  "ice_s": 20.240000000000364
+ },
+ {
+  "seed": 4,
+  "strategy": "detector governor (no TabPFN)",
+  "reached": true,
+  "fell": false,
+  "time": 50.470000000015716,
+  "slip_s": 10.939999999999811,
+  "ice_s": 25.26000000000115
+ },
+ {
+  "seed": 0,
+  "strategy": "XGBoost governor (risk < 0.5)",
+  "reached": true,
+  "fell": false,
+  "time": 45.79000000001,
+  "slip_s": 5.409999999999929,
+  "ice_s": 12.239999999999783
+ },
+ {
+  "seed": 0,
+  "strategy": "XGBoost governor (risk < 0.65)",
+  "reached": true,
+  "fell": false,
+  "time": 34.709999999996455,
+  "slip_s": 5.649999999999924,
+  "ice_s": 11.179999999999806
+ },
+ {
+  "seed": 1,
+  "strategy": "XGBoost governor (risk < 0.5)",
+  "reached": true,
+  "fell": false,
+  "time": 45.05000000000909,
+  "slip_s": 7.139999999999892,
+  "ice_s": 15.519999999999714
+ },
+ {
+  "seed": 1,
+  "strategy": "XGBoost governor (risk < 0.65)",
+  "reached": true,
+  "fell": false,
+  "time": 37.41999999999977,
+  "slip_s": 7.509999999999884,
+  "ice_s": 14.409999999999737
+ },
+ {
+  "seed": 2,
+  "strategy": "XGBoost governor (risk < 0.5)",
+  "reached": true,
+  "fell": false,
+  "time": 47.87000000001254,
+  "slip_s": 8.66999999999986,
+  "ice_s": 19.740000000000286
+ },
+ {
+  "seed": 2,
+  "strategy": "XGBoost governor (risk < 0.65)",
+  "reached": true,
+  "fell": false,
+  "time": 41.730000000005035,
+  "slip_s": 8.859999999999856,
+  "ice_s": 19.51000000000025
+ },
+ {
+  "seed": 3,
+  "strategy": "XGBoost governor (risk < 0.5)",
+  "reached": true,
+  "fell": false,
+  "time": 46.56000000001094,
+  "slip_s": 9.58999999999984,
+  "ice_s": 21.130000000000503
+ },
+ {
+  "seed": 3,
+  "strategy": "XGBoost governor (risk < 0.65)",
+  "reached": true,
+  "fell": false,
+  "time": 43.33000000000699,
+  "slip_s": 10.369999999999823,
+  "ice_s": 18.950000000000163
+ },
+ {
+  "seed": 4,
+  "strategy": "XGBoost governor (risk < 0.5)",
+  "reached": true,
+  "fell": false,
+  "time": 49.26000000001424,
+  "slip_s": 11.059999999999809,
+  "ice_s": 25.440000000001177
+ },
+ {
+  "seed": 4,
+  "strategy": "XGBoost governor (risk < 0.65)",
+  "reached": true,
+  "fell": false,
+  "time": 38.450000000001026,
+  "slip_s": 11.719999999999795,
+  "ice_s": 24.900000000001093
+ }
+]

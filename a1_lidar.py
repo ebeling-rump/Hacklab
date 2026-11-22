@@ -69,13 +69,23 @@ def random_boxes(rng: np.random.Generator, n: int = 7):
     return boxes
 
 
-def build_model(boxes) -> mujoco.MjModel:
+def build_model(boxes, movers=()) -> mujoco.MjModel:
+    """Scene with static boxes (x, y, half_x, half_y) and optional moving boxes.
+
+    movers: (half_x, half_y) per moving box. Each becomes a mocap body named
+    "mover<i>"; set data.mocap_pos to move it (kinematic: it pushes the robot,
+    the robot cannot push it). The lidar sees movers like any other geom.
+    """
     spec = mujoco.MjSpec.from_file(str(ensure_model()))
     world, trunk = spec.worldbody, spec.body("trunk")
 
     for x, y, sx, sy in boxes:
         world.add_geom(type=mujoco.mjtGeom.mjGEOM_BOX, size=[sx, sy, 0.25],
                        pos=[x, y, 0.25], rgba=[0.8, 0.4, 0.2, 1])
+    for i, (sx, sy) in enumerate(movers):
+        body = world.add_body(name=f"mover{i}", mocap=True, pos=[100 + 2 * i, 0, 0.25])
+        body.add_geom(type=mujoco.mjtGeom.mjGEOM_BOX, size=[sx, sy, 0.25],
+                      rgba=[0.2, 0.4, 0.9, 1])
     world.add_geom(type=mujoco.mjtGeom.mjGEOM_CYLINDER, size=[0.2, 0.002, 0],
                    pos=[*GOAL, 0.002], rgba=[0.2, 0.9, 0.3, 1],
                    contype=0, conaffinity=0)
@@ -111,18 +121,29 @@ def read_lidar(data) -> np.ndarray:
     return np.minimum(r, MAX_RANGE)
 
 
-def gait(t: float, forward: float, turn: float) -> np.ndarray:
-    """Open-loop trot. forward in [0, 1] scales speed, turn in [-1, 1] (+ = left)."""
+def gait(t: float, forward: float, turn: float, stance: float = 0.0, crouch: float = 0.0,
+         lift: float = 1.0) -> np.ndarray:
+    """Open-loop trot. forward in [0, 1] scales speed, turn in [-1, 1] (+ = left).
+
+    Optional posture changes (all 0 / 1 = the original gait, unchanged):
+      stance  hip abduction in rad; > 0 spreads the feet sideways (wider base)
+      crouch  rad added to the thigh (and twice to the knee); > 0 lowers the body
+      lift    scales the foot lift; 0 = feet stay on the ground (no stepping)
+    """
     ctrl = np.zeros(12)
     for leg in range(4):
         phase = 2 * np.pi * FREQ * t + PHASE[leg]
         side = -1 if IS_LEFT[leg] else 1
         stride = STRIDE * np.clip(forward + side * turn, -1, 2)
         hip, thigh, knee = STAND
-        thigh -= stride * np.sin(phase)
-        knee -= LIFT * max(0.0, np.cos(phase))
+        hip = -side * stance * STANCE_SIGN
+        thigh += crouch - stride * np.sin(phase)
+        knee -= 2 * crouch + lift * LIFT * max(0.0, np.cos(phase))
         ctrl[3 * leg:3 * leg + 3] = hip, thigh, knee
     return ctrl
+
+
+STANCE_SIGN = 1.0   # set from a measurement: +stance must move the feet outwards
 
 
 def yaw(data) -> float:
@@ -148,10 +169,11 @@ class Navigator:
         self.prev = None   # previously chosen heading, world frame
         self.cmd = np.zeros(2)                           # smoothed (forward, turn)
         self.alpha = timestep / SMOOTHING                # low-pass filter gain
+        self.goal = GOAL   # target point; a planner may replace it with a waypoint
 
     def __call__(self, data, ranges: np.ndarray) -> tuple[float, float]:
         th = yaw(data)
-        to_goal = GOAL - data.qpos[:2]
+        to_goal = self.goal - data.qpos[:2]
         goal_dir = wrap(np.arctan2(to_goal[1], to_goal[0]) - th)   # robot frame
         clearance = min(CLEARANCE, np.linalg.norm(to_goal))
 
