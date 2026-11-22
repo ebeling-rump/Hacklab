@@ -22,7 +22,7 @@ COLORS = {
     "gp_transfer": "#8c4a1f",
     "tabpfn": "#9ad1a5", "tabpfn_res": "#5cb874", "tabpfn_physfeat": "#2e9e57", "tabpfn_hybrid": "#127a3d",
     "tabpfn_transfer": "#0b4f28", "tabpfn_transfer_raw": "#6a3d9a",
-    "tabpfn_hybrid_active": "#b5179e", "tabpfn_transfer_hybrid": "#00a6a6", "gp_transfer_hybrid": "#a0522d", "physics_sysid_active": "#7209b7", "gp_hybrid_active": "#f72585",
+    "tabpfn_hybrid_active": "#b5179e", "tabpfn_transfer_hybrid": "#00a6a6", "tabpfn_api_transfer_hybrid": "#0077b6", "gp_transfer_hybrid": "#a0522d", "physics_sysid_active": "#7209b7", "gp_hybrid_active": "#f72585",
 }
 LABELS = {
     "physics_nominal": "Physics (nominal, no learning)", "physics_sysid": "Physics + online sysID (A)",
@@ -31,7 +31,7 @@ LABELS = {
     "tabpfn": "TabPFN (D)", "tabpfn_res": "TabPFN residual", "tabpfn_physfeat": "TabPFN + physics feats",
     "tabpfn_hybrid": "TabPFN hybrid (sysID + TabPFN residual)", "tabpfn_transfer": "TabPFN transfer (F)",
     "tabpfn_transfer_raw": "TabPFN transfer (no physics)",
-    "tabpfn_transfer_hybrid": "TabPFN transfer-hybrid (F)", "gp_transfer_hybrid": "GP transfer-hybrid", "tabpfn_hybrid_active": "TabPFN hybrid + active (E)",
+    "tabpfn_transfer_hybrid": "TabPFN transfer-hybrid (F)", "tabpfn_api_transfer_hybrid": "TabPFN v3.5 API, transfer-hybrid", "gp_transfer_hybrid": "GP transfer-hybrid", "tabpfn_hybrid_active": "TabPFN hybrid + active (E)",
 }
 
 plt.rcParams.update({"figure.dpi": 130, "axes.spines.top": False, "axes.spines.right": False,

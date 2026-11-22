@@ -234,6 +234,20 @@ physics bottom). Over all 5 crates physics + sysID succeeds 4/5 and TabPFN trans
 5/5. On the two new crates the API model needs about half the pushes, but the API model also
 places the crate slightly less precisely on seed 4.
 
+*Extra demo scenarios* (one seed each, chosen in advance for wheeled complex objects, all results
+reported; physics + sysID vs TabPFN v3.5 API transfer-hybrid, planar prior = 40 training objects):
+
+| scenario | physics + sysID | TabPFN API transfer-hybrid | video |
+|---|---|---|---|
+| A1, L-shaped crate (0.7 × 0.3 m) through the door | success, 15 pushes, 12 cm | success, **8 pushes**, 12 cm | `A1_doorway_Lcrate_tabpfn_api_vs_physics.mp4` |
+| C4H: Z-shape on casters to a precise pose | success, **5 pushes**, 20 mm / 5.6° | success, 7 pushes, **11 mm** / 7.0° | `C4H_s1_...mp4` |
+| C5H: T-shape on casters through a doorway | success, **13 pushes**, 2 wall contacts | success, 14 pushes, 6 wall contacts | `C5H_s2_...mp4` |
+| C6H: L-shape on casters through a cluttered room | success, 46 pushes, 24 mm, 10 wall contacts | success, 43 pushes, **12 mm**, 18 wall contacts | `C6H_s1_...mp4` |
+
+(The A1 L crate was first defined 0.4 m wide; with the 10 cm planner margin it cannot fit the 0.52 m
+door at all, so it was slimmed to 0.3 m before any result was recorded.) Mixed picture: the API
+model is faster on the A1 crate and more precise in the planar tasks, but touches walls more often.
+
 The robot rotates the 0.7 m crate to pass the 0.52 m door, walks around and through the door after
 it, and parks it within 0.15 m of the goal. **With 3–5 seeds this is a demonstration, not statistical
 evidence** of a TabPFN advantage; the offline 3D prediction results above show no position-accuracy

@@ -40,7 +40,7 @@ def make_scene(seed: int, crate_kind="rect"):
     if crate_kind == "rect":
         shape = rect(0.7, 0.3)
     else:
-        shape = l_shape(0.7, 0.4, 0.22)
+        shape = l_shape(0.7, 0.3, 0.15)  # 0.3 m wide like the rect crate, so it fits the door
     mass = float(rng.uniform(3.0, 6.0))
     mu = float(rng.uniform(0.25, 0.5))
     minx, miny, maxx, maxy = shape.polygon.bounds
