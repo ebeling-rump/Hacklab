@@ -117,7 +117,7 @@ def run(model_name: str, seed: int = 0, max_pushes: int = 18, video: bool = Fals
     bounds = (-0.4, 3.6, -1.7, 1.7)
     nav = Navigator(sc.walls, (-1.0, 4.0, -1.95, 1.95), res=0.025)
     field = CostField(shape, sc.walls, bounds, goal, pos_tol=0.12, ang_tol=None, res=0.05, n_theta=24,
-                      margin=0.04, w_theta=0.15)
+                      margin=0.10, w_theta=0.15)
     planner = Planner(field, walls=sc.walls, lam_u=0.5, w_theta=0.15, step_cost=0.02, depth=2,
                       start_offset=NOSE + STANDOFF, start_margin=ROBOT_R)
     model = make_model(model_name, source=prior)

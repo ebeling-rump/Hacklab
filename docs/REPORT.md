@@ -191,17 +191,25 @@ Orientation error improves from 18.8° (nominal) to ~11–12° after 12 pushes (
 TabPFN transfer-hybrid 11.4°, TabPFN-hybrid 12.1°, GP-hybrid 13.1°). The transfer models are the only
 calibrated ones at 1–5 pushes (median NLL ≈ 0 vs 10²–10³ for single-crate GP/TabPFN).
 
-**Doorway demo** (`results/a1/*.mp4`). Same crate (hidden mass 4.9 kg, μ 0.32, CoM offset), same
-start, same planner:
+**Doorway demo** (`a1push/episode.py`, videos in `results/videos/A1_*.mp4`). Three crates (seeds;
+hidden mass 3–6 kg, μ 0.25–0.5, CoM offset), same start, same planner, budget 30 pushes.
 
-| model | result | pushes | falls | mean prediction error |
-|---|---|---|---|---|
-| TabPFN transfer-hybrid (prior: 6 other crates) | success (0.11 m from goal) | 13 | 2 | 142 mm |
-| physics + sysID | success (0.08 m) | 11 | 2 | 142 mm |
+*Development history (reported for transparency):* a first version of the planner (wall margin 4 cm)
+gave 1/3 successes for **both** models; both failed by jamming the crate diagonally in the door frame,
+a planner flaw (wall contacts are not modelled). The margin was widened to 10 cm for both models and
+all seeds were re-run; the table below is the final run.
 
-Both rotate the crate by ~60–90° to pass the 0.52 m door, follow it through and reach the goal.
-**This demo shows the full learn-and-plan loop on a real robot body; it does not show a TabPFN
-advantage** (one seed, near-identical outcomes).
+| seed | physics + sysID | TabPFN transfer-hybrid (prior: 6 other crates, 115 pushes) |
+|---|---|---|
+| 0 | success, 23 pushes, 1 fall | success, 28 pushes, 2 falls |
+| 1 | success, 27 pushes | success, 20 pushes |
+| 2 | **failed** — crate jammed in the door frame, then 15 attempts without a walkable path | success, 16 pushes |
+| total | 2/3 | **3/3** |
+
+The robot rotates the 0.7 m crate to pass the 0.52 m door, walks around and through the door after
+it, and parks it within 0.15 m of the goal. **With 3 seeds this is a demonstration, not statistical
+evidence** of a TabPFN advantage; the offline 3D prediction results above show no position-accuracy
+advantage, so the difference may be due to chance.
 
 ---
 
