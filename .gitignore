@@ -224,3 +224,6 @@ __marimo__/
 
 # MuJoCo Menagerie (downloaded by franka_mujoco.py)
 mujoco_menagerie/
+data/
+scratch/
+results/videos/*.mp4.tmp
